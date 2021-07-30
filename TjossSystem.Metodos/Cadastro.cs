@@ -11,10 +11,10 @@ namespace TjossSystem.Metodos
     [Table("cadastro")] //Nome da tabela tem que ser igual a do banco de dados.
     public class Cadastro
     {
-        public Cadastro()
-        {
-            this.DadosFiscaisBasicos = new HashSet<DadosFiscaisBasicos>();
-        }
+        //public Cadastro()
+        //{
+        //    this.DadosFiscaisBasicos = new HashSet<DadosFiscaisBasicos>();
+        //}
         [Key] //Define que é cheve primaria
         [DatabaseGenerated(DatabaseGeneratedOption.None)] //faz com que o banco não gere valores.
         public int codigocadastro { get; set; }
@@ -22,9 +22,11 @@ namespace TjossSystem.Metodos
         public string nomecadastro { get; set; }
         public string nomefantasia { get; set; }
         public int codigotipocadastro { get; set; }
+        public int cpfcnpj { get; set; }
+        public int controle { get; set; }
         public DateTime datahalteracao { get; set; }
         public int codigofuncionario { get; set; }
 
-        public virtual ICollection<DadosFiscaisBasicos> DadosFiscaisBasicos { get; private set; }
+        //public virtual ICollection<DadosFiscaisBasicos> DadosFiscaisBasicos { get; private set; }
     }
 }

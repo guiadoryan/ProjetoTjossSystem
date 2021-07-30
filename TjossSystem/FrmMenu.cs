@@ -25,7 +25,13 @@ namespace TjossSystem
         private void button1_Click(object sender, EventArgs e)
         {
             string strErro;
-            objMetodos.RegistrarCadastro(1, "Guilherme Adoryan", out strErro);
+            //objMetodos.RegistrarCadastro(1, "Guilherme Adoryan", out strErro);
+        }
+
+        private void cadastroDePessoaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCadastro frmCadastro = new FrmCadastro();
+            frmCadastro.Show();
         }
     }
 }
