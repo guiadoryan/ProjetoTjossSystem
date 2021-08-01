@@ -67,6 +67,7 @@
       <HintPath>..\TjossSystem\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Text.Encodings.Web, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\TjossSystem\packages\System.Text.Encodings.Web.4.6.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
@@ -88,18 +89,106 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cadastro.cs" />
-    <Compile Include="DadosFiscaisBasicos.cs" />
+    <Compile Include="cadastro.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexao.cs" />
+    <Compile Include="contrato.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dadosfisicos.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataIntegration.cs" />
+    <Compile Include="definicaocadastro.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="funcionarios.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="itemestoque.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="itens.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="itenscontrato.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="itenspedido.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="medida.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Metodos.cs" />
+    <Compile Include="movimentoestoque.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pedidos.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tipocadastro.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tipocontrato.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tipodefinicao.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tipoestoque.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tipoitem.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tipopedido.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TjossModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TjossModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TjossModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TjossModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TjossModel.edmx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EntityDeploy Include="TjossModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TjossModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="TjossModel.edmx.diagram">
+      <DependentUpon>TjossModel.edmx</DependentUpon>
+    </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TjossModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TjossModel.edmx</DependentUpon>
+      <LastGenOutput>TjossModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="TjossModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TjossModel.edmx</DependentUpon>
+      <LastGenOutput>TjossModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

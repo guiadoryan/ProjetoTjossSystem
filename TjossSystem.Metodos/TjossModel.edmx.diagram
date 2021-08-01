@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c9f53663fa1e4e3f81c18ff306075934" Name="Diagram1">
+        <EntityTypeShape EntityType="tjossModel.cadastro" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.contrato" Width="1.5" PointX="8.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.dadosfisicos" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.definicaocadastro" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.funcionarios" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.itemestoque" Width="1.5" PointX="11.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.itens" Width="1.5" PointX="6" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.itenscontrato" Width="1.5" PointX="10.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.itenspedido" Width="1.5" PointX="15.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.medida" Width="1.5" PointX="5.25" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.movimentoestoque" Width="1.5" PointX="3" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.pedidos" Width="1.5" PointX="13.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.tipocadastro" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.tipocontrato" Width="1.5" PointX="6" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.tipodefinicao" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.tipoestoque" Width="1.5" PointX="9" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.tipoitem" Width="1.5" PointX="3.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tjossModel.tipopedido" Width="1.5" PointX="11.25" PointY="15.25" IsExpanded="true" />
+        <AssociationConnector Association="tjossModel.cadastro_contratovenda_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.cadastro_dadosfisicos_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.cadastro_definicaocadastro_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.cadastro_medida_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.cadastro_pedidovenda_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.funcionarios_cadastro_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.tipocadastro_cadastro_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.contrato_itenscontrato_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.contrato_pedidos_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.funcionarios_contratovenda_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.tipocontrato_contratovenda_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.funcionarios_definicaocadastro_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.tipodefinicao_definicaocadastro_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.funcionarios_itens_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.funcionarios_movimentoestoque_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.itens_itemestoque_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.tipoestoque_itemestoque_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.itens_itenscontrato_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.itens_itenspedido_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.tipoitem_itens_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.pedidos_itenspedido_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="tjossModel.tipopedido_pedidos_fk" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

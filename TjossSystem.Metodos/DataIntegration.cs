@@ -11,7 +11,7 @@ namespace TjossSystem.Metodos
     public class CadastroDI
     {
         [DataMember]
-        public int NumeroCadastro { get; set; }
+        public int CodigoCadastro { get; set; }
 
         [DataMember]
         public string NomeCadastro { get; set; }
@@ -23,15 +23,53 @@ namespace TjossSystem.Metodos
         public int CodigoTipoCadastro { get; set; }
 
         [DataMember]
-        public int CpfCnpj { get; set; }
+        public string CpfCnpj { get; set; }
 
         [DataMember]
-        public int Controle { get; set; }
+        public string Controle { get; set; }
 
         [DataMember]
         public DateTime DatahAlteracao { get; set; }
 
         [DataMember]
         public int CodigoFuncionario { get; set; }
+
+        [DataMember]
+        public List<EnderecoDI> EnderecosDI { get; set; }
+    }
+
+    [DataContract]
+    public class EnderecoDI
+    {
+        [DataMember]
+        public string CodigoFilial { get; set; }
+
+        [DataMember]
+        public string Endereco { get; set; }
+
+        [DataMember]
+        public string Bairro { get; set; }
+
+        [DataMember]
+        public int NumeroEndereco { get; set; }
+
+        [DataMember]
+        public string Complemento { get; set; }
+
+        [DataMember]
+        public DateTime DatahAlteracao { get; set; }
+
+        [DataMember]
+        public int CodigoFuncionario { get; set; }
+    }
+
+    [DataContract]
+    public class TipoCadastroDI
+    {
+        [DataMember]
+        public int CodigoTipoCadastro { get; set; }
+
+        [DataMember]
+        public string DescricaoTipoCadastro { get; set; }
     }
 }

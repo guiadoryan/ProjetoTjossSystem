@@ -12,38 +12,31 @@ namespace TjossSystem.Metodos
     using System;
     using System.Collections.Generic;
     
-    public partial class cadastro
+    public partial class contrato
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public cadastro()
+        public contrato()
         {
-            this.contrato = new HashSet<contrato>();
-            this.dadosfisicos = new HashSet<dadosfisicos>();
-            this.definicaocadastro = new HashSet<definicaocadastro>();
-            this.medida = new HashSet<medida>();
+            this.itenscontrato = new HashSet<itenscontrato>();
             this.pedidos = new HashSet<pedidos>();
         }
     
+        public int numerocontrato { get; set; }
+        public int codigotipocontrato { get; set; }
         public int codigocadastro { get; set; }
-        public string nomecadastro { get; set; }
-        public string nomefantasia { get; set; }
-        public int codigotipocadastro { get; set; }
-        public string cpfcnpj { get; set; }
-        public string controle { get; set; }
+        public System.DateTime datacontrato { get; set; }
+        public string situacao { get; set; }
+        public System.DateTime datavencimento { get; set; }
+        public int codigovendedor { get; set; }
         public System.DateTime datahalteracao { get; set; }
         public int codigofuncionario { get; set; }
     
+        public virtual cadastro cadastro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<contrato> contrato { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<dadosfisicos> dadosfisicos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<definicaocadastro> definicaocadastro { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<medida> medida { get; set; }
+        public virtual ICollection<itenscontrato> itenscontrato { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pedidos> pedidos { get; set; }
         public virtual funcionarios funcionarios { get; set; }
-        public virtual tipocadastro tipocadastro { get; set; }
+        public virtual tipocontrato tipocontrato { get; set; }
     }
 }

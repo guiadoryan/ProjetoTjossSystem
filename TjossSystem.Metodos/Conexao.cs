@@ -17,10 +17,6 @@ namespace TjossSystem.Metodos
             this.schema = schema;
         }
 
-        public DbSet<Cadastro> Cadastro { get; set; }
-
-        public DbSet<DadosFiscaisBasicos> DadosFiscaisBasicos { get; set; }
-
         protected override void OnModelCreating(DbModelBuilder builder)
         {
             builder.HasDefaultSchema(this.schema);
