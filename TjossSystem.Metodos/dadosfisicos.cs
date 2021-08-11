@@ -15,12 +15,15 @@ namespace TjossSystem.Metodos
     public partial class dadosfisicos
     {
         public int codigocadastro { get; set; }
-        public string codigofilial { get; set; }
+        public int codigofilial { get; set; }
         public string endereco { get; set; }
         public string bairro { get; set; }
         public int numero { get; set; }
         public string complemento { get; set; }
+        public string cependereco { get; set; }
+        public Nullable<int> codigocidade { get; set; }
     
         public virtual cadastro cadastro { get; set; }
+        public virtual cidade cidade { get; set; }
     }
 }

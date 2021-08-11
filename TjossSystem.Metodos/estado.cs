@@ -12,27 +12,21 @@ namespace TjossSystem.Metodos
     using System;
     using System.Collections.Generic;
     
-    public partial class pedidos
+    public partial class estado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public pedidos()
+        public estado()
         {
-            this.itenspedido = new HashSet<itenspedido>();
+            this.cidade = new HashSet<cidade>();
         }
     
-        public int numeropedido { get; set; }
-        public int codigotipopedido { get; set; }
-        public int codigocadastro { get; set; }
-        public string situacaopedido { get; set; }
-        public Nullable<System.DateTime> dataconclusao { get; set; }
-        public Nullable<int> numerocontrato { get; set; }
-        public Nullable<int> codigotipocontrato { get; set; }
-        public decimal valortotalpedido { get; set; }
+        public int codigoestado { get; set; }
+        public string nomeestado { get; set; }
+        public string siglaestado { get; set; }
+        public int codigopais { get; set; }
     
-        public virtual cadastro cadastro { get; set; }
-        public virtual contrato contrato { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<itenspedido> itenspedido { get; set; }
-        public virtual tipopedido tipopedido { get; set; }
+        public virtual ICollection<cidade> cidade { get; set; }
+        public virtual pais pais { get; set; }
     }
 }

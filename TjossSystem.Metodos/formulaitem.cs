@@ -12,16 +12,12 @@ namespace TjossSystem.Metodos
     using System;
     using System.Collections.Generic;
     
-    public partial class itenscontrato
+    public partial class formulaitem
     {
-        public int numerocontrato { get; set; }
-        public int codigotipocontrato { get; set; }
         public int codigoitem { get; set; }
-        public decimal saldocontratado { get; set; }
-        public decimal saldoatual { get; set; }
-        public decimal valoritem { get; set; }
+        public int numerosequencia { get; set; }
+        public string observacaoformula { get; set; }
     
-        public virtual contrato contrato { get; set; }
         public virtual itens itens { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace TjossSystem.Metodos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public itens()
         {
+            this.formulaitem = new HashSet<formulaitem>();
             this.itemestoque = new HashSet<itemestoque>();
             this.itenscontrato = new HashSet<itenscontrato>();
             this.itenspedido = new HashSet<itenspedido>();
@@ -29,6 +30,8 @@ namespace TjossSystem.Metodos
         public System.DateTime datahalteracao { get; set; }
         public int codigofuncionario { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<formulaitem> formulaitem { get; set; }
         public virtual funcionarios funcionarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<itemestoque> itemestoque { get; set; }

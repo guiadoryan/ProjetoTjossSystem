@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="tjossModel.Store" Provider="Npgsql" ProviderManifestToken="13.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="tjossModel.Store" Provider="Npgsql" ProviderManifestToken="13.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cadastro">
           <Key>
             <PropertyRef Name="codigocadastro" />
@@ -18,6 +18,23 @@
           <Property Name="datahalteracao" Type="timestamp" Nullable="false" />
           <Property Name="codigofuncionario" Type="int4" Nullable="false" />
         </EntityType>
+        <EntityType Name="cargofuncionario">
+          <Key>
+            <PropertyRef Name="codigocargo" />
+          </Key>
+          <Property Name="codigocargo" Type="int4" Nullable="false" />
+          <Property Name="descricaocargo" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="situacao" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cidade">
+          <Key>
+            <PropertyRef Name="codigocidade" />
+          </Key>
+          <Property Name="codigocidade" Type="int4" Nullable="false" />
+          <Property Name="nomecidade" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="siglacidade" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="codigoestado" Type="int4" Nullable="false" />
+        </EntityType>
         <EntityType Name="contrato">
           <Key>
             <PropertyRef Name="numerocontrato" />
@@ -27,8 +44,8 @@
           <Property Name="codigotipocontrato" Type="int4" Nullable="false" />
           <Property Name="codigocadastro" Type="int4" Nullable="false" />
           <Property Name="datacontrato" Type="date" Nullable="false" />
-          <Property Name="situacao" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="datavencimento" Type="date" Nullable="false" />
+          <Property Name="situacao" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="codigovendedor" Type="int4" Nullable="false" />
           <Property Name="datahalteracao" Type="timestamp" Nullable="false" />
           <Property Name="codigofuncionario" Type="int4" Nullable="false" />
@@ -39,11 +56,13 @@
             <PropertyRef Name="codigofilial" />
           </Key>
           <Property Name="codigocadastro" Type="int4" Nullable="false" />
-          <Property Name="codigofilial" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="codigofilial" Type="int4" Nullable="false" />
           <Property Name="endereco" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="bairro" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="numero" Type="int4" Nullable="false" />
           <Property Name="complemento" Type="varchar" MaxLength="80" />
+          <Property Name="cependereco" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="codigocidade" Type="int4" />
         </EntityType>
         <EntityType Name="definicaocadastro">
           <Key>
@@ -54,6 +73,24 @@
           <Property Name="codigotipodefinicao" Type="int4" Nullable="false" />
           <Property Name="datahalteracao" Type="timestamp" Nullable="false" />
           <Property Name="codigofuncionario" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="codigoestado" />
+          </Key>
+          <Property Name="codigoestado" Type="int4" Nullable="false" />
+          <Property Name="nomeestado" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="siglaestado" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="codigopais" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="formulaitem">
+          <Key>
+            <PropertyRef Name="codigoitem" />
+            <PropertyRef Name="numerosequencia" />
+          </Key>
+          <Property Name="codigoitem" Type="int4" Nullable="false" />
+          <Property Name="numerosequencia" Type="int4" Nullable="false" />
+          <Property Name="observacaoformula" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="funcionarios">
           <Key>
@@ -66,6 +103,7 @@
           <Property Name="datanascimento" Type="date" Nullable="false" />
           <Property Name="dataadmissao" Type="date" Nullable="false" />
           <Property Name="datadesligamento" Type="date" />
+          <Property Name="codigocargo" Type="int4" Nullable="false" />
         </EntityType>
         <EntityType Name="itemestoque">
           <Key>
@@ -75,7 +113,7 @@
           <Property Name="codigoitem" Type="int4" Nullable="false" />
           <Property Name="codigotipoestoque" Type="int4" Nullable="false" />
           <Property Name="quantidadedisponivel" Type="numeric" Precision="15" Scale="5" Nullable="false" />
-          <Property Name="quantidadereservado" Type="numeric" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="valorproduto" Type="numeric" Precision="15" Scale="5" Nullable="false" />
         </EntityType>
         <EntityType Name="itens">
           <Key>
@@ -99,6 +137,7 @@
           <Property Name="codigoitem" Type="int4" Nullable="false" />
           <Property Name="saldocontratado" Type="numeric" Precision="15" Scale="5" Nullable="false" />
           <Property Name="saldoatual" Type="numeric" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="valoritem" Type="numeric" Precision="15" Scale="5" Nullable="false" />
         </EntityType>
         <EntityType Name="itenspedido">
           <Key>
@@ -111,6 +150,10 @@
           <Property Name="codigoitem" Type="int4" Nullable="false" />
           <Property Name="quantidadesolicitada" Type="numeric" Precision="15" Scale="5" Nullable="false" />
           <Property Name="quantidadebaixada" Type="numeric" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="valorunitario" Type="numeric" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="valortotalitem" Type="numeric" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="codigocadastro" Type="int4" />
+          <Property Name="codigomedida" Type="int4" />
         </EntityType>
         <EntityType Name="medida">
           <Key>
@@ -121,7 +164,9 @@
           <Property Name="codigomedida" Type="int4" Nullable="false" />
           <Property Name="altura" Type="numeric" Precision="15" Scale="5" />
           <Property Name="cintura" Type="numeric" Precision="15" Scale="5" />
-          <Property Name="ombroaombro" Type="numeric" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="ombroaombro" Type="numeric" Precision="15" Scale="5" />
+          <Property Name="busto" Type="numeric" Precision="15" Scale="5" />
+          <Property Name="observacao" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="movimentoestoque">
           <Key>
@@ -134,6 +179,14 @@
           <Property Name="datahmovimento" Type="timestamp" Nullable="false" />
           <Property Name="codigofuncionario" Type="int4" Nullable="false" />
         </EntityType>
+        <EntityType Name="pais">
+          <Key>
+            <PropertyRef Name="codigopais" />
+          </Key>
+          <Property Name="codigopais" Type="int4" Nullable="false" />
+          <Property Name="nomepais" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="siglapais" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="pedidos">
           <Key>
             <PropertyRef Name="numeropedido" />
@@ -143,9 +196,10 @@
           <Property Name="codigotipopedido" Type="int4" Nullable="false" />
           <Property Name="codigocadastro" Type="int4" Nullable="false" />
           <Property Name="situacaopedido" Type="bpchar" MaxLength="1" Nullable="false" />
-          <Property Name="dataconclusao" Type="date" Nullable="false" />
+          <Property Name="dataconclusao" Type="date" />
           <Property Name="numerocontrato" Type="int4" />
           <Property Name="codigotipocontrato" Type="int4" />
+          <Property Name="valortotalpedido" Type="numeric" Precision="15" Scale="5" Nullable="false" />
         </EntityType>
         <EntityType Name="tipocadastro">
           <Key>
@@ -193,6 +247,14 @@
           <Property Name="codigotipopedido" Type="int4" Nullable="false" />
           <Property Name="descricaotipopedido" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="situacao" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="codigofuncionario" />
+          </Key>
+          <Property Name="codigofuncionario" Type="int4" Nullable="false" />
+          <Property Name="senha" Type="varchar" MaxLength="30" />
+          <Property Name="datahcadastro" Type="timestamp" Nullable="false" />
         </EntityType>
         <Association Name="cadastro_contratovenda_fk">
           <End Role="cadastro" Type="Self.cadastro" Multiplicity="1" />
@@ -254,6 +316,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="cargofuncionario_funcionarios_fk">
+          <End Role="cargofuncionario" Type="Self.cargofuncionario" Multiplicity="1" />
+          <End Role="funcionarios" Type="Self.funcionarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargofuncionario">
+              <PropertyRef Name="codigocargo" />
+            </Principal>
+            <Dependent Role="funcionarios">
+              <PropertyRef Name="codigocargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cidade_dadosfisicos_fk">
+          <End Role="cidade" Type="Self.cidade" Multiplicity="0..1" />
+          <End Role="dadosfisicos" Type="Self.dadosfisicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cidade">
+              <PropertyRef Name="codigocidade" />
+            </Principal>
+            <Dependent Role="dadosfisicos">
+              <PropertyRef Name="codigocidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="contrato_itenscontrato_fk">
           <End Role="contrato" Type="Self.contrato" Multiplicity="1" />
           <End Role="itenscontrato" Type="Self.itenscontrato" Multiplicity="*" />
@@ -279,6 +365,18 @@
             <Dependent Role="pedidos">
               <PropertyRef Name="numerocontrato" />
               <PropertyRef Name="codigotipocontrato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="estado_cidade_fk">
+          <End Role="estado" Type="Self.estado" Multiplicity="1" />
+          <End Role="cidade" Type="Self.cidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="codigoestado" />
+            </Principal>
+            <Dependent Role="cidade">
+              <PropertyRef Name="codigoestado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -342,6 +440,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="funcionarios_senhafuncionario_fk">
+          <End Role="funcionarios" Type="Self.funcionarios" Multiplicity="1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="funcionarios">
+              <PropertyRef Name="codigofuncionario" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="codigofuncionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="itens_formulaitem_fk">
+          <End Role="itens" Type="Self.itens" Multiplicity="1" />
+          <End Role="formulaitem" Type="Self.formulaitem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="itens">
+              <PropertyRef Name="codigoitem" />
+            </Principal>
+            <Dependent Role="formulaitem">
+              <PropertyRef Name="codigoitem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="itens_itemestoque_fk">
           <End Role="itens" Type="Self.itens" Multiplicity="1" />
           <End Role="itemestoque" Type="Self.itemestoque" Multiplicity="*" />
@@ -375,6 +497,32 @@
             </Principal>
             <Dependent Role="itenspedido">
               <PropertyRef Name="codigoitem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="medida_itenspedido_fk">
+          <End Role="medida" Type="Self.medida" Multiplicity="0..1" />
+          <End Role="itenspedido" Type="Self.itenspedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medida">
+              <PropertyRef Name="codigocadastro" />
+              <PropertyRef Name="codigomedida" />
+            </Principal>
+            <Dependent Role="itenspedido">
+              <PropertyRef Name="codigocadastro" />
+              <PropertyRef Name="codigomedida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pais_estado_fk">
+          <End Role="pais" Type="Self.pais" Multiplicity="1" />
+          <End Role="estado" Type="Self.estado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pais">
+              <PropertyRef Name="codigopais" />
+            </Principal>
+            <Dependent Role="estado">
+              <PropertyRef Name="codigopais" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -466,9 +614,13 @@
         </Association>
         <EntityContainer Name="tjossModelStoreContainer">
           <EntitySet Name="cadastro" EntityType="Self.cadastro" Schema="public" store:Type="Tables" />
+          <EntitySet Name="cargofuncionario" EntityType="Self.cargofuncionario" Schema="public" store:Type="Tables" />
+          <EntitySet Name="cidade" EntityType="Self.cidade" Schema="public" store:Type="Tables" />
           <EntitySet Name="contrato" EntityType="Self.contrato" Schema="public" store:Type="Tables" />
           <EntitySet Name="dadosfisicos" EntityType="Self.dadosfisicos" Schema="public" store:Type="Tables" />
           <EntitySet Name="definicaocadastro" EntityType="Self.definicaocadastro" Schema="public" store:Type="Tables" />
+          <EntitySet Name="estado" EntityType="Self.estado" Schema="public" store:Type="Tables" />
+          <EntitySet Name="formulaitem" EntityType="Self.formulaitem" Schema="public" store:Type="Tables" />
           <EntitySet Name="funcionarios" EntityType="Self.funcionarios" Schema="public" store:Type="Tables" />
           <EntitySet Name="itemestoque" EntityType="Self.itemestoque" Schema="public" store:Type="Tables" />
           <EntitySet Name="itens" EntityType="Self.itens" Schema="public" store:Type="Tables" />
@@ -476,6 +628,7 @@
           <EntitySet Name="itenspedido" EntityType="Self.itenspedido" Schema="public" store:Type="Tables" />
           <EntitySet Name="medida" EntityType="Self.medida" Schema="public" store:Type="Tables" />
           <EntitySet Name="movimentoestoque" EntityType="Self.movimentoestoque" Schema="public" store:Type="Tables" />
+          <EntitySet Name="pais" EntityType="Self.pais" Schema="public" store:Type="Tables" />
           <EntitySet Name="pedidos" EntityType="Self.pedidos" Schema="public" store:Type="Tables" />
           <EntitySet Name="tipocadastro" EntityType="Self.tipocadastro" Schema="public" store:Type="Tables" />
           <EntitySet Name="tipocontrato" EntityType="Self.tipocontrato" Schema="public" store:Type="Tables" />
@@ -483,6 +636,7 @@
           <EntitySet Name="tipoestoque" EntityType="Self.tipoestoque" Schema="public" store:Type="Tables" />
           <EntitySet Name="tipoitem" EntityType="Self.tipoitem" Schema="public" store:Type="Tables" />
           <EntitySet Name="tipopedido" EntityType="Self.tipopedido" Schema="public" store:Type="Tables" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="public" store:Type="Tables" />
           <AssociationSet Name="cadastro_contratovenda_fk" Association="Self.cadastro_contratovenda_fk">
             <End Role="cadastro" EntitySet="cadastro" />
             <End Role="contrato" EntitySet="contrato" />
@@ -503,6 +657,14 @@
             <End Role="cadastro" EntitySet="cadastro" />
             <End Role="pedidos" EntitySet="pedidos" />
           </AssociationSet>
+          <AssociationSet Name="cargofuncionario_funcionarios_fk" Association="Self.cargofuncionario_funcionarios_fk">
+            <End Role="cargofuncionario" EntitySet="cargofuncionario" />
+            <End Role="funcionarios" EntitySet="funcionarios" />
+          </AssociationSet>
+          <AssociationSet Name="cidade_dadosfisicos_fk" Association="Self.cidade_dadosfisicos_fk">
+            <End Role="cidade" EntitySet="cidade" />
+            <End Role="dadosfisicos" EntitySet="dadosfisicos" />
+          </AssociationSet>
           <AssociationSet Name="contrato_itenscontrato_fk" Association="Self.contrato_itenscontrato_fk">
             <End Role="contrato" EntitySet="contrato" />
             <End Role="itenscontrato" EntitySet="itenscontrato" />
@@ -510,6 +672,10 @@
           <AssociationSet Name="contrato_pedidos_fk" Association="Self.contrato_pedidos_fk">
             <End Role="contrato" EntitySet="contrato" />
             <End Role="pedidos" EntitySet="pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="estado_cidade_fk" Association="Self.estado_cidade_fk">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="cidade" EntitySet="cidade" />
           </AssociationSet>
           <AssociationSet Name="funcionarios_cadastro_fk" Association="Self.funcionarios_cadastro_fk">
             <End Role="funcionarios" EntitySet="funcionarios" />
@@ -531,6 +697,14 @@
             <End Role="funcionarios" EntitySet="funcionarios" />
             <End Role="movimentoestoque" EntitySet="movimentoestoque" />
           </AssociationSet>
+          <AssociationSet Name="funcionarios_senhafuncionario_fk" Association="Self.funcionarios_senhafuncionario_fk">
+            <End Role="funcionarios" EntitySet="funcionarios" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="itens_formulaitem_fk" Association="Self.itens_formulaitem_fk">
+            <End Role="itens" EntitySet="itens" />
+            <End Role="formulaitem" EntitySet="formulaitem" />
+          </AssociationSet>
           <AssociationSet Name="itens_itemestoque_fk" Association="Self.itens_itemestoque_fk">
             <End Role="itens" EntitySet="itens" />
             <End Role="itemestoque" EntitySet="itemestoque" />
@@ -542,6 +716,14 @@
           <AssociationSet Name="itens_itenspedido_fk" Association="Self.itens_itenspedido_fk">
             <End Role="itens" EntitySet="itens" />
             <End Role="itenspedido" EntitySet="itenspedido" />
+          </AssociationSet>
+          <AssociationSet Name="medida_itenspedido_fk" Association="Self.medida_itenspedido_fk">
+            <End Role="medida" EntitySet="medida" />
+            <End Role="itenspedido" EntitySet="itenspedido" />
+          </AssociationSet>
+          <AssociationSet Name="pais_estado_fk" Association="Self.pais_estado_fk">
+            <End Role="pais" EntitySet="pais" />
+            <End Role="estado" EntitySet="estado" />
           </AssociationSet>
           <AssociationSet Name="pedidos_itenspedido_fk" Association="Self.pedidos_itenspedido_fk">
             <End Role="pedidos" EntitySet="pedidos" />
@@ -572,30 +754,191 @@
             <End Role="pedidos" EntitySet="pedidos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="tjossModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="tjossEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cadastro" EntityType="tjossModel.cadastro" />
+          <EntitySet Name="cargofuncionario" EntityType="tjossModel.cargofuncionario" />
+          <EntitySet Name="cidade" EntityType="tjossModel.cidade" />
+          <EntitySet Name="contrato" EntityType="tjossModel.contrato" />
+          <EntitySet Name="dadosfisicos" EntityType="tjossModel.dadosfisicos" />
+          <EntitySet Name="definicaocadastro" EntityType="tjossModel.definicaocadastro" />
+          <EntitySet Name="estado" EntityType="tjossModel.estado" />
+          <EntitySet Name="formulaitem" EntityType="tjossModel.formulaitem" />
+          <EntitySet Name="funcionarios" EntityType="tjossModel.funcionarios" />
+          <EntitySet Name="itemestoque" EntityType="tjossModel.itemestoque" />
+          <EntitySet Name="itens" EntityType="tjossModel.itens" />
+          <EntitySet Name="itenscontrato" EntityType="tjossModel.itenscontrato" />
+          <EntitySet Name="itenspedido" EntityType="tjossModel.itenspedido" />
+          <EntitySet Name="medida" EntityType="tjossModel.medida" />
+          <EntitySet Name="movimentoestoque" EntityType="tjossModel.movimentoestoque" />
+          <EntitySet Name="pais" EntityType="tjossModel.pais" />
+          <EntitySet Name="pedidos" EntityType="tjossModel.pedidos" />
+          <EntitySet Name="tipocadastro" EntityType="tjossModel.tipocadastro" />
+          <EntitySet Name="tipocontrato" EntityType="tjossModel.tipocontrato" />
+          <EntitySet Name="tipodefinicao" EntityType="tjossModel.tipodefinicao" />
+          <EntitySet Name="tipoestoque" EntityType="tjossModel.tipoestoque" />
+          <EntitySet Name="tipoitem" EntityType="tjossModel.tipoitem" />
+          <EntitySet Name="tipopedido" EntityType="tjossModel.tipopedido" />
+          <EntitySet Name="usuarios" EntityType="tjossModel.usuarios" />
+          <AssociationSet Name="cadastro_contratovenda_fk" Association="tjossModel.cadastro_contratovenda_fk">
+            <End Role="cadastro" EntitySet="cadastro" />
+            <End Role="contrato" EntitySet="contrato" />
+          </AssociationSet>
+          <AssociationSet Name="cadastro_dadosfisicos_fk" Association="tjossModel.cadastro_dadosfisicos_fk">
+            <End Role="cadastro" EntitySet="cadastro" />
+            <End Role="dadosfisicos" EntitySet="dadosfisicos" />
+          </AssociationSet>
+          <AssociationSet Name="cadastro_definicaocadastro_fk" Association="tjossModel.cadastro_definicaocadastro_fk">
+            <End Role="cadastro" EntitySet="cadastro" />
+            <End Role="definicaocadastro" EntitySet="definicaocadastro" />
+          </AssociationSet>
+          <AssociationSet Name="cadastro_medida_fk" Association="tjossModel.cadastro_medida_fk">
+            <End Role="cadastro" EntitySet="cadastro" />
+            <End Role="medida" EntitySet="medida" />
+          </AssociationSet>
+          <AssociationSet Name="cadastro_pedidovenda_fk" Association="tjossModel.cadastro_pedidovenda_fk">
+            <End Role="cadastro" EntitySet="cadastro" />
+            <End Role="pedidos" EntitySet="pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="funcionarios_cadastro_fk" Association="tjossModel.funcionarios_cadastro_fk">
+            <End Role="funcionarios" EntitySet="funcionarios" />
+            <End Role="cadastro" EntitySet="cadastro" />
+          </AssociationSet>
+          <AssociationSet Name="tipocadastro_cadastro_fk" Association="tjossModel.tipocadastro_cadastro_fk">
+            <End Role="tipocadastro" EntitySet="tipocadastro" />
+            <End Role="cadastro" EntitySet="cadastro" />
+          </AssociationSet>
+          <AssociationSet Name="cargofuncionario_funcionarios_fk" Association="tjossModel.cargofuncionario_funcionarios_fk">
+            <End Role="cargofuncionario" EntitySet="cargofuncionario" />
+            <End Role="funcionarios" EntitySet="funcionarios" />
+          </AssociationSet>
+          <AssociationSet Name="cidade_dadosfisicos_fk" Association="tjossModel.cidade_dadosfisicos_fk">
+            <End Role="cidade" EntitySet="cidade" />
+            <End Role="dadosfisicos" EntitySet="dadosfisicos" />
+          </AssociationSet>
+          <AssociationSet Name="estado_cidade_fk" Association="tjossModel.estado_cidade_fk">
+            <End Role="estado" EntitySet="estado" />
+            <End Role="cidade" EntitySet="cidade" />
+          </AssociationSet>
+          <AssociationSet Name="contrato_itenscontrato_fk" Association="tjossModel.contrato_itenscontrato_fk">
+            <End Role="contrato" EntitySet="contrato" />
+            <End Role="itenscontrato" EntitySet="itenscontrato" />
+          </AssociationSet>
+          <AssociationSet Name="contrato_pedidos_fk" Association="tjossModel.contrato_pedidos_fk">
+            <End Role="contrato" EntitySet="contrato" />
+            <End Role="pedidos" EntitySet="pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="funcionarios_contratovenda_fk" Association="tjossModel.funcionarios_contratovenda_fk">
+            <End Role="funcionarios" EntitySet="funcionarios" />
+            <End Role="contrato" EntitySet="contrato" />
+          </AssociationSet>
+          <AssociationSet Name="tipocontrato_contratovenda_fk" Association="tjossModel.tipocontrato_contratovenda_fk">
+            <End Role="tipocontrato" EntitySet="tipocontrato" />
+            <End Role="contrato" EntitySet="contrato" />
+          </AssociationSet>
+          <AssociationSet Name="funcionarios_definicaocadastro_fk" Association="tjossModel.funcionarios_definicaocadastro_fk">
+            <End Role="funcionarios" EntitySet="funcionarios" />
+            <End Role="definicaocadastro" EntitySet="definicaocadastro" />
+          </AssociationSet>
+          <AssociationSet Name="tipodefinicao_definicaocadastro_fk" Association="tjossModel.tipodefinicao_definicaocadastro_fk">
+            <End Role="tipodefinicao" EntitySet="tipodefinicao" />
+            <End Role="definicaocadastro" EntitySet="definicaocadastro" />
+          </AssociationSet>
+          <AssociationSet Name="pais_estado_fk" Association="tjossModel.pais_estado_fk">
+            <End Role="pais" EntitySet="pais" />
+            <End Role="estado" EntitySet="estado" />
+          </AssociationSet>
+          <AssociationSet Name="itens_formulaitem_fk" Association="tjossModel.itens_formulaitem_fk">
+            <End Role="itens" EntitySet="itens" />
+            <End Role="formulaitem" EntitySet="formulaitem" />
+          </AssociationSet>
+          <AssociationSet Name="funcionarios_itens_fk" Association="tjossModel.funcionarios_itens_fk">
+            <End Role="funcionarios" EntitySet="funcionarios" />
+            <End Role="itens" EntitySet="itens" />
+          </AssociationSet>
+          <AssociationSet Name="funcionarios_movimentoestoque_fk" Association="tjossModel.funcionarios_movimentoestoque_fk">
+            <End Role="funcionarios" EntitySet="funcionarios" />
+            <End Role="movimentoestoque" EntitySet="movimentoestoque" />
+          </AssociationSet>
+          <AssociationSet Name="funcionarios_senhafuncionario_fk" Association="tjossModel.funcionarios_senhafuncionario_fk">
+            <End Role="funcionarios" EntitySet="funcionarios" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="itens_itemestoque_fk" Association="tjossModel.itens_itemestoque_fk">
+            <End Role="itens" EntitySet="itens" />
+            <End Role="itemestoque" EntitySet="itemestoque" />
+          </AssociationSet>
+          <AssociationSet Name="tipoestoque_itemestoque_fk" Association="tjossModel.tipoestoque_itemestoque_fk">
+            <End Role="tipoestoque" EntitySet="tipoestoque" />
+            <End Role="itemestoque" EntitySet="itemestoque" />
+          </AssociationSet>
+          <AssociationSet Name="itens_itenscontrato_fk" Association="tjossModel.itens_itenscontrato_fk">
+            <End Role="itens" EntitySet="itens" />
+            <End Role="itenscontrato" EntitySet="itenscontrato" />
+          </AssociationSet>
+          <AssociationSet Name="itens_itenspedido_fk" Association="tjossModel.itens_itenspedido_fk">
+            <End Role="itens" EntitySet="itens" />
+            <End Role="itenspedido" EntitySet="itenspedido" />
+          </AssociationSet>
+          <AssociationSet Name="tipoitem_itens_fk" Association="tjossModel.tipoitem_itens_fk">
+            <End Role="tipoitem" EntitySet="tipoitem" />
+            <End Role="itens" EntitySet="itens" />
+          </AssociationSet>
+          <AssociationSet Name="medida_itenspedido_fk" Association="tjossModel.medida_itenspedido_fk">
+            <End Role="medida" EntitySet="medida" />
+            <End Role="itenspedido" EntitySet="itenspedido" />
+          </AssociationSet>
+          <AssociationSet Name="pedidos_itenspedido_fk" Association="tjossModel.pedidos_itenspedido_fk">
+            <End Role="pedidos" EntitySet="pedidos" />
+            <End Role="itenspedido" EntitySet="itenspedido" />
+          </AssociationSet>
+          <AssociationSet Name="tipopedido_pedidos_fk" Association="tjossModel.tipopedido_pedidos_fk">
+            <End Role="tipopedido" EntitySet="tipopedido" />
+            <End Role="pedidos" EntitySet="pedidos" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="cadastro">
           <Key>
             <PropertyRef Name="codigocadastro" />
           </Key>
           <Property Name="codigocadastro" Type="Int32" Nullable="false" />
-          <Property Name="nomecadastro" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="nomefantasia" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nomecadastro" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="nomefantasia" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="codigotipocadastro" Type="Int32" Nullable="false" />
-          <Property Name="cpfcnpj" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="controle" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="datahalteracao" Type="DateTime" Precision="6" Nullable="false" />
+          <Property Name="cpfcnpj" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="controle" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="datahalteracao" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="codigofuncionario" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="contrato" Relationship="Self.cadastro_contratovenda_fk" FromRole="cadastro" ToRole="contrato" />
-          <NavigationProperty Name="dadosfisicos" Relationship="Self.cadastro_dadosfisicos_fk" FromRole="cadastro" ToRole="dadosfisicos" />
-          <NavigationProperty Name="definicaocadastro" Relationship="Self.cadastro_definicaocadastro_fk" FromRole="cadastro" ToRole="definicaocadastro" />
-          <NavigationProperty Name="medida" Relationship="Self.cadastro_medida_fk" FromRole="cadastro" ToRole="medida" />
-          <NavigationProperty Name="pedidos" Relationship="Self.cadastro_pedidovenda_fk" FromRole="cadastro" ToRole="pedidos" />
-          <NavigationProperty Name="funcionarios" Relationship="Self.funcionarios_cadastro_fk" FromRole="cadastro" ToRole="funcionarios" />
-          <NavigationProperty Name="tipocadastro" Relationship="Self.tipocadastro_cadastro_fk" FromRole="cadastro" ToRole="tipocadastro" />
+          <NavigationProperty Name="contrato" Relationship="tjossModel.cadastro_contratovenda_fk" FromRole="cadastro" ToRole="contrato" />
+          <NavigationProperty Name="dadosfisicos" Relationship="tjossModel.cadastro_dadosfisicos_fk" FromRole="cadastro" ToRole="dadosfisicos" />
+          <NavigationProperty Name="definicaocadastro" Relationship="tjossModel.cadastro_definicaocadastro_fk" FromRole="cadastro" ToRole="definicaocadastro" />
+          <NavigationProperty Name="medida" Relationship="tjossModel.cadastro_medida_fk" FromRole="cadastro" ToRole="medida" />
+          <NavigationProperty Name="pedidos" Relationship="tjossModel.cadastro_pedidovenda_fk" FromRole="cadastro" ToRole="pedidos" />
+          <NavigationProperty Name="funcionarios" Relationship="tjossModel.funcionarios_cadastro_fk" FromRole="cadastro" ToRole="funcionarios" />
+          <NavigationProperty Name="tipocadastro" Relationship="tjossModel.tipocadastro_cadastro_fk" FromRole="cadastro" ToRole="tipocadastro" />
+        </EntityType>
+        <EntityType Name="cargofuncionario">
+          <Key>
+            <PropertyRef Name="codigocargo" />
+          </Key>
+          <Property Name="codigocargo" Type="Int32" Nullable="false" />
+          <Property Name="descricaocargo" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="funcionarios" Relationship="tjossModel.cargofuncionario_funcionarios_fk" FromRole="cargofuncionario" ToRole="funcionarios" />
+        </EntityType>
+        <EntityType Name="cidade">
+          <Key>
+            <PropertyRef Name="codigocidade" />
+          </Key>
+          <Property Name="codigocidade" Type="Int32" Nullable="false" />
+          <Property Name="nomecidade" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="siglacidade" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="codigoestado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="dadosfisicos" Relationship="tjossModel.cidade_dadosfisicos_fk" FromRole="cidade" ToRole="dadosfisicos" />
+          <NavigationProperty Name="estado" Relationship="tjossModel.estado_cidade_fk" FromRole="cidade" ToRole="estado" />
         </EntityType>
         <EntityType Name="contrato">
           <Key>
@@ -605,17 +948,17 @@
           <Property Name="numerocontrato" Type="Int32" Nullable="false" />
           <Property Name="codigotipocontrato" Type="Int32" Nullable="false" />
           <Property Name="codigocadastro" Type="Int32" Nullable="false" />
-          <Property Name="datacontrato" Type="DateTime" Precision="0" Nullable="false" />
-          <Property Name="situacao" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="datavencimento" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="datacontrato" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="datavencimento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="codigovendedor" Type="Int32" Nullable="false" />
-          <Property Name="datahalteracao" Type="DateTime" Precision="6" Nullable="false" />
+          <Property Name="datahalteracao" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="codigofuncionario" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="cadastro" Relationship="Self.cadastro_contratovenda_fk" FromRole="contrato" ToRole="cadastro" />
-          <NavigationProperty Name="itenscontrato" Relationship="Self.contrato_itenscontrato_fk" FromRole="contrato" ToRole="itenscontrato" />
-          <NavigationProperty Name="pedidos" Relationship="Self.contrato_pedidos_fk" FromRole="contrato" ToRole="pedidos" />
-          <NavigationProperty Name="funcionarios" Relationship="Self.funcionarios_contratovenda_fk" FromRole="contrato" ToRole="funcionarios" />
-          <NavigationProperty Name="tipocontrato" Relationship="Self.tipocontrato_contratovenda_fk" FromRole="contrato" ToRole="tipocontrato" />
+          <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_contratovenda_fk" FromRole="contrato" ToRole="cadastro" />
+          <NavigationProperty Name="itenscontrato" Relationship="tjossModel.contrato_itenscontrato_fk" FromRole="contrato" ToRole="itenscontrato" />
+          <NavigationProperty Name="pedidos" Relationship="tjossModel.contrato_pedidos_fk" FromRole="contrato" ToRole="pedidos" />
+          <NavigationProperty Name="funcionarios" Relationship="tjossModel.funcionarios_contratovenda_fk" FromRole="contrato" ToRole="funcionarios" />
+          <NavigationProperty Name="tipocontrato" Relationship="tjossModel.tipocontrato_contratovenda_fk" FromRole="contrato" ToRole="tipocontrato" />
         </EntityType>
         <EntityType Name="dadosfisicos">
           <Key>
@@ -623,12 +966,15 @@
             <PropertyRef Name="codigofilial" />
           </Key>
           <Property Name="codigocadastro" Type="Int32" Nullable="false" />
-          <Property Name="codigofilial" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="endereco" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="bairro" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="codigofilial" Type="Int32" Nullable="false" />
+          <Property Name="endereco" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="bairro" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="numero" Type="Int32" Nullable="false" />
           <Property Name="complemento" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="cadastro" Relationship="Self.cadastro_dadosfisicos_fk" FromRole="dadosfisicos" ToRole="cadastro" />
+          <Property Name="cependereco" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="codigocidade" Type="Int32" />
+          <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_dadosfisicos_fk" FromRole="dadosfisicos" ToRole="cadastro" />
+          <NavigationProperty Name="cidade" Relationship="tjossModel.cidade_dadosfisicos_fk" FromRole="dadosfisicos" ToRole="cidade" />
         </EntityType>
         <EntityType Name="definicaocadastro">
           <Key>
@@ -637,28 +983,52 @@
           </Key>
           <Property Name="codigocadastro" Type="Int32" Nullable="false" />
           <Property Name="codigotipodefinicao" Type="Int32" Nullable="false" />
-          <Property Name="datahalteracao" Type="DateTime" Precision="6" Nullable="false" />
+          <Property Name="datahalteracao" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="codigofuncionario" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="cadastro" Relationship="Self.cadastro_definicaocadastro_fk" FromRole="definicaocadastro" ToRole="cadastro" />
-          <NavigationProperty Name="funcionarios" Relationship="Self.funcionarios_definicaocadastro_fk" FromRole="definicaocadastro" ToRole="funcionarios" />
-          <NavigationProperty Name="tipodefinicao" Relationship="Self.tipodefinicao_definicaocadastro_fk" FromRole="definicaocadastro" ToRole="tipodefinicao" />
+          <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_definicaocadastro_fk" FromRole="definicaocadastro" ToRole="cadastro" />
+          <NavigationProperty Name="funcionarios" Relationship="tjossModel.funcionarios_definicaocadastro_fk" FromRole="definicaocadastro" ToRole="funcionarios" />
+          <NavigationProperty Name="tipodefinicao" Relationship="tjossModel.tipodefinicao_definicaocadastro_fk" FromRole="definicaocadastro" ToRole="tipodefinicao" />
+        </EntityType>
+        <EntityType Name="estado">
+          <Key>
+            <PropertyRef Name="codigoestado" />
+          </Key>
+          <Property Name="codigoestado" Type="Int32" Nullable="false" />
+          <Property Name="nomeestado" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="siglaestado" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="codigopais" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cidade" Relationship="tjossModel.estado_cidade_fk" FromRole="estado" ToRole="cidade" />
+          <NavigationProperty Name="pais" Relationship="tjossModel.pais_estado_fk" FromRole="estado" ToRole="pais" />
+        </EntityType>
+        <EntityType Name="formulaitem">
+          <Key>
+            <PropertyRef Name="codigoitem" />
+            <PropertyRef Name="numerosequencia" />
+          </Key>
+          <Property Name="codigoitem" Type="Int32" Nullable="false" />
+          <Property Name="numerosequencia" Type="Int32" Nullable="false" />
+          <Property Name="observacaoformula" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="itens" Relationship="tjossModel.itens_formulaitem_fk" FromRole="formulaitem" ToRole="itens" />
         </EntityType>
         <EntityType Name="funcionarios">
           <Key>
             <PropertyRef Name="codigofuncionario" />
           </Key>
           <Property Name="codigofuncionario" Type="Int32" Nullable="false" />
-          <Property Name="nome" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="cpf" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="cpfcontrole" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="datanascimento" Type="DateTime" Precision="0" Nullable="false" />
-          <Property Name="dataadmissao" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="nome" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="cpf" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="cpfcontrole" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="datanascimento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dataadmissao" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="datadesligamento" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="cadastro" Relationship="Self.funcionarios_cadastro_fk" FromRole="funcionarios" ToRole="cadastro" />
-          <NavigationProperty Name="contrato" Relationship="Self.funcionarios_contratovenda_fk" FromRole="funcionarios" ToRole="contrato" />
-          <NavigationProperty Name="definicaocadastro" Relationship="Self.funcionarios_definicaocadastro_fk" FromRole="funcionarios" ToRole="definicaocadastro" />
-          <NavigationProperty Name="itens" Relationship="Self.funcionarios_itens_fk" FromRole="funcionarios" ToRole="itens" />
-          <NavigationProperty Name="movimentoestoque" Relationship="Self.funcionarios_movimentoestoque_fk" FromRole="funcionarios" ToRole="movimentoestoque" />
+          <Property Name="codigocargo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cadastro" Relationship="tjossModel.funcionarios_cadastro_fk" FromRole="funcionarios" ToRole="cadastro" />
+          <NavigationProperty Name="cargofuncionario" Relationship="tjossModel.cargofuncionario_funcionarios_fk" FromRole="funcionarios" ToRole="cargofuncionario" />
+          <NavigationProperty Name="contrato" Relationship="tjossModel.funcionarios_contratovenda_fk" FromRole="funcionarios" ToRole="contrato" />
+          <NavigationProperty Name="definicaocadastro" Relationship="tjossModel.funcionarios_definicaocadastro_fk" FromRole="funcionarios" ToRole="definicaocadastro" />
+          <NavigationProperty Name="itens" Relationship="tjossModel.funcionarios_itens_fk" FromRole="funcionarios" ToRole="itens" />
+          <NavigationProperty Name="movimentoestoque" Relationship="tjossModel.funcionarios_movimentoestoque_fk" FromRole="funcionarios" ToRole="movimentoestoque" />
+          <NavigationProperty Name="usuarios" Relationship="tjossModel.funcionarios_senhafuncionario_fk" FromRole="funcionarios" ToRole="usuarios" />
         </EntityType>
         <EntityType Name="itemestoque">
           <Key>
@@ -667,26 +1037,27 @@
           </Key>
           <Property Name="codigoitem" Type="Int32" Nullable="false" />
           <Property Name="codigotipoestoque" Type="Int32" Nullable="false" />
-          <Property Name="quantidadedisponivel" Type="Decimal" Precision="15" Scale="5" Nullable="false" />
-          <Property Name="quantidadereservado" Type="Decimal" Precision="15" Scale="5" Nullable="false" />
-          <NavigationProperty Name="itens" Relationship="Self.itens_itemestoque_fk" FromRole="itemestoque" ToRole="itens" />
-          <NavigationProperty Name="tipoestoque" Relationship="Self.tipoestoque_itemestoque_fk" FromRole="itemestoque" ToRole="tipoestoque" />
+          <Property Name="quantidadedisponivel" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="valorproduto" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <NavigationProperty Name="itens" Relationship="tjossModel.itens_itemestoque_fk" FromRole="itemestoque" ToRole="itens" />
+          <NavigationProperty Name="tipoestoque" Relationship="tjossModel.tipoestoque_itemestoque_fk" FromRole="itemestoque" ToRole="tipoestoque" />
         </EntityType>
         <EntityType Name="itens">
           <Key>
             <PropertyRef Name="codigoitem" />
           </Key>
           <Property Name="codigoitem" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descricaoitem" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descricaoitem" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="codigotipoitem" Type="Int32" Nullable="false" />
-          <Property Name="situacao" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="datahalteracao" Type="DateTime" Precision="6" Nullable="false" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="datahalteracao" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="codigofuncionario" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="funcionarios" Relationship="Self.funcionarios_itens_fk" FromRole="itens" ToRole="funcionarios" />
-          <NavigationProperty Name="itemestoque" Relationship="Self.itens_itemestoque_fk" FromRole="itens" ToRole="itemestoque" />
-          <NavigationProperty Name="itenscontrato" Relationship="Self.itens_itenscontrato_fk" FromRole="itens" ToRole="itenscontrato" />
-          <NavigationProperty Name="itenspedido" Relationship="Self.itens_itenspedido_fk" FromRole="itens" ToRole="itenspedido" />
-          <NavigationProperty Name="tipoitem" Relationship="Self.tipoitem_itens_fk" FromRole="itens" ToRole="tipoitem" />
+          <NavigationProperty Name="formulaitem" Relationship="tjossModel.itens_formulaitem_fk" FromRole="itens" ToRole="formulaitem" />
+          <NavigationProperty Name="funcionarios" Relationship="tjossModel.funcionarios_itens_fk" FromRole="itens" ToRole="funcionarios" />
+          <NavigationProperty Name="itemestoque" Relationship="tjossModel.itens_itemestoque_fk" FromRole="itens" ToRole="itemestoque" />
+          <NavigationProperty Name="itenscontrato" Relationship="tjossModel.itens_itenscontrato_fk" FromRole="itens" ToRole="itenscontrato" />
+          <NavigationProperty Name="itenspedido" Relationship="tjossModel.itens_itenspedido_fk" FromRole="itens" ToRole="itenspedido" />
+          <NavigationProperty Name="tipoitem" Relationship="tjossModel.tipoitem_itens_fk" FromRole="itens" ToRole="tipoitem" />
         </EntityType>
         <EntityType Name="itenscontrato">
           <Key>
@@ -697,10 +1068,11 @@
           <Property Name="numerocontrato" Type="Int32" Nullable="false" />
           <Property Name="codigotipocontrato" Type="Int32" Nullable="false" />
           <Property Name="codigoitem" Type="Int32" Nullable="false" />
-          <Property Name="saldocontratado" Type="Decimal" Precision="15" Scale="5" Nullable="false" />
-          <Property Name="saldoatual" Type="Decimal" Precision="15" Scale="5" Nullable="false" />
-          <NavigationProperty Name="contrato" Relationship="Self.contrato_itenscontrato_fk" FromRole="itenscontrato" ToRole="contrato" />
-          <NavigationProperty Name="itens" Relationship="Self.itens_itenscontrato_fk" FromRole="itenscontrato" ToRole="itens" />
+          <Property Name="saldocontratado" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="saldoatual" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="valoritem" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <NavigationProperty Name="contrato" Relationship="tjossModel.contrato_itenscontrato_fk" FromRole="itenscontrato" ToRole="contrato" />
+          <NavigationProperty Name="itens" Relationship="tjossModel.itens_itenscontrato_fk" FromRole="itenscontrato" ToRole="itens" />
         </EntityType>
         <EntityType Name="itenspedido">
           <Key>
@@ -711,10 +1083,15 @@
           <Property Name="numeropedido" Type="Int32" Nullable="false" />
           <Property Name="codigotipopedido" Type="Int32" Nullable="false" />
           <Property Name="codigoitem" Type="Int32" Nullable="false" />
-          <Property Name="quantidadesolicitada" Type="Decimal" Precision="15" Scale="5" Nullable="false" />
-          <Property Name="quantidadebaixada" Type="Decimal" Precision="15" Scale="5" Nullable="false" />
-          <NavigationProperty Name="itens" Relationship="Self.itens_itenspedido_fk" FromRole="itenspedido" ToRole="itens" />
-          <NavigationProperty Name="pedidos" Relationship="Self.pedidos_itenspedido_fk" FromRole="itenspedido" ToRole="pedidos" />
+          <Property Name="quantidadesolicitada" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="quantidadebaixada" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="valorunitario" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="valortotalitem" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="codigocadastro" Type="Int32" />
+          <Property Name="codigomedida" Type="Int32" />
+          <NavigationProperty Name="itens" Relationship="tjossModel.itens_itenspedido_fk" FromRole="itenspedido" ToRole="itens" />
+          <NavigationProperty Name="medida" Relationship="tjossModel.medida_itenspedido_fk" FromRole="itenspedido" ToRole="medida" />
+          <NavigationProperty Name="pedidos" Relationship="tjossModel.pedidos_itenspedido_fk" FromRole="itenspedido" ToRole="pedidos" />
         </EntityType>
         <EntityType Name="medida">
           <Key>
@@ -725,8 +1102,11 @@
           <Property Name="codigomedida" Type="Int32" Nullable="false" />
           <Property Name="altura" Type="Decimal" Precision="15" Scale="5" />
           <Property Name="cintura" Type="Decimal" Precision="15" Scale="5" />
-          <Property Name="ombroaombro" Type="Decimal" Precision="15" Scale="5" Nullable="false" />
-          <NavigationProperty Name="cadastro" Relationship="Self.cadastro_medida_fk" FromRole="medida" ToRole="cadastro" />
+          <Property Name="ombroaombro" Type="Decimal" Precision="15" Scale="5" />
+          <Property Name="busto" Type="Decimal" Precision="15" Scale="5" />
+          <Property Name="observacao" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_medida_fk" FromRole="medida" ToRole="cadastro" />
+          <NavigationProperty Name="itenspedido" Relationship="tjossModel.medida_itenspedido_fk" FromRole="medida" ToRole="itenspedido" />
         </EntityType>
         <EntityType Name="movimentoestoque">
           <Key>
@@ -734,11 +1114,20 @@
           </Key>
           <Property Name="sequenciamovimentoestoque" Type="Int32" Nullable="false" />
           <Property Name="codigoitem" Type="Int32" Nullable="false" />
-          <Property Name="tipomovimento" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="quantidademovimentada" Type="Decimal" Precision="15" Scale="5" Nullable="false" />
-          <Property Name="datahmovimento" Type="DateTime" Precision="6" Nullable="false" />
+          <Property Name="tipomovimento" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="quantidademovimentada" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="datahmovimento" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="codigofuncionario" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="funcionarios" Relationship="Self.funcionarios_movimentoestoque_fk" FromRole="movimentoestoque" ToRole="funcionarios" />
+          <NavigationProperty Name="funcionarios" Relationship="tjossModel.funcionarios_movimentoestoque_fk" FromRole="movimentoestoque" ToRole="funcionarios" />
+        </EntityType>
+        <EntityType Name="pais">
+          <Key>
+            <PropertyRef Name="codigopais" />
+          </Key>
+          <Property Name="codigopais" Type="Int32" Nullable="false" />
+          <Property Name="nomepais" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="siglapais" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="estado" Relationship="tjossModel.pais_estado_fk" FromRole="pais" ToRole="estado" />
         </EntityType>
         <EntityType Name="pedidos">
           <Key>
@@ -748,71 +1137,81 @@
           <Property Name="numeropedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="codigotipopedido" Type="Int32" Nullable="false" />
           <Property Name="codigocadastro" Type="Int32" Nullable="false" />
-          <Property Name="situacaopedido" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="dataconclusao" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="situacaopedido" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="dataconclusao" Type="DateTime" Precision="0" />
           <Property Name="numerocontrato" Type="Int32" />
           <Property Name="codigotipocontrato" Type="Int32" />
-          <NavigationProperty Name="cadastro" Relationship="Self.cadastro_pedidovenda_fk" FromRole="pedidos" ToRole="cadastro" />
-          <NavigationProperty Name="contrato" Relationship="Self.contrato_pedidos_fk" FromRole="pedidos" ToRole="contrato" />
-          <NavigationProperty Name="itenspedido" Relationship="Self.pedidos_itenspedido_fk" FromRole="pedidos" ToRole="itenspedido" />
-          <NavigationProperty Name="tipopedido" Relationship="Self.tipopedido_pedidos_fk" FromRole="pedidos" ToRole="tipopedido" />
+          <Property Name="valortotalpedido" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_pedidovenda_fk" FromRole="pedidos" ToRole="cadastro" />
+          <NavigationProperty Name="contrato" Relationship="tjossModel.contrato_pedidos_fk" FromRole="pedidos" ToRole="contrato" />
+          <NavigationProperty Name="itenspedido" Relationship="tjossModel.pedidos_itenspedido_fk" FromRole="pedidos" ToRole="itenspedido" />
+          <NavigationProperty Name="tipopedido" Relationship="tjossModel.tipopedido_pedidos_fk" FromRole="pedidos" ToRole="tipopedido" />
         </EntityType>
         <EntityType Name="tipocadastro">
           <Key>
             <PropertyRef Name="codigotipocadastro" />
           </Key>
           <Property Name="codigotipocadastro" Type="Int32" Nullable="false" />
-          <Property Name="descricaotipocadastro" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="cadastro" Relationship="Self.tipocadastro_cadastro_fk" FromRole="tipocadastro" ToRole="cadastro" />
+          <Property Name="descricaotipocadastro" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="cadastro" Relationship="tjossModel.tipocadastro_cadastro_fk" FromRole="tipocadastro" ToRole="cadastro" />
         </EntityType>
         <EntityType Name="tipocontrato">
           <Key>
             <PropertyRef Name="codigotipocontrato" />
           </Key>
           <Property Name="codigotipocontrato" Type="Int32" Nullable="false" />
-          <Property Name="descricaotipocontrato" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="situacao" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="contrato" Relationship="Self.tipocontrato_contratovenda_fk" FromRole="tipocontrato" ToRole="contrato" />
+          <Property Name="descricaotipocontrato" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="contrato" Relationship="tjossModel.tipocontrato_contratovenda_fk" FromRole="tipocontrato" ToRole="contrato" />
         </EntityType>
         <EntityType Name="tipodefinicao">
           <Key>
             <PropertyRef Name="codigotipodefinicao" />
           </Key>
           <Property Name="codigotipodefinicao" Type="Int32" Nullable="false" />
-          <Property Name="descricaodefinicao" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="situacao" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="definicaocadastro" Relationship="Self.tipodefinicao_definicaocadastro_fk" FromRole="tipodefinicao" ToRole="definicaocadastro" />
+          <Property Name="descricaodefinicao" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="definicaocadastro" Relationship="tjossModel.tipodefinicao_definicaocadastro_fk" FromRole="tipodefinicao" ToRole="definicaocadastro" />
         </EntityType>
         <EntityType Name="tipoestoque">
           <Key>
             <PropertyRef Name="codigotipoestoque" />
           </Key>
           <Property Name="codigotipoestoque" Type="Int32" Nullable="false" />
-          <Property Name="descricaotipoestoque" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="situacao" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="itemestoque" Relationship="Self.tipoestoque_itemestoque_fk" FromRole="tipoestoque" ToRole="itemestoque" />
+          <Property Name="descricaotipoestoque" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="itemestoque" Relationship="tjossModel.tipoestoque_itemestoque_fk" FromRole="tipoestoque" ToRole="itemestoque" />
         </EntityType>
         <EntityType Name="tipoitem">
           <Key>
             <PropertyRef Name="codigotipoitem" />
           </Key>
           <Property Name="codigotipoitem" Type="Int32" Nullable="false" />
-          <Property Name="descricaotipoitem" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="situacaotipoitem" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="itens" Relationship="Self.tipoitem_itens_fk" FromRole="tipoitem" ToRole="itens" />
+          <Property Name="descricaotipoitem" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="situacaotipoitem" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="itens" Relationship="tjossModel.tipoitem_itens_fk" FromRole="tipoitem" ToRole="itens" />
         </EntityType>
         <EntityType Name="tipopedido">
           <Key>
             <PropertyRef Name="codigotipopedido" />
           </Key>
           <Property Name="codigotipopedido" Type="Int32" Nullable="false" />
-          <Property Name="descricaotipopedido" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="situacao" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="pedidos" Relationship="Self.tipopedido_pedidos_fk" FromRole="tipopedido" ToRole="pedidos" />
+          <Property Name="descricaotipopedido" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="pedidos" Relationship="tjossModel.tipopedido_pedidos_fk" FromRole="tipopedido" ToRole="pedidos" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="codigofuncionario" />
+          </Key>
+          <Property Name="codigofuncionario" Type="Int32" Nullable="false" />
+          <Property Name="senha" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="datahcadastro" Type="DateTime" Nullable="false" Precision="6" />
+          <NavigationProperty Name="funcionarios" Relationship="tjossModel.funcionarios_senhafuncionario_fk" FromRole="usuarios" ToRole="funcionarios" />
         </EntityType>
         <Association Name="cadastro_contratovenda_fk">
-          <End Role="cadastro" Type="Self.cadastro" Multiplicity="1" />
-          <End Role="contrato" Type="Self.contrato" Multiplicity="*" />
+          <End Type="tjossModel.cadastro" Role="cadastro" Multiplicity="1" />
+          <End Type="tjossModel.contrato" Role="contrato" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="cadastro">
               <PropertyRef Name="codigocadastro" />
@@ -823,8 +1222,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="cadastro_dadosfisicos_fk">
-          <End Role="cadastro" Type="Self.cadastro" Multiplicity="1" />
-          <End Role="dadosfisicos" Type="Self.dadosfisicos" Multiplicity="*" />
+          <End Type="tjossModel.cadastro" Role="cadastro" Multiplicity="1" />
+          <End Type="tjossModel.dadosfisicos" Role="dadosfisicos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="cadastro">
               <PropertyRef Name="codigocadastro" />
@@ -835,8 +1234,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="cadastro_definicaocadastro_fk">
-          <End Role="cadastro" Type="Self.cadastro" Multiplicity="1" />
-          <End Role="definicaocadastro" Type="Self.definicaocadastro" Multiplicity="*" />
+          <End Type="tjossModel.cadastro" Role="cadastro" Multiplicity="1" />
+          <End Type="tjossModel.definicaocadastro" Role="definicaocadastro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="cadastro">
               <PropertyRef Name="codigocadastro" />
@@ -847,8 +1246,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="cadastro_medida_fk">
-          <End Role="cadastro" Type="Self.cadastro" Multiplicity="1" />
-          <End Role="medida" Type="Self.medida" Multiplicity="*" />
+          <End Type="tjossModel.cadastro" Role="cadastro" Multiplicity="1" />
+          <End Type="tjossModel.medida" Role="medida" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="cadastro">
               <PropertyRef Name="codigocadastro" />
@@ -859,8 +1258,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="cadastro_pedidovenda_fk">
-          <End Role="cadastro" Type="Self.cadastro" Multiplicity="1" />
-          <End Role="pedidos" Type="Self.pedidos" Multiplicity="*" />
+          <End Type="tjossModel.cadastro" Role="cadastro" Multiplicity="1" />
+          <End Type="tjossModel.pedidos" Role="pedidos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="cadastro">
               <PropertyRef Name="codigocadastro" />
@@ -871,8 +1270,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="funcionarios_cadastro_fk">
-          <End Role="funcionarios" Type="Self.funcionarios" Multiplicity="1" />
-          <End Role="cadastro" Type="Self.cadastro" Multiplicity="*" />
+          <End Type="tjossModel.funcionarios" Role="funcionarios" Multiplicity="1" />
+          <End Type="tjossModel.cadastro" Role="cadastro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="funcionarios">
               <PropertyRef Name="codigofuncionario" />
@@ -883,8 +1282,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="tipocadastro_cadastro_fk">
-          <End Role="tipocadastro" Type="Self.tipocadastro" Multiplicity="1" />
-          <End Role="cadastro" Type="Self.cadastro" Multiplicity="*" />
+          <End Type="tjossModel.tipocadastro" Role="tipocadastro" Multiplicity="1" />
+          <End Type="tjossModel.cadastro" Role="cadastro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tipocadastro">
               <PropertyRef Name="codigotipocadastro" />
@@ -894,9 +1293,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="cargofuncionario_funcionarios_fk">
+          <End Type="tjossModel.cargofuncionario" Role="cargofuncionario" Multiplicity="1" />
+          <End Type="tjossModel.funcionarios" Role="funcionarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cargofuncionario">
+              <PropertyRef Name="codigocargo" />
+            </Principal>
+            <Dependent Role="funcionarios">
+              <PropertyRef Name="codigocargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cidade_dadosfisicos_fk">
+          <End Type="tjossModel.cidade" Role="cidade" Multiplicity="0..1" />
+          <End Type="tjossModel.dadosfisicos" Role="dadosfisicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cidade">
+              <PropertyRef Name="codigocidade" />
+            </Principal>
+            <Dependent Role="dadosfisicos">
+              <PropertyRef Name="codigocidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="estado_cidade_fk">
+          <End Type="tjossModel.estado" Role="estado" Multiplicity="1" />
+          <End Type="tjossModel.cidade" Role="cidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="estado">
+              <PropertyRef Name="codigoestado" />
+            </Principal>
+            <Dependent Role="cidade">
+              <PropertyRef Name="codigoestado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="contrato_itenscontrato_fk">
-          <End Role="contrato" Type="Self.contrato" Multiplicity="1" />
-          <End Role="itenscontrato" Type="Self.itenscontrato" Multiplicity="*" />
+          <End Type="tjossModel.contrato" Role="contrato" Multiplicity="1" />
+          <End Type="tjossModel.itenscontrato" Role="itenscontrato" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="contrato">
               <PropertyRef Name="numerocontrato" />
@@ -909,8 +1344,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="contrato_pedidos_fk">
-          <End Role="contrato" Type="Self.contrato" Multiplicity="0..1" />
-          <End Role="pedidos" Type="Self.pedidos" Multiplicity="*" />
+          <End Type="tjossModel.contrato" Role="contrato" Multiplicity="0..1" />
+          <End Type="tjossModel.pedidos" Role="pedidos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="contrato">
               <PropertyRef Name="numerocontrato" />
@@ -923,8 +1358,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="funcionarios_contratovenda_fk">
-          <End Role="funcionarios" Type="Self.funcionarios" Multiplicity="1" />
-          <End Role="contrato" Type="Self.contrato" Multiplicity="*" />
+          <End Type="tjossModel.funcionarios" Role="funcionarios" Multiplicity="1" />
+          <End Type="tjossModel.contrato" Role="contrato" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="funcionarios">
               <PropertyRef Name="codigofuncionario" />
@@ -935,8 +1370,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="tipocontrato_contratovenda_fk">
-          <End Role="tipocontrato" Type="Self.tipocontrato" Multiplicity="1" />
-          <End Role="contrato" Type="Self.contrato" Multiplicity="*" />
+          <End Type="tjossModel.tipocontrato" Role="tipocontrato" Multiplicity="1" />
+          <End Type="tjossModel.contrato" Role="contrato" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tipocontrato">
               <PropertyRef Name="codigotipocontrato" />
@@ -947,8 +1382,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="funcionarios_definicaocadastro_fk">
-          <End Role="funcionarios" Type="Self.funcionarios" Multiplicity="1" />
-          <End Role="definicaocadastro" Type="Self.definicaocadastro" Multiplicity="*" />
+          <End Type="tjossModel.funcionarios" Role="funcionarios" Multiplicity="1" />
+          <End Type="tjossModel.definicaocadastro" Role="definicaocadastro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="funcionarios">
               <PropertyRef Name="codigofuncionario" />
@@ -959,8 +1394,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="tipodefinicao_definicaocadastro_fk">
-          <End Role="tipodefinicao" Type="Self.tipodefinicao" Multiplicity="1" />
-          <End Role="definicaocadastro" Type="Self.definicaocadastro" Multiplicity="*" />
+          <End Type="tjossModel.tipodefinicao" Role="tipodefinicao" Multiplicity="1" />
+          <End Type="tjossModel.definicaocadastro" Role="definicaocadastro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tipodefinicao">
               <PropertyRef Name="codigotipodefinicao" />
@@ -970,9 +1405,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="pais_estado_fk">
+          <End Type="tjossModel.pais" Role="pais" Multiplicity="1" />
+          <End Type="tjossModel.estado" Role="estado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pais">
+              <PropertyRef Name="codigopais" />
+            </Principal>
+            <Dependent Role="estado">
+              <PropertyRef Name="codigopais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="itens_formulaitem_fk">
+          <End Type="tjossModel.itens" Role="itens" Multiplicity="1" />
+          <End Type="tjossModel.formulaitem" Role="formulaitem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="itens">
+              <PropertyRef Name="codigoitem" />
+            </Principal>
+            <Dependent Role="formulaitem">
+              <PropertyRef Name="codigoitem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="funcionarios_itens_fk">
-          <End Role="funcionarios" Type="Self.funcionarios" Multiplicity="1" />
-          <End Role="itens" Type="Self.itens" Multiplicity="*" />
+          <End Type="tjossModel.funcionarios" Role="funcionarios" Multiplicity="1" />
+          <End Type="tjossModel.itens" Role="itens" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="funcionarios">
               <PropertyRef Name="codigofuncionario" />
@@ -983,8 +1442,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="funcionarios_movimentoestoque_fk">
-          <End Role="funcionarios" Type="Self.funcionarios" Multiplicity="1" />
-          <End Role="movimentoestoque" Type="Self.movimentoestoque" Multiplicity="*" />
+          <End Type="tjossModel.funcionarios" Role="funcionarios" Multiplicity="1" />
+          <End Type="tjossModel.movimentoestoque" Role="movimentoestoque" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="funcionarios">
               <PropertyRef Name="codigofuncionario" />
@@ -994,9 +1453,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="funcionarios_senhafuncionario_fk">
+          <End Type="tjossModel.funcionarios" Role="funcionarios" Multiplicity="1" />
+          <End Type="tjossModel.usuarios" Role="usuarios" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="funcionarios">
+              <PropertyRef Name="codigofuncionario" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="codigofuncionario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="itens_itemestoque_fk">
-          <End Role="itens" Type="Self.itens" Multiplicity="1" />
-          <End Role="itemestoque" Type="Self.itemestoque" Multiplicity="*" />
+          <End Type="tjossModel.itens" Role="itens" Multiplicity="1" />
+          <End Type="tjossModel.itemestoque" Role="itemestoque" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="itens">
               <PropertyRef Name="codigoitem" />
@@ -1007,8 +1478,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="tipoestoque_itemestoque_fk">
-          <End Role="tipoestoque" Type="Self.tipoestoque" Multiplicity="1" />
-          <End Role="itemestoque" Type="Self.itemestoque" Multiplicity="*" />
+          <End Type="tjossModel.tipoestoque" Role="tipoestoque" Multiplicity="1" />
+          <End Type="tjossModel.itemestoque" Role="itemestoque" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tipoestoque">
               <PropertyRef Name="codigotipoestoque" />
@@ -1019,8 +1490,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="itens_itenscontrato_fk">
-          <End Role="itens" Type="Self.itens" Multiplicity="1" />
-          <End Role="itenscontrato" Type="Self.itenscontrato" Multiplicity="*" />
+          <End Type="tjossModel.itens" Role="itens" Multiplicity="1" />
+          <End Type="tjossModel.itenscontrato" Role="itenscontrato" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="itens">
               <PropertyRef Name="codigoitem" />
@@ -1031,8 +1502,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="itens_itenspedido_fk">
-          <End Role="itens" Type="Self.itens" Multiplicity="1" />
-          <End Role="itenspedido" Type="Self.itenspedido" Multiplicity="*" />
+          <End Type="tjossModel.itens" Role="itens" Multiplicity="1" />
+          <End Type="tjossModel.itenspedido" Role="itenspedido" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="itens">
               <PropertyRef Name="codigoitem" />
@@ -1043,8 +1514,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="tipoitem_itens_fk">
-          <End Role="tipoitem" Type="Self.tipoitem" Multiplicity="1" />
-          <End Role="itens" Type="Self.itens" Multiplicity="*" />
+          <End Type="tjossModel.tipoitem" Role="tipoitem" Multiplicity="1" />
+          <End Type="tjossModel.itens" Role="itens" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tipoitem">
               <PropertyRef Name="codigotipoitem" />
@@ -1054,9 +1525,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="medida_itenspedido_fk">
+          <End Type="tjossModel.medida" Role="medida" Multiplicity="0..1" />
+          <End Type="tjossModel.itenspedido" Role="itenspedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medida">
+              <PropertyRef Name="codigocadastro" />
+              <PropertyRef Name="codigomedida" />
+            </Principal>
+            <Dependent Role="itenspedido">
+              <PropertyRef Name="codigocadastro" />
+              <PropertyRef Name="codigomedida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="pedidos_itenspedido_fk">
-          <End Role="pedidos" Type="Self.pedidos" Multiplicity="1" />
-          <End Role="itenspedido" Type="Self.itenspedido" Multiplicity="*" />
+          <End Type="tjossModel.pedidos" Role="pedidos" Multiplicity="1" />
+          <End Type="tjossModel.itenspedido" Role="itenspedido" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="pedidos">
               <PropertyRef Name="codigotipopedido" />
@@ -1069,8 +1554,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="tipopedido_pedidos_fk">
-          <End Role="tipopedido" Type="Self.tipopedido" Multiplicity="1" />
-          <End Role="pedidos" Type="Self.pedidos" Multiplicity="*" />
+          <End Type="tjossModel.tipopedido" Role="tipopedido" Multiplicity="1" />
+          <End Type="tjossModel.pedidos" Role="pedidos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tipopedido">
               <PropertyRef Name="codigotipopedido" />
@@ -1080,115 +1565,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="tjossEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="cadastro" EntityType="Self.cadastro" />
-          <EntitySet Name="contrato" EntityType="Self.contrato" />
-          <EntitySet Name="dadosfisicos" EntityType="Self.dadosfisicos" />
-          <EntitySet Name="definicaocadastro" EntityType="Self.definicaocadastro" />
-          <EntitySet Name="funcionarios" EntityType="Self.funcionarios" />
-          <EntitySet Name="itemestoque" EntityType="Self.itemestoque" />
-          <EntitySet Name="itens" EntityType="Self.itens" />
-          <EntitySet Name="itenscontrato" EntityType="Self.itenscontrato" />
-          <EntitySet Name="itenspedido" EntityType="Self.itenspedido" />
-          <EntitySet Name="medida" EntityType="Self.medida" />
-          <EntitySet Name="movimentoestoque" EntityType="Self.movimentoestoque" />
-          <EntitySet Name="pedidos" EntityType="Self.pedidos" />
-          <EntitySet Name="tipocadastro" EntityType="Self.tipocadastro" />
-          <EntitySet Name="tipocontrato" EntityType="Self.tipocontrato" />
-          <EntitySet Name="tipodefinicao" EntityType="Self.tipodefinicao" />
-          <EntitySet Name="tipoestoque" EntityType="Self.tipoestoque" />
-          <EntitySet Name="tipoitem" EntityType="Self.tipoitem" />
-          <EntitySet Name="tipopedido" EntityType="Self.tipopedido" />
-          <AssociationSet Name="cadastro_contratovenda_fk" Association="Self.cadastro_contratovenda_fk">
-            <End Role="cadastro" EntitySet="cadastro" />
-            <End Role="contrato" EntitySet="contrato" />
-          </AssociationSet>
-          <AssociationSet Name="cadastro_dadosfisicos_fk" Association="Self.cadastro_dadosfisicos_fk">
-            <End Role="cadastro" EntitySet="cadastro" />
-            <End Role="dadosfisicos" EntitySet="dadosfisicos" />
-          </AssociationSet>
-          <AssociationSet Name="cadastro_definicaocadastro_fk" Association="Self.cadastro_definicaocadastro_fk">
-            <End Role="cadastro" EntitySet="cadastro" />
-            <End Role="definicaocadastro" EntitySet="definicaocadastro" />
-          </AssociationSet>
-          <AssociationSet Name="cadastro_medida_fk" Association="Self.cadastro_medida_fk">
-            <End Role="cadastro" EntitySet="cadastro" />
-            <End Role="medida" EntitySet="medida" />
-          </AssociationSet>
-          <AssociationSet Name="cadastro_pedidovenda_fk" Association="Self.cadastro_pedidovenda_fk">
-            <End Role="cadastro" EntitySet="cadastro" />
-            <End Role="pedidos" EntitySet="pedidos" />
-          </AssociationSet>
-          <AssociationSet Name="funcionarios_cadastro_fk" Association="Self.funcionarios_cadastro_fk">
-            <End Role="funcionarios" EntitySet="funcionarios" />
-            <End Role="cadastro" EntitySet="cadastro" />
-          </AssociationSet>
-          <AssociationSet Name="tipocadastro_cadastro_fk" Association="Self.tipocadastro_cadastro_fk">
-            <End Role="tipocadastro" EntitySet="tipocadastro" />
-            <End Role="cadastro" EntitySet="cadastro" />
-          </AssociationSet>
-          <AssociationSet Name="contrato_itenscontrato_fk" Association="Self.contrato_itenscontrato_fk">
-            <End Role="contrato" EntitySet="contrato" />
-            <End Role="itenscontrato" EntitySet="itenscontrato" />
-          </AssociationSet>
-          <AssociationSet Name="contrato_pedidos_fk" Association="Self.contrato_pedidos_fk">
-            <End Role="contrato" EntitySet="contrato" />
-            <End Role="pedidos" EntitySet="pedidos" />
-          </AssociationSet>
-          <AssociationSet Name="funcionarios_contratovenda_fk" Association="Self.funcionarios_contratovenda_fk">
-            <End Role="funcionarios" EntitySet="funcionarios" />
-            <End Role="contrato" EntitySet="contrato" />
-          </AssociationSet>
-          <AssociationSet Name="tipocontrato_contratovenda_fk" Association="Self.tipocontrato_contratovenda_fk">
-            <End Role="tipocontrato" EntitySet="tipocontrato" />
-            <End Role="contrato" EntitySet="contrato" />
-          </AssociationSet>
-          <AssociationSet Name="funcionarios_definicaocadastro_fk" Association="Self.funcionarios_definicaocadastro_fk">
-            <End Role="funcionarios" EntitySet="funcionarios" />
-            <End Role="definicaocadastro" EntitySet="definicaocadastro" />
-          </AssociationSet>
-          <AssociationSet Name="tipodefinicao_definicaocadastro_fk" Association="Self.tipodefinicao_definicaocadastro_fk">
-            <End Role="tipodefinicao" EntitySet="tipodefinicao" />
-            <End Role="definicaocadastro" EntitySet="definicaocadastro" />
-          </AssociationSet>
-          <AssociationSet Name="funcionarios_itens_fk" Association="Self.funcionarios_itens_fk">
-            <End Role="funcionarios" EntitySet="funcionarios" />
-            <End Role="itens" EntitySet="itens" />
-          </AssociationSet>
-          <AssociationSet Name="funcionarios_movimentoestoque_fk" Association="Self.funcionarios_movimentoestoque_fk">
-            <End Role="funcionarios" EntitySet="funcionarios" />
-            <End Role="movimentoestoque" EntitySet="movimentoestoque" />
-          </AssociationSet>
-          <AssociationSet Name="itens_itemestoque_fk" Association="Self.itens_itemestoque_fk">
-            <End Role="itens" EntitySet="itens" />
-            <End Role="itemestoque" EntitySet="itemestoque" />
-          </AssociationSet>
-          <AssociationSet Name="tipoestoque_itemestoque_fk" Association="Self.tipoestoque_itemestoque_fk">
-            <End Role="tipoestoque" EntitySet="tipoestoque" />
-            <End Role="itemestoque" EntitySet="itemestoque" />
-          </AssociationSet>
-          <AssociationSet Name="itens_itenscontrato_fk" Association="Self.itens_itenscontrato_fk">
-            <End Role="itens" EntitySet="itens" />
-            <End Role="itenscontrato" EntitySet="itenscontrato" />
-          </AssociationSet>
-          <AssociationSet Name="itens_itenspedido_fk" Association="Self.itens_itenspedido_fk">
-            <End Role="itens" EntitySet="itens" />
-            <End Role="itenspedido" EntitySet="itenspedido" />
-          </AssociationSet>
-          <AssociationSet Name="tipoitem_itens_fk" Association="Self.tipoitem_itens_fk">
-            <End Role="tipoitem" EntitySet="tipoitem" />
-            <End Role="itens" EntitySet="itens" />
-          </AssociationSet>
-          <AssociationSet Name="pedidos_itenspedido_fk" Association="Self.pedidos_itenspedido_fk">
-            <End Role="pedidos" EntitySet="pedidos" />
-            <End Role="itenspedido" EntitySet="itenspedido" />
-          </AssociationSet>
-          <AssociationSet Name="tipopedido_pedidos_fk" Association="Self.tipopedido_pedidos_fk">
-            <End Role="tipopedido" EntitySet="tipopedido" />
-            <End Role="pedidos" EntitySet="pedidos" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1197,197 +1574,264 @@
           <EntitySetMapping Name="cadastro">
             <EntityTypeMapping TypeName="tjossModel.cadastro">
               <MappingFragment StoreEntitySet="cadastro">
-                <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
-                <ScalarProperty Name="nomecadastro" ColumnName="nomecadastro" />
-                <ScalarProperty Name="nomefantasia" ColumnName="nomefantasia" />
-                <ScalarProperty Name="codigotipocadastro" ColumnName="codigotipocadastro" />
-                <ScalarProperty Name="cpfcnpj" ColumnName="cpfcnpj" />
-                <ScalarProperty Name="controle" ColumnName="controle" />
-                <ScalarProperty Name="datahalteracao" ColumnName="datahalteracao" />
                 <ScalarProperty Name="codigofuncionario" ColumnName="codigofuncionario" />
+                <ScalarProperty Name="datahalteracao" ColumnName="datahalteracao" />
+                <ScalarProperty Name="controle" ColumnName="controle" />
+                <ScalarProperty Name="cpfcnpj" ColumnName="cpfcnpj" />
+                <ScalarProperty Name="codigotipocadastro" ColumnName="codigotipocadastro" />
+                <ScalarProperty Name="nomefantasia" ColumnName="nomefantasia" />
+                <ScalarProperty Name="nomecadastro" ColumnName="nomecadastro" />
+                <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cargofuncionario">
+            <EntityTypeMapping TypeName="tjossModel.cargofuncionario">
+              <MappingFragment StoreEntitySet="cargofuncionario">
+                <ScalarProperty Name="situacao" ColumnName="situacao" />
+                <ScalarProperty Name="descricaocargo" ColumnName="descricaocargo" />
+                <ScalarProperty Name="codigocargo" ColumnName="codigocargo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cidade">
+            <EntityTypeMapping TypeName="tjossModel.cidade">
+              <MappingFragment StoreEntitySet="cidade">
+                <ScalarProperty Name="codigoestado" ColumnName="codigoestado" />
+                <ScalarProperty Name="siglacidade" ColumnName="siglacidade" />
+                <ScalarProperty Name="nomecidade" ColumnName="nomecidade" />
+                <ScalarProperty Name="codigocidade" ColumnName="codigocidade" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="contrato">
             <EntityTypeMapping TypeName="tjossModel.contrato">
               <MappingFragment StoreEntitySet="contrato">
-                <ScalarProperty Name="numerocontrato" ColumnName="numerocontrato" />
-                <ScalarProperty Name="codigotipocontrato" ColumnName="codigotipocontrato" />
-                <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
-                <ScalarProperty Name="datacontrato" ColumnName="datacontrato" />
+                <ScalarProperty Name="codigofuncionario" ColumnName="codigofuncionario" />
+                <ScalarProperty Name="datahalteracao" ColumnName="datahalteracao" />
+                <ScalarProperty Name="codigovendedor" ColumnName="codigovendedor" />
                 <ScalarProperty Name="situacao" ColumnName="situacao" />
                 <ScalarProperty Name="datavencimento" ColumnName="datavencimento" />
-                <ScalarProperty Name="codigovendedor" ColumnName="codigovendedor" />
-                <ScalarProperty Name="datahalteracao" ColumnName="datahalteracao" />
-                <ScalarProperty Name="codigofuncionario" ColumnName="codigofuncionario" />
+                <ScalarProperty Name="datacontrato" ColumnName="datacontrato" />
+                <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
+                <ScalarProperty Name="codigotipocontrato" ColumnName="codigotipocontrato" />
+                <ScalarProperty Name="numerocontrato" ColumnName="numerocontrato" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dadosfisicos">
             <EntityTypeMapping TypeName="tjossModel.dadosfisicos">
               <MappingFragment StoreEntitySet="dadosfisicos">
-                <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
-                <ScalarProperty Name="codigofilial" ColumnName="codigofilial" />
-                <ScalarProperty Name="endereco" ColumnName="endereco" />
-                <ScalarProperty Name="bairro" ColumnName="bairro" />
-                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="codigocidade" ColumnName="codigocidade" />
+                <ScalarProperty Name="cependereco" ColumnName="cependereco" />
                 <ScalarProperty Name="complemento" ColumnName="complemento" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="endereco" ColumnName="endereco" />
+                <ScalarProperty Name="codigofilial" ColumnName="codigofilial" />
+                <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="definicaocadastro">
             <EntityTypeMapping TypeName="tjossModel.definicaocadastro">
               <MappingFragment StoreEntitySet="definicaocadastro">
-                <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
-                <ScalarProperty Name="codigotipodefinicao" ColumnName="codigotipodefinicao" />
-                <ScalarProperty Name="datahalteracao" ColumnName="datahalteracao" />
                 <ScalarProperty Name="codigofuncionario" ColumnName="codigofuncionario" />
+                <ScalarProperty Name="datahalteracao" ColumnName="datahalteracao" />
+                <ScalarProperty Name="codigotipodefinicao" ColumnName="codigotipodefinicao" />
+                <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estado">
+            <EntityTypeMapping TypeName="tjossModel.estado">
+              <MappingFragment StoreEntitySet="estado">
+                <ScalarProperty Name="codigopais" ColumnName="codigopais" />
+                <ScalarProperty Name="siglaestado" ColumnName="siglaestado" />
+                <ScalarProperty Name="nomeestado" ColumnName="nomeestado" />
+                <ScalarProperty Name="codigoestado" ColumnName="codigoestado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="formulaitem">
+            <EntityTypeMapping TypeName="tjossModel.formulaitem">
+              <MappingFragment StoreEntitySet="formulaitem">
+                <ScalarProperty Name="observacaoformula" ColumnName="observacaoformula" />
+                <ScalarProperty Name="numerosequencia" ColumnName="numerosequencia" />
+                <ScalarProperty Name="codigoitem" ColumnName="codigoitem" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="funcionarios">
             <EntityTypeMapping TypeName="tjossModel.funcionarios">
               <MappingFragment StoreEntitySet="funcionarios">
-                <ScalarProperty Name="codigofuncionario" ColumnName="codigofuncionario" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
-                <ScalarProperty Name="cpf" ColumnName="cpf" />
-                <ScalarProperty Name="cpfcontrole" ColumnName="cpfcontrole" />
-                <ScalarProperty Name="datanascimento" ColumnName="datanascimento" />
-                <ScalarProperty Name="dataadmissao" ColumnName="dataadmissao" />
+                <ScalarProperty Name="codigocargo" ColumnName="codigocargo" />
                 <ScalarProperty Name="datadesligamento" ColumnName="datadesligamento" />
+                <ScalarProperty Name="dataadmissao" ColumnName="dataadmissao" />
+                <ScalarProperty Name="datanascimento" ColumnName="datanascimento" />
+                <ScalarProperty Name="cpfcontrole" ColumnName="cpfcontrole" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="codigofuncionario" ColumnName="codigofuncionario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="itemestoque">
             <EntityTypeMapping TypeName="tjossModel.itemestoque">
               <MappingFragment StoreEntitySet="itemestoque">
-                <ScalarProperty Name="codigoitem" ColumnName="codigoitem" />
-                <ScalarProperty Name="codigotipoestoque" ColumnName="codigotipoestoque" />
+                <ScalarProperty Name="valorproduto" ColumnName="valorproduto" />
                 <ScalarProperty Name="quantidadedisponivel" ColumnName="quantidadedisponivel" />
-                <ScalarProperty Name="quantidadereservado" ColumnName="quantidadereservado" />
+                <ScalarProperty Name="codigotipoestoque" ColumnName="codigotipoestoque" />
+                <ScalarProperty Name="codigoitem" ColumnName="codigoitem" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="itens">
             <EntityTypeMapping TypeName="tjossModel.itens">
               <MappingFragment StoreEntitySet="itens">
-                <ScalarProperty Name="codigoitem" ColumnName="codigoitem" />
-                <ScalarProperty Name="descricaoitem" ColumnName="descricaoitem" />
-                <ScalarProperty Name="codigotipoitem" ColumnName="codigotipoitem" />
-                <ScalarProperty Name="situacao" ColumnName="situacao" />
-                <ScalarProperty Name="datahalteracao" ColumnName="datahalteracao" />
                 <ScalarProperty Name="codigofuncionario" ColumnName="codigofuncionario" />
+                <ScalarProperty Name="datahalteracao" ColumnName="datahalteracao" />
+                <ScalarProperty Name="situacao" ColumnName="situacao" />
+                <ScalarProperty Name="codigotipoitem" ColumnName="codigotipoitem" />
+                <ScalarProperty Name="descricaoitem" ColumnName="descricaoitem" />
+                <ScalarProperty Name="codigoitem" ColumnName="codigoitem" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="itenscontrato">
             <EntityTypeMapping TypeName="tjossModel.itenscontrato">
               <MappingFragment StoreEntitySet="itenscontrato">
-                <ScalarProperty Name="numerocontrato" ColumnName="numerocontrato" />
-                <ScalarProperty Name="codigotipocontrato" ColumnName="codigotipocontrato" />
-                <ScalarProperty Name="codigoitem" ColumnName="codigoitem" />
-                <ScalarProperty Name="saldocontratado" ColumnName="saldocontratado" />
+                <ScalarProperty Name="valoritem" ColumnName="valoritem" />
                 <ScalarProperty Name="saldoatual" ColumnName="saldoatual" />
+                <ScalarProperty Name="saldocontratado" ColumnName="saldocontratado" />
+                <ScalarProperty Name="codigoitem" ColumnName="codigoitem" />
+                <ScalarProperty Name="codigotipocontrato" ColumnName="codigotipocontrato" />
+                <ScalarProperty Name="numerocontrato" ColumnName="numerocontrato" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="itenspedido">
             <EntityTypeMapping TypeName="tjossModel.itenspedido">
               <MappingFragment StoreEntitySet="itenspedido">
-                <ScalarProperty Name="numeropedido" ColumnName="numeropedido" />
-                <ScalarProperty Name="codigotipopedido" ColumnName="codigotipopedido" />
-                <ScalarProperty Name="codigoitem" ColumnName="codigoitem" />
-                <ScalarProperty Name="quantidadesolicitada" ColumnName="quantidadesolicitada" />
+                <ScalarProperty Name="codigomedida" ColumnName="codigomedida" />
+                <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
+                <ScalarProperty Name="valortotalitem" ColumnName="valortotalitem" />
+                <ScalarProperty Name="valorunitario" ColumnName="valorunitario" />
                 <ScalarProperty Name="quantidadebaixada" ColumnName="quantidadebaixada" />
+                <ScalarProperty Name="quantidadesolicitada" ColumnName="quantidadesolicitada" />
+                <ScalarProperty Name="codigoitem" ColumnName="codigoitem" />
+                <ScalarProperty Name="codigotipopedido" ColumnName="codigotipopedido" />
+                <ScalarProperty Name="numeropedido" ColumnName="numeropedido" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="medida">
             <EntityTypeMapping TypeName="tjossModel.medida">
               <MappingFragment StoreEntitySet="medida">
-                <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
-                <ScalarProperty Name="codigomedida" ColumnName="codigomedida" />
-                <ScalarProperty Name="altura" ColumnName="altura" />
-                <ScalarProperty Name="cintura" ColumnName="cintura" />
+                <ScalarProperty Name="observacao" ColumnName="observacao" />
+                <ScalarProperty Name="busto" ColumnName="busto" />
                 <ScalarProperty Name="ombroaombro" ColumnName="ombroaombro" />
+                <ScalarProperty Name="cintura" ColumnName="cintura" />
+                <ScalarProperty Name="altura" ColumnName="altura" />
+                <ScalarProperty Name="codigomedida" ColumnName="codigomedida" />
+                <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="movimentoestoque">
             <EntityTypeMapping TypeName="tjossModel.movimentoestoque">
               <MappingFragment StoreEntitySet="movimentoestoque">
-                <ScalarProperty Name="sequenciamovimentoestoque" ColumnName="sequenciamovimentoestoque" />
-                <ScalarProperty Name="codigoitem" ColumnName="codigoitem" />
-                <ScalarProperty Name="tipomovimento" ColumnName="tipomovimento" />
-                <ScalarProperty Name="quantidademovimentada" ColumnName="quantidademovimentada" />
-                <ScalarProperty Name="datahmovimento" ColumnName="datahmovimento" />
                 <ScalarProperty Name="codigofuncionario" ColumnName="codigofuncionario" />
+                <ScalarProperty Name="datahmovimento" ColumnName="datahmovimento" />
+                <ScalarProperty Name="quantidademovimentada" ColumnName="quantidademovimentada" />
+                <ScalarProperty Name="tipomovimento" ColumnName="tipomovimento" />
+                <ScalarProperty Name="codigoitem" ColumnName="codigoitem" />
+                <ScalarProperty Name="sequenciamovimentoestoque" ColumnName="sequenciamovimentoestoque" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pais">
+            <EntityTypeMapping TypeName="tjossModel.pais">
+              <MappingFragment StoreEntitySet="pais">
+                <ScalarProperty Name="siglapais" ColumnName="siglapais" />
+                <ScalarProperty Name="nomepais" ColumnName="nomepais" />
+                <ScalarProperty Name="codigopais" ColumnName="codigopais" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="pedidos">
             <EntityTypeMapping TypeName="tjossModel.pedidos">
               <MappingFragment StoreEntitySet="pedidos">
-                <ScalarProperty Name="numeropedido" ColumnName="numeropedido" />
-                <ScalarProperty Name="codigotipopedido" ColumnName="codigotipopedido" />
-                <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
-                <ScalarProperty Name="situacaopedido" ColumnName="situacaopedido" />
-                <ScalarProperty Name="dataconclusao" ColumnName="dataconclusao" />
-                <ScalarProperty Name="numerocontrato" ColumnName="numerocontrato" />
+                <ScalarProperty Name="valortotalpedido" ColumnName="valortotalpedido" />
                 <ScalarProperty Name="codigotipocontrato" ColumnName="codigotipocontrato" />
+                <ScalarProperty Name="numerocontrato" ColumnName="numerocontrato" />
+                <ScalarProperty Name="dataconclusao" ColumnName="dataconclusao" />
+                <ScalarProperty Name="situacaopedido" ColumnName="situacaopedido" />
+                <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
+                <ScalarProperty Name="codigotipopedido" ColumnName="codigotipopedido" />
+                <ScalarProperty Name="numeropedido" ColumnName="numeropedido" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tipocadastro">
             <EntityTypeMapping TypeName="tjossModel.tipocadastro">
               <MappingFragment StoreEntitySet="tipocadastro">
-                <ScalarProperty Name="codigotipocadastro" ColumnName="codigotipocadastro" />
                 <ScalarProperty Name="descricaotipocadastro" ColumnName="descricaotipocadastro" />
+                <ScalarProperty Name="codigotipocadastro" ColumnName="codigotipocadastro" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tipocontrato">
             <EntityTypeMapping TypeName="tjossModel.tipocontrato">
               <MappingFragment StoreEntitySet="tipocontrato">
-                <ScalarProperty Name="codigotipocontrato" ColumnName="codigotipocontrato" />
-                <ScalarProperty Name="descricaotipocontrato" ColumnName="descricaotipocontrato" />
                 <ScalarProperty Name="situacao" ColumnName="situacao" />
+                <ScalarProperty Name="descricaotipocontrato" ColumnName="descricaotipocontrato" />
+                <ScalarProperty Name="codigotipocontrato" ColumnName="codigotipocontrato" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tipodefinicao">
             <EntityTypeMapping TypeName="tjossModel.tipodefinicao">
               <MappingFragment StoreEntitySet="tipodefinicao">
-                <ScalarProperty Name="codigotipodefinicao" ColumnName="codigotipodefinicao" />
-                <ScalarProperty Name="descricaodefinicao" ColumnName="descricaodefinicao" />
                 <ScalarProperty Name="situacao" ColumnName="situacao" />
+                <ScalarProperty Name="descricaodefinicao" ColumnName="descricaodefinicao" />
+                <ScalarProperty Name="codigotipodefinicao" ColumnName="codigotipodefinicao" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tipoestoque">
             <EntityTypeMapping TypeName="tjossModel.tipoestoque">
               <MappingFragment StoreEntitySet="tipoestoque">
-                <ScalarProperty Name="codigotipoestoque" ColumnName="codigotipoestoque" />
-                <ScalarProperty Name="descricaotipoestoque" ColumnName="descricaotipoestoque" />
                 <ScalarProperty Name="situacao" ColumnName="situacao" />
+                <ScalarProperty Name="descricaotipoestoque" ColumnName="descricaotipoestoque" />
+                <ScalarProperty Name="codigotipoestoque" ColumnName="codigotipoestoque" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tipoitem">
             <EntityTypeMapping TypeName="tjossModel.tipoitem">
               <MappingFragment StoreEntitySet="tipoitem">
-                <ScalarProperty Name="codigotipoitem" ColumnName="codigotipoitem" />
-                <ScalarProperty Name="descricaotipoitem" ColumnName="descricaotipoitem" />
                 <ScalarProperty Name="situacaotipoitem" ColumnName="situacaotipoitem" />
+                <ScalarProperty Name="descricaotipoitem" ColumnName="descricaotipoitem" />
+                <ScalarProperty Name="codigotipoitem" ColumnName="codigotipoitem" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tipopedido">
             <EntityTypeMapping TypeName="tjossModel.tipopedido">
               <MappingFragment StoreEntitySet="tipopedido">
-                <ScalarProperty Name="codigotipopedido" ColumnName="codigotipopedido" />
-                <ScalarProperty Name="descricaotipopedido" ColumnName="descricaotipopedido" />
                 <ScalarProperty Name="situacao" ColumnName="situacao" />
+                <ScalarProperty Name="descricaotipopedido" ColumnName="descricaotipopedido" />
+                <ScalarProperty Name="codigotipopedido" ColumnName="codigotipopedido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="tjossModel.usuarios">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="datahcadastro" ColumnName="datahcadastro" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="codigofuncionario" ColumnName="codigofuncionario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

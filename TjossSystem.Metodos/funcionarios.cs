@@ -31,9 +31,11 @@ namespace TjossSystem.Metodos
         public System.DateTime datanascimento { get; set; }
         public System.DateTime dataadmissao { get; set; }
         public Nullable<System.DateTime> datadesligamento { get; set; }
+        public int codigocargo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cadastro> cadastro { get; set; }
+        public virtual cargofuncionario cargofuncionario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<contrato> contrato { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -42,5 +44,6 @@ namespace TjossSystem.Metodos
         public virtual ICollection<itens> itens { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<movimentoestoque> movimentoestoque { get; set; }
+        public virtual usuarios usuarios { get; set; }
     }
 }

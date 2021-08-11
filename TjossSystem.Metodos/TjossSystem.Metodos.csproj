@@ -92,6 +92,12 @@
     <Compile Include="cadastro.cs">
       <DependentUpon>TjossModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="cargofuncionario.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cidade.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexao.cs" />
     <Compile Include="contrato.cs">
       <DependentUpon>TjossModel.tt</DependentUpon>
@@ -101,6 +107,12 @@
     </Compile>
     <Compile Include="DataIntegration.cs" />
     <Compile Include="definicaocadastro.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="estado.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="formulaitem.cs">
       <DependentUpon>TjossModel.tt</DependentUpon>
     </Compile>
     <Compile Include="funcionarios.cs">
@@ -123,6 +135,9 @@
     </Compile>
     <Compile Include="Metodos.cs" />
     <Compile Include="movimentoestoque.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pais.cs">
       <DependentUpon>TjossModel.tt</DependentUpon>
     </Compile>
     <Compile Include="pedidos.cs">
@@ -161,6 +176,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TjossModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="usuarios.cs">
+      <DependentUpon>TjossModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

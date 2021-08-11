@@ -31,10 +31,12 @@ namespace TjossSystem
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadastro));
             this.grpDadosChave = new System.Windows.Forms.GroupBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.lblNumeroCadastro = new System.Windows.Forms.Label();
             this.txtNumeroCadastro = new System.Windows.Forms.TextBox();
             this.tbcDadosCadastro = new System.Windows.Forms.TabControl();
             this.tabCadastro = new System.Windows.Forms.TabPage();
+            this.cboTipoCadastro = new System.Windows.Forms.ComboBox();
             this.txtCodigoFuncionario = new System.Windows.Forms.TextBox();
             this.txtDatahAlteracao = new System.Windows.Forms.TextBox();
             this.txtControle = new System.Windows.Forms.TextBox();
@@ -63,6 +65,12 @@ namespace TjossSystem
             this.txtCodigoMedida = new System.Windows.Forms.TextBox();
             this.lblCodigoMedida = new System.Windows.Forms.Label();
             this.tabEndereco = new System.Windows.Forms.TabPage();
+            this.cboCidade = new System.Windows.Forms.ComboBox();
+            this.lblCidade = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lblCepEndereco = new System.Windows.Forms.Label();
+            this.btnInativarEndereco = new System.Windows.Forms.Button();
+            this.blnAdicionarEndereco = new System.Windows.Forms.Button();
             this.grpEnderecos = new System.Windows.Forms.GroupBox();
             this.dgvEnderecos = new System.Windows.Forms.DataGridView();
             this.txtComplemento = new System.Windows.Forms.TextBox();
@@ -84,10 +92,31 @@ namespace TjossSystem
             this.tsbFechar = new System.Windows.Forms.ToolStripButton();
             this.tsbLimpar = new System.Windows.Forms.ToolStripButton();
             this.tsbGravar = new System.Windows.Forms.ToolStripButton();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.btnInativarEndereco = new System.Windows.Forms.Button();
-            this.blnAdicionarEndereco = new System.Windows.Forms.Button();
-            this.cboTipoCadastro = new System.Windows.Forms.ComboBox();
+            this.clnCodigoCadastro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCodigoFilialEndereco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnEndereco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnBairro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnNumeroEndereco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnComplementoEndereco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCepEndereco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCodigoCidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtBustoMedida = new System.Windows.Forms.TextBox();
+            this.lblBusto = new System.Windows.Forms.Label();
+            this.txtObservacaoMedida = new System.Windows.Forms.TextBox();
+            this.lblObservacaoMedida = new System.Windows.Forms.Label();
+            this.txtCodigoFuncionarioDefinicao = new System.Windows.Forms.TextBox();
+            this.txtDatahAlteracaoDefinicao = new System.Windows.Forms.TextBox();
+            this.lblFuncionarioDefinicao = new System.Windows.Forms.Label();
+            this.lblDatahAlteracaoDefinicao = new System.Windows.Forms.Label();
+            this.btnInativarDefinicao = new System.Windows.Forms.Button();
+            this.btnAdicionarDefinicao = new System.Windows.Forms.Button();
+            this.clnCodigoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnAlturaMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCinturaMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnOmbroAhOmbro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnBustoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnObservacaoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCodigoDefinicao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpDadosChave.SuspendLayout();
             this.tbcDadosCadastro.SuspendLayout();
             this.tabCadastro.SuspendLayout();
@@ -115,6 +144,16 @@ namespace TjossSystem
             this.grpDadosChave.TabIndex = 0;
             this.grpDadosChave.TabStop = false;
             this.grpDadosChave.Text = "Dados Basicos";
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(293, 21);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(115, 46);
+            this.btnBuscar.TabIndex = 22;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // lblNumeroCadastro
             // 
@@ -171,6 +210,15 @@ namespace TjossSystem
             this.tabCadastro.TabIndex = 0;
             this.tabCadastro.Text = "Dados Cadastro";
             // 
+            // cboTipoCadastro
+            // 
+            this.cboTipoCadastro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipoCadastro.FormattingEnabled = true;
+            this.cboTipoCadastro.Location = new System.Drawing.Point(117, 80);
+            this.cboTipoCadastro.Name = "cboTipoCadastro";
+            this.cboTipoCadastro.Size = new System.Drawing.Size(195, 21);
+            this.cboTipoCadastro.TabIndex = 16;
+            // 
             // txtCodigoFuncionario
             // 
             this.txtCodigoFuncionario.Enabled = false;
@@ -212,6 +260,7 @@ namespace TjossSystem
             this.txtCodigoTipoCadastro.Name = "txtCodigoTipoCadastro";
             this.txtCodigoTipoCadastro.Size = new System.Drawing.Size(55, 20);
             this.txtCodigoTipoCadastro.TabIndex = 11;
+            this.txtCodigoTipoCadastro.Visible = false;
             // 
             // txtNomeFantasia
             // 
@@ -295,6 +344,10 @@ namespace TjossSystem
             // tabMedidas
             // 
             this.tabMedidas.BackColor = System.Drawing.SystemColors.Control;
+            this.tabMedidas.Controls.Add(this.txtObservacaoMedida);
+            this.tabMedidas.Controls.Add(this.lblObservacaoMedida);
+            this.tabMedidas.Controls.Add(this.txtBustoMedida);
+            this.tabMedidas.Controls.Add(this.lblBusto);
             this.tabMedidas.Controls.Add(this.btnInativar);
             this.tabMedidas.Controls.Add(this.btnAdicionarMedida);
             this.tabMedidas.Controls.Add(this.grpMedidas);
@@ -334,20 +387,33 @@ namespace TjossSystem
             // grpMedidas
             // 
             this.grpMedidas.Controls.Add(this.dgvMedidas);
-            this.grpMedidas.Location = new System.Drawing.Point(8, 143);
+            this.grpMedidas.Location = new System.Drawing.Point(8, 184);
             this.grpMedidas.Name = "grpMedidas";
-            this.grpMedidas.Size = new System.Drawing.Size(965, 311);
+            this.grpMedidas.Size = new System.Drawing.Size(965, 270);
             this.grpMedidas.TabIndex = 20;
             this.grpMedidas.TabStop = false;
             this.grpMedidas.Text = "Medidas";
             // 
             // dgvMedidas
             // 
+            this.dgvMedidas.AllowUserToAddRows = false;
+            this.dgvMedidas.AllowUserToDeleteRows = false;
+            this.dgvMedidas.AllowUserToResizeRows = false;
             this.dgvMedidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMedidas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clnCodigoMedida,
+            this.clnAlturaMedida,
+            this.clnCinturaMedida,
+            this.clnOmbroAhOmbro,
+            this.clnBustoMedida,
+            this.clnObservacaoMedida});
             this.dgvMedidas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMedidas.Location = new System.Drawing.Point(3, 16);
+            this.dgvMedidas.MultiSelect = false;
             this.dgvMedidas.Name = "dgvMedidas";
-            this.dgvMedidas.Size = new System.Drawing.Size(959, 292);
+            this.dgvMedidas.RowHeadersVisible = false;
+            this.dgvMedidas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvMedidas.Size = new System.Drawing.Size(959, 251);
             this.dgvMedidas.TabIndex = 0;
             // 
             // txtOmbroAhOmbro
@@ -417,6 +483,10 @@ namespace TjossSystem
             // tabEndereco
             // 
             this.tabEndereco.BackColor = System.Drawing.SystemColors.Control;
+            this.tabEndereco.Controls.Add(this.cboCidade);
+            this.tabEndereco.Controls.Add(this.lblCidade);
+            this.tabEndereco.Controls.Add(this.textBox1);
+            this.tabEndereco.Controls.Add(this.lblCepEndereco);
             this.tabEndereco.Controls.Add(this.btnInativarEndereco);
             this.tabEndereco.Controls.Add(this.blnAdicionarEndereco);
             this.tabEndereco.Controls.Add(this.grpEnderecos);
@@ -437,23 +507,89 @@ namespace TjossSystem
             this.tabEndereco.TabIndex = 2;
             this.tabEndereco.Text = "Endereço";
             // 
+            // cboCidade
+            // 
+            this.cboCidade.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCidade.FormattingEnabled = true;
+            this.cboCidade.Location = new System.Drawing.Point(107, 171);
+            this.cboCidade.Name = "cboCidade";
+            this.cboCidade.Size = new System.Drawing.Size(195, 21);
+            this.cboCidade.TabIndex = 30;
+            // 
+            // lblCidade
+            // 
+            this.lblCidade.AutoSize = true;
+            this.lblCidade.Location = new System.Drawing.Point(19, 174);
+            this.lblCidade.Name = "lblCidade";
+            this.lblCidade.Size = new System.Drawing.Size(43, 13);
+            this.lblCidade.TabIndex = 29;
+            this.lblCidade.Text = "Cidade:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(107, 145);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(287, 20);
+            this.textBox1.TabIndex = 28;
+            // 
+            // lblCepEndereco
+            // 
+            this.lblCepEndereco.AutoSize = true;
+            this.lblCepEndereco.Location = new System.Drawing.Point(20, 148);
+            this.lblCepEndereco.Name = "lblCepEndereco";
+            this.lblCepEndereco.Size = new System.Drawing.Size(29, 13);
+            this.lblCepEndereco.TabIndex = 27;
+            this.lblCepEndereco.Text = "Cep:";
+            // 
+            // btnInativarEndereco
+            // 
+            this.btnInativarEndereco.Location = new System.Drawing.Point(858, 96);
+            this.btnInativarEndereco.Name = "btnInativarEndereco";
+            this.btnInativarEndereco.Size = new System.Drawing.Size(115, 46);
+            this.btnInativarEndereco.TabIndex = 26;
+            this.btnInativarEndereco.Text = "Inativar";
+            this.btnInativarEndereco.UseVisualStyleBackColor = true;
+            // 
+            // blnAdicionarEndereco
+            // 
+            this.blnAdicionarEndereco.Location = new System.Drawing.Point(727, 96);
+            this.blnAdicionarEndereco.Name = "blnAdicionarEndereco";
+            this.blnAdicionarEndereco.Size = new System.Drawing.Size(115, 46);
+            this.blnAdicionarEndereco.TabIndex = 25;
+            this.blnAdicionarEndereco.Text = "Adicionar";
+            this.blnAdicionarEndereco.UseVisualStyleBackColor = true;
+            this.blnAdicionarEndereco.Click += new System.EventHandler(this.blnAdicionarEndereco_Click);
+            // 
             // grpEnderecos
             // 
             this.grpEnderecos.Controls.Add(this.dgvEnderecos);
-            this.grpEnderecos.Location = new System.Drawing.Point(8, 145);
+            this.grpEnderecos.Location = new System.Drawing.Point(8, 198);
             this.grpEnderecos.Name = "grpEnderecos";
-            this.grpEnderecos.Size = new System.Drawing.Size(970, 309);
+            this.grpEnderecos.Size = new System.Drawing.Size(970, 256);
             this.grpEnderecos.TabIndex = 24;
             this.grpEnderecos.TabStop = false;
             this.grpEnderecos.Text = "Enderecos";
             // 
             // dgvEnderecos
             // 
+            this.dgvEnderecos.AllowUserToAddRows = false;
+            this.dgvEnderecos.AllowUserToDeleteRows = false;
             this.dgvEnderecos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEnderecos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clnCodigoCadastro,
+            this.clnCodigoFilialEndereco,
+            this.clnEndereco,
+            this.clnBairro,
+            this.clnNumeroEndereco,
+            this.clnComplementoEndereco,
+            this.clnCepEndereco,
+            this.clnCodigoCidade});
             this.dgvEnderecos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvEnderecos.Location = new System.Drawing.Point(3, 16);
             this.dgvEnderecos.Name = "dgvEnderecos";
-            this.dgvEnderecos.Size = new System.Drawing.Size(964, 290);
+            this.dgvEnderecos.RowHeadersVisible = false;
+            this.dgvEnderecos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvEnderecos.Size = new System.Drawing.Size(964, 237);
             this.dgvEnderecos.TabIndex = 0;
             // 
             // txtComplemento
@@ -524,6 +660,7 @@ namespace TjossSystem
             // 
             this.txtFilial.Location = new System.Drawing.Point(107, 15);
             this.txtFilial.Name = "txtFilial";
+            this.txtFilial.ReadOnly = true;
             this.txtFilial.Size = new System.Drawing.Size(60, 20);
             this.txtFilial.TabIndex = 15;
             // 
@@ -539,6 +676,12 @@ namespace TjossSystem
             // tabDefinicao
             // 
             this.tabDefinicao.BackColor = System.Drawing.SystemColors.Control;
+            this.tabDefinicao.Controls.Add(this.btnInativarDefinicao);
+            this.tabDefinicao.Controls.Add(this.btnAdicionarDefinicao);
+            this.tabDefinicao.Controls.Add(this.txtCodigoFuncionarioDefinicao);
+            this.tabDefinicao.Controls.Add(this.txtDatahAlteracaoDefinicao);
+            this.tabDefinicao.Controls.Add(this.lblFuncionarioDefinicao);
+            this.tabDefinicao.Controls.Add(this.lblDatahAlteracaoDefinicao);
             this.tabDefinicao.Controls.Add(this.grpDefinicao);
             this.tabDefinicao.Controls.Add(this.txtCodigoDefinicao);
             this.tabDefinicao.Controls.Add(this.lblCodigoDefinicao);
@@ -552,20 +695,26 @@ namespace TjossSystem
             // grpDefinicao
             // 
             this.grpDefinicao.Controls.Add(this.dgvDefinicao);
-            this.grpDefinicao.Location = new System.Drawing.Point(5, 76);
+            this.grpDefinicao.Location = new System.Drawing.Point(5, 94);
             this.grpDefinicao.Name = "grpDefinicao";
-            this.grpDefinicao.Size = new System.Drawing.Size(970, 378);
+            this.grpDefinicao.Size = new System.Drawing.Size(970, 360);
             this.grpDefinicao.TabIndex = 25;
             this.grpDefinicao.TabStop = false;
             this.grpDefinicao.Text = "Definições";
             // 
             // dgvDefinicao
             // 
+            this.dgvDefinicao.AllowUserToAddRows = false;
+            this.dgvDefinicao.AllowUserToDeleteRows = false;
             this.dgvDefinicao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDefinicao.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clnCodigoDefinicao});
             this.dgvDefinicao.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDefinicao.Location = new System.Drawing.Point(3, 16);
             this.dgvDefinicao.Name = "dgvDefinicao";
-            this.dgvDefinicao.Size = new System.Drawing.Size(964, 359);
+            this.dgvDefinicao.RowHeadersVisible = false;
+            this.dgvDefinicao.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDefinicao.Size = new System.Drawing.Size(964, 341);
             this.dgvDefinicao.TabIndex = 0;
             // 
             // txtCodigoDefinicao
@@ -630,43 +779,190 @@ namespace TjossSystem
             this.tsbGravar.Text = "F9 - Gravar";
             this.tsbGravar.Click += new System.EventHandler(this.tsbGravar_Click);
             // 
-            // btnBuscar
+            // clnCodigoCadastro
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(293, 21);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(115, 46);
-            this.btnBuscar.TabIndex = 22;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            this.clnCodigoCadastro.DataPropertyName = "CodigoCadastro";
+            this.clnCodigoCadastro.HeaderText = "Codigo Cadastro";
+            this.clnCodigoCadastro.Name = "clnCodigoCadastro";
+            this.clnCodigoCadastro.ReadOnly = true;
+            this.clnCodigoCadastro.Visible = false;
             // 
-            // btnInativarEndereco
+            // clnCodigoFilialEndereco
             // 
-            this.btnInativarEndereco.Location = new System.Drawing.Point(858, 96);
-            this.btnInativarEndereco.Name = "btnInativarEndereco";
-            this.btnInativarEndereco.Size = new System.Drawing.Size(115, 46);
-            this.btnInativarEndereco.TabIndex = 26;
-            this.btnInativarEndereco.Text = "Inativar";
-            this.btnInativarEndereco.UseVisualStyleBackColor = true;
+            this.clnCodigoFilialEndereco.DataPropertyName = "CodigoFilial";
+            this.clnCodigoFilialEndereco.HeaderText = "Código Filial";
+            this.clnCodigoFilialEndereco.MaxInputLength = 4;
+            this.clnCodigoFilialEndereco.Name = "clnCodigoFilialEndereco";
+            this.clnCodigoFilialEndereco.ReadOnly = true;
             // 
-            // blnAdicionarEndereco
+            // clnEndereco
             // 
-            this.blnAdicionarEndereco.Location = new System.Drawing.Point(727, 96);
-            this.blnAdicionarEndereco.Name = "blnAdicionarEndereco";
-            this.blnAdicionarEndereco.Size = new System.Drawing.Size(115, 46);
-            this.blnAdicionarEndereco.TabIndex = 25;
-            this.blnAdicionarEndereco.Text = "Adicionar";
-            this.blnAdicionarEndereco.UseVisualStyleBackColor = true;
-            this.blnAdicionarEndereco.Click += new System.EventHandler(this.blnAdicionarEndereco_Click);
+            this.clnEndereco.DataPropertyName = "Endereco";
+            this.clnEndereco.HeaderText = "Endereço";
+            this.clnEndereco.Name = "clnEndereco";
+            this.clnEndereco.ReadOnly = true;
             // 
-            // cboTipoCadastro
+            // clnBairro
             // 
-            this.cboTipoCadastro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboTipoCadastro.FormattingEnabled = true;
-            this.cboTipoCadastro.Location = new System.Drawing.Point(117, 80);
-            this.cboTipoCadastro.Name = "cboTipoCadastro";
-            this.cboTipoCadastro.Size = new System.Drawing.Size(195, 21);
-            this.cboTipoCadastro.TabIndex = 16;
+            this.clnBairro.DataPropertyName = "Bairro";
+            this.clnBairro.HeaderText = "Bairro";
+            this.clnBairro.Name = "clnBairro";
+            this.clnBairro.ReadOnly = true;
+            // 
+            // clnNumeroEndereco
+            // 
+            this.clnNumeroEndereco.DataPropertyName = "NumeroEndereco";
+            this.clnNumeroEndereco.HeaderText = "Número";
+            this.clnNumeroEndereco.Name = "clnNumeroEndereco";
+            this.clnNumeroEndereco.ReadOnly = true;
+            // 
+            // clnComplementoEndereco
+            // 
+            this.clnComplementoEndereco.DataPropertyName = "Complemento";
+            this.clnComplementoEndereco.HeaderText = "Complemento";
+            this.clnComplementoEndereco.Name = "clnComplementoEndereco";
+            this.clnComplementoEndereco.ReadOnly = true;
+            // 
+            // clnCepEndereco
+            // 
+            this.clnCepEndereco.HeaderText = "Cep";
+            this.clnCepEndereco.Name = "clnCepEndereco";
+            this.clnCepEndereco.ReadOnly = true;
+            // 
+            // clnCodigoCidade
+            // 
+            this.clnCodigoCidade.HeaderText = "Cidade";
+            this.clnCodigoCidade.Name = "clnCodigoCidade";
+            this.clnCodigoCidade.ReadOnly = true;
+            // 
+            // txtBustoMedida
+            // 
+            this.txtBustoMedida.Location = new System.Drawing.Point(117, 132);
+            this.txtBustoMedida.Name = "txtBustoMedida";
+            this.txtBustoMedida.Size = new System.Drawing.Size(55, 20);
+            this.txtBustoMedida.TabIndex = 24;
+            // 
+            // lblBusto
+            // 
+            this.lblBusto.AutoSize = true;
+            this.lblBusto.Location = new System.Drawing.Point(64, 135);
+            this.lblBusto.Name = "lblBusto";
+            this.lblBusto.Size = new System.Drawing.Size(37, 13);
+            this.lblBusto.TabIndex = 23;
+            this.lblBusto.Text = "Busto:";
+            // 
+            // txtObservacaoMedida
+            // 
+            this.txtObservacaoMedida.Location = new System.Drawing.Point(117, 158);
+            this.txtObservacaoMedida.Name = "txtObservacaoMedida";
+            this.txtObservacaoMedida.Size = new System.Drawing.Size(362, 20);
+            this.txtObservacaoMedida.TabIndex = 26;
+            // 
+            // lblObservacaoMedida
+            // 
+            this.lblObservacaoMedida.AutoSize = true;
+            this.lblObservacaoMedida.Location = new System.Drawing.Point(33, 161);
+            this.lblObservacaoMedida.Name = "lblObservacaoMedida";
+            this.lblObservacaoMedida.Size = new System.Drawing.Size(68, 13);
+            this.lblObservacaoMedida.TabIndex = 25;
+            this.lblObservacaoMedida.Text = "Observação:";
+            // 
+            // txtCodigoFuncionarioDefinicao
+            // 
+            this.txtCodigoFuncionarioDefinicao.Enabled = false;
+            this.txtCodigoFuncionarioDefinicao.Location = new System.Drawing.Point(117, 68);
+            this.txtCodigoFuncionarioDefinicao.MaxLength = 20;
+            this.txtCodigoFuncionarioDefinicao.Name = "txtCodigoFuncionarioDefinicao";
+            this.txtCodigoFuncionarioDefinicao.Size = new System.Drawing.Size(112, 20);
+            this.txtCodigoFuncionarioDefinicao.TabIndex = 29;
+            // 
+            // txtDatahAlteracaoDefinicao
+            // 
+            this.txtDatahAlteracaoDefinicao.Enabled = false;
+            this.txtDatahAlteracaoDefinicao.Location = new System.Drawing.Point(117, 42);
+            this.txtDatahAlteracaoDefinicao.MaxLength = 50;
+            this.txtDatahAlteracaoDefinicao.Name = "txtDatahAlteracaoDefinicao";
+            this.txtDatahAlteracaoDefinicao.Size = new System.Drawing.Size(112, 20);
+            this.txtDatahAlteracaoDefinicao.TabIndex = 28;
+            // 
+            // lblFuncionarioDefinicao
+            // 
+            this.lblFuncionarioDefinicao.AutoSize = true;
+            this.lblFuncionarioDefinicao.Location = new System.Drawing.Point(20, 71);
+            this.lblFuncionarioDefinicao.Name = "lblFuncionarioDefinicao";
+            this.lblFuncionarioDefinicao.Size = new System.Drawing.Size(65, 13);
+            this.lblFuncionarioDefinicao.TabIndex = 27;
+            this.lblFuncionarioDefinicao.Text = "Funcionario:";
+            // 
+            // lblDatahAlteracaoDefinicao
+            // 
+            this.lblDatahAlteracaoDefinicao.AutoSize = true;
+            this.lblDatahAlteracaoDefinicao.Location = new System.Drawing.Point(20, 45);
+            this.lblDatahAlteracaoDefinicao.Name = "lblDatahAlteracaoDefinicao";
+            this.lblDatahAlteracaoDefinicao.Size = new System.Drawing.Size(80, 13);
+            this.lblDatahAlteracaoDefinicao.TabIndex = 26;
+            this.lblDatahAlteracaoDefinicao.Text = "Data alteração:";
+            // 
+            // btnInativarDefinicao
+            // 
+            this.btnInativarDefinicao.Location = new System.Drawing.Point(858, 45);
+            this.btnInativarDefinicao.Name = "btnInativarDefinicao";
+            this.btnInativarDefinicao.Size = new System.Drawing.Size(115, 46);
+            this.btnInativarDefinicao.TabIndex = 31;
+            this.btnInativarDefinicao.Text = "Inativar";
+            this.btnInativarDefinicao.UseVisualStyleBackColor = true;
+            // 
+            // btnAdicionarDefinicao
+            // 
+            this.btnAdicionarDefinicao.Location = new System.Drawing.Point(727, 45);
+            this.btnAdicionarDefinicao.Name = "btnAdicionarDefinicao";
+            this.btnAdicionarDefinicao.Size = new System.Drawing.Size(115, 46);
+            this.btnAdicionarDefinicao.TabIndex = 30;
+            this.btnAdicionarDefinicao.Text = "Adicionar";
+            this.btnAdicionarDefinicao.UseVisualStyleBackColor = true;
+            // 
+            // clnCodigoMedida
+            // 
+            this.clnCodigoMedida.HeaderText = "Cód. Medida";
+            this.clnCodigoMedida.Name = "clnCodigoMedida";
+            this.clnCodigoMedida.ReadOnly = true;
+            // 
+            // clnAlturaMedida
+            // 
+            this.clnAlturaMedida.HeaderText = "Altura";
+            this.clnAlturaMedida.Name = "clnAlturaMedida";
+            this.clnAlturaMedida.ReadOnly = true;
+            // 
+            // clnCinturaMedida
+            // 
+            this.clnCinturaMedida.HeaderText = "Cintura";
+            this.clnCinturaMedida.Name = "clnCinturaMedida";
+            this.clnCinturaMedida.ReadOnly = true;
+            // 
+            // clnOmbroAhOmbro
+            // 
+            this.clnOmbroAhOmbro.HeaderText = "Ombro a Ombro";
+            this.clnOmbroAhOmbro.Name = "clnOmbroAhOmbro";
+            this.clnOmbroAhOmbro.ReadOnly = true;
+            this.clnOmbroAhOmbro.Width = 120;
+            // 
+            // clnBustoMedida
+            // 
+            this.clnBustoMedida.HeaderText = "Busto";
+            this.clnBustoMedida.Name = "clnBustoMedida";
+            this.clnBustoMedida.ReadOnly = true;
+            // 
+            // clnObservacaoMedida
+            // 
+            this.clnObservacaoMedida.HeaderText = "Observação";
+            this.clnObservacaoMedida.Name = "clnObservacaoMedida";
+            this.clnObservacaoMedida.ReadOnly = true;
+            // 
+            // clnCodigoDefinicao
+            // 
+            this.clnCodigoDefinicao.HeaderText = "Cód. Definição";
+            this.clnCodigoDefinicao.Name = "clnCodigoDefinicao";
+            this.clnCodigoDefinicao.ReadOnly = true;
             // 
             // FrmCadastro
             // 
@@ -754,7 +1050,6 @@ namespace TjossSystem
         private System.Windows.Forms.Button btnAdicionarMedida;
         private System.Windows.Forms.Button btnInativar;
         private System.Windows.Forms.GroupBox grpEnderecos;
-        private System.Windows.Forms.DataGridView dgvEnderecos;
         private System.Windows.Forms.GroupBox grpDefinicao;
         private System.Windows.Forms.DataGridView dgvDefinicao;
         private System.Windows.Forms.TextBox txtCodigoDefinicao;
@@ -763,5 +1058,35 @@ namespace TjossSystem
         private System.Windows.Forms.Button btnInativarEndereco;
         private System.Windows.Forms.Button blnAdicionarEndereco;
         private System.Windows.Forms.ComboBox cboTipoCadastro;
+        private System.Windows.Forms.DataGridView dgvEnderecos;
+        private System.Windows.Forms.ComboBox cboCidade;
+        private System.Windows.Forms.Label lblCidade;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label lblCepEndereco;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoCadastro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoFilialEndereco;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnEndereco;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnBairro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnNumeroEndereco;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnComplementoEndereco;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCepEndereco;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoCidade;
+        private System.Windows.Forms.TextBox txtObservacaoMedida;
+        private System.Windows.Forms.Label lblObservacaoMedida;
+        private System.Windows.Forms.TextBox txtBustoMedida;
+        private System.Windows.Forms.Label lblBusto;
+        private System.Windows.Forms.TextBox txtCodigoFuncionarioDefinicao;
+        private System.Windows.Forms.TextBox txtDatahAlteracaoDefinicao;
+        private System.Windows.Forms.Label lblFuncionarioDefinicao;
+        private System.Windows.Forms.Label lblDatahAlteracaoDefinicao;
+        private System.Windows.Forms.Button btnInativarDefinicao;
+        private System.Windows.Forms.Button btnAdicionarDefinicao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoMedida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnAlturaMedida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCinturaMedida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnOmbroAhOmbro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnBustoMedida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnObservacaoMedida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoDefinicao;
     }
 }

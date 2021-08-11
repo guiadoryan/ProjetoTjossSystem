@@ -19,8 +19,13 @@ namespace TjossSystem.Metodos
         public int codigoitem { get; set; }
         public decimal quantidadesolicitada { get; set; }
         public decimal quantidadebaixada { get; set; }
+        public decimal valorunitario { get; set; }
+        public decimal valortotalitem { get; set; }
+        public Nullable<int> codigocadastro { get; set; }
+        public Nullable<int> codigomedida { get; set; }
     
         public virtual itens itens { get; set; }
+        public virtual medida medida { get; set; }
         public virtual pedidos pedidos { get; set; }
     }
 }

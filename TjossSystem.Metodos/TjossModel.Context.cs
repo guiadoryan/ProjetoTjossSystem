@@ -26,9 +26,13 @@ namespace TjossSystem.Metodos
         }
     
         public virtual DbSet<cadastro> cadastro { get; set; }
+        public virtual DbSet<cargofuncionario> cargofuncionario { get; set; }
+        public virtual DbSet<cidade> cidade { get; set; }
         public virtual DbSet<contrato> contrato { get; set; }
         public virtual DbSet<dadosfisicos> dadosfisicos { get; set; }
         public virtual DbSet<definicaocadastro> definicaocadastro { get; set; }
+        public virtual DbSet<estado> estado { get; set; }
+        public virtual DbSet<formulaitem> formulaitem { get; set; }
         public virtual DbSet<funcionarios> funcionarios { get; set; }
         public virtual DbSet<itemestoque> itemestoque { get; set; }
         public virtual DbSet<itens> itens { get; set; }
@@ -36,6 +40,7 @@ namespace TjossSystem.Metodos
         public virtual DbSet<itenspedido> itenspedido { get; set; }
         public virtual DbSet<medida> medida { get; set; }
         public virtual DbSet<movimentoestoque> movimentoestoque { get; set; }
+        public virtual DbSet<pais> pais { get; set; }
         public virtual DbSet<pedidos> pedidos { get; set; }
         public virtual DbSet<tipocadastro> tipocadastro { get; set; }
         public virtual DbSet<tipocontrato> tipocontrato { get; set; }
@@ -43,5 +48,6 @@ namespace TjossSystem.Metodos
         public virtual DbSet<tipoestoque> tipoestoque { get; set; }
         public virtual DbSet<tipoitem> tipoitem { get; set; }
         public virtual DbSet<tipopedido> tipopedido { get; set; }
+        public virtual DbSet<usuarios> usuarios { get; set; }
     }
 }

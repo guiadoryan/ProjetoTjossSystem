@@ -17,7 +17,7 @@ namespace TjossSystem.Metodos
         public int codigoitem { get; set; }
         public int codigotipoestoque { get; set; }
         public decimal quantidadedisponivel { get; set; }
-        public decimal quantidadereservado { get; set; }
+        public decimal valorproduto { get; set; }
     
         public virtual itens itens { get; set; }
         public virtual tipoestoque tipoestoque { get; set; }

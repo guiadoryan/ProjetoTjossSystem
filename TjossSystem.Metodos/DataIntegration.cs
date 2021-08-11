@@ -42,7 +42,10 @@ namespace TjossSystem.Metodos
     public class EnderecoDI
     {
         [DataMember]
-        public string CodigoFilial { get; set; }
+        public int CodigoCadastro { get; set; }
+
+        [DataMember]
+        public int CodigoFilial { get; set; }
 
         [DataMember]
         public string Endereco { get; set; }

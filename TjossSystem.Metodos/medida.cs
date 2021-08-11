@@ -14,12 +14,22 @@ namespace TjossSystem.Metodos
     
     public partial class medida
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public medida()
+        {
+            this.itenspedido = new HashSet<itenspedido>();
+        }
+    
         public int codigocadastro { get; set; }
         public int codigomedida { get; set; }
         public Nullable<decimal> altura { get; set; }
         public Nullable<decimal> cintura { get; set; }
-        public decimal ombroaombro { get; set; }
+        public Nullable<decimal> ombroaombro { get; set; }
+        public Nullable<decimal> busto { get; set; }
+        public string observacao { get; set; }
     
         public virtual cadastro cadastro { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<itenspedido> itenspedido { get; set; }
     }
 }

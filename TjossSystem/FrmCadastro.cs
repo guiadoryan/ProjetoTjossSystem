@@ -111,7 +111,6 @@ namespace TjossSystem
 
         private void FrmCadastro_Load(object sender, EventArgs e)
         {
-            DataTable temp = new DataTable();
             Metodos.Metodos objMetodos = new Metodos.Metodos();
             lstTipoCadastroDI = new List<TipoCadastroDI>();
 
