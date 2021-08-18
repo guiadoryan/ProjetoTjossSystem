@@ -18,6 +18,7 @@ namespace TjossSystem.Metodos
         public int codigotipodefinicao { get; set; }
         public System.DateTime datahalteracao { get; set; }
         public int codigofuncionario { get; set; }
+        public string situacao { get; set; }
     
         public virtual cadastro cadastro { get; set; }
         public virtual funcionarios funcionarios { get; set; }

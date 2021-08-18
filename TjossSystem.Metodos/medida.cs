@@ -27,6 +27,7 @@ namespace TjossSystem.Metodos
         public Nullable<decimal> ombroaombro { get; set; }
         public Nullable<decimal> busto { get; set; }
         public string observacao { get; set; }
+        public string situacao { get; set; }
     
         public virtual cadastro cadastro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

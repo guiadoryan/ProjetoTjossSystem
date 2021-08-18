@@ -33,7 +33,6 @@ namespace TjossSystem
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.cadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDePessoaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastroDeMedidasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pedidosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pedidoDeCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pedidoDeVendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,8 +74,7 @@ namespace TjossSystem
             // cadastrosToolStripMenuItem
             // 
             this.cadastrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cadastroDePessoaToolStripMenuItem,
-            this.cadastroDeMedidasToolStripMenuItem});
+            this.cadastroDePessoaToolStripMenuItem});
             this.cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
             this.cadastrosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.cadastrosToolStripMenuItem.Text = "Cadastros";
@@ -84,15 +82,9 @@ namespace TjossSystem
             // cadastroDePessoaToolStripMenuItem
             // 
             this.cadastroDePessoaToolStripMenuItem.Name = "cadastroDePessoaToolStripMenuItem";
-            this.cadastroDePessoaToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.cadastroDePessoaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cadastroDePessoaToolStripMenuItem.Text = "Cadastro de pessoa";
             this.cadastroDePessoaToolStripMenuItem.Click += new System.EventHandler(this.cadastroDePessoaToolStripMenuItem_Click);
-            // 
-            // cadastroDeMedidasToolStripMenuItem
-            // 
-            this.cadastroDeMedidasToolStripMenuItem.Name = "cadastroDeMedidasToolStripMenuItem";
-            this.cadastroDeMedidasToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.cadastroDeMedidasToolStripMenuItem.Text = "Cadastro de medidas";
             // 
             // pedidosToolStripMenuItem
             // 
@@ -107,19 +99,19 @@ namespace TjossSystem
             // pedidoDeCompraToolStripMenuItem
             // 
             this.pedidoDeCompraToolStripMenuItem.Name = "pedidoDeCompraToolStripMenuItem";
-            this.pedidoDeCompraToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.pedidoDeCompraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pedidoDeCompraToolStripMenuItem.Text = "Pedido de compra";
             // 
             // pedidoDeVendaToolStripMenuItem
             // 
             this.pedidoDeVendaToolStripMenuItem.Name = "pedidoDeVendaToolStripMenuItem";
-            this.pedidoDeVendaToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.pedidoDeVendaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pedidoDeVendaToolStripMenuItem.Text = "Pedido de venda";
             // 
             // pedidoDeAluguelToolStripMenuItem
             // 
             this.pedidoDeAluguelToolStripMenuItem.Name = "pedidoDeAluguelToolStripMenuItem";
-            this.pedidoDeAluguelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.pedidoDeAluguelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pedidoDeAluguelToolStripMenuItem.Text = "Pedido de aluguel";
             // 
             // movimentosToolStripMenuItem
@@ -191,7 +183,6 @@ namespace TjossSystem
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cadastrosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroDePessoaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cadastroDeMedidasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pedidosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pedidoDeCompraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pedidoDeVendaToolStripMenuItem;

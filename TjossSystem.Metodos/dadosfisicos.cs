@@ -22,6 +22,7 @@ namespace TjossSystem.Metodos
         public string complemento { get; set; }
         public string cependereco { get; set; }
         public Nullable<int> codigocidade { get; set; }
+        public string situacao { get; set; }
     
         public virtual cadastro cadastro { get; set; }
         public virtual cidade cidade { get; set; }

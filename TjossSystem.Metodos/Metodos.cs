@@ -8,34 +8,70 @@ namespace TjossSystem.Metodos
 {
     public class Metodos
     {
-        public bool RegistrarCadastro(int pCodigoCadastro, string pNomeCadastro, string pNomeFantasia, int pCodigoTipoCadastro, int pCpfCnpj, int pControle, /*CadastroDI pCadastro,*/ out string pErro)
+        public bool RegistrarCadastro(CadastroDI pCadastroDI, List<EnderecoDI> pEnderecosDI, out string pErro)
         {
             tjossEntities objConexao = new tjossEntities();
             cadastro objCadastro = new cadastro();
             List<dadosfisicos> lstEndereco = new List<dadosfisicos>(); 
-            bool blnNovo = false;
+            bool blnNovoCadastro = false;
             try
             {
-                objCadastro = objConexao.cadastro.Where(c => c.codigocadastro == pCodigoCadastro && c.codigocadastro != 0).FirstOrDefault();
+                objCadastro = objConexao.cadastro.Where(c => c.codigocadastro == pCadastroDI.CodigoCadastro && c.codigocadastro != 0).FirstOrDefault();
 
                 if (objCadastro == null)
                 {
                     objCadastro = new cadastro();
-                    blnNovo = true;
-                    objCadastro.codigocadastro = objConexao.cadastro.Where(c => c.codigocadastro == pCodigoCadastro).FirstOrDefault().codigocadastro != 0 ? objConexao.cadastro.Where(c => c.codigocadastro == pCodigoCadastro).FirstOrDefault().codigocadastro + 1 : 1;
+                    blnNovoCadastro = true;
+                    objCadastro.codigocadastro = objConexao.cadastro.Where(c => c.codigocadastro == pCadastroDI.CodigoCadastro && c.codigocadastro != 0).FirstOrDefault() != null ? objConexao.cadastro.OrderByDescending(c => c.codigocadastro).FirstOrDefault().codigocadastro + 1 : 1;
                 }
 
-                objCadastro.nomecadastro = pNomeCadastro;
-                objCadastro.nomefantasia = pNomeFantasia;
-                objCadastro.codigotipocadastro = pCodigoTipoCadastro;
-                objCadastro.cpfcnpj = pCpfCnpj.ToString();
-                objCadastro.controle = pControle.ToString();
-                objCadastro.datahalteracao = DateTime.Now;
-                objCadastro.codigofuncionario = 0; //Alterar para pegar do sistema.
+                objCadastro.nomecadastro = pCadastroDI.NomeCadastro;
+                objCadastro.nomefantasia = pCadastroDI.NomeFantasia;
+                objCadastro.codigotipocadastro = pCadastroDI.CodigoTipoCadastro;
+                objCadastro.cpfcnpj = pCadastroDI.CpfCnpj;
+                objCadastro.controle = pCadastroDI.Controle;
+                objCadastro.datahalteracao = pCadastroDI.DatahAlteracao;
+                objCadastro.codigofuncionario = pCadastroDI.CodigoFuncionario; //Alterar para pegar do sistema.
 
-                if (blnNovo)
+                if (blnNovoCadastro)
                 {
                     objConexao.cadastro.Add(objCadastro);
+                }
+
+                bool blnNovoEndereco = false;
+                foreach (var objEnderecoDI in pEnderecosDI)
+                {
+                    dadosfisicos objEndereco = new dadosfisicos();
+                    objEndereco = objConexao.dadosfisicos.Where(c => c.codigocadastro == pCadastroDI.CodigoCadastro && c.codigocadastro != 0 && c.codigofilial == objEnderecoDI.CodigoFilial).FirstOrDefault();
+                    if (objEndereco == null)
+                    {
+                        objEndereco = new dadosfisicos
+                        {
+                            codigocadastro = pCadastroDI.CodigoCadastro,
+                            codigofilial = objEnderecoDI.CodigoFilial,
+                            endereco = objEnderecoDI.Endereco,
+                            bairro = objEnderecoDI.Bairro,
+                            numero = objEnderecoDI.NumeroEndereco,
+                            complemento = objEnderecoDI.Complemento,
+                            cependereco = objEnderecoDI.CepEndereco,
+                            codigocidade = objEnderecoDI.CodigoCidade
+                        };
+                        blnNovoEndereco = true;
+                    }
+                    else
+                    {
+                        objEndereco.endereco = objEnderecoDI.Endereco;
+                        objEndereco.bairro = objEnderecoDI.Bairro;
+                        objEndereco.numero = objEnderecoDI.NumeroEndereco;
+                        objEndereco.complemento = objEnderecoDI.Complemento;
+                        objEndereco.cependereco = objEnderecoDI.CepEndereco;
+                        objEndereco.codigocidade = objEnderecoDI.CodigoCidade;
+                    }
+
+                    if (blnNovoEndereco)
+                    {
+                        objConexao.dadosfisicos.Add(objEndereco);
+                    }
                 }
 
                 objConexao.SaveChanges();
@@ -85,11 +121,15 @@ namespace TjossSystem.Metodos
                 {
                     objEnderecoDI = new EnderecoDI
                     {
+                        CodigoCadastro = objEndereco.codigocadastro,
                         CodigoFilial = objEndereco.codigofilial,
                         Endereco = objEndereco.endereco,
                         Bairro = objEndereco.bairro,
                         NumeroEndereco = objEndereco.numero,
-                        Complemento = objEndereco.complemento
+                        Complemento = objEndereco.complemento,
+                        CepEndereco = objEndereco.cependereco,
+                        SituacaoEndereco = objEndereco.situacao,
+                        CodigoCidade = objEndereco.codigocidade
                     };
                     lstEnderecoDI.Add(objEnderecoDI);
                 }
@@ -118,6 +158,30 @@ namespace TjossSystem.Metodos
                 }
 
                 return lstTipoCadastroDI;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<CidadeDI> ConsultarCidades()
+        {
+            tjossEntities objConexao = new tjossEntities();
+            List<CidadeDI> lstCidadesDI = new List<CidadeDI>();
+
+            List<cidade> lstCidades = objConexao.cidade.ToList();
+
+            if (lstCidades.Count > 0)
+            {
+                CidadeDI objCidadeDI;
+                foreach (var objCidade in lstCidades)
+                {
+                    objCidadeDI = new CidadeDI { CodigoCidade = objCidade.codigocidade, DescricaoCidade = $"{objCidade.codigocidade} - {objCidade.nomecidade}" };
+                    lstCidadesDI.Add(objCidadeDI);
+                }
+
+                return lstCidadesDI;
             }
             else
             {
