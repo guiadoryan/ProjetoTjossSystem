@@ -13,15 +13,40 @@ namespace TjossSystem
 {
     public partial class FrmCadastro : Form
     {
+        /// <summary>
+        /// Objeto que fica os dados do cadastro
+        /// </summary>
         CadastroDI objCadastro;
 
-        List<TipoCadastroDI> lstTipoCadastroDI;
-
-        List<CidadeDI> lstCidadesDI;
-
+        /// <summary>
+        /// DataTable com os endereços
+        /// </summary>
         DataTable dttEnderecos;
 
-        const int FUNCIONARIO = 1;
+        /// <summary>
+        /// DataTable com os endereços
+        /// </summary>
+        DataTable dttMedidas;
+
+        /// <summary>
+        /// DataTable com os endereços
+        /// </summary>
+        DataTable dttDefinicao;
+
+        /// <summary>
+        /// Lista com os tipos de cadastros
+        /// </summary>
+        List<TipoCadastroDI> lstTipoCadastroDI;
+
+        /// <summary>
+        /// Lista de cidades
+        /// </summary>
+        List<CidadeDI> lstCidadesDI;
+
+        /// <summary>
+        /// FUNCIONARIO ADMIN
+        /// </summary>
+        const int FUNCIONARIO = 0;
 
         public FrmCadastro()
         {
@@ -90,7 +115,7 @@ namespace TjossSystem
             }
             catch(Exception pEx)
             {
-                MessageBox.Show($"Erro ao gravar", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao gravar!{Environment.NewLine}{pEx.InnerException.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -138,7 +163,7 @@ namespace TjossSystem
                     txtCodigoFuncionario.Text = objCadastro.CodigoFuncionario.ToString();
 
                     dttEnderecos.Clear();
-                    foreach (var objEndereco in objCadastro.EnderecosDI)
+                    foreach (var objEndereco in objCadastro.EnderecoDI)
                     {
                         dttEnderecos.Rows.Add(objEndereco.CodigoCadastro,
                                               objEndereco.CodigoFilial,
@@ -152,8 +177,33 @@ namespace TjossSystem
                                               objEndereco.DatahAlteracao,
                                               objEndereco.CodigoFuncionario);
                     }
-                    //dttEnderecos.Rows.Add(objCadastro.EnderecosDI);
+
+                    dttMedidas.Clear();
+                    foreach (var objMedida in objCadastro.MedidaDI)
+                    {
+                        dttMedidas.Rows.Add(objMedida.CodigoCadastro,
+                                              objMedida.CodigoMedida,
+                                              objMedida.Altura,
+                                              objMedida.Cintura,
+                                              objMedida.OmbroAhOmbro,
+                                              objMedida.Busto,
+                                              objMedida.ObservacaoMedida,
+                                              objMedida.SituacaoMedida);
+                    }
+
+                    dttDefinicao.Clear();
+                    foreach (var objDefinicao in objCadastro.DefinicaoDI)
+                    {
+                        dttDefinicao.Rows.Add(objDefinicao.CodigoCadastro,
+                                              objDefinicao.CodigoDefinicao,
+                                              objDefinicao.SituacaoDefinicao,
+                                              objDefinicao.DatahAlteracao,
+                                              objDefinicao.CodigoFuncionario);
+                    }
+
                     dgvEnderecos.DataSource = dttEnderecos;
+                    dgvMedidas.DataSource = dttMedidas;
+                    dgvDefinicao.DataSource = dttDefinicao;
                 }
             }
             else
@@ -211,11 +261,7 @@ namespace TjossSystem
                 MessageBox.Show("CEP invalido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            /*if (!string.IsNullOrEmpty(situacao.Text) || !int.TryParse(txtFilial.Text, out _))
-            {
-                MessageBox.Show("Número da filial invalido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }*/
+
             foreach (DataGridViewRow rowEndereco in dgvEnderecos.Rows)
             {
                 if (rowEndereco.Cells[clnCodigoFilialEndereco.Name].Value.ToString() == txtFilial.Text)
@@ -246,23 +292,10 @@ namespace TjossSystem
                     SituacaoEndereco = cboSituacaoEndereco.SelectedIndex == 0 ? "A" : "I",
                     CodigoCidade = (int)cboCidade.SelectedValue
                 };
-                /*txtNumeroCadastro.Text,
-                                  intFilial.ToString(),
-                                  txtEndereco.Text,
-                                  txtBairro.Text,
-                                  txtNumero.Text,
-                                  txtComplemento.Text,
-                                  txtCepEndereco.Text,
-                                  cboSituacaoEndereco.SelectedIndex == 0 ? "A" : "I",
-                                  cboCidade.SelectedValue);*/
-                objCadastro.EnderecosDI.Add(objEnderecoDI);
+                objCadastro.EnderecoDI.Add(objEnderecoDI);
                 dgvEnderecos.DataSource = null;
-                dgvEnderecos.DataSource = objCadastro.EnderecosDI;
-            }
-            else
-            {
-
-            }    
+                dgvEnderecos.DataSource = objCadastro.EnderecoDI;
+            }   
         }
 
         private void FrmCadastro_Load(object sender, EventArgs e)
@@ -289,6 +322,9 @@ namespace TjossSystem
             cboCidade.DisplayMember = "DescricaoCidade";
         }
 
+        /// <summary>
+        /// Criando tabelas
+        /// </summary>
         private void CriarDataTables()
         {
             dttEnderecos = new DataTable();
@@ -303,30 +339,53 @@ namespace TjossSystem
             dttEnderecos.Columns.Add("CodigoCidade");
             dttEnderecos.Columns.Add("DatahAlteracao");
             dttEnderecos.Columns.Add("CodigoFuncionario");
+
+            //TO DO: Criar proximos dtt aqui
+            dttMedidas = new DataTable();
+            dttMedidas.Columns.Add("CodigoCadastro");
+            dttMedidas.Columns.Add("CodigoMedida");
+            dttMedidas.Columns.Add("Altura");
+            dttMedidas.Columns.Add("Cintura");
+            dttMedidas.Columns.Add("OmbroAhOmbro");
+            dttMedidas.Columns.Add("Busto");
+            dttMedidas.Columns.Add("ObservacaoMedida");
+            dttMedidas.Columns.Add("SituacaoMedida");
+            dttMedidas.Columns.Add("DatahAlteracao");
+            dttMedidas.Columns.Add("CodigoFuncionario");
+
+            dttDefinicao = new DataTable();
+            dttDefinicao.Columns.Add("CodigoCadastro");
+            dttDefinicao.Columns.Add("CodigoDefinicao");
+            dttDefinicao.Columns.Add("SituacaoDefinicao");
+            dttDefinicao.Columns.Add("DatahAlteracao");
+            dttDefinicao.Columns.Add("CodigoFuncionario");
         }
 
         private void FrmCadastro_KeyPress(object sender, KeyPressEventArgs e)
         {
-            /*if ((e.KeyChar == (char)Keys.Enter))
-            {
-                //Verifica se é TextBox Multiline, se não for muda o foco para o proximo controle
-                if (!((sender as Form).ActiveControl is TextBoxBase) ||
-                    ((sender as Form).ActiveControl is TextBoxBase &&
-                    !((sender as Form).ActiveControl as TextBoxBase).Multiline))
-                {
-                    //Obs.: A mudança de campos não funcionará para formulário que contem SplitContainer.
-                    ProcessTabKey(true);
-                }
-            }*/
-
             if (sender is TextBoxBase)
             {
-                //ComponentEnable(pSender, e);
-
                 if ((sender as TextBoxBase).Multiline)
                 {
                     (sender as TextBoxBase).Text = (sender as TextBoxBase).Text.Trim().Replace("  ", " ");
                 }
+            }
+        }
+
+        private void dgvEnderecos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvEnderecos.SelectedRows.Count > 0)
+            {
+                DataGridViewRow rowLinha = dgvEnderecos.SelectedRows[0];
+
+                txtFilial.Text = rowLinha.Cells[clnCodigoFilialEndereco.Name].Value.ToString();
+                txtEndereco.Text = rowLinha.Cells[clnEndereco.Name].Value.ToString();
+                txtBairro.Text = rowLinha.Cells[clnBairro.Name].Value.ToString();
+                txtNumero.Text = rowLinha.Cells[clnNumeroEndereco.Name].Value.ToString();
+                txtComplemento.Text = rowLinha.Cells[clnComplementoEndereco.Name].Value.ToString();
+                txtCepEndereco.Text = rowLinha.Cells[clnCepEndereco.Name].Value.ToString();
+                cboCidade.SelectedItem = rowLinha.Cells[clnCodigoCidade.Name].Value.ToString();
+                cboSituacaoEndereco.SelectedIndex = rowLinha.Cells[clnSituacaoEndereco.Name].Value.ToString() == "A" ? 0 : 1;
             }
         }
     }

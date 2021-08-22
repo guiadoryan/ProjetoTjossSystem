@@ -8,6 +8,13 @@ namespace TjossSystem.Metodos
 {
     public class Metodos
     {
+        /// <summary>
+        /// Método que Regista/Altera Cadastro no sistema
+        /// </summary>
+        /// <param name="pCadastroDI">Objeto com os dados basicos do cadastro</param>
+        /// <param name="pEnderecosDI">Objeto com dados do endereço do cadastro</param>
+        /// <param name="pErro">Mensagem de erro</param>
+        /// <returns>True caso Registrar/Alterar um cadastro, false caso o contrario.</returns>
         public bool RegistrarCadastro(CadastroDI pCadastroDI, List<EnderecoDI> pEnderecosDI, out string pErro)
         {
             tjossEntities objConexao = new tjossEntities();
@@ -54,7 +61,8 @@ namespace TjossSystem.Metodos
                             numero = objEnderecoDI.NumeroEndereco,
                             complemento = objEnderecoDI.Complemento,
                             cependereco = objEnderecoDI.CepEndereco,
-                            codigocidade = objEnderecoDI.CodigoCidade
+                            codigocidade = objEnderecoDI.CodigoCidade,
+                            situacao = objEnderecoDI.SituacaoEndereco
                         };
                         blnNovoEndereco = true;
                     }
@@ -66,6 +74,7 @@ namespace TjossSystem.Metodos
                         objEndereco.complemento = objEnderecoDI.Complemento;
                         objEndereco.cependereco = objEnderecoDI.CepEndereco;
                         objEndereco.codigocidade = objEnderecoDI.CodigoCidade;
+                        objEndereco.situacao = objEnderecoDI.SituacaoEndereco;
                     }
 
                     if (blnNovoEndereco)
@@ -92,6 +101,8 @@ namespace TjossSystem.Metodos
 
             CadastroDI objCadastroDI;
             List<EnderecoDI> lstEnderecoDI = new List<EnderecoDI>();
+            List<MedidaDI> lstMedidaDI = new List<MedidaDI>();
+            List<DefinicaoDI> lstDefinicaoDI = new List<DefinicaoDI>();
 
             objCadastro = objConexao.cadastro.Where(c => c.codigocadastro == pCodigoCadastro && c.codigocadastro != 0).FirstOrDefault();
             if (objCadastro == null)
@@ -135,8 +146,51 @@ namespace TjossSystem.Metodos
                 }
             }
 
+            List<medida> lstMedida = new List<medida>();
+            lstMedida = objConexao.medida.Where(c => c.codigocadastro == pCodigoCadastro).ToList();
+            if (lstMedida.Count > 0)
+            {
+                MedidaDI objMedidaDI = new MedidaDI();
+                foreach (var objMedida in lstMedida)
+                {
+                    objMedidaDI = new MedidaDI
+                    {
+                        CodigoCadastro = objMedida.codigocadastro,
+                        CodigoMedida = objMedida.codigomedida,
+                        Altura = objMedida.altura,
+                        Cintura = objMedida.cintura,
+                        OmbroAhOmbro = objMedida.ombroaombro,
+                        Busto = objMedida.busto,
+                        ObservacaoMedida = objMedida.observacao,
+                        SituacaoMedida = objMedida.situacao
+                    };
+                    lstMedidaDI.Add(objMedidaDI);
+                }
+            }
 
-            objCadastroDI.EnderecosDI = lstEnderecoDI;
+            List<definicaocadastro> lstDefinicao = new List<definicaocadastro>();
+            lstDefinicao = objConexao.definicaocadastro.Where(c => c.codigocadastro == pCodigoCadastro).ToList();
+            if (lstDefinicao.Count > 0)
+            {
+                DefinicaoDI objDefinicaoDI = new DefinicaoDI();
+                foreach (var objDefinicao in lstDefinicao)
+                {
+                    objDefinicaoDI = new DefinicaoDI
+                    {
+                        CodigoCadastro = objDefinicao.codigocadastro,
+                        CodigoDefinicao = objDefinicao.codigotipodefinicao,
+                        SituacaoDefinicao = objDefinicao.situacao,
+                        DatahAlteracao = objDefinicao.datahalteracao,
+                        CodigoFuncionario = objDefinicao.codigofuncionario
+                    };
+                    lstDefinicaoDI.Add(objDefinicaoDI);
+                }
+            }
+
+
+            objCadastroDI.EnderecoDI = lstEnderecoDI;
+            objCadastroDI.MedidaDI = lstMedidaDI;
+            objCadastroDI.DefinicaoDI = lstDefinicaoDI;
             return objCadastroDI;
         }
 

@@ -35,7 +35,11 @@ namespace TjossSystem.Metodos
         public int CodigoFuncionario { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        public List<EnderecoDI> EnderecosDI { get; set; }
+        public List<EnderecoDI> EnderecoDI { get; set; }
+
+        public List<MedidaDI> MedidaDI { get; set; }
+
+        public List<DefinicaoDI> DefinicaoDI { get; set; }
     }
 
     [DataContract]
@@ -48,16 +52,16 @@ namespace TjossSystem.Metodos
         public int CodigoMedida { get; set; }
 
         [DataMember]
-        public decimal Altura { get; set; }
+        public decimal? Altura { get; set; }
 
         [DataMember]
-        public decimal Cintura { get; set; }
+        public decimal? Cintura { get; set; }
 
         [DataMember]
-        public decimal OmbroAhOmbro { get; set; }
+        public decimal? OmbroAhOmbro { get; set; }
 
         [DataMember]
-        public decimal Busto { get; set; }
+        public decimal? Busto { get; set; }
 
         [DataMember]
         public string ObservacaoMedida { get; set; }

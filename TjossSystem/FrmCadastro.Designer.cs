@@ -61,13 +61,6 @@ namespace TjossSystem
             this.btnAdicionarMedida = new System.Windows.Forms.Button();
             this.grpMedidas = new System.Windows.Forms.GroupBox();
             this.dgvMedidas = new System.Windows.Forms.DataGridView();
-            this.clnCodigoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnAlturaMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnCinturaMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnOmbroAhOmbro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnBustoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnObservacaoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnSituacaoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtOmbroAhOmbro = new System.Windows.Forms.TextBox();
             this.lblOmbroAhOmbro = new System.Windows.Forms.Label();
             this.txtCintura = new System.Windows.Forms.TextBox();
@@ -117,13 +110,27 @@ namespace TjossSystem
             this.lblDatahAlteracaoDefinicao = new System.Windows.Forms.Label();
             this.grpDefinicao = new System.Windows.Forms.GroupBox();
             this.dgvDefinicao = new System.Windows.Forms.DataGridView();
-            this.clnCodigoDefinicao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtCodigoDefinicao = new System.Windows.Forms.TextBox();
             this.lblCodigoDefinicao = new System.Windows.Forms.Label();
             this.tspBotoes = new System.Windows.Forms.ToolStrip();
             this.tsbFechar = new System.Windows.Forms.ToolStripButton();
             this.tsbLimpar = new System.Windows.Forms.ToolStripButton();
             this.tsbGravar = new System.Windows.Forms.ToolStripButton();
+            this.clnCodigoCadastroDefinicao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCodigoDefinicao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnSituacaoDefinicao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnDatahAlteracaoDefinicao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCodigoFuncionarioDefinicao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCodigoCadastroMedidas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCodigoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnAlturaMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCinturaMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnOmbroAhOmbro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnBustoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnObservacaoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnSituacaoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnDatahAlteracaoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCodigoFuncionarioMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpDadosChave.SuspendLayout();
             this.tbcDadosCadastro.SuspendLayout();
             this.tabCadastro.SuspendLayout();
@@ -448,17 +455,21 @@ namespace TjossSystem
             // 
             // dgvMedidas
             // 
+            this.dgvMedidas.AllowUserToAddRows = false;
             this.dgvMedidas.AllowUserToDeleteRows = false;
             this.dgvMedidas.AllowUserToResizeRows = false;
             this.dgvMedidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMedidas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clnCodigoCadastroMedidas,
             this.clnCodigoMedida,
             this.clnAlturaMedida,
             this.clnCinturaMedida,
             this.clnOmbroAhOmbro,
             this.clnBustoMedida,
             this.clnObservacaoMedida,
-            this.clnSituacaoMedida});
+            this.clnSituacaoMedida,
+            this.clnDatahAlteracaoMedida,
+            this.clnCodigoFuncionarioMedida});
             this.dgvMedidas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMedidas.Location = new System.Drawing.Point(3, 16);
             this.dgvMedidas.MultiSelect = false;
@@ -467,50 +478,6 @@ namespace TjossSystem
             this.dgvMedidas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMedidas.Size = new System.Drawing.Size(959, 224);
             this.dgvMedidas.TabIndex = 0;
-            // 
-            // clnCodigoMedida
-            // 
-            this.clnCodigoMedida.HeaderText = "Cód. Medida";
-            this.clnCodigoMedida.Name = "clnCodigoMedida";
-            this.clnCodigoMedida.ReadOnly = true;
-            // 
-            // clnAlturaMedida
-            // 
-            this.clnAlturaMedida.HeaderText = "Altura";
-            this.clnAlturaMedida.Name = "clnAlturaMedida";
-            this.clnAlturaMedida.ReadOnly = true;
-            // 
-            // clnCinturaMedida
-            // 
-            this.clnCinturaMedida.HeaderText = "Cintura";
-            this.clnCinturaMedida.Name = "clnCinturaMedida";
-            this.clnCinturaMedida.ReadOnly = true;
-            // 
-            // clnOmbroAhOmbro
-            // 
-            this.clnOmbroAhOmbro.HeaderText = "Ombro a Ombro";
-            this.clnOmbroAhOmbro.Name = "clnOmbroAhOmbro";
-            this.clnOmbroAhOmbro.ReadOnly = true;
-            this.clnOmbroAhOmbro.Width = 120;
-            // 
-            // clnBustoMedida
-            // 
-            this.clnBustoMedida.HeaderText = "Busto";
-            this.clnBustoMedida.Name = "clnBustoMedida";
-            this.clnBustoMedida.ReadOnly = true;
-            // 
-            // clnObservacaoMedida
-            // 
-            this.clnObservacaoMedida.HeaderText = "Observação";
-            this.clnObservacaoMedida.Name = "clnObservacaoMedida";
-            this.clnObservacaoMedida.ReadOnly = true;
-            // 
-            // clnSituacaoMedida
-            // 
-            this.clnSituacaoMedida.DataPropertyName = "SituacaoMedida";
-            this.clnSituacaoMedida.HeaderText = "Situação";
-            this.clnSituacaoMedida.Name = "clnSituacaoMedida";
-            this.clnSituacaoMedida.ReadOnly = true;
             // 
             // txtOmbroAhOmbro
             // 
@@ -704,6 +671,7 @@ namespace TjossSystem
             this.dgvEnderecos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEnderecos.Size = new System.Drawing.Size(964, 210);
             this.dgvEnderecos.TabIndex = 0;
+            this.dgvEnderecos.SelectionChanged += new System.EventHandler(this.dgvEnderecos_SelectionChanged);
             // 
             // clnCodigoCadastro
             // 
@@ -968,7 +936,11 @@ namespace TjossSystem
             this.dgvDefinicao.AllowUserToDeleteRows = false;
             this.dgvDefinicao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDefinicao.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clnCodigoDefinicao});
+            this.clnCodigoCadastroDefinicao,
+            this.clnCodigoDefinicao,
+            this.clnSituacaoDefinicao,
+            this.clnDatahAlteracaoDefinicao,
+            this.clnCodigoFuncionarioDefinicao});
             this.dgvDefinicao.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDefinicao.Location = new System.Drawing.Point(3, 16);
             this.dgvDefinicao.Name = "dgvDefinicao";
@@ -976,12 +948,6 @@ namespace TjossSystem
             this.dgvDefinicao.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDefinicao.Size = new System.Drawing.Size(964, 312);
             this.dgvDefinicao.TabIndex = 0;
-            // 
-            // clnCodigoDefinicao
-            // 
-            this.clnCodigoDefinicao.HeaderText = "Cód. Definição";
-            this.clnCodigoDefinicao.Name = "clnCodigoDefinicao";
-            this.clnCodigoDefinicao.ReadOnly = true;
             // 
             // txtCodigoDefinicao
             // 
@@ -1044,6 +1010,118 @@ namespace TjossSystem
             this.tsbGravar.Size = new System.Drawing.Size(68, 22);
             this.tsbGravar.Text = "F9 - Gravar";
             this.tsbGravar.Click += new System.EventHandler(this.tsbGravar_Click);
+            // 
+            // clnCodigoCadastroDefinicao
+            // 
+            this.clnCodigoCadastroDefinicao.DataPropertyName = "CodigoCadastro";
+            this.clnCodigoCadastroDefinicao.HeaderText = "Código Cadastro";
+            this.clnCodigoCadastroDefinicao.Name = "clnCodigoCadastroDefinicao";
+            this.clnCodigoCadastroDefinicao.ReadOnly = true;
+            this.clnCodigoCadastroDefinicao.Visible = false;
+            // 
+            // clnCodigoDefinicao
+            // 
+            this.clnCodigoDefinicao.DataPropertyName = "CodigoDefinicao";
+            this.clnCodigoDefinicao.HeaderText = "Cód. Definição";
+            this.clnCodigoDefinicao.Name = "clnCodigoDefinicao";
+            this.clnCodigoDefinicao.ReadOnly = true;
+            // 
+            // clnSituacaoDefinicao
+            // 
+            this.clnSituacaoDefinicao.DataPropertyName = "SituacaoDefinicao";
+            this.clnSituacaoDefinicao.HeaderText = "Situação";
+            this.clnSituacaoDefinicao.Name = "clnSituacaoDefinicao";
+            this.clnSituacaoDefinicao.ReadOnly = true;
+            // 
+            // clnDatahAlteracaoDefinicao
+            // 
+            this.clnDatahAlteracaoDefinicao.DataPropertyName = "DatahAlteracao";
+            this.clnDatahAlteracaoDefinicao.HeaderText = "Data Alteração";
+            this.clnDatahAlteracaoDefinicao.Name = "clnDatahAlteracaoDefinicao";
+            this.clnDatahAlteracaoDefinicao.ReadOnly = true;
+            this.clnDatahAlteracaoDefinicao.Visible = false;
+            // 
+            // clnCodigoFuncionarioDefinicao
+            // 
+            this.clnCodigoFuncionarioDefinicao.DataPropertyName = "CodigoFuncionario";
+            this.clnCodigoFuncionarioDefinicao.HeaderText = "Código Funcionario";
+            this.clnCodigoFuncionarioDefinicao.Name = "clnCodigoFuncionarioDefinicao";
+            this.clnCodigoFuncionarioDefinicao.ReadOnly = true;
+            this.clnCodigoFuncionarioDefinicao.Visible = false;
+            // 
+            // clnCodigoCadastroMedidas
+            // 
+            this.clnCodigoCadastroMedidas.DataPropertyName = "CodigoCadastro";
+            this.clnCodigoCadastroMedidas.HeaderText = "Código Cadastro";
+            this.clnCodigoCadastroMedidas.Name = "clnCodigoCadastroMedidas";
+            this.clnCodigoCadastroMedidas.ReadOnly = true;
+            this.clnCodigoCadastroMedidas.Visible = false;
+            // 
+            // clnCodigoMedida
+            // 
+            this.clnCodigoMedida.DataPropertyName = "CodigoMedida";
+            this.clnCodigoMedida.HeaderText = "Cód. Medida";
+            this.clnCodigoMedida.Name = "clnCodigoMedida";
+            this.clnCodigoMedida.ReadOnly = true;
+            // 
+            // clnAlturaMedida
+            // 
+            this.clnAlturaMedida.DataPropertyName = "Altura";
+            this.clnAlturaMedida.HeaderText = "Altura";
+            this.clnAlturaMedida.Name = "clnAlturaMedida";
+            this.clnAlturaMedida.ReadOnly = true;
+            // 
+            // clnCinturaMedida
+            // 
+            this.clnCinturaMedida.DataPropertyName = "Cintura";
+            this.clnCinturaMedida.HeaderText = "Cintura";
+            this.clnCinturaMedida.Name = "clnCinturaMedida";
+            this.clnCinturaMedida.ReadOnly = true;
+            // 
+            // clnOmbroAhOmbro
+            // 
+            this.clnOmbroAhOmbro.DataPropertyName = "OmbroAhOmbro";
+            this.clnOmbroAhOmbro.HeaderText = "Ombro a Ombro";
+            this.clnOmbroAhOmbro.Name = "clnOmbroAhOmbro";
+            this.clnOmbroAhOmbro.ReadOnly = true;
+            this.clnOmbroAhOmbro.Width = 120;
+            // 
+            // clnBustoMedida
+            // 
+            this.clnBustoMedida.DataPropertyName = "Busto";
+            this.clnBustoMedida.HeaderText = "Busto";
+            this.clnBustoMedida.Name = "clnBustoMedida";
+            this.clnBustoMedida.ReadOnly = true;
+            // 
+            // clnObservacaoMedida
+            // 
+            this.clnObservacaoMedida.DataPropertyName = "ObservacaoMedida";
+            this.clnObservacaoMedida.HeaderText = "Observação";
+            this.clnObservacaoMedida.Name = "clnObservacaoMedida";
+            this.clnObservacaoMedida.ReadOnly = true;
+            // 
+            // clnSituacaoMedida
+            // 
+            this.clnSituacaoMedida.DataPropertyName = "SituacaoMedida";
+            this.clnSituacaoMedida.HeaderText = "Situação";
+            this.clnSituacaoMedida.Name = "clnSituacaoMedida";
+            this.clnSituacaoMedida.ReadOnly = true;
+            // 
+            // clnDatahAlteracaoMedida
+            // 
+            this.clnDatahAlteracaoMedida.DataPropertyName = "DatahAlteracao";
+            this.clnDatahAlteracaoMedida.HeaderText = "Data Alteração";
+            this.clnDatahAlteracaoMedida.Name = "clnDatahAlteracaoMedida";
+            this.clnDatahAlteracaoMedida.ReadOnly = true;
+            this.clnDatahAlteracaoMedida.Visible = false;
+            // 
+            // clnCodigoFuncionarioMedida
+            // 
+            this.clnCodigoFuncionarioMedida.DataPropertyName = "CodigoFuncionario";
+            this.clnCodigoFuncionarioMedida.HeaderText = "Código Funcionario";
+            this.clnCodigoFuncionarioMedida.Name = "clnCodigoFuncionarioMedida";
+            this.clnCodigoFuncionarioMedida.ReadOnly = true;
+            this.clnCodigoFuncionarioMedida.Visible = false;
             // 
             // FrmCadastro
             // 
@@ -1152,20 +1230,12 @@ namespace TjossSystem
         private System.Windows.Forms.Label lblFuncionarioDefinicao;
         private System.Windows.Forms.Label lblDatahAlteracaoDefinicao;
         private System.Windows.Forms.Button btnAdicionarDefinicao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoDefinicao;
         private System.Windows.Forms.ComboBox cboSituacaoDefinicao;
         private System.Windows.Forms.Label lblSituacaoDefinicao;
         private System.Windows.Forms.ComboBox cboSituacaoEndereco;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cboSituacaoMedida;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoMedida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnAlturaMedida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnCinturaMedida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnOmbroAhOmbro;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnBustoMedida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnObservacaoMedida;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clnSituacaoMedida;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoCadastro;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoFilialEndereco;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnEndereco;
@@ -1177,5 +1247,20 @@ namespace TjossSystem
         private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoCidade;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnDatahAlteracaoEndereco;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoFuncionarioEndereco;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoCadastroDefinicao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoDefinicao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnSituacaoDefinicao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnDatahAlteracaoDefinicao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoFuncionarioDefinicao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoCadastroMedidas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoMedida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnAlturaMedida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCinturaMedida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnOmbroAhOmbro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnBustoMedida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnObservacaoMedida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnSituacaoMedida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnDatahAlteracaoMedida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoFuncionarioMedida;
     }
 }
