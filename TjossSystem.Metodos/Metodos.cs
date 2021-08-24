@@ -15,7 +15,7 @@ namespace TjossSystem.Metodos
         /// <param name="pEnderecosDI">Objeto com dados do endereço do cadastro</param>
         /// <param name="pErro">Mensagem de erro</param>
         /// <returns>True caso Registrar/Alterar um cadastro, false caso o contrario.</returns>
-        public bool RegistrarCadastro(CadastroDI pCadastroDI, List<EnderecoDI> pEnderecosDI, out string pErro)
+        public bool RegistrarCadastro(CadastroDI pCadastroDI, List<EnderecoDI> pEnderecosDI, List<MedidaDI> pMedidas, List<DefinicaoDI> pDefinicao, out string pErro)
         {
             tjossEntities objConexao = new tjossEntities();
             cadastro objCadastro = new cadastro();
@@ -83,6 +83,36 @@ namespace TjossSystem.Metodos
                     }
                 }
 
+                bool blnNovoDefinicao = false;
+                foreach (var objDefinicaoDI in pDefinicao)
+                {
+                    definicaocadastro objDefinicao = new definicaocadastro();
+                    objDefinicao = objConexao.definicaocadastro.Where(c => c.codigocadastro == pCadastroDI.CodigoCadastro && c.codigocadastro != 0 && c.codigotipodefinicao == objDefinicaoDI.CodigoDefinicao).FirstOrDefault();
+                    if (objDefinicao == null)
+                    {
+                        objDefinicao = new definicaocadastro
+                        {
+                            codigocadastro = pCadastroDI.CodigoCadastro,
+                            codigotipodefinicao = objDefinicaoDI.CodigoDefinicao,
+                            situacao = objDefinicaoDI.SituacaoDefinicao,
+                            datahalteracao = objDefinicaoDI.DatahAlteracao,
+                            codigofuncionario = objDefinicaoDI.CodigoFuncionario
+                        };
+                        blnNovoDefinicao = true;
+                    }
+                    else
+                    {
+                        objDefinicao.situacao = objDefinicaoDI.SituacaoDefinicao;
+                        objDefinicao.datahalteracao = objDefinicaoDI.DatahAlteracao;
+                        objDefinicao.codigofuncionario = objDefinicaoDI.CodigoFuncionario;
+                    }
+
+                    if (blnNovoDefinicao)
+                    {
+                        objConexao.definicaocadastro.Add(objDefinicao);
+                    }
+                }
+
                 objConexao.SaveChanges();
                 pErro = string.Empty;
                 return true;
@@ -94,6 +124,11 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que busca os dados do cadastro
+        /// </summary>
+        /// <param name="pCodigoCadastro">Código do cadastro</param>
+        /// <returns>Retorna um objeto com todos os dados do cadastro</returns>
         public CadastroDI ConsultarCadastro(int pCodigoCadastro)
         {
             tjossEntities objConexao = new tjossEntities();

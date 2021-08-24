@@ -58,10 +58,24 @@ namespace TjossSystem
             {
                 clnColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-            /*foreach (DataGridViewColumn clnColumn in dgvDadosDiagnostico.Columns)
+
+            foreach (DataGridViewColumn clnColumn in dgvMedidas.Columns)
             {
                 clnColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }*/
+            }
+
+            foreach (DataGridViewColumn clnColumn in dgvDefinicao.Columns)
+            {
+                clnColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            /*if (datagridView1.SelectedRows.Count > 0)
+                        {
+                            int index = datagridView.SelectedRows[0].Index;
+
+                            if (index >= 0)
+                                datagridView.Rows[index].Selected = false;
+                        }*/
         }
 
         private void tsbGravar_Click(object sender, EventArgs e)
@@ -75,6 +89,8 @@ namespace TjossSystem
                 //Instancia classe data contract.
                 CadastroDI objCadastroDI = new CadastroDI();
                 List<EnderecoDI> lstEnderecoDI = new List<EnderecoDI>();
+                List<MedidaDI> lstMedidaDI = new List<MedidaDI>();
+                List<DefinicaoDI> lstDefinicaoDI = new List<DefinicaoDI>();
 
                 //Passa os dados para a classe data contract.
                 objCadastroDI.CodigoCadastro = !string.IsNullOrEmpty(txtNumeroCadastro.Text) ? Convert.ToInt32(txtNumeroCadastro.Text) : 0;
@@ -106,12 +122,47 @@ namespace TjossSystem
                     lstEnderecoDI.Add(objEnderecoDI);
                 }
 
+                foreach (DataGridViewRow rowMedida in dgvMedidas.Rows)
+                {
+                    MedidaDI objMedidaDI = new MedidaDI
+                    {
+                        CodigoCadastro = !string.IsNullOrEmpty(txtNumeroCadastro.Text) ? Convert.ToInt32(txtNumeroCadastro.Text) : 0,
+                        CodigoMedida = !string.IsNullOrEmpty(txtCodigoMedida.Text) ? Convert.ToInt32(rowMedida.Cells[clnCodigoMedida.Name].Value) : 0,
+                        Altura = Convert.ToDecimal(rowMedida.Cells[clnAlturaMedida.Name].Value),
+                        Cintura = Convert.ToDecimal(rowMedida.Cells[clnCinturaMedida.Name].Value),
+                        OmbroAhOmbro = Convert.ToDecimal(rowMedida.Cells[clnOmbroAhOmbro.Name].Value),
+                        Busto = Convert.ToDecimal(rowMedida.Cells[clnBustoMedida.Name].Value),
+                        ObservacaoMedida = rowMedida.Cells[clnObservacaoMedida.Name].Value.ToString(),
+                        SituacaoMedida = rowMedida.Cells[clnSituacaoMedida.Name].Value.ToString(),
+                        DatahAlteracao = dtaAtual,
+                        CodigoFuncionario = FUNCIONARIO
+                    };
+
+                    lstMedidaDI.Add(objMedidaDI);
+                }
+
+                foreach (DataGridViewRow rowDefinicao in dgvDefinicao.Rows)
+                {
+                    DefinicaoDI objDefinicaoDI = new DefinicaoDI
+                    {
+                        CodigoCadastro = !string.IsNullOrEmpty(txtNumeroCadastro.Text) ? Convert.ToInt32(txtNumeroCadastro.Text) : 0,
+                        CodigoDefinicao = Convert.ToInt32(rowDefinicao.Cells[clnCodigoDefinicao.Name].Value),
+                        SituacaoDefinicao = rowDefinicao.Cells[clnSituacaoDefinicao.Name].Value.ToString(),
+                        DatahAlteracao = dtaAtual,
+                        CodigoFuncionario = FUNCIONARIO
+                    };
+
+                    lstDefinicaoDI.Add(objDefinicaoDI);
+                }
+
                 //Chama o metodo que grava ou altera os dados do cadastro.
-                if (!objMetodos.RegistrarCadastro(objCadastroDI, lstEnderecoDI, out strErro))
+                if (!objMetodos.RegistrarCadastro(objCadastroDI, lstEnderecoDI, lstMedidaDI, lstDefinicaoDI, out strErro))
                 {
                     MessageBox.Show($"{strErro}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
+                tsbLimpar.PerformClick();
             }
             catch(Exception pEx)
             {
@@ -280,6 +331,12 @@ namespace TjossSystem
 
             if (blnNovaFilial)
             {
+                if (Convert.ToInt32(cboTipoCadastro.SelectedValue) == 1 && intFilial >= 1)
+                {
+                    MessageBox.Show("Pessoa fisica só pode ter um endereço cadastrado!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    dgvEnderecos_SelectionChanged(sender, e);
+                    return;
+                }
                 EnderecoDI objEnderecoDI = new EnderecoDI
                 {
                     CodigoCadastro = Convert.ToInt32(txtNumeroCadastro.Text),
@@ -296,6 +353,32 @@ namespace TjossSystem
                 dgvEnderecos.DataSource = null;
                 dgvEnderecos.DataSource = objCadastro.EnderecoDI;
             }   
+        }
+
+        private void btnAdicionarDefinicao_Click(object sender, EventArgs e)
+        {
+            bool blnNovaDefinicao = true;
+            foreach (DataGridViewRow rowDefinicao in dgvDefinicao.Rows)
+            {
+                if (rowDefinicao.Cells[clnCodigoDefinicao.Name].Value.ToString() == txtCodigoDefinicao.Text)
+                {
+                    blnNovaDefinicao = false;
+                    rowDefinicao.Cells[clnSituacaoDefinicao.Name].Value = cboSituacaoDefinicao.SelectedIndex == 0 ? "A" : "I";
+                }
+            }
+
+            if (blnNovaDefinicao)
+            {
+                DefinicaoDI objDefinicaoDI = new DefinicaoDI
+                {
+                    CodigoCadastro = Convert.ToInt32(txtNumeroCadastro.Text),
+                    CodigoDefinicao = Convert.ToInt32(txtCodigoDefinicao.Text),
+                    SituacaoDefinicao = cboSituacaoDefinicao.SelectedIndex == 0 ? "A" : "I"
+                };
+                objCadastro.DefinicaoDI.Add(objDefinicaoDI);
+                dgvDefinicao.DataSource = null;
+                dgvDefinicao.DataSource = objCadastro.DefinicaoDI;
+            }
         }
 
         private void FrmCadastro_Load(object sender, EventArgs e)

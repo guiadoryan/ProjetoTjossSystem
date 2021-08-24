@@ -5,30 +5,30 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c9f53663fa1e4e3f81c18ff306075934" Name="Diagram1">
-        <EntityTypeShape EntityType="tjossModel.cadastro" Width="1.5" PointX="8.25" PointY="14.25" />
-        <EntityTypeShape EntityType="tjossModel.cargofuncionario" Width="1.5" PointX="0.75" PointY="15.375" />
-        <EntityTypeShape EntityType="tjossModel.cidade" Width="1.5" PointX="11.25" PointY="7.125" />
-        <EntityTypeShape EntityType="tjossModel.contrato" Width="1.5" PointX="10.5" PointY="10.375" />
-        <EntityTypeShape EntityType="tjossModel.dadosfisicos" Width="1.5" PointX="13.5" PointY="14.75" />
-        <EntityTypeShape EntityType="tjossModel.definicaocadastro" Width="1.5" PointX="10.5" PointY="15.125" />
-        <EntityTypeShape EntityType="tjossModel.estado" Width="1.5" PointX="9" PointY="7.125" />
-        <EntityTypeShape EntityType="tjossModel.formulaitem" Width="1.5" PointX="7.5" PointY="21.25" />
-        <EntityTypeShape EntityType="tjossModel.funcionarios" Width="1.5" PointX="3" PointY="14.25" />
-        <EntityTypeShape EntityType="tjossModel.itemestoque" Width="1.5" PointX="10.5" PointY="18.125" />
-        <EntityTypeShape EntityType="tjossModel.itens" Width="1.5" PointX="5.25" PointY="17.625" />
-        <EntityTypeShape EntityType="tjossModel.itenscontrato" Width="1.5" PointX="12.75" PointY="11.375" />
-        <EntityTypeShape EntityType="tjossModel.itenspedido" Width="1.5" PointX="18" PointY="19.125" />
-        <EntityTypeShape EntityType="tjossModel.medida" Width="1.5" PointX="10.5" PointY="26.125" />
-        <EntityTypeShape EntityType="tjossModel.movimentoestoque" Width="1.5" PointX="5.25" PointY="13.75" />
-        <EntityTypeShape EntityType="tjossModel.pais" Width="1.5" PointX="6.75" PointY="7.375" />
-        <EntityTypeShape EntityType="tjossModel.pedidos" Width="1.5" PointX="15.75" PointY="12.625" />
-        <EntityTypeShape EntityType="tjossModel.tipocadastro" Width="1.5" PointX="6" PointY="11.5" />
-        <EntityTypeShape EntityType="tjossModel.tipocontrato" Width="1.5" PointX="8.25" PointY="11.375" />
-        <EntityTypeShape EntityType="tjossModel.tipodefinicao" Width="1.5" PointX="8.25" PointY="24.375" />
-        <EntityTypeShape EntityType="tjossModel.tipoestoque" Width="1.5" PointX="8.25" PointY="27.375" />
-        <EntityTypeShape EntityType="tjossModel.tipoitem" Width="1.5" PointX="3" PointY="19.375" />
-        <EntityTypeShape EntityType="tjossModel.tipopedido" Width="1.5" PointX="13.5" PointY="8.375" />
-        <EntityTypeShape EntityType="tjossModel.usuarios" Width="1.5" PointX="5.25" PointY="25.625" />
+        <EntityTypeShape EntityType="tjossModel.cadastro" Width="1.5" PointX="8.25" PointY="14.625" />
+        <EntityTypeShape EntityType="tjossModel.cargofuncionario" Width="1.5" PointX="0.75" PointY="15.625" />
+        <EntityTypeShape EntityType="tjossModel.cidade" Width="1.5" PointX="8.25" PointY="8.5" />
+        <EntityTypeShape EntityType="tjossModel.contrato" Width="1.5" PointX="13.5" PointY="14.75" />
+        <EntityTypeShape EntityType="tjossModel.dadosfisicos" Width="1.5" PointX="10.5" PointY="10" />
+        <EntityTypeShape EntityType="tjossModel.definicaocadastro" Width="1.5" PointX="10.5" PointY="14.25" />
+        <EntityTypeShape EntityType="tjossModel.estado" Width="1.5" PointX="6" PointY="8.5" />
+        <EntityTypeShape EntityType="tjossModel.formulaitem" Width="1.5" PointX="7.5" PointY="20.625" />
+        <EntityTypeShape EntityType="tjossModel.funcionarios" Width="1.5" PointX="3" PointY="14.625" />
+        <EntityTypeShape EntityType="tjossModel.itemestoque" Width="1.5" PointX="10.5" PointY="22.5" />
+        <EntityTypeShape EntityType="tjossModel.itens" Width="1.5" PointX="5.25" PointY="16.875" />
+        <EntityTypeShape EntityType="tjossModel.itenscontrato" Width="1.5" PointX="15.75" PointY="16.25" />
+        <EntityTypeShape EntityType="tjossModel.itenspedido" Width="1.5" PointX="18" PointY="15" />
+        <EntityTypeShape EntityType="tjossModel.medida" Width="1.5" PointX="10.5" PointY="18.375" />
+        <EntityTypeShape EntityType="tjossModel.movimentoestoque" Width="1.5" PointX="5.25" PointY="25.375" />
+        <EntityTypeShape EntityType="tjossModel.pais" Width="1.5" PointX="3.75" PointY="8.625" />
+        <EntityTypeShape EntityType="tjossModel.pedidos" Width="1.5" PointX="15.75" PointY="11.875" />
+        <EntityTypeShape EntityType="tjossModel.tipocadastro" Width="1.5" PointX="6" PointY="11.75" />
+        <EntityTypeShape EntityType="tjossModel.tipocontrato" Width="1.5" PointX="11.25" PointY="6.625" />
+        <EntityTypeShape EntityType="tjossModel.tipodefinicao" Width="1.5" PointX="8.25" PointY="11.625" />
+        <EntityTypeShape EntityType="tjossModel.tipoestoque" Width="1.5" PointX="8.25" PointY="23.625" />
+        <EntityTypeShape EntityType="tjossModel.tipoitem" Width="1.5" PointX="3" PointY="19.625" />
+        <EntityTypeShape EntityType="tjossModel.tipopedido" Width="1.5" PointX="13.5" PointY="11.625" />
+        <EntityTypeShape EntityType="tjossModel.usuarios" Width="1.5" PointX="5.25" PointY="14.125" />
         <AssociationConnector Association="tjossModel.cadastro_contratovenda_fk" />
         <AssociationConnector Association="tjossModel.cadastro_dadosfisicos_fk" />
         <AssociationConnector Association="tjossModel.cadastro_definicaocadastro_fk" />

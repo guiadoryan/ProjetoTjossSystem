@@ -976,9 +976,9 @@
           <Property Name="complemento" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="cependereco" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="codigocidade" Type="Int32" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_dadosfisicos_fk" FromRole="dadosfisicos" ToRole="cadastro" />
           <NavigationProperty Name="cidade" Relationship="tjossModel.cidade_dadosfisicos_fk" FromRole="dadosfisicos" ToRole="cidade" />
-          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="definicaocadastro">
           <Key>
@@ -989,10 +989,10 @@
           <Property Name="codigotipodefinicao" Type="Int32" Nullable="false" />
           <Property Name="datahalteracao" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="codigofuncionario" Type="Int32" Nullable="false" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_definicaocadastro_fk" FromRole="definicaocadastro" ToRole="cadastro" />
           <NavigationProperty Name="funcionarios" Relationship="tjossModel.funcionarios_definicaocadastro_fk" FromRole="definicaocadastro" ToRole="funcionarios" />
           <NavigationProperty Name="tipodefinicao" Relationship="tjossModel.tipodefinicao_definicaocadastro_fk" FromRole="definicaocadastro" ToRole="tipodefinicao" />
-          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="estado">
           <Key>
@@ -1110,9 +1110,9 @@
           <Property Name="ombroaombro" Type="Decimal" Precision="15" Scale="5" />
           <Property Name="busto" Type="Decimal" Precision="15" Scale="5" />
           <Property Name="observacao" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_medida_fk" FromRole="medida" ToRole="cadastro" />
           <NavigationProperty Name="itenspedido" Relationship="tjossModel.medida_itenspedido_fk" FromRole="medida" ToRole="itenspedido" />
-          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="movimentoestoque">
           <Key>
