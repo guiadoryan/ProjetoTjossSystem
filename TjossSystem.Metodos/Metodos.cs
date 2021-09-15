@@ -83,6 +83,42 @@ namespace TjossSystem.Metodos
                     }
                 }
 
+                bool blnNovaMedida = false;
+                foreach (var objMedidaDI in pMedidas)
+                {
+                    medida objMedida = new medida();
+                    objMedida = objConexao.medida.Where(c => c.codigocadastro == pCadastroDI.CodigoCadastro && c.codigocadastro != 0 && c.codigomedida == objMedidaDI.CodigoMedida).FirstOrDefault();
+                    if (objMedida == null)
+                    {
+                        objMedida = new medida
+                        {
+                            codigocadastro = pCadastroDI.CodigoCadastro,
+                            codigomedida = objMedidaDI.CodigoMedida,
+                            altura = objMedidaDI.Altura,
+                            cintura = objMedidaDI.Cintura,
+                            ombroaombro = objMedidaDI.OmbroAhOmbro,
+                            busto = objMedidaDI.Busto,
+                            observacao = objMedidaDI.ObservacaoMedida,
+                            situacao = objMedidaDI.SituacaoMedida
+                        };
+                        blnNovaMedida = true;
+                    }
+                    else
+                    {
+                        objMedida.altura = objMedidaDI.Altura;
+                        objMedida.cintura = objMedidaDI.Cintura;
+                        objMedida.ombroaombro = objMedidaDI.OmbroAhOmbro;
+                        objMedida.busto = objMedidaDI.Busto;
+                        objMedida.observacao = objMedidaDI.ObservacaoMedida;
+                        objMedida.situacao = objMedidaDI.SituacaoMedida;
+                    }
+
+                    if (blnNovaMedida)
+                    {
+                        objConexao.medida.Add(objMedida);
+                    }
+                }
+
                 bool blnNovoDefinicao = false;
                 foreach (var objDefinicaoDI in pDefinicao)
                 {
@@ -271,6 +307,30 @@ namespace TjossSystem.Metodos
                 }
 
                 return lstCidadesDI;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<TipoDefinicaoDI> ConsultarDefinicoes()
+        {
+            tjossEntities objConexao = new tjossEntities();
+            List<TipoDefinicaoDI> lstTipoDefinicaoDI = new List<TipoDefinicaoDI>();
+
+            List<tipodefinicao> lstTipoDefinicao = objConexao.tipodefinicao.ToList();
+
+            if(lstTipoDefinicao.Count > 0)
+            {
+                TipoDefinicaoDI objDefinicaoDI;
+                foreach (var objTipoDefinicao in lstTipoDefinicao)
+                {
+                    objDefinicaoDI = new TipoDefinicaoDI { CodigoTipoDefinicao = objTipoDefinicao.codigotipodefinicao, DescricaoTipoDefinicao = $"{objTipoDefinicao.codigotipodefinicao} - {objTipoDefinicao.descricaodefinicao}" };
+                    lstTipoDefinicaoDI.Add(objDefinicaoDI);
+                }
+
+                return lstTipoDefinicaoDI;
             }
             else
             {

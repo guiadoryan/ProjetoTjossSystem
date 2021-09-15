@@ -46,7 +46,7 @@
           <Property Name="datacontrato" Type="date" Nullable="false" />
           <Property Name="datavencimento" Type="date" Nullable="false" />
           <Property Name="situacao" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="codigovendedor" Type="int4" Nullable="false" />
+          <Property Name="codigovendedor" Type="int4" />
           <Property Name="datahalteracao" Type="timestamp" Nullable="false" />
           <Property Name="codigofuncionario" Type="int4" Nullable="false" />
         </EntityType>
@@ -56,14 +56,14 @@
             <PropertyRef Name="codigofilial" />
           </Key>
           <Property Name="codigocadastro" Type="int4" Nullable="false" />
-          <Property Name="codigofilial" Type="int4" Nullable="false" />
+          <Property Name="codigofilial" Type="varchar" MaxLength="4" Nullable="false" />
           <Property Name="endereco" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="bairro" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="numero" Type="int4" Nullable="false" />
           <Property Name="complemento" Type="varchar" MaxLength="80" />
           <Property Name="cependereco" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="situacao" Type="bpchar" MaxLength="1" Nullable="false" />
           <Property Name="codigocidade" Type="int4" />
-          <Property Name="situacao" Type="varchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="definicaocadastro">
           <Key>
@@ -72,9 +72,9 @@
           </Key>
           <Property Name="codigocadastro" Type="int4" Nullable="false" />
           <Property Name="codigotipodefinicao" Type="int4" Nullable="false" />
+          <Property Name="situacao" Type="bpchar" MaxLength="1" Nullable="false" />
           <Property Name="datahalteracao" Type="timestamp" Nullable="false" />
           <Property Name="codigofuncionario" Type="int4" Nullable="false" />
-          <Property Name="situacao" Type="varchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="estado">
           <Key>
@@ -169,13 +169,13 @@
           <Property Name="ombroaombro" Type="numeric" Precision="15" Scale="5" />
           <Property Name="busto" Type="numeric" Precision="15" Scale="5" />
           <Property Name="observacao" Type="varchar" MaxLength="100" />
-          <Property Name="situacao" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="situacao" Type="bpchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="movimentoestoque">
           <Key>
             <PropertyRef Name="sequenciamovimentoestoque" />
           </Key>
-          <Property Name="sequenciamovimentoestoque" Type="int4" Nullable="false" />
+          <Property Name="sequenciamovimentoestoque" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="codigoitem" Type="int4" Nullable="false" />
           <Property Name="tipomovimento" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="quantidademovimentada" Type="numeric" Precision="15" Scale="5" Nullable="false" />
@@ -217,6 +217,7 @@
           </Key>
           <Property Name="codigotipocontrato" Type="int4" Nullable="false" />
           <Property Name="descricaotipocontrato" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="modelocontrato" Type="bytea" />
           <Property Name="situacao" Type="varchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="tipodefinicao">
@@ -503,6 +504,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="itens_movimentoestoque_fk">
+          <End Role="itens" Type="Self.itens" Multiplicity="1" />
+          <End Role="movimentoestoque" Type="Self.movimentoestoque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="itens">
+              <PropertyRef Name="codigoitem" />
+            </Principal>
+            <Dependent Role="movimentoestoque">
+              <PropertyRef Name="codigoitem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="medida_itenspedido_fk">
           <End Role="medida" Type="Self.medida" Multiplicity="0..1" />
           <End Role="itenspedido" Type="Self.itenspedido" Multiplicity="*" />
@@ -720,6 +733,10 @@
             <End Role="itens" EntitySet="itens" />
             <End Role="itenspedido" EntitySet="itenspedido" />
           </AssociationSet>
+          <AssociationSet Name="itens_movimentoestoque_fk" Association="Self.itens_movimentoestoque_fk">
+            <End Role="itens" EntitySet="itens" />
+            <End Role="movimentoestoque" EntitySet="movimentoestoque" />
+          </AssociationSet>
           <AssociationSet Name="medida_itenspedido_fk" Association="Self.medida_itenspedido_fk">
             <End Role="medida" EntitySet="medida" />
             <End Role="itenspedido" EntitySet="itenspedido" />
@@ -886,6 +903,10 @@
             <End Role="itens" EntitySet="itens" />
             <End Role="itenspedido" EntitySet="itenspedido" />
           </AssociationSet>
+          <AssociationSet Name="itens_movimentoestoque_fk" Association="tjossModel.itens_movimentoestoque_fk">
+            <End Role="itens" EntitySet="itens" />
+            <End Role="movimentoestoque" EntitySet="movimentoestoque" />
+          </AssociationSet>
           <AssociationSet Name="tipoitem_itens_fk" Association="tjossModel.tipoitem_itens_fk">
             <End Role="tipoitem" EntitySet="tipoitem" />
             <End Role="itens" EntitySet="itens" />
@@ -954,7 +975,7 @@
           <Property Name="datacontrato" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="datavencimento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="codigovendedor" Type="Int32" Nullable="false" />
+          <Property Name="codigovendedor" Type="Int32" />
           <Property Name="datahalteracao" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="codigofuncionario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_contratovenda_fk" FromRole="contrato" ToRole="cadastro" />
@@ -969,14 +990,14 @@
             <PropertyRef Name="codigofilial" />
           </Key>
           <Property Name="codigocadastro" Type="Int32" Nullable="false" />
-          <Property Name="codigofilial" Type="Int32" Nullable="false" />
+          <Property Name="codigofilial" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="endereco" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="bairro" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="numero" Type="Int32" Nullable="false" />
           <Property Name="complemento" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="cependereco" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="codigocidade" Type="Int32" />
-          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_dadosfisicos_fk" FromRole="dadosfisicos" ToRole="cadastro" />
           <NavigationProperty Name="cidade" Relationship="tjossModel.cidade_dadosfisicos_fk" FromRole="dadosfisicos" ToRole="cidade" />
         </EntityType>
@@ -987,9 +1008,9 @@
           </Key>
           <Property Name="codigocadastro" Type="Int32" Nullable="false" />
           <Property Name="codigotipodefinicao" Type="Int32" Nullable="false" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
           <Property Name="datahalteracao" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="codigofuncionario" Type="Int32" Nullable="false" />
-          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_definicaocadastro_fk" FromRole="definicaocadastro" ToRole="cadastro" />
           <NavigationProperty Name="funcionarios" Relationship="tjossModel.funcionarios_definicaocadastro_fk" FromRole="definicaocadastro" ToRole="funcionarios" />
           <NavigationProperty Name="tipodefinicao" Relationship="tjossModel.tipodefinicao_definicaocadastro_fk" FromRole="definicaocadastro" ToRole="tipodefinicao" />
@@ -1062,6 +1083,7 @@
           <NavigationProperty Name="itemestoque" Relationship="tjossModel.itens_itemestoque_fk" FromRole="itens" ToRole="itemestoque" />
           <NavigationProperty Name="itenscontrato" Relationship="tjossModel.itens_itenscontrato_fk" FromRole="itens" ToRole="itenscontrato" />
           <NavigationProperty Name="itenspedido" Relationship="tjossModel.itens_itenspedido_fk" FromRole="itens" ToRole="itenspedido" />
+          <NavigationProperty Name="movimentoestoque" Relationship="tjossModel.itens_movimentoestoque_fk" FromRole="itens" ToRole="movimentoestoque" />
           <NavigationProperty Name="tipoitem" Relationship="tjossModel.tipoitem_itens_fk" FromRole="itens" ToRole="tipoitem" />
         </EntityType>
         <EntityType Name="itenscontrato">
@@ -1110,7 +1132,7 @@
           <Property Name="ombroaombro" Type="Decimal" Precision="15" Scale="5" />
           <Property Name="busto" Type="Decimal" Precision="15" Scale="5" />
           <Property Name="observacao" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_medida_fk" FromRole="medida" ToRole="cadastro" />
           <NavigationProperty Name="itenspedido" Relationship="tjossModel.medida_itenspedido_fk" FromRole="medida" ToRole="itenspedido" />
         </EntityType>
@@ -1118,13 +1140,14 @@
           <Key>
             <PropertyRef Name="sequenciamovimentoestoque" />
           </Key>
-          <Property Name="sequenciamovimentoestoque" Type="Int32" Nullable="false" />
+          <Property Name="sequenciamovimentoestoque" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="codigoitem" Type="Int32" Nullable="false" />
           <Property Name="tipomovimento" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="quantidademovimentada" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
           <Property Name="datahmovimento" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="codigofuncionario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="funcionarios" Relationship="tjossModel.funcionarios_movimentoestoque_fk" FromRole="movimentoestoque" ToRole="funcionarios" />
+          <NavigationProperty Name="itens" Relationship="tjossModel.itens_movimentoestoque_fk" FromRole="movimentoestoque" ToRole="itens" />
         </EntityType>
         <EntityType Name="pais">
           <Key>
@@ -1167,6 +1190,7 @@
           </Key>
           <Property Name="codigotipocontrato" Type="Int32" Nullable="false" />
           <Property Name="descricaotipocontrato" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="modelocontrato" Type="Binary" MaxLength="2147483647" FixedLength="false" />
           <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="contrato" Relationship="tjossModel.tipocontrato_contratovenda_fk" FromRole="tipocontrato" ToRole="contrato" />
         </EntityType>
@@ -1519,6 +1543,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="itens_movimentoestoque_fk">
+          <End Type="tjossModel.itens" Role="itens" Multiplicity="1" />
+          <End Type="tjossModel.movimentoestoque" Role="movimentoestoque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="itens">
+              <PropertyRef Name="codigoitem" />
+            </Principal>
+            <Dependent Role="movimentoestoque">
+              <PropertyRef Name="codigoitem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="tipoitem_itens_fk">
           <End Type="tjossModel.tipoitem" Role="tipoitem" Multiplicity="1" />
           <End Type="tjossModel.itens" Role="itens" Multiplicity="*" />
@@ -1628,8 +1664,8 @@
           <EntitySetMapping Name="dadosfisicos">
             <EntityTypeMapping TypeName="tjossModel.dadosfisicos">
               <MappingFragment StoreEntitySet="dadosfisicos">
-                <ScalarProperty Name="situacao" ColumnName="situacao" />
                 <ScalarProperty Name="codigocidade" ColumnName="codigocidade" />
+                <ScalarProperty Name="situacao" ColumnName="situacao" />
                 <ScalarProperty Name="cependereco" ColumnName="cependereco" />
                 <ScalarProperty Name="complemento" ColumnName="complemento" />
                 <ScalarProperty Name="numero" ColumnName="numero" />
@@ -1643,9 +1679,9 @@
           <EntitySetMapping Name="definicaocadastro">
             <EntityTypeMapping TypeName="tjossModel.definicaocadastro">
               <MappingFragment StoreEntitySet="definicaocadastro">
-                <ScalarProperty Name="situacao" ColumnName="situacao" />
                 <ScalarProperty Name="codigofuncionario" ColumnName="codigofuncionario" />
                 <ScalarProperty Name="datahalteracao" ColumnName="datahalteracao" />
+                <ScalarProperty Name="situacao" ColumnName="situacao" />
                 <ScalarProperty Name="codigotipodefinicao" ColumnName="codigotipodefinicao" />
                 <ScalarProperty Name="codigocadastro" ColumnName="codigocadastro" />
               </MappingFragment>
@@ -1794,6 +1830,7 @@
             <EntityTypeMapping TypeName="tjossModel.tipocontrato">
               <MappingFragment StoreEntitySet="tipocontrato">
                 <ScalarProperty Name="situacao" ColumnName="situacao" />
+                <ScalarProperty Name="modelocontrato" ColumnName="modelocontrato" />
                 <ScalarProperty Name="descricaotipocontrato" ColumnName="descricaotipocontrato" />
                 <ScalarProperty Name="codigotipocontrato" ColumnName="codigotipocontrato" />
               </MappingFragment>

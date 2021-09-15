@@ -22,5 +22,6 @@ namespace TjossSystem.Metodos
         public int codigofuncionario { get; set; }
     
         public virtual funcionarios funcionarios { get; set; }
+        public virtual itens itens { get; set; }
     }
 }

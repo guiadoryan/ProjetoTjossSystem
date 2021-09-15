@@ -22,6 +22,7 @@ namespace TjossSystem.Metodos
     
         public int codigotipocontrato { get; set; }
         public string descricaotipocontrato { get; set; }
+        public byte[] modelocontrato { get; set; }
         public string situacao { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

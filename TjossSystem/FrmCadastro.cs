@@ -44,9 +44,14 @@ namespace TjossSystem
         List<CidadeDI> lstCidadesDI;
 
         /// <summary>
+        /// Lista de tipos de definições
+        /// </summary>
+        List<TipoDefinicaoDI> lstTipoDefinicaoDI;
+
+        /// <summary>
         /// FUNCIONARIO ADMIN
         /// </summary>
-        const int FUNCIONARIO = 0;
+        private const int FUNCIONARIO = 0;
 
         public FrmCadastro()
         {
@@ -68,14 +73,6 @@ namespace TjossSystem
             {
                 clnColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
-            /*if (datagridView1.SelectedRows.Count > 0)
-                        {
-                            int index = datagridView.SelectedRows[0].Index;
-
-                            if (index >= 0)
-                                datagridView.Rows[index].Selected = false;
-                        }*/
         }
 
         private void tsbGravar_Click(object sender, EventArgs e)
@@ -107,7 +104,7 @@ namespace TjossSystem
                     EnderecoDI objEnderecoDI = new EnderecoDI 
                     { 
                         CodigoCadastro = !string.IsNullOrEmpty(txtNumeroCadastro.Text) ? Convert.ToInt32(txtNumeroCadastro.Text) : 0,
-                        CodigoFilial = Convert.ToInt32(rowEndereco.Cells[clnCodigoFilialEndereco.Name].Value),
+                        CodigoFilial = rowEndereco.Cells[clnCodigoFilialEndereco.Name].Value.ToString(),
                         Endereco = rowEndereco.Cells[clnEndereco.Name].Value.ToString(),
                         Bairro = rowEndereco.Cells[clnBairro.Name].Value.ToString(),
                         NumeroEndereco = Convert.ToInt32(rowEndereco.Cells[clnNumeroEndereco.Name].Value),
@@ -172,6 +169,7 @@ namespace TjossSystem
 
         public void ValidarCamposTela()
         {
+            //TO DO: VALIDAR CAMPOS DO CADASTRO
             if (!string.IsNullOrEmpty(txtNumeroCadastro.Text) && !int.TryParse(txtNumeroCadastro.Text, out _))
             {
                 MessageBox.Show("Número do cadastro invalido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -186,16 +184,16 @@ namespace TjossSystem
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            if (!int.TryParse(txtNumeroCadastro.Text, out _))
-            {
-                MessageBox.Show("Número do cadastro invalido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             Metodos.Metodos objMetodos = new Metodos.Metodos();
 
             if (!string.IsNullOrEmpty(txtNumeroCadastro.Text))
             {
+                if (!int.TryParse(txtNumeroCadastro.Text, out _))
+                {
+                    MessageBox.Show("Número do cadastro invalido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 objCadastro = objMetodos.ConsultarCadastro(Convert.ToInt32(txtNumeroCadastro.Text));
                 if (objCadastro.CodigoCadastro == 0)
                 {
@@ -340,7 +338,7 @@ namespace TjossSystem
                 EnderecoDI objEnderecoDI = new EnderecoDI
                 {
                     CodigoCadastro = Convert.ToInt32(txtNumeroCadastro.Text),
-                    CodigoFilial = Convert.ToInt32(txtFilial.Text),
+                    CodigoFilial = txtFilial.Text,
                     Endereco = txtEndereco.Text,
                     Bairro = txtBairro.Text,
                     NumeroEndereco = Convert.ToInt32(txtNumero.Text),
@@ -357,10 +355,11 @@ namespace TjossSystem
 
         private void btnAdicionarDefinicao_Click(object sender, EventArgs e)
         {
+            //TO DO: VALIDAR CAMPOS DEFINICAO
             bool blnNovaDefinicao = true;
             foreach (DataGridViewRow rowDefinicao in dgvDefinicao.Rows)
             {
-                if (rowDefinicao.Cells[clnCodigoDefinicao.Name].Value.ToString() == txtCodigoDefinicao.Text)
+                if (rowDefinicao.Cells[clnCodigoDefinicao.Name].Value.ToString() == cboCidade.SelectedValue.ToString())
                 {
                     blnNovaDefinicao = false;
                     rowDefinicao.Cells[clnSituacaoDefinicao.Name].Value = cboSituacaoDefinicao.SelectedIndex == 0 ? "A" : "I";
@@ -372,7 +371,7 @@ namespace TjossSystem
                 DefinicaoDI objDefinicaoDI = new DefinicaoDI
                 {
                     CodigoCadastro = Convert.ToInt32(txtNumeroCadastro.Text),
-                    CodigoDefinicao = Convert.ToInt32(txtCodigoDefinicao.Text),
+                    CodigoDefinicao = (int)cboCidade.SelectedValue,
                     SituacaoDefinicao = cboSituacaoDefinicao.SelectedIndex == 0 ? "A" : "I"
                 };
                 objCadastro.DefinicaoDI.Add(objDefinicaoDI);
@@ -381,20 +380,66 @@ namespace TjossSystem
             }
         }
 
+        private void btnAdicionarMedida_Click(object sender, EventArgs e)
+        {
+            //TO DO: FAZER ESSE EVENTO.
+            // 1 - Validar campos das medidas.
+            bool blnNovaMedida = true;
+            foreach (DataGridViewRow rowMedidas in dgvMedidas.Rows)
+            {
+                if (rowMedidas.Cells[clnCodigoMedida.Name].Value.ToString() == txtCodigoMedida.Text)
+                {
+                    blnNovaMedida = false;
+                    //TO DO: Caso Código Medida for igual a ZERO, atualiza a linha atual (SelectedRow).
+                    rowMedidas.Cells[clnCodigoCadastroMedidas.Name].Value = !string.IsNullOrEmpty(txtNumeroCadastro.Text) ? Convert.ToInt32(txtNumeroCadastro.Text) : 0;
+                    rowMedidas.Cells[clnCodigoMedida.Name].Value = !string.IsNullOrEmpty(txtCodigoMedida.Text) ? Convert.ToInt32(txtCodigoMedida.Text) : 0;
+
+                    rowMedidas.Cells[clnAlturaMedida.Name].Value = !string.IsNullOrEmpty(txtAltura.Text) ? txtAltura.Text : string.Empty;
+                    rowMedidas.Cells[clnCinturaMedida.Name].Value = !string.IsNullOrEmpty(txtCintura.Text) ? txtCintura.Text : string.Empty;
+                    rowMedidas.Cells[clnOmbroAhOmbro.Name].Value = !string.IsNullOrEmpty(txtOmbroAhOmbro.Text) ? txtOmbroAhOmbro.Text : string.Empty;
+                    rowMedidas.Cells[clnBustoMedida.Name].Value = !string.IsNullOrEmpty(txtBustoMedida.Text) ? txtBustoMedida.Text : string.Empty;
+                    rowMedidas.Cells[clnObservacaoMedida.Name].Value = !string.IsNullOrEmpty(txtObservacaoMedida.Text) ? txtObservacaoMedida.Text : string.Empty;
+                    rowMedidas.Cells[clnSituacaoMedida.Name].Value = cboSituacaoMedida.SelectedIndex == 0 ? "A" : "I";
+                }
+            }
+
+            if (blnNovaMedida)
+            {
+                MedidaDI objMedidaDI = new MedidaDI
+                {
+                    CodigoCadastro = !string.IsNullOrEmpty(txtNumeroCadastro.Text) ? Convert.ToInt32(txtNumeroCadastro.Text) : 0,
+                    CodigoMedida = !string.IsNullOrEmpty(txtCodigoMedida.Text) ? Convert.ToInt32(txtCodigoMedida.Text) : 0,
+                    Altura = !string.IsNullOrEmpty(txtAltura.Text) ? Convert.ToDecimal(txtAltura.Text) : 0,
+                    Cintura = !string.IsNullOrEmpty(txtCintura.Text) ? Convert.ToDecimal(txtCintura.Text) : 0,
+                    OmbroAhOmbro = !string.IsNullOrEmpty(txtOmbroAhOmbro.Text) ? Convert.ToDecimal(txtOmbroAhOmbro.Text) : 0,
+                    Busto = !string.IsNullOrEmpty(txtBustoMedida.Text) ? Convert.ToDecimal(txtBustoMedida.Text) : 0,
+                    ObservacaoMedida = !string.IsNullOrEmpty(txtObservacaoMedida.Text) ? txtObservacaoMedida.Text : string.Empty,
+                    SituacaoMedida = cboSituacaoMedida.SelectedIndex == 0 ? "A" : "I"
+                };
+                objCadastro.MedidaDI.Add(objMedidaDI);
+                dgvMedidas.DataSource = null;
+                dgvMedidas.DataSource = objCadastro.MedidaDI;
+            }
+        }
+
         private void FrmCadastro_Load(object sender, EventArgs e)
         {
             dgvEnderecos.AutoGenerateColumns = false;
+            dgvDefinicao.AutoGenerateColumns = false;
+            dgvMedidas.AutoGenerateColumns = false;
             CriarDataTables();
 
             Metodos.Metodos objMetodos = new Metodos.Metodos();
             lstTipoCadastroDI = new List<TipoCadastroDI>();
             lstCidadesDI = new List<CidadeDI>();
+            lstTipoDefinicaoDI = new List<TipoDefinicaoDI>();
 
             //cboTipoCadastro.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             //cboTipoCadastro.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             lstTipoCadastroDI = objMetodos.ConsultarTipoCadastro();
             lstCidadesDI = objMetodos.ConsultarCidades();
+            lstTipoDefinicaoDI = objMetodos.ConsultarDefinicoes();
 
             cboTipoCadastro.DataSource = lstTipoCadastroDI;
             cboTipoCadastro.ValueMember = "CodigoTipoCadastro";
@@ -403,6 +448,15 @@ namespace TjossSystem
             cboCidade.DataSource = lstCidadesDI;
             cboCidade.ValueMember = "CodigoCidade";
             cboCidade.DisplayMember = "DescricaoCidade";
+
+            cboCodigoDefinicao.DataSource = lstTipoDefinicaoDI;
+            cboCodigoDefinicao.ValueMember = "CodigoTipoDefinicao";
+            cboCodigoDefinicao.DisplayMember = "DescricaoTipoDefinicao";
+
+            cboSituacaoDefinicao.SelectedIndex = 0;
+            cboSituacaoEndereco.SelectedIndex = 0;
+            cboSituacaoMedida.SelectedIndex = 0;
+            cboCodigoDefinicao.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -423,7 +477,6 @@ namespace TjossSystem
             dttEnderecos.Columns.Add("DatahAlteracao");
             dttEnderecos.Columns.Add("CodigoFuncionario");
 
-            //TO DO: Criar proximos dtt aqui
             dttMedidas = new DataTable();
             dttMedidas.Columns.Add("CodigoCadastro");
             dttMedidas.Columns.Add("CodigoMedida");
@@ -469,6 +522,36 @@ namespace TjossSystem
                 txtCepEndereco.Text = rowLinha.Cells[clnCepEndereco.Name].Value.ToString();
                 cboCidade.SelectedItem = rowLinha.Cells[clnCodigoCidade.Name].Value.ToString();
                 cboSituacaoEndereco.SelectedIndex = rowLinha.Cells[clnSituacaoEndereco.Name].Value.ToString() == "A" ? 0 : 1;
+            }
+        }
+
+        private void dgvDefinicao_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvDefinicao.SelectedRows.Count > 0)
+            {
+                DataGridViewRow rowDefinicao = dgvDefinicao.SelectedRows[0];
+
+                cboCodigoDefinicao.SelectedItem = (int)cboCidade.SelectedValue;
+                cboSituacaoDefinicao.SelectedIndex = rowDefinicao.Cells[clnSituacaoDefinicao.Name].Value.ToString() == "A" ? 0 : 1;
+                txtDatahAlteracaoDefinicao.Text = rowDefinicao.Cells[clnDatahAlteracaoDefinicao.Name].Value.ToString();
+                txtCodigoFuncionarioDefinicao.Text = rowDefinicao.Cells[clnCodigoFuncionarioDefinicao.Name].Value.ToString();
+            }
+        }
+
+        private void dgvMedidas_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvMedidas.SelectedRows.Count > 0)
+            {
+                DataGridViewRow rowMedidas = dgvMedidas.SelectedRows[0];
+
+                txtCodigoMedida.Text = rowMedidas.Cells[clnCodigoMedida.Name].Value.ToString() == "0" ? string.Empty : rowMedidas.Cells[clnCodigoMedida.Name].Value.ToString();
+
+                txtAltura.Text = rowMedidas.Cells[clnAlturaMedida.Name].Value.ToString();
+                txtCintura.Text = rowMedidas.Cells[clnCinturaMedida.Name].Value.ToString();
+                txtOmbroAhOmbro.Text = rowMedidas.Cells[clnOmbroAhOmbro.Name].Value.ToString();
+                txtBustoMedida.Text = rowMedidas.Cells[clnBustoMedida.Name].Value.ToString();
+                txtObservacaoMedida.Text = rowMedidas.Cells[clnObservacaoMedida.Name].Value.ToString();
+                cboSituacaoMedida.SelectedIndex = rowMedidas.Cells[clnSituacaoMedida.Name].Value.ToString() == "A" ? 0 : 1;
             }
         }
     }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace TjossSystem.Metodos
 {
+    #region :: CADASTRO ::
     [DataContract]
     public class CadastroDI
     {
@@ -83,7 +84,7 @@ namespace TjossSystem.Metodos
         public int? CodigoCadastro { get; set; }
 
         [DataMember]
-        public int CodigoFilial { get; set; }
+        public string CodigoFilial { get; set; }
 
         [DataMember]
         public string Endereco { get; set; }
@@ -141,6 +142,18 @@ namespace TjossSystem.Metodos
         [DataMember]
         public string DescricaoTipoCadastro { get; set; }
     }
+
+    [DataContract]
+    public class TipoDefinicaoDI
+    {
+        [DataMember]
+        public int CodigoTipoDefinicao { get; set; }
+
+        [DataMember]
+        public string DescricaoTipoDefinicao { get; set; }
+    }
+
+    #endregion
 
     [DataContract]
     public class CidadeDI

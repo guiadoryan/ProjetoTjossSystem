@@ -111,6 +111,7 @@ namespace TjossSystem
             this.txtFilial = new System.Windows.Forms.TextBox();
             this.lblFilial = new System.Windows.Forms.Label();
             this.tabDefinicao = new System.Windows.Forms.TabPage();
+            this.cboCodigoDefinicao = new System.Windows.Forms.ComboBox();
             this.cboSituacaoDefinicao = new System.Windows.Forms.ComboBox();
             this.lblSituacaoDefinicao = new System.Windows.Forms.Label();
             this.btnAdicionarDefinicao = new System.Windows.Forms.Button();
@@ -442,6 +443,7 @@ namespace TjossSystem
             this.btnAdicionarMedida.TabIndex = 21;
             this.btnAdicionarMedida.Text = "Adicionar";
             this.btnAdicionarMedida.UseVisualStyleBackColor = true;
+            this.btnAdicionarMedida.Click += new System.EventHandler(this.btnAdicionarMedida_Click);
             // 
             // grpMedidas
             // 
@@ -478,6 +480,7 @@ namespace TjossSystem
             this.dgvMedidas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMedidas.Size = new System.Drawing.Size(959, 224);
             this.dgvMedidas.TabIndex = 0;
+            this.dgvMedidas.SelectionChanged += new System.EventHandler(this.dgvMedidas_SelectionChanged);
             // 
             // clnCodigoCadastroMedidas
             // 
@@ -911,6 +914,7 @@ namespace TjossSystem
             // tabDefinicao
             // 
             this.tabDefinicao.BackColor = System.Drawing.SystemColors.Control;
+            this.tabDefinicao.Controls.Add(this.cboCodigoDefinicao);
             this.tabDefinicao.Controls.Add(this.cboSituacaoDefinicao);
             this.tabDefinicao.Controls.Add(this.lblSituacaoDefinicao);
             this.tabDefinicao.Controls.Add(this.btnAdicionarDefinicao);
@@ -927,6 +931,18 @@ namespace TjossSystem
             this.tabDefinicao.Size = new System.Drawing.Size(981, 460);
             this.tabDefinicao.TabIndex = 3;
             this.tabDefinicao.Text = "Definição";
+            // 
+            // cboCodigoDefinicao
+            // 
+            this.cboCodigoDefinicao.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCodigoDefinicao.FormattingEnabled = true;
+            this.cboCodigoDefinicao.Items.AddRange(new object[] {
+            "Ativo",
+            "Inativo"});
+            this.cboCodigoDefinicao.Location = new System.Drawing.Point(117, 14);
+            this.cboCodigoDefinicao.Name = "cboCodigoDefinicao";
+            this.cboCodigoDefinicao.Size = new System.Drawing.Size(114, 21);
+            this.cboCodigoDefinicao.TabIndex = 34;
             // 
             // cboSituacaoDefinicao
             // 
@@ -1023,6 +1039,7 @@ namespace TjossSystem
             this.dgvDefinicao.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDefinicao.Size = new System.Drawing.Size(964, 312);
             this.dgvDefinicao.TabIndex = 0;
+            this.dgvDefinicao.SelectionChanged += new System.EventHandler(this.dgvDefinicao_SelectionChanged);
             // 
             // clnCodigoCadastroDefinicao
             // 
@@ -1064,7 +1081,7 @@ namespace TjossSystem
             // 
             // txtCodigoDefinicao
             // 
-            this.txtCodigoDefinicao.Location = new System.Drawing.Point(117, 16);
+            this.txtCodigoDefinicao.Location = new System.Drawing.Point(309, 15);
             this.txtCodigoDefinicao.Name = "txtCodigoDefinicao";
             this.txtCodigoDefinicao.Size = new System.Drawing.Size(55, 20);
             this.txtCodigoDefinicao.TabIndex = 13;
@@ -1263,5 +1280,6 @@ namespace TjossSystem
         private System.Windows.Forms.DataGridViewTextBoxColumn clnSituacaoMedida;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnDatahAlteracaoMedida;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoFuncionarioMedida;
+        private System.Windows.Forms.ComboBox cboCodigoDefinicao;
     }
 }

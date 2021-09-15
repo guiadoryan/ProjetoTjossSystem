@@ -16,6 +16,7 @@ namespace TjossSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //TO DO: FAZER VALIDAÇÃO DE LOGIN.
             Application.Run(new FrmMenu());
         }
     }

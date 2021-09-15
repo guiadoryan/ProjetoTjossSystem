@@ -21,6 +21,7 @@ namespace TjossSystem.Metodos
             this.itemestoque = new HashSet<itemestoque>();
             this.itenscontrato = new HashSet<itenscontrato>();
             this.itenspedido = new HashSet<itenspedido>();
+            this.movimentoestoque = new HashSet<movimentoestoque>();
         }
     
         public int codigoitem { get; set; }
@@ -39,6 +40,8 @@ namespace TjossSystem.Metodos
         public virtual ICollection<itenscontrato> itenscontrato { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<itenspedido> itenspedido { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<movimentoestoque> movimentoestoque { get; set; }
         public virtual tipoitem tipoitem { get; set; }
     }
 }
