@@ -21,5 +21,15 @@ namespace TjossSystem
         {
 
         }
+
+        public void Login()
+        {
+            this.DialogResult = DialogResult.Yes;
+        }
+
+        private void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            Login();
+        }
     }
 }

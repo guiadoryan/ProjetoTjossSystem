@@ -14,10 +14,20 @@ namespace TjossSystem
         [STAThread]
         static void Main()
         {
+            string strRetorno = string.Empty;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //TO DO: FAZER VALIDAÇÃO DE LOGIN.
-            Application.Run(new FrmMenu());
+            FrmLogin objLogin = new FrmLogin();
+            objLogin.ShowDialog();
+            if(objLogin.DialogResult == DialogResult.Yes)
+            {
+                Application.Run(new FrmMenu());
+            }
+            else
+            {
+                MessageBox.Show("Erro ao Fazer login");
+            }
         }
     }
 }

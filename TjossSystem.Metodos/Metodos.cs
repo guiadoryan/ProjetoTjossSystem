@@ -265,6 +265,44 @@ namespace TjossSystem.Metodos
             return objCadastroDI;
         }
 
+        public List<CadastroDI> ListarCadastros()
+        {
+            tjossEntities objConexao = new tjossEntities();
+            List<CadastroDI> lstCadastroDI = new List<CadastroDI>();
+
+            List<cadastro> lstCadastro = objConexao.cadastro.Where(c => c.codigocadastro != 0).ToList();
+
+            if (lstCadastro.Count > 0)
+            {
+                CadastroDI objCadastroDI;
+                foreach (var objCadastro in lstCadastro)
+                {
+                    objCadastroDI = new CadastroDI { CodigoCadastro = objCadastro.codigocadastro, NomeCadastro = $"{objCadastro.codigocadastro} - {objCadastro.nomecadastro}" };
+                    lstCadastroDI.Add(objCadastroDI);
+                }
+
+                return lstCadastroDI;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public MedidaDI ListarMedidaCadastro(int pCodigoCadastro, int pCodigoMedida)
+        {
+            tjossEntities objConexao = new tjossEntities();
+            medida objMedida = new medida();
+
+            objMedida = objConexao.medida.Where(c => c.codigocadastro == pCodigoCadastro && c.codigomedida == pCodigoMedida).FirstOrDefault();
+            if (objMedida != null)
+            {
+                return new MedidaDI { CodigoCadastro = objMedida.codigocadastro, CodigoMedida = objMedida.codigomedida };
+            }
+
+            return null;
+        }
+
         public List<TipoCadastroDI> ConsultarTipoCadastro()
         {
             tjossEntities objConexao = new tjossEntities();
