@@ -13,6 +13,8 @@ namespace TjossSystem.Metodos
         /// </summary>
         /// <param name="pCadastroDI">Objeto com os dados basicos do cadastro</param>
         /// <param name="pEnderecosDI">Objeto com dados do endereço do cadastro</param>
+        /// <param name="pMedidas">Objeto com dados das medidas do cadastro</param>
+        /// <param name="pDefinicao">Objeto com dados das definições do cadastro</param>
         /// <param name="pErro">Mensagem de erro</param>
         /// <returns>True caso Registrar/Alterar um cadastro, false caso o contrario.</returns>
         public bool RegistrarCadastro(CadastroDI pCadastroDI, List<EnderecoDI> pEnderecosDI, List<MedidaDI> pMedidas, List<DefinicaoDI> pDefinicao, out string pErro)
@@ -21,6 +23,7 @@ namespace TjossSystem.Metodos
             cadastro objCadastro = new cadastro();
             List<dadosfisicos> lstEndereco = new List<dadosfisicos>(); 
             bool blnNovoCadastro = false;
+            int intCodigoCadastro = 0;
             try
             {
                 objCadastro = objConexao.cadastro.Where(c => c.codigocadastro == pCadastroDI.CodigoCadastro && c.codigocadastro != 0).FirstOrDefault();
@@ -29,7 +32,9 @@ namespace TjossSystem.Metodos
                 {
                     objCadastro = new cadastro();
                     blnNovoCadastro = true;
-                    objCadastro.codigocadastro = objConexao.cadastro.Where(c => c.codigocadastro == pCadastroDI.CodigoCadastro && c.codigocadastro != 0).FirstOrDefault() != null ? objConexao.cadastro.OrderByDescending(c => c.codigocadastro).FirstOrDefault().codigocadastro + 1 : 1;
+                    intCodigoCadastro = objConexao.cadastro.OrderByDescending(il => il.codigocadastro).FirstOrDefault() != null ?
+                                        objConexao.cadastro.OrderByDescending(il => il.codigocadastro).FirstOrDefault().codigocadastro + 1 : 1;
+                    objCadastro.codigocadastro = intCodigoCadastro;
                 }
 
                 objCadastro.nomecadastro = pCadastroDI.NomeCadastro;
@@ -93,7 +98,8 @@ namespace TjossSystem.Metodos
                         objMedida = new medida
                         {
                             codigocadastro = pCadastroDI.CodigoCadastro,
-                            codigomedida = objMedidaDI.CodigoMedida,
+                            codigomedida = objConexao.medida.Where(il => il.codigocadastro == intCodigoCadastro).OrderByDescending(il => il.codigocadastro).FirstOrDefault() != null ?
+                                           objConexao.medida.Where(il => il.codigocadastro == intCodigoCadastro).OrderByDescending(il => il.codigocadastro).FirstOrDefault().codigocadastro + 1 : 1,
                             altura = objMedidaDI.Altura,
                             cintura = objMedidaDI.Cintura,
                             ombroaombro = objMedidaDI.OmbroAhOmbro,
@@ -155,7 +161,7 @@ namespace TjossSystem.Metodos
             }
             catch(Exception pEx)
             {
-                pErro = $"Exceção ao executar o metodo RegistrarCadastro.{Environment.NewLine}{pEx.InnerException.Message}";
+                pErro = $"Exceção ao executar o metodo RegistrarCadastro.{Environment.NewLine}{pEx.InnerException.InnerException}";
                 return false;
             }
         }
@@ -175,96 +181,108 @@ namespace TjossSystem.Metodos
             List<MedidaDI> lstMedidaDI = new List<MedidaDI>();
             List<DefinicaoDI> lstDefinicaoDI = new List<DefinicaoDI>();
 
-            objCadastro = objConexao.cadastro.Where(c => c.codigocadastro == pCodigoCadastro && c.codigocadastro != 0).FirstOrDefault();
-            if (objCadastro == null)
+            try
             {
-                //retornar
-                return new CadastroDI();
-            }
-
-            objCadastroDI = new CadastroDI
-            {
-                CodigoCadastro = objCadastro.codigocadastro,
-                NomeCadastro = objCadastro.nomecadastro,
-                NomeFantasia = objCadastro.nomefantasia,
-                CodigoTipoCadastro = objCadastro.codigotipocadastro,
-                CpfCnpj = objCadastro.cpfcnpj,
-                Controle = objCadastro.controle,
-                DatahAlteracao = objCadastro.datahalteracao,
-                CodigoFuncionario = objCadastro.codigofuncionario,
-            };
-
-            List<dadosfisicos> lstEndereco = new List<dadosfisicos>();
-            lstEndereco = objConexao.dadosfisicos.Where(c => c.codigocadastro == pCodigoCadastro).ToList();
-            if (lstEndereco.Count > 0)
-            {
-                EnderecoDI objEnderecoDI = new EnderecoDI();
-                foreach (var objEndereco in lstEndereco)
+                objCadastro = objConexao.cadastro.Where(c => c.codigocadastro == pCodigoCadastro && c.codigocadastro != 0).FirstOrDefault();
+                if (objCadastro == null)
                 {
-                    objEnderecoDI = new EnderecoDI
-                    {
-                        CodigoCadastro = objEndereco.codigocadastro,
-                        CodigoFilial = objEndereco.codigofilial,
-                        Endereco = objEndereco.endereco,
-                        Bairro = objEndereco.bairro,
-                        NumeroEndereco = objEndereco.numero,
-                        Complemento = objEndereco.complemento,
-                        CepEndereco = objEndereco.cependereco,
-                        SituacaoEndereco = objEndereco.situacao,
-                        CodigoCidade = objEndereco.codigocidade
-                    };
-                    lstEnderecoDI.Add(objEnderecoDI);
+                    //retornar
+                    return new CadastroDI();
                 }
-            }
 
-            List<medida> lstMedida = new List<medida>();
-            lstMedida = objConexao.medida.Where(c => c.codigocadastro == pCodigoCadastro).ToList();
-            if (lstMedida.Count > 0)
-            {
-                MedidaDI objMedidaDI = new MedidaDI();
-                foreach (var objMedida in lstMedida)
+                objCadastroDI = new CadastroDI
                 {
-                    objMedidaDI = new MedidaDI
-                    {
-                        CodigoCadastro = objMedida.codigocadastro,
-                        CodigoMedida = objMedida.codigomedida,
-                        Altura = objMedida.altura,
-                        Cintura = objMedida.cintura,
-                        OmbroAhOmbro = objMedida.ombroaombro,
-                        Busto = objMedida.busto,
-                        ObservacaoMedida = objMedida.observacao,
-                        SituacaoMedida = objMedida.situacao
-                    };
-                    lstMedidaDI.Add(objMedidaDI);
-                }
-            }
+                    CodigoCadastro = objCadastro.codigocadastro,
+                    NomeCadastro = objCadastro.nomecadastro,
+                    NomeFantasia = objCadastro.nomefantasia,
+                    CodigoTipoCadastro = objCadastro.codigotipocadastro,
+                    CpfCnpj = objCadastro.cpfcnpj,
+                    Controle = objCadastro.controle,
+                    DatahAlteracao = objCadastro.datahalteracao,
+                    CodigoFuncionario = objCadastro.codigofuncionario,
+                };
 
-            List<definicaocadastro> lstDefinicao = new List<definicaocadastro>();
-            lstDefinicao = objConexao.definicaocadastro.Where(c => c.codigocadastro == pCodigoCadastro).ToList();
-            if (lstDefinicao.Count > 0)
-            {
-                DefinicaoDI objDefinicaoDI = new DefinicaoDI();
-                foreach (var objDefinicao in lstDefinicao)
+                List<dadosfisicos> lstEndereco = new List<dadosfisicos>();
+                lstEndereco = objConexao.dadosfisicos.Where(c => c.codigocadastro == pCodigoCadastro).ToList();
+                if (lstEndereco.Count > 0)
                 {
-                    objDefinicaoDI = new DefinicaoDI
+                    EnderecoDI objEnderecoDI = new EnderecoDI();
+                    foreach (var objEndereco in lstEndereco)
                     {
-                        CodigoCadastro = objDefinicao.codigocadastro,
-                        CodigoDefinicao = objDefinicao.codigotipodefinicao,
-                        SituacaoDefinicao = objDefinicao.situacao,
-                        DatahAlteracao = objDefinicao.datahalteracao,
-                        CodigoFuncionario = objDefinicao.codigofuncionario
-                    };
-                    lstDefinicaoDI.Add(objDefinicaoDI);
+                        objEnderecoDI = new EnderecoDI
+                        {
+                            CodigoCadastro = objEndereco.codigocadastro,
+                            CodigoFilial = objEndereco.codigofilial,
+                            Endereco = objEndereco.endereco,
+                            Bairro = objEndereco.bairro,
+                            NumeroEndereco = objEndereco.numero,
+                            Complemento = objEndereco.complemento,
+                            CepEndereco = objEndereco.cependereco,
+                            SituacaoEndereco = objEndereco.situacao,
+                            CodigoCidade = objEndereco.codigocidade
+                        };
+                        lstEnderecoDI.Add(objEnderecoDI);
+                    }
                 }
+
+                List<medida> lstMedida = new List<medida>();
+                lstMedida = objConexao.medida.Where(c => c.codigocadastro == pCodigoCadastro).ToList();
+                if (lstMedida.Count > 0)
+                {
+                    MedidaDI objMedidaDI = new MedidaDI();
+                    foreach (var objMedida in lstMedida)
+                    {
+                        objMedidaDI = new MedidaDI
+                        {
+                            CodigoCadastro = objMedida.codigocadastro,
+                            CodigoMedida = objMedida.codigomedida,
+                            Altura = objMedida.altura,
+                            Cintura = objMedida.cintura,
+                            OmbroAhOmbro = objMedida.ombroaombro,
+                            Busto = objMedida.busto,
+                            ObservacaoMedida = objMedida.observacao,
+                            SituacaoMedida = objMedida.situacao
+                        };
+                        lstMedidaDI.Add(objMedidaDI);
+                    }
+                }
+
+                List<definicaocadastro> lstDefinicao = new List<definicaocadastro>();
+                lstDefinicao = objConexao.definicaocadastro.Where(c => c.codigocadastro == pCodigoCadastro).ToList();
+                if (lstDefinicao.Count > 0)
+                {
+                    DefinicaoDI objDefinicaoDI = new DefinicaoDI();
+                    foreach (var objDefinicao in lstDefinicao)
+                    {
+                        objDefinicaoDI = new DefinicaoDI
+                        {
+                            CodigoCadastro = objDefinicao.codigocadastro,
+                            CodigoDefinicao = objDefinicao.codigotipodefinicao,
+                            SituacaoDefinicao = objDefinicao.situacao,
+                            DatahAlteracao = objDefinicao.datahalteracao,
+                            CodigoFuncionario = objDefinicao.codigofuncionario
+                        };
+                        lstDefinicaoDI.Add(objDefinicaoDI);
+                    }
+                }
+
+
+                objCadastroDI.EnderecoDI = lstEnderecoDI;
+                objCadastroDI.MedidaDI = lstMedidaDI;
+                objCadastroDI.DefinicaoDI = lstDefinicaoDI;
+                return objCadastroDI;
             }
-
-
-            objCadastroDI.EnderecoDI = lstEnderecoDI;
-            objCadastroDI.MedidaDI = lstMedidaDI;
-            objCadastroDI.DefinicaoDI = lstDefinicaoDI;
-            return objCadastroDI;
+            catch (Exception pE)
+            {
+                string strErro = pE.InnerException.InnerException.Message;
+                return null;
+            }
         }
 
+        /// <summary>
+        /// Metodo que lista todos os cadastros registrados
+        /// </summary>
+        /// <returns>Retorna uma lista de cadastros</returns>
         public List<CadastroDI> ListarCadastros()
         {
             tjossEntities objConexao = new tjossEntities();
@@ -289,6 +307,12 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que lista a medida do cadastro
+        /// </summary>
+        /// <param name="pCodigoCadastro">Código do cadastro</param>
+        /// <param name="pCodigoMedida">Código da medida</param>
+        /// <returns>Retorna um objeto com a medida</returns>
         public MedidaDI ListarMedidaCadastro(int pCodigoCadastro, int pCodigoMedida)
         {
             tjossEntities objConexao = new tjossEntities();
@@ -303,6 +327,10 @@ namespace TjossSystem.Metodos
             return null;
         }
 
+        /// <summary>
+        /// Método que consulta todos os tipos de cadastros registrados
+        /// </summary>
+        /// <returns>Retorna uma lisca com os tipos de cadastros registrados</returns>
         public List<TipoCadastroDI> ConsultarTipoCadastro()
         {
             tjossEntities objConexao = new tjossEntities();
@@ -328,6 +356,10 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que consulta todas as cidades cadastradas
+        /// </summary>
+        /// <returns>Retorna uma lista com as cidades</returns>
         public List<CidadeDI> ConsultarCidades()
         {
             tjossEntities objConexao = new tjossEntities();
@@ -352,6 +384,10 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que consulta todas as definições cadastradas
+        /// </summary>
+        /// <returns>Retorna uma lisca com as definições</returns>
         public List<TipoDefinicaoDI> ConsultarDefinicoes()
         {
             tjossEntities objConexao = new tjossEntities();

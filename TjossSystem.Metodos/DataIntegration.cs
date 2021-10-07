@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace TjossSystem.Metodos
 {
+    //auto-generated
+
     #region :: CADASTRO ::
     [DataContract]
     public class CadastroDI
