@@ -384,6 +384,54 @@ namespace TjossSystem.Metodos
             }
         }
 
+        public List<EstadoDI> ConsultarEstados()
+        {
+            tjossEntities objConexao = new tjossEntities();
+            List<EstadoDI> lstEstadoDI = new List<EstadoDI>();
+
+            List<estado> lstEstado = objConexao.estado.ToList();
+
+            if (lstEstado.Count > 0)
+            {
+                EstadoDI objEstadoDI;
+                foreach (var objEstado in lstEstado)
+                {
+                    objEstadoDI = new EstadoDI { CodigoEstado = objEstado.codigoestado, DescricaoEstado = $"{objEstado.codigoestado} - {objEstado.nomeestado}" };
+                    lstEstadoDI.Add(objEstadoDI);
+                }
+
+                return lstEstadoDI;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public List<PaisDI> ConsultarPaises()
+        {
+            tjossEntities objConexao = new tjossEntities();
+            List<PaisDI> lstPaisDI = new List<PaisDI>();
+
+            List<pais> lstPais = objConexao.pais.ToList();
+
+            if (lstPais.Count > 0)
+            {
+                PaisDI objPaisDI;
+                foreach (var objPais in lstPais)
+                {
+                    objPaisDI = new PaisDI { CodigoPais = objPais.codigopais, DescricaoPais = $"{objPais.codigopais} - {objPais.nomepais}" };
+                    lstPaisDI.Add(objPaisDI);
+                }
+
+                return lstPaisDI;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         /// <summary>
         /// Método que consulta todas as definições cadastradas
         /// </summary>

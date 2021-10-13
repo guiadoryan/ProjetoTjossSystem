@@ -92,6 +92,7 @@
     <Compile Include="cadastro.cs">
       <DependentUpon>TjossModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CadastroRegioes.cs" />
     <Compile Include="cargofuncionario.cs">
       <DependentUpon>TjossModel.tt</DependentUpon>
     </Compile>

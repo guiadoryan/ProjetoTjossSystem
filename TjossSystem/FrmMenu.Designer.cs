@@ -40,8 +40,6 @@ namespace TjossSystem
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parematrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDePaísToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastroDeEstadosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastroDeCidadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +69,7 @@ namespace TjossSystem
             // cadastroDePessoaToolStripMenuItem
             // 
             this.cadastroDePessoaToolStripMenuItem.Name = "cadastroDePessoaToolStripMenuItem";
-            this.cadastroDePessoaToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.cadastroDePessoaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cadastroDePessoaToolStripMenuItem.Text = "Cadastro de pessoa";
             this.cadastroDePessoaToolStripMenuItem.Click += new System.EventHandler(this.cadastroDePessoaToolStripMenuItem_Click);
             // 
@@ -119,8 +117,6 @@ namespace TjossSystem
             // 
             this.parematrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cadastroDePaísToolStripMenuItem,
-            this.cadastroDeEstadosToolStripMenuItem1,
-            this.cadastroDeCidadeToolStripMenuItem,
             this.cadastroEmpresaToolStripMenuItem});
             this.parematrosToolStripMenuItem.Name = "parematrosToolStripMenuItem";
             this.parematrosToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
@@ -129,20 +125,9 @@ namespace TjossSystem
             // cadastroDePaísToolStripMenuItem
             // 
             this.cadastroDePaísToolStripMenuItem.Name = "cadastroDePaísToolStripMenuItem";
-            this.cadastroDePaísToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.cadastroDePaísToolStripMenuItem.Text = "Cadastro de país";
-            // 
-            // cadastroDeEstadosToolStripMenuItem1
-            // 
-            this.cadastroDeEstadosToolStripMenuItem1.Name = "cadastroDeEstadosToolStripMenuItem1";
-            this.cadastroDeEstadosToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.cadastroDeEstadosToolStripMenuItem1.Text = "Cadastro de estados";
-            // 
-            // cadastroDeCidadeToolStripMenuItem
-            // 
-            this.cadastroDeCidadeToolStripMenuItem.Name = "cadastroDeCidadeToolStripMenuItem";
-            this.cadastroDeCidadeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.cadastroDeCidadeToolStripMenuItem.Text = "Cadastro de cidade";
+            this.cadastroDePaísToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.cadastroDePaísToolStripMenuItem.Text = "Cadastro de Regiões";
+            this.cadastroDePaísToolStripMenuItem.Click += new System.EventHandler(this.cadastroDePaísToolStripMenuItem_Click);
             // 
             // cadastroEmpresaToolStripMenuItem
             // 
@@ -179,8 +164,6 @@ namespace TjossSystem
         private System.Windows.Forms.ToolStripMenuItem relatóriosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem parematrosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroDePaísToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cadastroDeEstadosToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem cadastroDeCidadeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroEmpresaToolStripMenuItem;
     }
 }

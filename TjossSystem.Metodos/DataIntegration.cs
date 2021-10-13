@@ -165,5 +165,43 @@ namespace TjossSystem.Metodos
 
         [DataMember]
         public string DescricaoCidade { get; set; }
+
+        [DataMember]
+        public string SiglaCidade { get; set; }
+
+        public int CodigoEstadoCit { get; set; }
+
+        [DataMember]
+        public List<EstadoDI> EstadoDI { get; set; }
+    }
+
+    [DataContract]
+    public class EstadoDI
+    {
+        [DataMember]
+        public int CodigoEstado { get; set; }
+
+        [DataMember]
+        public string DescricaoEstado { get; set; }
+
+        [DataMember]
+        public string SiglaEstado { get; set; }
+
+        public int CodigoPaisEst { get; set; }
+
+        [DataMember]
+        public List<PaisDI> PaisDI { get; set; }
+    }
+
+    public class PaisDI
+    {
+        [DataMember]
+        public int CodigoPais { get; set; }
+
+        [DataMember]
+        public string DescricaoPais { get; set; }
+
+        [DataMember]
+        public string SiglaPais { get; set; }
     }
 }

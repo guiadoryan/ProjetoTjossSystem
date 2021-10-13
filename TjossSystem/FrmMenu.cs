@@ -22,5 +22,11 @@ namespace TjossSystem
             FrmCadastro objCadastro = new FrmCadastro();
             objCadastro.Show();
         }
+
+        private void cadastroDePaísToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCadastroRegioes objCadastroRegioes = new FrmCadastroRegioes();
+            objCadastroRegioes.Show();
+        }
     }
 }
