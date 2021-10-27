@@ -98,11 +98,35 @@
     <Compile Include="FrmCadastro.Designer.cs">
       <DependentUpon>FrmCadastro.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmCadastroCargos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCadastroCargos.Designer.cs">
+      <DependentUpon>FrmCadastroCargos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCadastroItens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCadastroItens.Designer.cs">
+      <DependentUpon>FrmCadastroItens.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmCadastroRegioes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmCadastroRegioes.Designer.cs">
       <DependentUpon>FrmCadastroRegioes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCadastroTipoEstoque.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCadastroTipoEstoque.Designer.cs">
+      <DependentUpon>FrmCadastroTipoEstoque.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCadastroTipoItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCadastroTipoItem.Designer.cs">
+      <DependentUpon>FrmCadastroTipoItem.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
@@ -121,8 +145,20 @@
     <EmbeddedResource Include="FrmCadastro.resx">
       <DependentUpon>FrmCadastro.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmCadastroCargos.resx">
+      <DependentUpon>FrmCadastroCargos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCadastroItens.resx">
+      <DependentUpon>FrmCadastroItens.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmCadastroRegioes.resx">
       <DependentUpon>FrmCadastroRegioes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCadastroTipoEstoque.resx">
+      <DependentUpon>FrmCadastroTipoEstoque.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCadastroTipoItem.resx">
+      <DependentUpon>FrmCadastroTipoItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>

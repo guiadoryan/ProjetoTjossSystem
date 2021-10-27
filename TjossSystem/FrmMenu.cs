@@ -28,5 +28,28 @@ namespace TjossSystem
             FrmCadastroRegioes objCadastroRegioes = new FrmCadastroRegioes();
             objCadastroRegioes.Show();
         }
+
+        private void cadastroTipoEstoqToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCadastroTipoEstoque objCadastroTipoEstoque = new FrmCadastroTipoEstoque();
+            objCadastroTipoEstoque.Show();
+        }
+
+        private void cadastroTipoItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cadastroDeItensToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCadastroItens objCadastroItens = new FrmCadastroItens();
+            objCadastroItens.Show();
+        }
+
+        private void cadastroDeCargosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCadastroCargos objCadastroCargos = new FrmCadastroCargos();
+            objCadastroCargos.Show();
+        }
     }
 }

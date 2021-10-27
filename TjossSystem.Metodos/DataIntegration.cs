@@ -193,6 +193,7 @@ namespace TjossSystem.Metodos
         public List<PaisDI> PaisDI { get; set; }
     }
 
+    [DataContract]
     public class PaisDI
     {
         [DataMember]
@@ -203,5 +204,64 @@ namespace TjossSystem.Metodos
 
         [DataMember]
         public string SiglaPais { get; set; }
+    }
+
+    //Itens
+
+    [DataContract]
+    public class ItemDI
+    {
+        [DataMember]
+        public int CodigoItem { get; set; }
+
+        [DataMember]
+        public string DescricaoItens { get; set; }
+
+        [DataMember]
+        public string DescricaoComboBox { get; set; }
+
+        [DataMember]
+        public int CodigoTipoItem { get; set; }
+
+        [DataMember]
+        public string SituacaoItem { get; set; }
+
+        [DataMember]
+        public DateTime DatahAlteracao { get; set; }
+
+        [DataMember]
+        public int CodigoFuncionario { get; set; }
+    }
+
+    [DataContract]
+    public class TipoEstoqueDI
+    {
+        [DataMember]
+        public int CodigoTipoEstoque { get; set; }
+
+        [DataMember]
+        public string DescricaoTipoEstoque { get; set; }
+
+        [DataMember]
+        public string DescricaoComboBox { get; set; }
+
+        [DataMember]
+        public string SituacaoTipoEstoque { get; set; }
+    }
+
+    [DataContract]
+    public class TipoItemDI
+    {
+        [DataMember]
+        public int CodigoTipoItem { get; set; }
+
+        [DataMember]
+        public string DescricaoTipoItem { get; set; }
+
+        [DataMember]
+        public string DescricaoComboBox { get; set; }
+
+        [DataMember]
+        public string SituacaoTipoItem { get; set; }
     }
 }

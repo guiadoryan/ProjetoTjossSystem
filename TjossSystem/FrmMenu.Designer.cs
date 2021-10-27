@@ -41,6 +41,16 @@ namespace TjossSystem
             this.parematrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDePaísToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastroDeItensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastroTipoEstoqToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastroTipoItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemEstoqueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemFormulaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.funcionariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastroDeFuncionariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastroDeCargosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastroDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +61,9 @@ namespace TjossSystem
             this.pedidosToolStripMenuItem,
             this.movimentosToolStripMenuItem,
             this.relatóriosToolStripMenuItem,
-            this.parematrosToolStripMenuItem});
+            this.parematrosToolStripMenuItem,
+            this.itensToolStripMenuItem,
+            this.funcionariosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -69,7 +81,7 @@ namespace TjossSystem
             // cadastroDePessoaToolStripMenuItem
             // 
             this.cadastroDePessoaToolStripMenuItem.Name = "cadastroDePessoaToolStripMenuItem";
-            this.cadastroDePessoaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cadastroDePessoaToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.cadastroDePessoaToolStripMenuItem.Text = "Cadastro de pessoa";
             this.cadastroDePessoaToolStripMenuItem.Click += new System.EventHandler(this.cadastroDePessoaToolStripMenuItem_Click);
             // 
@@ -132,8 +144,82 @@ namespace TjossSystem
             // cadastroEmpresaToolStripMenuItem
             // 
             this.cadastroEmpresaToolStripMenuItem.Name = "cadastroEmpresaToolStripMenuItem";
-            this.cadastroEmpresaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cadastroEmpresaToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.cadastroEmpresaToolStripMenuItem.Text = "Cadastro Empresa";
+            // 
+            // itensToolStripMenuItem
+            // 
+            this.itensToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cadastroDeItensToolStripMenuItem,
+            this.cadastroTipoEstoqToolStripMenuItem,
+            this.cadastroTipoItemToolStripMenuItem,
+            this.itemEstoqueToolStripMenuItem,
+            this.itemFormulaToolStripMenuItem});
+            this.itensToolStripMenuItem.Name = "itensToolStripMenuItem";
+            this.itensToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.itensToolStripMenuItem.Text = "Itens";
+            // 
+            // cadastroDeItensToolStripMenuItem
+            // 
+            this.cadastroDeItensToolStripMenuItem.Name = "cadastroDeItensToolStripMenuItem";
+            this.cadastroDeItensToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.cadastroDeItensToolStripMenuItem.Text = "Cadastro de itens";
+            this.cadastroDeItensToolStripMenuItem.Click += new System.EventHandler(this.cadastroDeItensToolStripMenuItem_Click);
+            // 
+            // cadastroTipoEstoqToolStripMenuItem
+            // 
+            this.cadastroTipoEstoqToolStripMenuItem.Name = "cadastroTipoEstoqToolStripMenuItem";
+            this.cadastroTipoEstoqToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.cadastroTipoEstoqToolStripMenuItem.Text = "Cadastro Tipo Estoque";
+            this.cadastroTipoEstoqToolStripMenuItem.Click += new System.EventHandler(this.cadastroTipoEstoqToolStripMenuItem_Click);
+            // 
+            // cadastroTipoItemToolStripMenuItem
+            // 
+            this.cadastroTipoItemToolStripMenuItem.Name = "cadastroTipoItemToolStripMenuItem";
+            this.cadastroTipoItemToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.cadastroTipoItemToolStripMenuItem.Text = "Cadastro Tipo Item";
+            this.cadastroTipoItemToolStripMenuItem.Click += new System.EventHandler(this.cadastroTipoItemToolStripMenuItem_Click);
+            // 
+            // itemEstoqueToolStripMenuItem
+            // 
+            this.itemEstoqueToolStripMenuItem.Name = "itemEstoqueToolStripMenuItem";
+            this.itemEstoqueToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.itemEstoqueToolStripMenuItem.Text = "Item Estoque";
+            // 
+            // itemFormulaToolStripMenuItem
+            // 
+            this.itemFormulaToolStripMenuItem.Name = "itemFormulaToolStripMenuItem";
+            this.itemFormulaToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.itemFormulaToolStripMenuItem.Text = "Item Formula";
+            // 
+            // funcionariosToolStripMenuItem
+            // 
+            this.funcionariosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cadastroDeFuncionariosToolStripMenuItem,
+            this.cadastroDeCargosToolStripMenuItem,
+            this.cadastroDeUsuariosToolStripMenuItem});
+            this.funcionariosToolStripMenuItem.Name = "funcionariosToolStripMenuItem";
+            this.funcionariosToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
+            this.funcionariosToolStripMenuItem.Text = "Funcionarios";
+            // 
+            // cadastroDeFuncionariosToolStripMenuItem
+            // 
+            this.cadastroDeFuncionariosToolStripMenuItem.Name = "cadastroDeFuncionariosToolStripMenuItem";
+            this.cadastroDeFuncionariosToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.cadastroDeFuncionariosToolStripMenuItem.Text = "Cadastro de Funcionarios";
+            // 
+            // cadastroDeCargosToolStripMenuItem
+            // 
+            this.cadastroDeCargosToolStripMenuItem.Name = "cadastroDeCargosToolStripMenuItem";
+            this.cadastroDeCargosToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.cadastroDeCargosToolStripMenuItem.Text = "Cadastro de Cargos";
+            this.cadastroDeCargosToolStripMenuItem.Click += new System.EventHandler(this.cadastroDeCargosToolStripMenuItem_Click);
+            // 
+            // cadastroDeUsuariosToolStripMenuItem
+            // 
+            this.cadastroDeUsuariosToolStripMenuItem.Name = "cadastroDeUsuariosToolStripMenuItem";
+            this.cadastroDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.cadastroDeUsuariosToolStripMenuItem.Text = "Cadastro de Usuarios";
             // 
             // FrmMenu
             // 
@@ -165,6 +251,16 @@ namespace TjossSystem
         private System.Windows.Forms.ToolStripMenuItem parematrosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroDePaísToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroEmpresaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem itensToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cadastroDeItensToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cadastroTipoEstoqToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cadastroTipoItemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem itemEstoqueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem itemFormulaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem funcionariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cadastroDeFuncionariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cadastroDeCargosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cadastroDeUsuariosToolStripMenuItem;
     }
 }
 
