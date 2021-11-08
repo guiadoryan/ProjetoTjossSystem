@@ -71,7 +71,7 @@ namespace TjossSystem.Metodos
                 if (objItem == null)
                 {
                     //retornar
-                    return new ItemDI();
+                    return null;
                 }
 
                 objItemDI = new ItemDI
@@ -85,6 +85,93 @@ namespace TjossSystem.Metodos
                 };
 
                 return objItemDI;
+            }
+            catch (Exception pE)
+            {
+                string strErro = pE.InnerException.InnerException.Message;
+                return null;
+            }
+        }
+
+        #endregion
+
+        #region :: Cadastro Estoque ::
+
+        /// <summary>
+        /// Método que Regista/Altera estoque dos itens no sistema
+        /// </summary>
+        /// <param name="pEstoqueItemDI">Objeto com os dados do item</param>
+        /// <param name="pErro">Mensagem de erro</param>
+        /// <returns>True caso Registrar/Alterar estoque do item, false caso o contrario.</returns>
+        public bool RegistrarEstoque(EstoqueItemDI pEstoqueItemDI, out string pErro)
+        {
+            tjossEntities objConexao = new tjossEntities();
+            itemestoque objItemEstoque = new itemestoque();
+            bool blnNovoItem = false;
+
+            try
+            {
+                objItemEstoque = objConexao.itemestoque.Where(c => c.codigoitem == pEstoqueItemDI.CodigoItem && c.codigoitem != 0 && c.codigotipoestoque == pEstoqueItemDI.CodigoTipoEstoque).FirstOrDefault();
+
+                if (objItemEstoque == null)
+                {
+                    objItemEstoque = new itemestoque();
+                    blnNovoItem = true;
+                    objItemEstoque.codigoitem = pEstoqueItemDI.CodigoItem;
+                    objItemEstoque.codigotipoestoque = pEstoqueItemDI.CodigoTipoEstoque;
+                    objItemEstoque.quantidadedisponivel = 0;
+                }
+
+                objItemEstoque.valorproduto = pEstoqueItemDI.ValorUnitario;
+
+                if (blnNovoItem)
+                {
+                    objConexao.itemestoque.Add(objItemEstoque);
+                }
+
+                objConexao.SaveChanges();
+                pErro = string.Empty;
+                return true;
+            }
+            catch (Exception pEx)
+            {
+                pErro = $"Exceção ao executar o metodo RegistrarEstoque.{Environment.NewLine}{pEx.InnerException.InnerException}";
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Método que busca os dados do estoque
+        /// </summary>
+        /// <param name="pCodigoItem">Código do item</param>
+        /// <param name="pCodigoTipoEstoque">Código do tipo de estoque</param>
+        /// <returns>Retorna um objeto com todos os dados do estoque</returns>
+        public EstoqueItemDI ConsultarEstoque(int pCodigoItem, int pCodigoTipoEstoque)
+        {
+            tjossEntities objConexao = new tjossEntities();
+            itemestoque objItemEstoque = new itemestoque();
+
+            EstoqueItemDI objEstoqueItemDI;
+
+            try
+            {
+                objItemEstoque = objConexao.itemestoque.Where(c => c.codigoitem == pCodigoItem && c.codigoitem != 0 
+                                                                && c.codigotipoestoque == pCodigoTipoEstoque).FirstOrDefault();
+                if (objItemEstoque == null)
+                {
+                    //retornar
+                    return new EstoqueItemDI();
+                }
+
+                objEstoqueItemDI = new EstoqueItemDI
+                {
+                    CodigoItem = objItemEstoque.codigoitem,
+                    CodigoTipoEstoque = objItemEstoque.codigotipoestoque,
+                    Quantidade = objItemEstoque.quantidadedisponivel,
+                    ValorUnitario = objItemEstoque.valorproduto
+                };
+
+                return objEstoqueItemDI;
             }
             catch (Exception pE)
             {
@@ -177,9 +264,38 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que consulta todos os tipos de estoques registrados
+        /// </summary>
+        /// <returns>Retorna uma lisca com os tipos de estoques registrados</returns>
+        public List<TipoEstoqueDI> BuscarTiposEstoques()
+        {
+            tjossEntities objConexao = new tjossEntities();
+            List<TipoEstoqueDI> lstTipoEstoqueDI = new List<TipoEstoqueDI>();
+            List<tipoestoque> lstTipoEstoque;
+
+            lstTipoEstoque = objConexao.tipoestoque.OrderBy(c => c.codigotipoestoque).ToList();
+
+            if (lstTipoEstoque.Count > 0)
+            {
+                TipoEstoqueDI objTipoEstoqueDI;
+                foreach (tipoestoque objTipoEstoque in lstTipoEstoque)
+                {
+                    objTipoEstoqueDI = new TipoEstoqueDI { CodigoTipoEstoque = objTipoEstoque.codigotipoestoque, DescricaoComboBox = $"{objTipoEstoque.codigotipoestoque} - {objTipoEstoque.descricaotipoestoque}" };
+                    lstTipoEstoqueDI.Add(objTipoEstoqueDI);
+                }
+
+                return lstTipoEstoqueDI;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         #endregion
 
-        #region :: Tipo Item
+        #region :: Tipo Item ::
         /// <summary>
         /// Método que Regista/Altera tipo item no sistema
         /// </summary>
@@ -292,5 +408,84 @@ namespace TjossSystem.Metodos
         }
 
         #endregion
+
+        /// <summary>
+        /// Método que Regista/Altera formula dos itens no sistema
+        /// </summary>
+        /// <param name="pFormulaItemDI">Objeto com os dados do item</param>
+        /// <param name="pErro">Mensagem de erro</param>
+        /// <returns>True caso Registrar/Alterar formula do item, false caso o contrario.</returns>
+        public bool RegistrarFormulaItem(FormulaItemDI pFormulaItemDI, out string pErro)
+        {
+            tjossEntities objConexao = new tjossEntities();
+            formulaitem objFormulaItem = new formulaitem();
+            bool blnNovoItem = false;
+
+            try
+            {
+                objFormulaItem = objConexao.formulaitem.Where(c => c.codigoitem == pFormulaItemDI.CodigoItem && c.codigoitem != 0 && c.numerosequencia == 1).FirstOrDefault();
+
+                if (objFormulaItem == null)
+                {
+                    objFormulaItem = new formulaitem();
+                    blnNovoItem = true;
+                    objFormulaItem.codigoitem = pFormulaItemDI.CodigoItem;
+                    objFormulaItem.numerosequencia = 1;
+                }
+
+                objFormulaItem.observacaoformula = pFormulaItemDI.ObservacaoFormula;
+
+                if (blnNovoItem)
+                {
+                    objConexao.formulaitem.Add(objFormulaItem);
+                }
+
+                objConexao.SaveChanges();
+                pErro = string.Empty;
+                return true;
+            }
+            catch (Exception pEx)
+            {
+                pErro = $"Exceção ao executar o metodo RegistrarFormulaItem.{Environment.NewLine}{pEx.InnerException.InnerException}";
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Método que busca os dados da formula do item
+        /// </summary>
+        /// <param name="pCodigoItem">Código do item</param>
+        /// <returns>Retorna um objeto com todos os dados da formula do item</returns>
+        public FormulaItemDI ConsultarFormula(int pCodigoItem)
+        {
+            tjossEntities objConexao = new tjossEntities();
+            formulaitem objFormulaItem = new formulaitem();
+
+            FormulaItemDI objFormulaItemDI;
+
+            try
+            {
+                objFormulaItem = objConexao.formulaitem.Where(c => c.codigoitem == pCodigoItem && c.codigoitem != 0 && c.numerosequencia == 1).FirstOrDefault();
+                if (objFormulaItem == null)
+                {
+                    //retornar
+                    return new FormulaItemDI();
+                }
+
+                objFormulaItemDI = new FormulaItemDI
+                {
+                    CodigoItem = objFormulaItem.codigoitem,
+                    NumeroSequencia = objFormulaItem.numerosequencia,
+                    ObservacaoFormula = objFormulaItem.observacaoformula
+                };
+
+                return objFormulaItemDI;
+            }
+            catch (Exception pE)
+            {
+                string strErro = pE.InnerException.InnerException.Message;
+                return null;
+            }
+        }
     }
 }

@@ -44,7 +44,7 @@ namespace TjossSystem
 
             if (string.IsNullOrEmpty(txtDescricaoItem.Text))
             {
-                MessageBox.Show("Informe a descrição do tipo estoque!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Informe a descrição do item!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -90,20 +90,25 @@ namespace TjossSystem
                 //Instancia classe data contract.
                 ItemDI objItemDI = objMetodosItens.ConsultarItem(Convert.ToInt32(txtCodigoItem.Text));
 
-                txtDescricaoItem.Text = objItemDI.DescricaoItens;
-                cboCodigoTipoItem.SelectedValue = objItemDI.CodigoTipoItem;
-                cboSituacaoItem.SelectedIndex = objItemDI.SituacaoItem == "A" ? 0 : 1;
-                txtDatahAlteracao.Text = $"{objItemDI.DatahAlteracao:dd/MM/yyyy HH:mm:ss}";
-                txtCodigoFuncionario.Text = objItemDI.CodigoFuncionario.ToString();
+                if (objItemDI != null)
+                {
+                    txtDescricaoItem.Text = objItemDI.DescricaoItens;
+                    cboCodigoTipoItem.SelectedValue = objItemDI.CodigoTipoItem;
+                    cboSituacaoItem.SelectedIndex = objItemDI.SituacaoItem == "A" ? 0 : 1;
+                    txtDatahAlteracao.Text = $"{objItemDI.DatahAlteracao:dd/MM/yyyy HH:mm:ss}";
+                    txtCodigoFuncionario.Text = objItemDI.CodigoFuncionario.ToString();
+                }
 
                 grpDadosBasicos.Enabled = true;
                 grpDadosChaveItens.Enabled = false;
+                tsbGravar.Enabled = true;
                 txtDescricaoItem.Focus();
             }
             else
             {
                 grpDadosBasicos.Enabled = true;
                 grpDadosChaveItens.Enabled = false;
+                tsbGravar.Enabled = true;
                 txtDescricaoItem.Focus();
             }
         }

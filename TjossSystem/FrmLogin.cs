@@ -12,6 +12,10 @@ namespace TjossSystem
 {
     public partial class FrmLogin : Form
     {
+        /// <summary>
+        /// Código do funcionario logado no sistema.
+        /// </summary>
+        public int intCodigoFuncionario = 0;
         public FrmLogin()
         {
             InitializeComponent();
@@ -24,12 +28,18 @@ namespace TjossSystem
 
         public void Login()
         {
+
             this.DialogResult = DialogResult.Yes;
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
             Login();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
         }
     }
 }

@@ -37,7 +37,8 @@ namespace TjossSystem
 
         private void cadastroTipoItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FrmCadastroTipoItem objCadastroTipoItem = new FrmCadastroTipoItem();
+            objCadastroTipoItem.Show();
         }
 
         private void cadastroDeItensToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,6 +51,18 @@ namespace TjossSystem
         {
             FrmCadastroCargos objCadastroCargos = new FrmCadastroCargos();
             objCadastroCargos.Show();
+        }
+
+        private void itemEstoqueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCadastroItemEstoque objCadastroItemEstoque = new FrmCadastroItemEstoque();
+            objCadastroItemEstoque.Show();
+        }
+
+        private void itemFormulaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCadastroFormulaItem objCadastroFormulaItem = new FrmCadastroFormulaItem();
+            objCadastroFormulaItem.Show();
         }
     }
 }

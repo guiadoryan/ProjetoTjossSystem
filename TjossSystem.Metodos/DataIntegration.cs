@@ -234,6 +234,22 @@ namespace TjossSystem.Metodos
     }
 
     [DataContract]
+    public class EstoqueItemDI
+    {
+        [DataMember]
+        public int CodigoItem { get; set; }
+
+        [DataMember]
+        public int CodigoTipoEstoque { get; set; }
+
+        [DataMember]
+        public decimal Quantidade { get; set; }
+
+        [DataMember]
+        public decimal ValorUnitario { get; set; }
+    }
+
+    [DataContract]
     public class TipoEstoqueDI
     {
         [DataMember]
@@ -263,5 +279,32 @@ namespace TjossSystem.Metodos
 
         [DataMember]
         public string SituacaoTipoItem { get; set; }
+    }
+
+    [DataContract]
+    public class FormulaItemDI
+    {
+        [DataMember]
+        public int CodigoItem { get; set; }
+
+        [DataMember]
+        public int NumeroSequencia { get; set; }
+
+        [DataMember]
+        public string ObservacaoFormula { get; set; }
+    }
+
+    //Login
+    [DataContract]
+    public class LoginDI
+    {
+        [DataMember]
+        public int CodigoFuncionario { get; set; }
+
+        [DataMember]
+        public string Senha { get; set; }
+
+        [DataMember]
+        public string Cargo { get; set; }
     }
 }

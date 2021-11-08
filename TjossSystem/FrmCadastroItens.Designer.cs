@@ -95,7 +95,6 @@ namespace TjossSystem
             // 
             // grpDadosBasicos
             // 
-            this.grpDadosBasicos.Controls.Add(this.tspBotoes);
             this.grpDadosBasicos.Controls.Add(this.txtCodigoFuncionario);
             this.grpDadosBasicos.Controls.Add(this.txtDatahAlteracao);
             this.grpDadosBasicos.Controls.Add(this.txtDescricaoItem);
@@ -107,6 +106,7 @@ namespace TjossSystem
             this.grpDadosBasicos.Controls.Add(this.lblCodigoTipoItem);
             this.grpDadosBasicos.Controls.Add(this.lblDescricaoItem);
             this.grpDadosBasicos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpDadosBasicos.Enabled = false;
             this.grpDadosBasicos.Location = new System.Drawing.Point(0, 67);
             this.grpDadosBasicos.Name = "grpDadosBasicos";
             this.grpDadosBasicos.Size = new System.Drawing.Size(484, 200);
@@ -120,9 +120,9 @@ namespace TjossSystem
             this.tsbFechar,
             this.tsbLimpar,
             this.tsbGravar});
-            this.tspBotoes.Location = new System.Drawing.Point(3, 172);
+            this.tspBotoes.Location = new System.Drawing.Point(0, 242);
             this.tspBotoes.Name = "tspBotoes";
-            this.tspBotoes.Size = new System.Drawing.Size(478, 25);
+            this.tspBotoes.Size = new System.Drawing.Size(484, 25);
             this.tspBotoes.TabIndex = 10;
             this.tspBotoes.Text = "toolStrip1";
             // 
@@ -152,6 +152,7 @@ namespace TjossSystem
             // 
             this.tsbGravar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tsbGravar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbGravar.Enabled = false;
             this.tsbGravar.Image = ((System.Drawing.Image)(resources.GetObject("tsbGravar.Image")));
             this.tsbGravar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbGravar.Name = "tsbGravar";
@@ -254,12 +255,13 @@ namespace TjossSystem
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 267);
+            this.Controls.Add(this.tspBotoes);
             this.Controls.Add(this.grpDadosBasicos);
             this.Controls.Add(this.grpDadosChaveItens);
             this.KeyPreview = true;
             this.Name = "FrmCadastroItens";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmCadastroItens";
+            this.Text = "Cadastro de Itens";
             this.Load += new System.EventHandler(this.FrmCadastroItens_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmCadastroItens_KeyDown);
             this.grpDadosChaveItens.ResumeLayout(false);
@@ -269,6 +271,7 @@ namespace TjossSystem
             this.tspBotoes.ResumeLayout(false);
             this.tspBotoes.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

@@ -185,12 +185,14 @@ namespace TjossSystem
             this.itemEstoqueToolStripMenuItem.Name = "itemEstoqueToolStripMenuItem";
             this.itemEstoqueToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.itemEstoqueToolStripMenuItem.Text = "Item Estoque";
+            this.itemEstoqueToolStripMenuItem.Click += new System.EventHandler(this.itemEstoqueToolStripMenuItem_Click);
             // 
             // itemFormulaToolStripMenuItem
             // 
             this.itemFormulaToolStripMenuItem.Name = "itemFormulaToolStripMenuItem";
             this.itemFormulaToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
             this.itemFormulaToolStripMenuItem.Text = "Item Formula";
+            this.itemFormulaToolStripMenuItem.Click += new System.EventHandler(this.itemFormulaToolStripMenuItem_Click);
             // 
             // funcionariosToolStripMenuItem
             // 

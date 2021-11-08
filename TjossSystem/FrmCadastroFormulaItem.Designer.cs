@@ -1,7 +1,7 @@
 ﻿
 namespace TjossSystem
 {
-    partial class FrmCadastroTipoEstoque
+    partial class FrmCadastroFormulaItem
     {
         /// <summary>
         /// Required designer variable.
@@ -29,20 +29,18 @@ namespace TjossSystem
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadastroTipoEstoque));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadastroFormulaItem));
             this.grpDadosChaveItens = new System.Windows.Forms.GroupBox();
             this.btnBuscarItem = new System.Windows.Forms.Button();
-            this.txtCodigoTipoEstoque = new System.Windows.Forms.TextBox();
-            this.lblCodigoTipoEstoque = new System.Windows.Forms.Label();
+            this.txtCodigoItem = new System.Windows.Forms.TextBox();
+            this.lblCodigoItem = new System.Windows.Forms.Label();
             this.grpDadosBasicos = new System.Windows.Forms.GroupBox();
+            this.txtObservacaoFormula = new System.Windows.Forms.RichTextBox();
             this.tspBotoes = new System.Windows.Forms.ToolStrip();
             this.tsbFechar = new System.Windows.Forms.ToolStripButton();
             this.tsbLimpar = new System.Windows.Forms.ToolStripButton();
             this.tsbGravar = new System.Windows.Forms.ToolStripButton();
-            this.txtDescricaoTipoEstoque = new System.Windows.Forms.TextBox();
-            this.cboSituacaoTipoEstoque = new System.Windows.Forms.ComboBox();
-            this.lblSituacao = new System.Windows.Forms.Label();
-            this.lblDescricaoItem = new System.Windows.Forms.Label();
+            this.lblObservacaoFormula = new System.Windows.Forms.Label();
             this.grpDadosChaveItens.SuspendLayout();
             this.grpDadosBasicos.SuspendLayout();
             this.tspBotoes.SuspendLayout();
@@ -51,18 +49,18 @@ namespace TjossSystem
             // grpDadosChaveItens
             // 
             this.grpDadosChaveItens.Controls.Add(this.btnBuscarItem);
-            this.grpDadosChaveItens.Controls.Add(this.txtCodigoTipoEstoque);
-            this.grpDadosChaveItens.Controls.Add(this.lblCodigoTipoEstoque);
+            this.grpDadosChaveItens.Controls.Add(this.txtCodigoItem);
+            this.grpDadosChaveItens.Controls.Add(this.lblCodigoItem);
             this.grpDadosChaveItens.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpDadosChaveItens.Location = new System.Drawing.Point(0, 0);
             this.grpDadosChaveItens.Name = "grpDadosChaveItens";
-            this.grpDadosChaveItens.Size = new System.Drawing.Size(428, 67);
-            this.grpDadosChaveItens.TabIndex = 1;
+            this.grpDadosChaveItens.Size = new System.Drawing.Size(421, 67);
+            this.grpDadosChaveItens.TabIndex = 4;
             this.grpDadosChaveItens.TabStop = false;
             // 
             // btnBuscarItem
             // 
-            this.btnBuscarItem.Location = new System.Drawing.Point(262, 22);
+            this.btnBuscarItem.Location = new System.Drawing.Point(203, 22);
             this.btnBuscarItem.Name = "btnBuscarItem";
             this.btnBuscarItem.Size = new System.Drawing.Size(112, 29);
             this.btnBuscarItem.TabIndex = 2;
@@ -70,36 +68,42 @@ namespace TjossSystem
             this.btnBuscarItem.UseVisualStyleBackColor = true;
             this.btnBuscarItem.Click += new System.EventHandler(this.btnBuscarItem_Click);
             // 
-            // txtCodigoTipoEstoque
+            // txtCodigoItem
             // 
-            this.txtCodigoTipoEstoque.Location = new System.Drawing.Point(127, 27);
-            this.txtCodigoTipoEstoque.Name = "txtCodigoTipoEstoque";
-            this.txtCodigoTipoEstoque.Size = new System.Drawing.Size(104, 20);
-            this.txtCodigoTipoEstoque.TabIndex = 1;
+            this.txtCodigoItem.Location = new System.Drawing.Point(84, 27);
+            this.txtCodigoItem.Name = "txtCodigoItem";
+            this.txtCodigoItem.Size = new System.Drawing.Size(104, 20);
+            this.txtCodigoItem.TabIndex = 1;
             // 
-            // lblCodigoTipoEstoque
+            // lblCodigoItem
             // 
-            this.lblCodigoTipoEstoque.AutoSize = true;
-            this.lblCodigoTipoEstoque.Location = new System.Drawing.Point(12, 30);
-            this.lblCodigoTipoEstoque.Name = "lblCodigoTipoEstoque";
-            this.lblCodigoTipoEstoque.Size = new System.Drawing.Size(109, 13);
-            this.lblCodigoTipoEstoque.TabIndex = 0;
-            this.lblCodigoTipoEstoque.Text = "Código Tipo Estoque:";
+            this.lblCodigoItem.AutoSize = true;
+            this.lblCodigoItem.Location = new System.Drawing.Point(12, 30);
+            this.lblCodigoItem.Name = "lblCodigoItem";
+            this.lblCodigoItem.Size = new System.Drawing.Size(66, 13);
+            this.lblCodigoItem.TabIndex = 0;
+            this.lblCodigoItem.Text = "Código Item:";
             // 
             // grpDadosBasicos
             // 
-            this.grpDadosBasicos.Controls.Add(this.tspBotoes);
-            this.grpDadosBasicos.Controls.Add(this.txtDescricaoTipoEstoque);
-            this.grpDadosBasicos.Controls.Add(this.cboSituacaoTipoEstoque);
-            this.grpDadosBasicos.Controls.Add(this.lblSituacao);
-            this.grpDadosBasicos.Controls.Add(this.lblDescricaoItem);
+            this.grpDadosBasicos.Controls.Add(this.txtObservacaoFormula);
+            this.grpDadosBasicos.Controls.Add(this.lblObservacaoFormula);
             this.grpDadosBasicos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpDadosBasicos.Enabled = false;
             this.grpDadosBasicos.Location = new System.Drawing.Point(0, 67);
             this.grpDadosBasicos.Name = "grpDadosBasicos";
-            this.grpDadosBasicos.Size = new System.Drawing.Size(428, 152);
-            this.grpDadosBasicos.TabIndex = 2;
+            this.grpDadosBasicos.Size = new System.Drawing.Size(421, 142);
+            this.grpDadosBasicos.TabIndex = 5;
             this.grpDadosBasicos.TabStop = false;
+            // 
+            // txtObservacaoFormula
+            // 
+            this.txtObservacaoFormula.Location = new System.Drawing.Point(84, 16);
+            this.txtObservacaoFormula.MaxLength = 200;
+            this.txtObservacaoFormula.Name = "txtObservacaoFormula";
+            this.txtObservacaoFormula.Size = new System.Drawing.Size(241, 42);
+            this.txtObservacaoFormula.TabIndex = 9;
+            this.txtObservacaoFormula.Text = "";
             // 
             // tspBotoes
             // 
@@ -108,9 +112,9 @@ namespace TjossSystem
             this.tsbFechar,
             this.tsbLimpar,
             this.tsbGravar});
-            this.tspBotoes.Location = new System.Drawing.Point(3, 124);
+            this.tspBotoes.Location = new System.Drawing.Point(0, 184);
             this.tspBotoes.Name = "tspBotoes";
-            this.tspBotoes.Size = new System.Drawing.Size(422, 25);
+            this.tspBotoes.Size = new System.Drawing.Size(421, 25);
             this.tspBotoes.TabIndex = 8;
             this.tspBotoes.Text = "toolStrip1";
             // 
@@ -147,55 +151,26 @@ namespace TjossSystem
             this.tsbGravar.Text = "F9 - Gravar";
             this.tsbGravar.Click += new System.EventHandler(this.tsbGravar_Click);
             // 
-            // txtDescricaoTipoEstoque
+            // lblObservacaoFormula
             // 
-            this.txtDescricaoTipoEstoque.Location = new System.Drawing.Point(114, 13);
-            this.txtDescricaoTipoEstoque.Name = "txtDescricaoTipoEstoque";
-            this.txtDescricaoTipoEstoque.Size = new System.Drawing.Size(241, 20);
-            this.txtDescricaoTipoEstoque.TabIndex = 7;
+            this.lblObservacaoFormula.AutoSize = true;
+            this.lblObservacaoFormula.Location = new System.Drawing.Point(12, 16);
+            this.lblObservacaoFormula.Name = "lblObservacaoFormula";
+            this.lblObservacaoFormula.Size = new System.Drawing.Size(58, 13);
+            this.lblObservacaoFormula.TabIndex = 0;
+            this.lblObservacaoFormula.Text = "Descrição:";
             // 
-            // cboSituacaoTipoEstoque
-            // 
-            this.cboSituacaoTipoEstoque.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSituacaoTipoEstoque.FormattingEnabled = true;
-            this.cboSituacaoTipoEstoque.Items.AddRange(new object[] {
-            "A - Ativo",
-            "I - Inativo"});
-            this.cboSituacaoTipoEstoque.Location = new System.Drawing.Point(114, 39);
-            this.cboSituacaoTipoEstoque.Name = "cboSituacaoTipoEstoque";
-            this.cboSituacaoTipoEstoque.Size = new System.Drawing.Size(121, 21);
-            this.cboSituacaoTipoEstoque.TabIndex = 6;
-            // 
-            // lblSituacao
-            // 
-            this.lblSituacao.AutoSize = true;
-            this.lblSituacao.Location = new System.Drawing.Point(12, 42);
-            this.lblSituacao.Name = "lblSituacao";
-            this.lblSituacao.Size = new System.Drawing.Size(52, 13);
-            this.lblSituacao.TabIndex = 2;
-            this.lblSituacao.Text = "Situacao:";
-            // 
-            // lblDescricaoItem
-            // 
-            this.lblDescricaoItem.AutoSize = true;
-            this.lblDescricaoItem.Location = new System.Drawing.Point(12, 16);
-            this.lblDescricaoItem.Name = "lblDescricaoItem";
-            this.lblDescricaoItem.Size = new System.Drawing.Size(58, 13);
-            this.lblDescricaoItem.TabIndex = 0;
-            this.lblDescricaoItem.Text = "Descrição:";
-            // 
-            // FrmCadastroTipoEstoque
+            // FrmCadastroFormulaItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 219);
+            this.ClientSize = new System.Drawing.Size(421, 209);
+            this.Controls.Add(this.tspBotoes);
             this.Controls.Add(this.grpDadosBasicos);
             this.Controls.Add(this.grpDadosChaveItens);
-            this.KeyPreview = true;
-            this.Name = "FrmCadastroTipoEstoque";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cadastro de Tipo Estoque";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmCadastroTipoEstoque_KeyDown);
+            this.Name = "FrmCadastroFormulaItem";
+            this.Text = "Cadastro de Formulas";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmCadastroFormulaItem_KeyDown);
             this.grpDadosChaveItens.ResumeLayout(false);
             this.grpDadosChaveItens.PerformLayout();
             this.grpDadosBasicos.ResumeLayout(false);
@@ -203,6 +178,7 @@ namespace TjossSystem
             this.tspBotoes.ResumeLayout(false);
             this.tspBotoes.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -210,16 +186,14 @@ namespace TjossSystem
 
         private System.Windows.Forms.GroupBox grpDadosChaveItens;
         private System.Windows.Forms.Button btnBuscarItem;
-        private System.Windows.Forms.TextBox txtCodigoTipoEstoque;
-        private System.Windows.Forms.Label lblCodigoTipoEstoque;
+        private System.Windows.Forms.TextBox txtCodigoItem;
+        private System.Windows.Forms.Label lblCodigoItem;
         private System.Windows.Forms.GroupBox grpDadosBasicos;
-        private System.Windows.Forms.TextBox txtDescricaoTipoEstoque;
-        private System.Windows.Forms.ComboBox cboSituacaoTipoEstoque;
-        private System.Windows.Forms.Label lblSituacao;
-        private System.Windows.Forms.Label lblDescricaoItem;
         private System.Windows.Forms.ToolStrip tspBotoes;
         private System.Windows.Forms.ToolStripButton tsbFechar;
         private System.Windows.Forms.ToolStripButton tsbLimpar;
         private System.Windows.Forms.ToolStripButton tsbGravar;
+        private System.Windows.Forms.Label lblObservacaoFormula;
+        private System.Windows.Forms.RichTextBox txtObservacaoFormula;
     }
 }

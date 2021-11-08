@@ -96,5 +96,23 @@ namespace TjossSystem
                 txtDescricaoTipoEstoque.Focus();
             }
         }
+
+        private void FrmCadastroTipoEstoque_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F9:
+                    tsbGravar.PerformClick();
+                    break;
+                case Keys.F10:
+                    tsbLimpar.PerformClick();
+                    break;
+                case Keys.F12:
+                    tsbFechar.PerformClick();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

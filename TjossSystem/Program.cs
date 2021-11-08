@@ -26,7 +26,7 @@ namespace TjossSystem
             }
             else
             {
-                MessageBox.Show("Erro ao Fazer login");
+                MessageBox.Show("Não foi possivel realizar o login, contate o suporte do sistema!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
