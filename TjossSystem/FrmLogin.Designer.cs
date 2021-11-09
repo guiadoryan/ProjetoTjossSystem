@@ -42,7 +42,7 @@ namespace TjossSystem
             this.btnConfirmar.Location = new System.Drawing.Point(39, 84);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(75, 32);
-            this.btnConfirmar.TabIndex = 0;
+            this.btnConfirmar.TabIndex = 2;
             this.btnConfirmar.Text = "Confirmar";
             this.btnConfirmar.UseVisualStyleBackColor = true;
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
@@ -52,7 +52,7 @@ namespace TjossSystem
             this.btnCancelar.Location = new System.Drawing.Point(120, 84);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 32);
-            this.btnCancelar.TabIndex = 1;
+            this.btnCancelar.TabIndex = 3;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -80,7 +80,7 @@ namespace TjossSystem
             this.txtUsuario.Location = new System.Drawing.Point(88, 23);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(100, 20);
-            this.txtUsuario.TabIndex = 4;
+            this.txtUsuario.TabIndex = 0;
             // 
             // txtSenha
             // 
@@ -88,7 +88,7 @@ namespace TjossSystem
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(100, 20);
-            this.txtSenha.TabIndex = 5;
+            this.txtSenha.TabIndex = 1;
             // 
             // FrmLogin
             // 

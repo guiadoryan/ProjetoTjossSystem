@@ -18,6 +18,7 @@ namespace TjossSystem.Metodos
         public pedidos()
         {
             this.itenspedido = new HashSet<itenspedido>();
+            this.movimentoestoque = new HashSet<movimentoestoque>();
         }
     
         public int numeropedido { get; set; }
@@ -33,6 +34,8 @@ namespace TjossSystem.Metodos
         public virtual contrato contrato { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<itenspedido> itenspedido { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<movimentoestoque> movimentoestoque { get; set; }
         public virtual tipopedido tipopedido { get; set; }
     }
 }

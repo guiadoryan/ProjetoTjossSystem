@@ -47,6 +47,7 @@
           <Property Name="datavencimento" Type="date" Nullable="false" />
           <Property Name="situacao" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="codigovendedor" Type="int4" />
+          <Property Name="contratoemitido" Type="bytea" />
           <Property Name="datahalteracao" Type="timestamp" Nullable="false" />
           <Property Name="codigofuncionario" Type="int4" Nullable="false" />
         </EntityType>
@@ -177,10 +178,14 @@
           </Key>
           <Property Name="sequenciamovimentoestoque" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="codigoitem" Type="int4" Nullable="false" />
+          <Property Name="codigotipoestoque" Type="int4" Nullable="false" />
           <Property Name="tipomovimento" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="quantidademovimentada" Type="numeric" Precision="15" Scale="5" Nullable="false" />
           <Property Name="datahmovimento" Type="timestamp" Nullable="false" />
           <Property Name="codigofuncionario" Type="int4" Nullable="false" />
+          <Property Name="observacaomovimento" Type="varchar" MaxLength="80" />
+          <Property Name="numeropedido" Type="int4" />
+          <Property Name="codigotipopedido" Type="int4" />
         </EntityType>
         <EntityType Name="pais">
           <Key>
@@ -456,6 +461,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="itemestoque_movimentoestoque_fk">
+          <End Role="itemestoque" Type="Self.itemestoque" Multiplicity="1" />
+          <End Role="movimentoestoque" Type="Self.movimentoestoque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="itemestoque">
+              <PropertyRef Name="codigoitem" />
+              <PropertyRef Name="codigotipoestoque" />
+            </Principal>
+            <Dependent Role="movimentoestoque">
+              <PropertyRef Name="codigoitem" />
+              <PropertyRef Name="codigotipoestoque" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="itens_formulaitem_fk">
           <End Role="itens" Type="Self.itens" Multiplicity="1" />
           <End Role="formulaitem" Type="Self.formulaitem" Multiplicity="*" />
@@ -504,18 +523,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="itens_movimentoestoque_fk">
-          <End Role="itens" Type="Self.itens" Multiplicity="1" />
-          <End Role="movimentoestoque" Type="Self.movimentoestoque" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="itens">
-              <PropertyRef Name="codigoitem" />
-            </Principal>
-            <Dependent Role="movimentoestoque">
-              <PropertyRef Name="codigoitem" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="medida_itenspedido_fk">
           <End Role="medida" Type="Self.medida" Multiplicity="0..1" />
           <End Role="itenspedido" Type="Self.itenspedido" Multiplicity="*" />
@@ -553,6 +560,20 @@
             <Dependent Role="itenspedido">
               <PropertyRef Name="codigotipopedido" />
               <PropertyRef Name="numeropedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pedidos_movimentoestoque_fk">
+          <End Role="pedidos" Type="Self.pedidos" Multiplicity="0..1" />
+          <End Role="movimentoestoque" Type="Self.movimentoestoque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedidos">
+              <PropertyRef Name="numeropedido" />
+              <PropertyRef Name="codigotipopedido" />
+            </Principal>
+            <Dependent Role="movimentoestoque">
+              <PropertyRef Name="numeropedido" />
+              <PropertyRef Name="codigotipopedido" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -717,6 +738,10 @@
             <End Role="funcionarios" EntitySet="funcionarios" />
             <End Role="usuarios" EntitySet="usuarios" />
           </AssociationSet>
+          <AssociationSet Name="itemestoque_movimentoestoque_fk" Association="Self.itemestoque_movimentoestoque_fk">
+            <End Role="itemestoque" EntitySet="itemestoque" />
+            <End Role="movimentoestoque" EntitySet="movimentoestoque" />
+          </AssociationSet>
           <AssociationSet Name="itens_formulaitem_fk" Association="Self.itens_formulaitem_fk">
             <End Role="itens" EntitySet="itens" />
             <End Role="formulaitem" EntitySet="formulaitem" />
@@ -733,10 +758,6 @@
             <End Role="itens" EntitySet="itens" />
             <End Role="itenspedido" EntitySet="itenspedido" />
           </AssociationSet>
-          <AssociationSet Name="itens_movimentoestoque_fk" Association="Self.itens_movimentoestoque_fk">
-            <End Role="itens" EntitySet="itens" />
-            <End Role="movimentoestoque" EntitySet="movimentoestoque" />
-          </AssociationSet>
           <AssociationSet Name="medida_itenspedido_fk" Association="Self.medida_itenspedido_fk">
             <End Role="medida" EntitySet="medida" />
             <End Role="itenspedido" EntitySet="itenspedido" />
@@ -748,6 +769,10 @@
           <AssociationSet Name="pedidos_itenspedido_fk" Association="Self.pedidos_itenspedido_fk">
             <End Role="pedidos" EntitySet="pedidos" />
             <End Role="itenspedido" EntitySet="itenspedido" />
+          </AssociationSet>
+          <AssociationSet Name="pedidos_movimentoestoque_fk" Association="Self.pedidos_movimentoestoque_fk">
+            <End Role="pedidos" EntitySet="pedidos" />
+            <End Role="movimentoestoque" EntitySet="movimentoestoque" />
           </AssociationSet>
           <AssociationSet Name="tipocadastro_cadastro_fk" Association="Self.tipocadastro_cadastro_fk">
             <End Role="tipocadastro" EntitySet="tipocadastro" />
@@ -887,6 +912,10 @@
             <End Role="funcionarios" EntitySet="funcionarios" />
             <End Role="usuarios" EntitySet="usuarios" />
           </AssociationSet>
+          <AssociationSet Name="itemestoque_movimentoestoque_fk" Association="tjossModel.itemestoque_movimentoestoque_fk">
+            <End Role="itemestoque" EntitySet="itemestoque" />
+            <End Role="movimentoestoque" EntitySet="movimentoestoque" />
+          </AssociationSet>
           <AssociationSet Name="itens_itemestoque_fk" Association="tjossModel.itens_itemestoque_fk">
             <End Role="itens" EntitySet="itens" />
             <End Role="itemestoque" EntitySet="itemestoque" />
@@ -903,10 +932,6 @@
             <End Role="itens" EntitySet="itens" />
             <End Role="itenspedido" EntitySet="itenspedido" />
           </AssociationSet>
-          <AssociationSet Name="itens_movimentoestoque_fk" Association="tjossModel.itens_movimentoestoque_fk">
-            <End Role="itens" EntitySet="itens" />
-            <End Role="movimentoestoque" EntitySet="movimentoestoque" />
-          </AssociationSet>
           <AssociationSet Name="tipoitem_itens_fk" Association="tjossModel.tipoitem_itens_fk">
             <End Role="tipoitem" EntitySet="tipoitem" />
             <End Role="itens" EntitySet="itens" />
@@ -918,6 +943,10 @@
           <AssociationSet Name="pedidos_itenspedido_fk" Association="tjossModel.pedidos_itenspedido_fk">
             <End Role="pedidos" EntitySet="pedidos" />
             <End Role="itenspedido" EntitySet="itenspedido" />
+          </AssociationSet>
+          <AssociationSet Name="pedidos_movimentoestoque_fk" Association="tjossModel.pedidos_movimentoestoque_fk">
+            <End Role="pedidos" EntitySet="pedidos" />
+            <End Role="movimentoestoque" EntitySet="movimentoestoque" />
           </AssociationSet>
           <AssociationSet Name="tipopedido_pedidos_fk" Association="tjossModel.tipopedido_pedidos_fk">
             <End Role="tipopedido" EntitySet="tipopedido" />
@@ -976,6 +1005,7 @@
           <Property Name="datavencimento" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="situacao" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="codigovendedor" Type="Int32" />
+          <Property Name="contratoemitido" Type="Binary" MaxLength="2147483647" FixedLength="false" />
           <Property Name="datahalteracao" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="codigofuncionario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_contratovenda_fk" FromRole="contrato" ToRole="cadastro" />
@@ -1065,6 +1095,7 @@
           <Property Name="codigotipoestoque" Type="Int32" Nullable="false" />
           <Property Name="quantidadedisponivel" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
           <Property Name="valorproduto" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <NavigationProperty Name="movimentoestoque" Relationship="tjossModel.itemestoque_movimentoestoque_fk" FromRole="itemestoque" ToRole="movimentoestoque" />
           <NavigationProperty Name="itens" Relationship="tjossModel.itens_itemestoque_fk" FromRole="itemestoque" ToRole="itens" />
           <NavigationProperty Name="tipoestoque" Relationship="tjossModel.tipoestoque_itemestoque_fk" FromRole="itemestoque" ToRole="tipoestoque" />
         </EntityType>
@@ -1083,7 +1114,6 @@
           <NavigationProperty Name="itemestoque" Relationship="tjossModel.itens_itemestoque_fk" FromRole="itens" ToRole="itemestoque" />
           <NavigationProperty Name="itenscontrato" Relationship="tjossModel.itens_itenscontrato_fk" FromRole="itens" ToRole="itenscontrato" />
           <NavigationProperty Name="itenspedido" Relationship="tjossModel.itens_itenspedido_fk" FromRole="itens" ToRole="itenspedido" />
-          <NavigationProperty Name="movimentoestoque" Relationship="tjossModel.itens_movimentoestoque_fk" FromRole="itens" ToRole="movimentoestoque" />
           <NavigationProperty Name="tipoitem" Relationship="tjossModel.tipoitem_itens_fk" FromRole="itens" ToRole="tipoitem" />
         </EntityType>
         <EntityType Name="itenscontrato">
@@ -1142,12 +1172,17 @@
           </Key>
           <Property Name="sequenciamovimentoestoque" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="codigoitem" Type="Int32" Nullable="false" />
+          <Property Name="codigotipoestoque" Type="Int32" Nullable="false" />
           <Property Name="tipomovimento" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="quantidademovimentada" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
           <Property Name="datahmovimento" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="codigofuncionario" Type="Int32" Nullable="false" />
+          <Property Name="observacaomovimento" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="numeropedido" Type="Int32" />
+          <Property Name="codigotipopedido" Type="Int32" />
           <NavigationProperty Name="funcionarios" Relationship="tjossModel.funcionarios_movimentoestoque_fk" FromRole="movimentoestoque" ToRole="funcionarios" />
-          <NavigationProperty Name="itens" Relationship="tjossModel.itens_movimentoestoque_fk" FromRole="movimentoestoque" ToRole="itens" />
+          <NavigationProperty Name="itemestoque" Relationship="tjossModel.itemestoque_movimentoestoque_fk" FromRole="movimentoestoque" ToRole="itemestoque" />
+          <NavigationProperty Name="pedidos" Relationship="tjossModel.pedidos_movimentoestoque_fk" FromRole="movimentoestoque" ToRole="pedidos" />
         </EntityType>
         <EntityType Name="pais">
           <Key>
@@ -1174,6 +1209,7 @@
           <NavigationProperty Name="cadastro" Relationship="tjossModel.cadastro_pedidovenda_fk" FromRole="pedidos" ToRole="cadastro" />
           <NavigationProperty Name="contrato" Relationship="tjossModel.contrato_pedidos_fk" FromRole="pedidos" ToRole="contrato" />
           <NavigationProperty Name="itenspedido" Relationship="tjossModel.pedidos_itenspedido_fk" FromRole="pedidos" ToRole="itenspedido" />
+          <NavigationProperty Name="movimentoestoque" Relationship="tjossModel.pedidos_movimentoestoque_fk" FromRole="pedidos" ToRole="movimentoestoque" />
           <NavigationProperty Name="tipopedido" Relationship="tjossModel.tipopedido_pedidos_fk" FromRole="pedidos" ToRole="tipopedido" />
         </EntityType>
         <EntityType Name="tipocadastro">
@@ -1495,6 +1531,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="itemestoque_movimentoestoque_fk">
+          <End Type="tjossModel.itemestoque" Role="itemestoque" Multiplicity="1" />
+          <End Type="tjossModel.movimentoestoque" Role="movimentoestoque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="itemestoque">
+              <PropertyRef Name="codigoitem" />
+              <PropertyRef Name="codigotipoestoque" />
+            </Principal>
+            <Dependent Role="movimentoestoque">
+              <PropertyRef Name="codigoitem" />
+              <PropertyRef Name="codigotipoestoque" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="itens_itemestoque_fk">
           <End Type="tjossModel.itens" Role="itens" Multiplicity="1" />
           <End Type="tjossModel.itemestoque" Role="itemestoque" Multiplicity="*" />
@@ -1543,18 +1593,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="itens_movimentoestoque_fk">
-          <End Type="tjossModel.itens" Role="itens" Multiplicity="1" />
-          <End Type="tjossModel.movimentoestoque" Role="movimentoestoque" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="itens">
-              <PropertyRef Name="codigoitem" />
-            </Principal>
-            <Dependent Role="movimentoestoque">
-              <PropertyRef Name="codigoitem" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="tipoitem_itens_fk">
           <End Type="tjossModel.tipoitem" Role="tipoitem" Multiplicity="1" />
           <End Type="tjossModel.itens" Role="itens" Multiplicity="*" />
@@ -1592,6 +1630,20 @@
             <Dependent Role="itenspedido">
               <PropertyRef Name="codigotipopedido" />
               <PropertyRef Name="numeropedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pedidos_movimentoestoque_fk">
+          <End Type="tjossModel.pedidos" Role="pedidos" Multiplicity="0..1" />
+          <End Type="tjossModel.movimentoestoque" Role="movimentoestoque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pedidos">
+              <PropertyRef Name="numeropedido" />
+              <PropertyRef Name="codigotipopedido" />
+            </Principal>
+            <Dependent Role="movimentoestoque">
+              <PropertyRef Name="numeropedido" />
+              <PropertyRef Name="codigotipopedido" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1651,6 +1703,7 @@
               <MappingFragment StoreEntitySet="contrato">
                 <ScalarProperty Name="codigofuncionario" ColumnName="codigofuncionario" />
                 <ScalarProperty Name="datahalteracao" ColumnName="datahalteracao" />
+                <ScalarProperty Name="contratoemitido" ColumnName="contratoemitido" />
                 <ScalarProperty Name="codigovendedor" ColumnName="codigovendedor" />
                 <ScalarProperty Name="situacao" ColumnName="situacao" />
                 <ScalarProperty Name="datavencimento" ColumnName="datavencimento" />
@@ -1786,10 +1839,14 @@
           <EntitySetMapping Name="movimentoestoque">
             <EntityTypeMapping TypeName="tjossModel.movimentoestoque">
               <MappingFragment StoreEntitySet="movimentoestoque">
+                <ScalarProperty Name="codigotipopedido" ColumnName="codigotipopedido" />
+                <ScalarProperty Name="numeropedido" ColumnName="numeropedido" />
+                <ScalarProperty Name="observacaomovimento" ColumnName="observacaomovimento" />
                 <ScalarProperty Name="codigofuncionario" ColumnName="codigofuncionario" />
                 <ScalarProperty Name="datahmovimento" ColumnName="datahmovimento" />
                 <ScalarProperty Name="quantidademovimentada" ColumnName="quantidademovimentada" />
                 <ScalarProperty Name="tipomovimento" ColumnName="tipomovimento" />
+                <ScalarProperty Name="codigotipoestoque" ColumnName="codigotipoestoque" />
                 <ScalarProperty Name="codigoitem" ColumnName="codigoitem" />
                 <ScalarProperty Name="sequenciamovimentoestoque" ColumnName="sequenciamovimentoestoque" />
               </MappingFragment>

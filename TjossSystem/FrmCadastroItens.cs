@@ -11,7 +11,7 @@ using TjossSystem.Metodos;
 
 namespace TjossSystem
 {
-    public partial class FrmCadastroItens : Form
+    public partial class FrmCadastroItens : FrmPadrao
     {
         /// <summary>
         /// Lista de tipo itens
@@ -54,7 +54,7 @@ namespace TjossSystem
             objItemDI.CodigoTipoItem = (int)cboCodigoTipoItem.SelectedValue;
             objItemDI.SituacaoItem = cboSituacaoItem.SelectedIndex == 0 ? "A" : "I";
             objItemDI.DatahAlteracao = dtaAtual;
-            objItemDI.CodigoFuncionario = 0;
+            objItemDI.CodigoFuncionario = CodigoFuncionario;
 
             if (!objMetodosItens.RegistrarItem(objItemDI, out strErro))
             {
@@ -67,6 +67,7 @@ namespace TjossSystem
         private void tsbLimpar_Click(object sender, EventArgs e)
         {
             FrmCadastroItens objNewForm = new FrmCadastroItens();
+            objNewForm.CodigoFuncionario = CodigoFuncionario;
             objNewForm.Show();
             this.Dispose(false);
         }

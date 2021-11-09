@@ -10,16 +10,18 @@ using System.Windows.Forms;
 
 namespace TjossSystem
 {
-    public partial class FrmMenu : Form
+    public partial class FrmMenu : FrmPadrao
     {
-        public FrmMenu()
+        public FrmMenu(ref int pCodigoFuncionario)
         {
             InitializeComponent();
+            CodigoFuncionario = pCodigoFuncionario;
         }
 
         private void cadastroDePessoaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmCadastro objCadastro = new FrmCadastro();
+            objCadastro.CodigoFuncionario = CodigoFuncionario;
             objCadastro.Show();
         }
 
@@ -44,6 +46,7 @@ namespace TjossSystem
         private void cadastroDeItensToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmCadastroItens objCadastroItens = new FrmCadastroItens();
+            objCadastroItens.CodigoFuncionario = CodigoFuncionario;
             objCadastroItens.Show();
         }
 
@@ -63,6 +66,13 @@ namespace TjossSystem
         {
             FrmCadastroFormulaItem objCadastroFormulaItem = new FrmCadastroFormulaItem();
             objCadastroFormulaItem.Show();
+        }
+
+        private void tipEntradaSaidaEstoque_Click(object sender, EventArgs e)
+        {
+            FrmEntradaSaidaEstoque objEntradaSaidaEstoque = new FrmEntradaSaidaEstoque();
+            objEntradaSaidaEstoque.CodigoFuncionario = CodigoFuncionario;
+            objEntradaSaidaEstoque.Show();
         }
     }
 }

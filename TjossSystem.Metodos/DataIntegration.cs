@@ -307,4 +307,40 @@ namespace TjossSystem.Metodos
         [DataMember]
         public string Cargo { get; set; }
     }
+
+    //Movimentação Estoque
+
+    [DataContract]
+    public class MovimentacaoEstoqueDI
+    {
+        [DataMember]
+        public int SequenciaMovimentoEstoque { get; set; }
+
+        [DataMember]
+        public int CodigoItem { get; set; }
+
+        [DataMember]
+        public int CodigoTipoEstoque { get; set; }
+
+        [DataMember]
+        public string TipoMovimento { get; set; }
+
+        [DataMember]
+        public decimal QuantidadeMovimentada { get; set; }
+
+        [DataMember]
+        public DateTime DatahMovimento { get; set; }
+
+        [DataMember]
+        public int CodigoFuncionario { get; set; }
+
+        [DataMember]
+        public int? NumeroPedido { get; set; }
+
+        [DataMember]
+        public int? CodigoTipoPedido { get; set; }
+
+        [DataMember]
+        public string ObservacaoMovimento { get; set; }
+    }
 }

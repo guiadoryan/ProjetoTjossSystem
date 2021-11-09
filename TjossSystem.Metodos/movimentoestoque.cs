@@ -16,12 +16,17 @@ namespace TjossSystem.Metodos
     {
         public int sequenciamovimentoestoque { get; set; }
         public int codigoitem { get; set; }
+        public int codigotipoestoque { get; set; }
         public string tipomovimento { get; set; }
         public decimal quantidademovimentada { get; set; }
         public System.DateTime datahmovimento { get; set; }
         public int codigofuncionario { get; set; }
+        public string observacaomovimento { get; set; }
+        public Nullable<int> numeropedido { get; set; }
+        public Nullable<int> codigotipopedido { get; set; }
     
         public virtual funcionarios funcionarios { get; set; }
-        public virtual itens itens { get; set; }
+        public virtual itemestoque itemestoque { get; set; }
+        public virtual pedidos pedidos { get; set; }
     }
 }

@@ -17,16 +17,12 @@ namespace TjossSystem
             string strRetorno = string.Empty;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //TO DO: FAZER VALIDAÇÃO DE LOGIN.
             FrmLogin objLogin = new FrmLogin();
             objLogin.ShowDialog();
+            int intFuncionario = objLogin.intCodigoFuncionario;
             if(objLogin.DialogResult == DialogResult.Yes)
             {
-                Application.Run(new FrmMenu());
-            }
-            else
-            {
-                MessageBox.Show("Não foi possivel realizar o login, contate o suporte do sistema!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Run(new FrmMenu(ref intFuncionario));
             }
         }
     }

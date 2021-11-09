@@ -28,6 +28,7 @@ namespace TjossSystem.Metodos
         public System.DateTime datavencimento { get; set; }
         public string situacao { get; set; }
         public Nullable<int> codigovendedor { get; set; }
+        public byte[] contratoemitido { get; set; }
         public System.DateTime datahalteracao { get; set; }
         public int codigofuncionario { get; set; }
     

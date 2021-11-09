@@ -140,6 +140,12 @@
     <Compile Include="FrmCadastroTipoItem.Designer.cs">
       <DependentUpon>FrmCadastroTipoItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmEntradaSaidaEstoque.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEntradaSaidaEstoque.Designer.cs">
+      <DependentUpon>FrmEntradaSaidaEstoque.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCadastroTipoItem.resx">
       <DependentUpon>FrmCadastroTipoItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEntradaSaidaEstoque.resx">
+      <DependentUpon>FrmEntradaSaidaEstoque.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>

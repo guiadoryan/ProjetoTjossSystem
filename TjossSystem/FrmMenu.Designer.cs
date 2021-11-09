@@ -51,6 +51,7 @@ namespace TjossSystem
             this.cadastroDeFuncionariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeCargosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipEntradaSaidaEstoque = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -154,7 +155,8 @@ namespace TjossSystem
             this.cadastroTipoEstoqToolStripMenuItem,
             this.cadastroTipoItemToolStripMenuItem,
             this.itemEstoqueToolStripMenuItem,
-            this.itemFormulaToolStripMenuItem});
+            this.itemFormulaToolStripMenuItem,
+            this.tipEntradaSaidaEstoque});
             this.itensToolStripMenuItem.Name = "itensToolStripMenuItem";
             this.itensToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.itensToolStripMenuItem.Text = "Itens";
@@ -162,35 +164,35 @@ namespace TjossSystem
             // cadastroDeItensToolStripMenuItem
             // 
             this.cadastroDeItensToolStripMenuItem.Name = "cadastroDeItensToolStripMenuItem";
-            this.cadastroDeItensToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.cadastroDeItensToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.cadastroDeItensToolStripMenuItem.Text = "Cadastro de itens";
             this.cadastroDeItensToolStripMenuItem.Click += new System.EventHandler(this.cadastroDeItensToolStripMenuItem_Click);
             // 
             // cadastroTipoEstoqToolStripMenuItem
             // 
             this.cadastroTipoEstoqToolStripMenuItem.Name = "cadastroTipoEstoqToolStripMenuItem";
-            this.cadastroTipoEstoqToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.cadastroTipoEstoqToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.cadastroTipoEstoqToolStripMenuItem.Text = "Cadastro Tipo Estoque";
             this.cadastroTipoEstoqToolStripMenuItem.Click += new System.EventHandler(this.cadastroTipoEstoqToolStripMenuItem_Click);
             // 
             // cadastroTipoItemToolStripMenuItem
             // 
             this.cadastroTipoItemToolStripMenuItem.Name = "cadastroTipoItemToolStripMenuItem";
-            this.cadastroTipoItemToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.cadastroTipoItemToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.cadastroTipoItemToolStripMenuItem.Text = "Cadastro Tipo Item";
             this.cadastroTipoItemToolStripMenuItem.Click += new System.EventHandler(this.cadastroTipoItemToolStripMenuItem_Click);
             // 
             // itemEstoqueToolStripMenuItem
             // 
             this.itemEstoqueToolStripMenuItem.Name = "itemEstoqueToolStripMenuItem";
-            this.itemEstoqueToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.itemEstoqueToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.itemEstoqueToolStripMenuItem.Text = "Item Estoque";
             this.itemEstoqueToolStripMenuItem.Click += new System.EventHandler(this.itemEstoqueToolStripMenuItem_Click);
             // 
             // itemFormulaToolStripMenuItem
             // 
             this.itemFormulaToolStripMenuItem.Name = "itemFormulaToolStripMenuItem";
-            this.itemFormulaToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.itemFormulaToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.itemFormulaToolStripMenuItem.Text = "Item Formula";
             this.itemFormulaToolStripMenuItem.Click += new System.EventHandler(this.itemFormulaToolStripMenuItem_Click);
             // 
@@ -223,6 +225,13 @@ namespace TjossSystem
             this.cadastroDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.cadastroDeUsuariosToolStripMenuItem.Text = "Cadastro de Usuarios";
             // 
+            // tipEntradaSaidaEstoque
+            // 
+            this.tipEntradaSaidaEstoque.Name = "tipEntradaSaidaEstoque";
+            this.tipEntradaSaidaEstoque.Size = new System.Drawing.Size(199, 22);
+            this.tipEntradaSaidaEstoque.Text = "Entrada e Saida Estoque";
+            this.tipEntradaSaidaEstoque.Click += new System.EventHandler(this.tipEntradaSaidaEstoque_Click);
+            // 
             // FrmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -230,7 +239,6 @@ namespace TjossSystem
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
             this.Name = "FrmMenu";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tjoss System V1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
@@ -263,6 +271,7 @@ namespace TjossSystem
         private System.Windows.Forms.ToolStripMenuItem cadastroDeFuncionariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeCargosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeUsuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tipEntradaSaidaEstoque;
     }
 }
 

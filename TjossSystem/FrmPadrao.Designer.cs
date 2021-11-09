@@ -40,9 +40,6 @@ namespace TjossSystem
             this.Name = "FrmPadrao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form Padrão";
-            this.Load += new System.EventHandler(this.FrmPadrao_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmPadrao_KeyDown);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FrmPadrao_KeyPress);
             this.ResumeLayout(false);
 
         }

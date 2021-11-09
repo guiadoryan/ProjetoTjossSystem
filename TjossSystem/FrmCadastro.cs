@@ -11,7 +11,7 @@ using TjossSystem.Metodos;
 
 namespace TjossSystem
 {
-    public partial class FrmCadastro : Form
+    public partial class FrmCadastro : FrmPadrao
     {
         /// <summary>
         /// Objeto que fica os dados do cadastro
@@ -52,11 +52,6 @@ namespace TjossSystem
         /// Lista com os cadastros registrados.
         /// </summary>
         List<CadastroDI> lstCadastrosDI;
-
-        /// <summary>
-        /// FUNCIONARIO ADMIN
-        /// </summary>
-        private const int FUNCIONARIO = 0;
 
         public FrmCadastro()
         {
@@ -266,7 +261,7 @@ namespace TjossSystem
                 objCadastroDI.CpfCnpj = txtCpfCnpj.Text;
                 objCadastroDI.Controle = txtControle.Text;
                 objCadastroDI.DatahAlteracao = dtaAtual;
-                objCadastroDI.CodigoFuncionario = FUNCIONARIO;
+                objCadastroDI.CodigoFuncionario = CodigoFuncionario;
 
                 foreach (DataGridViewRow rowEndereco in dgvEnderecos.Rows)
                 {
@@ -282,7 +277,7 @@ namespace TjossSystem
                         SituacaoEndereco = rowEndereco.Cells[clnSituacaoEndereco.Name].Value.ToString(),
                         CodigoCidade = Convert.ToInt32(rowEndereco.Cells[clnCodigoCidade.Name].Value),
                         DatahAlteracao = dtaAtual,
-                        CodigoFuncionario = FUNCIONARIO
+                        CodigoFuncionario = CodigoFuncionario
                     };
 
                     lstEnderecoDI.Add(objEnderecoDI);
@@ -301,7 +296,7 @@ namespace TjossSystem
                         ObservacaoMedida = rowMedida.Cells[clnObservacaoMedida.Name].Value.ToString(),
                         SituacaoMedida = rowMedida.Cells[clnSituacaoMedida.Name].Value.ToString(),
                         DatahAlteracao = dtaAtual,
-                        CodigoFuncionario = FUNCIONARIO
+                        CodigoFuncionario = CodigoFuncionario
                     };
 
                     lstMedidaDI.Add(objMedidaDI);
@@ -315,7 +310,7 @@ namespace TjossSystem
                         CodigoDefinicao = Convert.ToInt32(rowDefinicao.Cells[clnCodigoDefinicao.Name].Value),
                         SituacaoDefinicao = rowDefinicao.Cells[clnSituacaoDefinicao.Name].Value.ToString(),
                         DatahAlteracao = dtaAtual,
-                        CodigoFuncionario = FUNCIONARIO
+                        CodigoFuncionario = CodigoFuncionario
                     };
 
                     lstDefinicaoDI.Add(objDefinicaoDI);
@@ -425,6 +420,7 @@ namespace TjossSystem
         private void tsbLimpar_Click(object sender, EventArgs e)
         {
             FrmCadastro objNewForm = new FrmCadastro();
+            objNewForm.CodigoFuncionario = CodigoFuncionario;
             objNewForm.Show();
             this.Dispose(false);
         }
