@@ -49,7 +49,7 @@ namespace TjossSystem
                 //Instancia classe data contract.
                 EstoqueItemDI objEstoqueItemDI = objMetodosItens.ConsultarEstoque(Convert.ToInt32(txtCodigoItem.Text), (int)cboCodigoTipoEstoque.SelectedValue);
 
-                txtQuantidadeDisponivel.Text = objEstoqueItemDI.Quantidade.ToString() ;
+                txtQuantidadeDisponivel.Text = objEstoqueItemDI.Quantidade.ToString();
                 txtValorProduto.Text = objEstoqueItemDI.ValorUnitario.ToString();
 
                 grpDadosBasicos.Enabled = true;
@@ -163,6 +163,16 @@ namespace TjossSystem
             {
                 if ((sender as TextBox).Text.IndexOf(e.KeyChar) != -1)
                     e.Handled = true;
+            }
+        }
+
+        private void txtCodigoItem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Números [0,9], Backspace, e decimal
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != ','))
+            {
+                e.Handled = true;
+                return;
             }
         }
     }

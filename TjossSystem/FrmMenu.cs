@@ -50,12 +50,6 @@ namespace TjossSystem
             objCadastroItens.Show();
         }
 
-        private void cadastroDeCargosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FrmCadastroCargos objCadastroCargos = new FrmCadastroCargos();
-            objCadastroCargos.Show();
-        }
-
         private void itemEstoqueToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmCadastroItemEstoque objCadastroItemEstoque = new FrmCadastroItemEstoque();
@@ -73,6 +67,27 @@ namespace TjossSystem
             FrmEntradaSaidaEstoque objEntradaSaidaEstoque = new FrmEntradaSaidaEstoque();
             objEntradaSaidaEstoque.CodigoFuncionario = CodigoFuncionario;
             objEntradaSaidaEstoque.Show();
+        }
+
+        private void cadastroDeCargosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCadastroCargos objCadastroCargos = new FrmCadastroCargos();
+            objCadastroCargos.CodigoFuncionario = CodigoFuncionario;
+            objCadastroCargos.Show();
+        }
+
+        private void cadastroDeFuncionariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCadastroFuncionario objCadastroFuncionario = new FrmCadastroFuncionario();
+            objCadastroFuncionario.CodigoFuncionario = CodigoFuncionario;
+            objCadastroFuncionario.Show();
+        }
+
+        private void cadastroDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmCadastroUsuario objCadastroUsuario = new FrmCadastroUsuario();
+            objCadastroUsuario.CodigoFuncionario = CodigoFuncionario;
+            objCadastroUsuario.Show();
         }
     }
 }

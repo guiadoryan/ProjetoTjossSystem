@@ -294,7 +294,7 @@ namespace TjossSystem.Metodos
         public string ObservacaoFormula { get; set; }
     }
 
-    //Login
+    //Login e funcionarios
     [DataContract]
     public class LoginDI
     {
@@ -306,6 +306,60 @@ namespace TjossSystem.Metodos
 
         [DataMember]
         public string Cargo { get; set; }
+    }
+
+    [DataContract]
+    public class FuncionarioDI
+    {
+        [DataMember]
+        public int CodigoFuncionario { get; set; }
+
+        [DataMember]
+        public string Nome { get; set; }
+
+        [DataMember]
+        public string Cpf { get; set; }
+
+        [DataMember]
+        public string CpfControle { get; set; }
+
+        [DataMember]
+        public DateTime DataNascimento { get; set; }
+
+        [DataMember]
+        public DateTime DataAdmissao { get; set; }
+
+        [DataMember]
+        public DateTime? DataDesligamento { get; set; }
+
+        [DataMember]
+        public int CodigoCargo { get; set; }
+    }
+
+    [DataContract]
+    public class CargoFuncionarioDI
+    {
+        [DataMember]
+        public int CodigoCargo { get; set; }
+
+        [DataMember]
+        public string DescricaoCargo { get; set; }
+
+        [DataMember]
+        public string SituacaoCargo { get; set; }
+    }
+
+    [DataContract]
+    public class UsuarioDI
+    {
+        [DataMember]
+        public int CodigoFuncionario { get; set; }
+
+        [DataMember]
+        public string Senha { get; set; }
+
+        [DataMember]
+        public DateTime DatahCadastro { get; set; }
     }
 
     //Movimentação Estoque
@@ -342,5 +396,56 @@ namespace TjossSystem.Metodos
 
         [DataMember]
         public string ObservacaoMovimento { get; set; }
+    }
+
+    public class PedidoDI
+    {
+        [DataMember]
+        public int NumeroPedido { get; set; }
+
+        [DataMember]
+        public int CodigoTipoPedido { get; set; }
+
+        [DataMember]
+        public int CodigoCadastro { get; set; }
+
+        [DataMember]
+        public string SituacaoPedido { get; set; }
+
+        [DataMember]
+        public int? NumeroContrato { get; set; }
+
+        [DataMember]
+        public int? CodigoTipoContrato { get; set; }
+
+        [DataMember]
+        public decimal ValorTotalPedido { get; set; }
+
+        [DataMember]
+        public List<ItensPedidoDI> ItensPedido { get; set; }
+    }
+
+    public class ItensPedidoDI
+    {
+        [DataMember]
+        public int NumeroPedido { get; set; }
+
+        [DataMember]
+        public int CodigoTipoPedido { get; set; }
+
+        [DataMember]
+        public int CodigoItem { get; set; }
+
+        [DataMember]
+        public decimal ValorUnitario { get; set; }
+
+        [DataMember]
+        public decimal ValorTotalItem { get; set; }
+
+        [DataMember]
+        public int? CodigoCadastro { get; set; }
+
+        [DataMember]
+        public int? CodigoMedida { get; set; }
     }
 }

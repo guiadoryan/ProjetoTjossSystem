@@ -33,6 +33,9 @@ namespace TjossSystem
 
         }
 
+        /// <summary>
+        /// Método que faz login
+        /// </summary>
         public void Login()
         {
             ModuloUsuarios objUsuarios = new ModuloUsuarios();
@@ -67,6 +70,16 @@ namespace TjossSystem
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Números [0,9], Backspace, e decimal
+            if (((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8 && e.KeyChar != ','))
+            {
+                e.Handled = true;
+                return;
+            }
         }
     }
 }

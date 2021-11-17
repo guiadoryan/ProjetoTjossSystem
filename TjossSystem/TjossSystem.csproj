@@ -110,6 +110,12 @@
     <Compile Include="FrmCadastroFormulaItem.Designer.cs">
       <DependentUpon>FrmCadastroFormulaItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmCadastroFuncionario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCadastroFuncionario.Designer.cs">
+      <DependentUpon>FrmCadastroFuncionario.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmCadastroItemEstoque.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +145,12 @@
     </Compile>
     <Compile Include="FrmCadastroTipoItem.Designer.cs">
       <DependentUpon>FrmCadastroTipoItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCadastroUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCadastroUsuario.Designer.cs">
+      <DependentUpon>FrmCadastroUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmEntradaSaidaEstoque.cs">
       <SubType>Form</SubType>
@@ -175,6 +187,9 @@
     <EmbeddedResource Include="FrmCadastroFormulaItem.resx">
       <DependentUpon>FrmCadastroFormulaItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmCadastroFuncionario.resx">
+      <DependentUpon>FrmCadastroFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmCadastroItemEstoque.resx">
       <DependentUpon>FrmCadastroItemEstoque.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCadastroTipoItem.resx">
       <DependentUpon>FrmCadastroTipoItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCadastroUsuario.resx">
+      <DependentUpon>FrmCadastroUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEntradaSaidaEstoque.resx">
       <DependentUpon>FrmEntradaSaidaEstoque.cs</DependentUpon>

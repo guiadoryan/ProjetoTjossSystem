@@ -200,6 +200,7 @@ namespace TjossSystem
             this.txtCodigoItem.Name = "txtCodigoItem";
             this.txtCodigoItem.Size = new System.Drawing.Size(104, 20);
             this.txtCodigoItem.TabIndex = 1;
+            this.txtCodigoItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigoItem_KeyPress);
             // 
             // lblCodigoItem
             // 

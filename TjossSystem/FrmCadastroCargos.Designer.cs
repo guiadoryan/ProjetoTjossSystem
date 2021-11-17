@@ -31,16 +31,16 @@ namespace TjossSystem
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadastroCargos));
             this.grpDadosBasicos = new System.Windows.Forms.GroupBox();
-            this.tspBotoes = new System.Windows.Forms.ToolStrip();
-            this.tsbFechar = new System.Windows.Forms.ToolStripButton();
-            this.tsbLimpar = new System.Windows.Forms.ToolStripButton();
-            this.tsbGravar = new System.Windows.Forms.ToolStripButton();
             this.txtDescricaoCargo = new System.Windows.Forms.TextBox();
             this.cboSituacaoCargo = new System.Windows.Forms.ComboBox();
             this.lblSituacao = new System.Windows.Forms.Label();
             this.lblDescricaoItem = new System.Windows.Forms.Label();
+            this.tspBotoes = new System.Windows.Forms.ToolStrip();
+            this.tsbFechar = new System.Windows.Forms.ToolStripButton();
+            this.tsbLimpar = new System.Windows.Forms.ToolStripButton();
+            this.tsbGravar = new System.Windows.Forms.ToolStripButton();
             this.grpDadosChaveCargo = new System.Windows.Forms.GroupBox();
-            this.btnBuscarItem = new System.Windows.Forms.Button();
+            this.btnBuscarCargo = new System.Windows.Forms.Button();
             this.txtCodigoCargo = new System.Windows.Forms.TextBox();
             this.lblCodigoCargo = new System.Windows.Forms.Label();
             this.grpDadosBasicos.SuspendLayout();
@@ -50,63 +50,17 @@ namespace TjossSystem
             // 
             // grpDadosBasicos
             // 
-            this.grpDadosBasicos.Controls.Add(this.tspBotoes);
             this.grpDadosBasicos.Controls.Add(this.txtDescricaoCargo);
             this.grpDadosBasicos.Controls.Add(this.cboSituacaoCargo);
             this.grpDadosBasicos.Controls.Add(this.lblSituacao);
             this.grpDadosBasicos.Controls.Add(this.lblDescricaoItem);
             this.grpDadosBasicos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpDadosBasicos.Enabled = false;
             this.grpDadosBasicos.Location = new System.Drawing.Point(0, 67);
             this.grpDadosBasicos.Name = "grpDadosBasicos";
             this.grpDadosBasicos.Size = new System.Drawing.Size(414, 123);
             this.grpDadosBasicos.TabIndex = 3;
             this.grpDadosBasicos.TabStop = false;
-            // 
-            // tspBotoes
-            // 
-            this.tspBotoes.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tspBotoes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbFechar,
-            this.tsbLimpar,
-            this.tsbGravar});
-            this.tspBotoes.Location = new System.Drawing.Point(3, 95);
-            this.tspBotoes.Name = "tspBotoes";
-            this.tspBotoes.Size = new System.Drawing.Size(408, 25);
-            this.tspBotoes.TabIndex = 10;
-            this.tspBotoes.Text = "toolStrip1";
-            // 
-            // tsbFechar
-            // 
-            this.tsbFechar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsbFechar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbFechar.Image = ((System.Drawing.Image)(resources.GetObject("tsbFechar.Image")));
-            this.tsbFechar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbFechar.Name = "tsbFechar";
-            this.tsbFechar.Size = new System.Drawing.Size(75, 22);
-            this.tsbFechar.Text = "F12 - Fechar";
-            this.tsbFechar.Click += new System.EventHandler(this.tsbFechar_Click);
-            // 
-            // tsbLimpar
-            // 
-            this.tsbLimpar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsbLimpar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbLimpar.Image = ((System.Drawing.Image)(resources.GetObject("tsbLimpar.Image")));
-            this.tsbLimpar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbLimpar.Name = "tsbLimpar";
-            this.tsbLimpar.Size = new System.Drawing.Size(77, 22);
-            this.tsbLimpar.Text = "F10 - Limpar";
-            this.tsbLimpar.Click += new System.EventHandler(this.tsbLimpar_Click);
-            // 
-            // tsbGravar
-            // 
-            this.tsbGravar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsbGravar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbGravar.Image = ((System.Drawing.Image)(resources.GetObject("tsbGravar.Image")));
-            this.tsbGravar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbGravar.Name = "tsbGravar";
-            this.tsbGravar.Size = new System.Drawing.Size(68, 22);
-            this.tsbGravar.Text = "F9 - Gravar";
-            this.tsbGravar.Click += new System.EventHandler(this.tsbGravar_Click);
             // 
             // txtDescricaoCargo
             // 
@@ -146,9 +100,56 @@ namespace TjossSystem
             this.lblDescricaoItem.TabIndex = 0;
             this.lblDescricaoItem.Text = "Descrição:";
             // 
+            // tspBotoes
+            // 
+            this.tspBotoes.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tspBotoes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbFechar,
+            this.tsbLimpar,
+            this.tsbGravar});
+            this.tspBotoes.Location = new System.Drawing.Point(0, 165);
+            this.tspBotoes.Name = "tspBotoes";
+            this.tspBotoes.Size = new System.Drawing.Size(414, 25);
+            this.tspBotoes.TabIndex = 10;
+            this.tspBotoes.Text = "toolStrip1";
+            // 
+            // tsbFechar
+            // 
+            this.tsbFechar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsbFechar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbFechar.Image = ((System.Drawing.Image)(resources.GetObject("tsbFechar.Image")));
+            this.tsbFechar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbFechar.Name = "tsbFechar";
+            this.tsbFechar.Size = new System.Drawing.Size(75, 22);
+            this.tsbFechar.Text = "F12 - Fechar";
+            this.tsbFechar.Click += new System.EventHandler(this.tsbFechar_Click);
+            // 
+            // tsbLimpar
+            // 
+            this.tsbLimpar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsbLimpar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbLimpar.Image = ((System.Drawing.Image)(resources.GetObject("tsbLimpar.Image")));
+            this.tsbLimpar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbLimpar.Name = "tsbLimpar";
+            this.tsbLimpar.Size = new System.Drawing.Size(77, 22);
+            this.tsbLimpar.Text = "F10 - Limpar";
+            this.tsbLimpar.Click += new System.EventHandler(this.tsbLimpar_Click);
+            // 
+            // tsbGravar
+            // 
+            this.tsbGravar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsbGravar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbGravar.Enabled = false;
+            this.tsbGravar.Image = ((System.Drawing.Image)(resources.GetObject("tsbGravar.Image")));
+            this.tsbGravar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbGravar.Name = "tsbGravar";
+            this.tsbGravar.Size = new System.Drawing.Size(68, 22);
+            this.tsbGravar.Text = "F9 - Gravar";
+            this.tsbGravar.Click += new System.EventHandler(this.tsbGravar_Click);
+            // 
             // grpDadosChaveCargo
             // 
-            this.grpDadosChaveCargo.Controls.Add(this.btnBuscarItem);
+            this.grpDadosChaveCargo.Controls.Add(this.btnBuscarCargo);
             this.grpDadosChaveCargo.Controls.Add(this.txtCodigoCargo);
             this.grpDadosChaveCargo.Controls.Add(this.lblCodigoCargo);
             this.grpDadosChaveCargo.Dock = System.Windows.Forms.DockStyle.Top;
@@ -158,15 +159,15 @@ namespace TjossSystem
             this.grpDadosChaveCargo.TabIndex = 2;
             this.grpDadosChaveCargo.TabStop = false;
             // 
-            // btnBuscarItem
+            // btnBuscarCargo
             // 
-            this.btnBuscarItem.Location = new System.Drawing.Point(245, 22);
-            this.btnBuscarItem.Name = "btnBuscarItem";
-            this.btnBuscarItem.Size = new System.Drawing.Size(112, 29);
-            this.btnBuscarItem.TabIndex = 2;
-            this.btnBuscarItem.Text = "Buscar";
-            this.btnBuscarItem.UseVisualStyleBackColor = true;
-            this.btnBuscarItem.Click += new System.EventHandler(this.btnBuscarItem_Click);
+            this.btnBuscarCargo.Location = new System.Drawing.Point(245, 22);
+            this.btnBuscarCargo.Name = "btnBuscarCargo";
+            this.btnBuscarCargo.Size = new System.Drawing.Size(112, 29);
+            this.btnBuscarCargo.TabIndex = 2;
+            this.btnBuscarCargo.Text = "Buscar";
+            this.btnBuscarCargo.UseVisualStyleBackColor = true;
+            this.btnBuscarCargo.Click += new System.EventHandler(this.btnBuscarCargo_Click);
             // 
             // txtCodigoCargo
             // 
@@ -175,6 +176,7 @@ namespace TjossSystem
             this.txtCodigoCargo.Name = "txtCodigoCargo";
             this.txtCodigoCargo.Size = new System.Drawing.Size(104, 20);
             this.txtCodigoCargo.TabIndex = 1;
+            this.txtCodigoCargo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigoCargo_KeyPress);
             // 
             // lblCodigoCargo
             // 
@@ -190,12 +192,12 @@ namespace TjossSystem
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(414, 190);
+            this.Controls.Add(this.tspBotoes);
             this.Controls.Add(this.grpDadosBasicos);
             this.Controls.Add(this.grpDadosChaveCargo);
-            this.KeyPreview = true;
             this.Name = "FrmCadastroCargos";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Cargos";
+            this.Load += new System.EventHandler(this.FrmCadastroCargos_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmCadastroCargos_KeyDown);
             this.grpDadosBasicos.ResumeLayout(false);
             this.grpDadosBasicos.PerformLayout();
@@ -204,6 +206,7 @@ namespace TjossSystem
             this.grpDadosChaveCargo.ResumeLayout(false);
             this.grpDadosChaveCargo.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -219,7 +222,7 @@ namespace TjossSystem
         private System.Windows.Forms.Label lblSituacao;
         private System.Windows.Forms.Label lblDescricaoItem;
         private System.Windows.Forms.GroupBox grpDadosChaveCargo;
-        private System.Windows.Forms.Button btnBuscarItem;
+        private System.Windows.Forms.Button btnBuscarCargo;
         private System.Windows.Forms.TextBox txtCodigoCargo;
         private System.Windows.Forms.Label lblCodigoCargo;
     }

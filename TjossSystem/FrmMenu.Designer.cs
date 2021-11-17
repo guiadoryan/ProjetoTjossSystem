@@ -47,11 +47,11 @@ namespace TjossSystem
             this.cadastroTipoItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemEstoqueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemFormulaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipEntradaSaidaEstoque = new System.Windows.Forms.ToolStripMenuItem();
             this.funcionariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeFuncionariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeCargosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tipEntradaSaidaEstoque = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -196,6 +196,13 @@ namespace TjossSystem
             this.itemFormulaToolStripMenuItem.Text = "Item Formula";
             this.itemFormulaToolStripMenuItem.Click += new System.EventHandler(this.itemFormulaToolStripMenuItem_Click);
             // 
+            // tipEntradaSaidaEstoque
+            // 
+            this.tipEntradaSaidaEstoque.Name = "tipEntradaSaidaEstoque";
+            this.tipEntradaSaidaEstoque.Size = new System.Drawing.Size(199, 22);
+            this.tipEntradaSaidaEstoque.Text = "Entrada e Saida Estoque";
+            this.tipEntradaSaidaEstoque.Click += new System.EventHandler(this.tipEntradaSaidaEstoque_Click);
+            // 
             // funcionariosToolStripMenuItem
             // 
             this.funcionariosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -211,6 +218,7 @@ namespace TjossSystem
             this.cadastroDeFuncionariosToolStripMenuItem.Name = "cadastroDeFuncionariosToolStripMenuItem";
             this.cadastroDeFuncionariosToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.cadastroDeFuncionariosToolStripMenuItem.Text = "Cadastro de Funcionarios";
+            this.cadastroDeFuncionariosToolStripMenuItem.Click += new System.EventHandler(this.cadastroDeFuncionariosToolStripMenuItem_Click);
             // 
             // cadastroDeCargosToolStripMenuItem
             // 
@@ -224,13 +232,7 @@ namespace TjossSystem
             this.cadastroDeUsuariosToolStripMenuItem.Name = "cadastroDeUsuariosToolStripMenuItem";
             this.cadastroDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.cadastroDeUsuariosToolStripMenuItem.Text = "Cadastro de Usuarios";
-            // 
-            // tipEntradaSaidaEstoque
-            // 
-            this.tipEntradaSaidaEstoque.Name = "tipEntradaSaidaEstoque";
-            this.tipEntradaSaidaEstoque.Size = new System.Drawing.Size(199, 22);
-            this.tipEntradaSaidaEstoque.Text = "Entrada e Saida Estoque";
-            this.tipEntradaSaidaEstoque.Click += new System.EventHandler(this.tipEntradaSaidaEstoque_Click);
+            this.cadastroDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.cadastroDeUsuariosToolStripMenuItem_Click);
             // 
             // FrmMenu
             // 
