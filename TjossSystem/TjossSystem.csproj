@@ -176,6 +176,18 @@
     <Compile Include="FrmPadrao.Designer.cs">
       <DependentUpon>FrmPadrao.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmPedidoNovo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPedidoNovo.Designer.cs">
+      <DependentUpon>FrmPedidoNovo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPedidos.Designer.cs">
+      <DependentUpon>FrmPedidos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmCadastro.resx">
@@ -219,6 +231,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPadrao.resx">
       <DependentUpon>FrmPadrao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPedidoNovo.resx">
+      <DependentUpon>FrmPedidoNovo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPedidos.resx">
+      <DependentUpon>FrmPedidos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

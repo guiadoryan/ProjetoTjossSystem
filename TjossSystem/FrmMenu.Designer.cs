@@ -33,7 +33,7 @@ namespace TjossSystem
             this.cadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDePessoaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pedidosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pedidoDeCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipPedido = new System.Windows.Forms.ToolStripMenuItem();
             this.pedidoDeVendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pedidoDeAluguelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movimentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,29 +89,30 @@ namespace TjossSystem
             // pedidosToolStripMenuItem
             // 
             this.pedidosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pedidoDeCompraToolStripMenuItem,
+            this.tipPedido,
             this.pedidoDeVendaToolStripMenuItem,
             this.pedidoDeAluguelToolStripMenuItem});
             this.pedidosToolStripMenuItem.Name = "pedidosToolStripMenuItem";
             this.pedidosToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.pedidosToolStripMenuItem.Text = "Pedidos";
             // 
-            // pedidoDeCompraToolStripMenuItem
+            // tipPedido
             // 
-            this.pedidoDeCompraToolStripMenuItem.Name = "pedidoDeCompraToolStripMenuItem";
-            this.pedidoDeCompraToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.pedidoDeCompraToolStripMenuItem.Text = "Pedido de compra";
+            this.tipPedido.Name = "tipPedido";
+            this.tipPedido.Size = new System.Drawing.Size(180, 22);
+            this.tipPedido.Text = "Pedido";
+            this.tipPedido.Click += new System.EventHandler(this.tipPedido_Click);
             // 
             // pedidoDeVendaToolStripMenuItem
             // 
             this.pedidoDeVendaToolStripMenuItem.Name = "pedidoDeVendaToolStripMenuItem";
-            this.pedidoDeVendaToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.pedidoDeVendaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pedidoDeVendaToolStripMenuItem.Text = "Pedido de venda";
             // 
             // pedidoDeAluguelToolStripMenuItem
             // 
             this.pedidoDeAluguelToolStripMenuItem.Name = "pedidoDeAluguelToolStripMenuItem";
-            this.pedidoDeAluguelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.pedidoDeAluguelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pedidoDeAluguelToolStripMenuItem.Text = "Pedido de aluguel";
             // 
             // movimentosToolStripMenuItem
@@ -255,7 +256,7 @@ namespace TjossSystem
         private System.Windows.Forms.ToolStripMenuItem cadastrosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroDePessoaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pedidosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pedidoDeCompraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tipPedido;
         private System.Windows.Forms.ToolStripMenuItem pedidoDeVendaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pedidoDeAluguelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem movimentosToolStripMenuItem;

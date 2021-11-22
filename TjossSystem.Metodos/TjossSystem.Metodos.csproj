@@ -135,7 +135,9 @@
       <DependentUpon>TjossModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Metodos.cs" />
+    <Compile Include="ModuloContratos.cs" />
     <Compile Include="ModuloDeItens.cs" />
+    <Compile Include="ModuloPedidos.cs" />
     <Compile Include="ModuloUsuarios.cs" />
     <Compile Include="MovimentacaoEstoque.cs" />
     <Compile Include="movimentoestoque.cs">

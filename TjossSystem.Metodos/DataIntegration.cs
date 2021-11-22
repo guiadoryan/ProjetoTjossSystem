@@ -169,6 +169,7 @@ namespace TjossSystem.Metodos
         [DataMember]
         public string SiglaCidade { get; set; }
 
+        [DataMember]
         public int CodigoEstadoCit { get; set; }
 
         [DataMember]
@@ -187,6 +188,7 @@ namespace TjossSystem.Metodos
         [DataMember]
         public string SiglaEstado { get; set; }
 
+        [DataMember]
         public int CodigoPaisEst { get; set; }
 
         [DataMember]
@@ -398,6 +400,7 @@ namespace TjossSystem.Metodos
         public string ObservacaoMovimento { get; set; }
     }
 
+    [DataContract]
     public class PedidoDI
     {
         [DataMember]
@@ -413,6 +416,9 @@ namespace TjossSystem.Metodos
         public string SituacaoPedido { get; set; }
 
         [DataMember]
+        public DateTime? DataConclusao { get; set; }
+
+        [DataMember]
         public int? NumeroContrato { get; set; }
 
         [DataMember]
@@ -425,6 +431,7 @@ namespace TjossSystem.Metodos
         public List<ItensPedidoDI> ItensPedido { get; set; }
     }
 
+    [DataContract]
     public class ItensPedidoDI
     {
         [DataMember]
@@ -437,6 +444,12 @@ namespace TjossSystem.Metodos
         public int CodigoItem { get; set; }
 
         [DataMember]
+        public decimal QuantidadeSolicitada { get; set; }
+
+        [DataMember]
+        public decimal QuantidadeBaixada { get; set; }
+
+        [DataMember]
         public decimal ValorUnitario { get; set; }
 
         [DataMember]
@@ -447,5 +460,59 @@ namespace TjossSystem.Metodos
 
         [DataMember]
         public int? CodigoMedida { get; set; }
+    }
+
+    [DataContract]
+    public class TipoPedidoDI
+    {
+        [DataMember]
+        public int CodigoTipoPedido { get; set; }
+
+        [DataMember]
+        public string DescricaoTipoPedido{ get; set; }
+
+        [DataMember]
+        public string DescricaoComboBox { get; set; }
+
+        [DataMember]
+        public string SituacaoTipoPedido { get; set; }
+    }
+
+    [DataContract]
+    public class TipoContratoDI
+    {
+        [DataMember]
+        public int CodigoTipoContrato { get; set; }
+
+        [DataMember]
+        public string DescricaoTipoContrato { get; set; }
+
+        [DataMember]
+        public string DescricaoComboBox { get; set; }
+
+        [DataMember]
+        public string SituacaoTipoContrato { get; set; }
+    }
+
+    [DataContract]
+    public class ItensContratoDI
+    {
+        [DataMember]
+        public int NumeroContrato { get; set; }
+
+        [DataMember]
+        public int CodigoTipoContrato { get; set; }
+
+        [DataMember]
+        public int CodigoItem { get; set; }
+
+        [DataMember]
+        public decimal SaldoContratado { get; set; }
+
+        [DataMember]
+        public decimal SaldoAtual { get; set; }
+
+        [DataMember]
+        public decimal ValorItem { get; set; }
     }
 }

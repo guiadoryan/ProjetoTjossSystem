@@ -459,5 +459,34 @@ namespace TjossSystem.Metodos
                 return null;
             }
         }
+
+        public List<DefinicaoDI> ListarDefinicoesCadastro(int pCodigoCadastro)
+        {
+            tjossEntities objConexao = new tjossEntities();
+            List<DefinicaoDI> lstDefinicaoDI = new List<DefinicaoDI>();
+
+            List<definicaocadastro> lstDefinicao = objConexao.definicaocadastro.Where(d => d.codigocadastro == pCodigoCadastro).ToList();
+
+            if (lstDefinicao.Count > 0)
+            {
+                DefinicaoDI objDefinicaoDI;
+                foreach (var objDefinicao in lstDefinicao)
+                {
+                    objDefinicaoDI = new DefinicaoDI 
+                    { 
+                        CodigoCadastro = objDefinicao.codigocadastro, 
+                        CodigoDefinicao = objDefinicao.codigotipodefinicao,
+                        SituacaoDefinicao = objDefinicao.situacao
+                    };
+                    lstDefinicaoDI.Add(objDefinicaoDI);
+                }
+
+                return lstDefinicaoDI;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

@@ -89,5 +89,12 @@ namespace TjossSystem
             objCadastroUsuario.CodigoFuncionario = CodigoFuncionario;
             objCadastroUsuario.Show();
         }
+
+        private void tipPedido_Click(object sender, EventArgs e)
+        {
+            FrmPedidos objPedidos = new FrmPedidos();
+            objPedidos.CodigoFuncionario = CodigoFuncionario;
+            objPedidos.Show();
+        }
     }
 }
