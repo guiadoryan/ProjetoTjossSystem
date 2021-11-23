@@ -29,9 +29,9 @@ namespace TjossSystem
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadastro));
             this.grpDadosChave = new System.Windows.Forms.GroupBox();
             this.cboNumeroCadastro = new System.Windows.Forms.ComboBox();
@@ -199,6 +199,7 @@ namespace TjossSystem
             // txtNumeroCadastro
             // 
             this.txtNumeroCadastro.Location = new System.Drawing.Point(121, 35);
+            this.txtNumeroCadastro.MaxLength = 15;
             this.txtNumeroCadastro.Name = "txtNumeroCadastro";
             this.txtNumeroCadastro.Size = new System.Drawing.Size(224, 20);
             this.txtNumeroCadastro.TabIndex = 0;
@@ -210,6 +211,7 @@ namespace TjossSystem
             this.tbcDadosCadastro.Controls.Add(this.tabEndereco);
             this.tbcDadosCadastro.Controls.Add(this.tabDefinicao);
             this.tbcDadosCadastro.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tbcDadosCadastro.Enabled = false;
             this.tbcDadosCadastro.Location = new System.Drawing.Point(0, 88);
             this.tbcDadosCadastro.Name = "tbcDadosCadastro";
             this.tbcDadosCadastro.SelectedIndex = 0;
@@ -434,6 +436,7 @@ namespace TjossSystem
             // txtObservacaoMedida
             // 
             this.txtObservacaoMedida.Location = new System.Drawing.Point(117, 158);
+            this.txtObservacaoMedida.MaxLength = 80;
             this.txtObservacaoMedida.Name = "txtObservacaoMedida";
             this.txtObservacaoMedida.Size = new System.Drawing.Size(362, 20);
             this.txtObservacaoMedida.TabIndex = 26;
@@ -450,6 +453,7 @@ namespace TjossSystem
             // txtBustoMedida
             // 
             this.txtBustoMedida.Location = new System.Drawing.Point(117, 132);
+            this.txtBustoMedida.MaxLength = 10;
             this.txtBustoMedida.Name = "txtBustoMedida";
             this.txtBustoMedida.Size = new System.Drawing.Size(55, 20);
             this.txtBustoMedida.TabIndex = 24;
@@ -531,9 +535,9 @@ namespace TjossSystem
             // clnAlturaMedida
             // 
             this.clnAlturaMedida.DataPropertyName = "Altura";
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.clnAlturaMedida.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Format = "N2";
+            dataGridViewCellStyle13.NullValue = null;
+            this.clnAlturaMedida.DefaultCellStyle = dataGridViewCellStyle13;
             this.clnAlturaMedida.HeaderText = "Altura";
             this.clnAlturaMedida.Name = "clnAlturaMedida";
             this.clnAlturaMedida.ReadOnly = true;
@@ -541,8 +545,8 @@ namespace TjossSystem
             // clnCinturaMedida
             // 
             this.clnCinturaMedida.DataPropertyName = "Cintura";
-            dataGridViewCellStyle2.Format = "N2";
-            this.clnCinturaMedida.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Format = "N2";
+            this.clnCinturaMedida.DefaultCellStyle = dataGridViewCellStyle14;
             this.clnCinturaMedida.HeaderText = "Cintura";
             this.clnCinturaMedida.Name = "clnCinturaMedida";
             this.clnCinturaMedida.ReadOnly = true;
@@ -550,8 +554,8 @@ namespace TjossSystem
             // clnOmbroAhOmbro
             // 
             this.clnOmbroAhOmbro.DataPropertyName = "OmbroAhOmbro";
-            dataGridViewCellStyle3.Format = "N2";
-            this.clnOmbroAhOmbro.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Format = "N2";
+            this.clnOmbroAhOmbro.DefaultCellStyle = dataGridViewCellStyle15;
             this.clnOmbroAhOmbro.HeaderText = "Ombro a Ombro";
             this.clnOmbroAhOmbro.Name = "clnOmbroAhOmbro";
             this.clnOmbroAhOmbro.ReadOnly = true;
@@ -597,6 +601,7 @@ namespace TjossSystem
             // txtOmbroAhOmbro
             // 
             this.txtOmbroAhOmbro.Location = new System.Drawing.Point(117, 106);
+            this.txtOmbroAhOmbro.MaxLength = 10;
             this.txtOmbroAhOmbro.Name = "txtOmbroAhOmbro";
             this.txtOmbroAhOmbro.Size = new System.Drawing.Size(55, 20);
             this.txtOmbroAhOmbro.TabIndex = 19;
@@ -613,6 +618,7 @@ namespace TjossSystem
             // txtCintura
             // 
             this.txtCintura.Location = new System.Drawing.Point(117, 80);
+            this.txtCintura.MaxLength = 10;
             this.txtCintura.Name = "txtCintura";
             this.txtCintura.Size = new System.Drawing.Size(55, 20);
             this.txtCintura.TabIndex = 17;
@@ -629,6 +635,7 @@ namespace TjossSystem
             // txtAltura
             // 
             this.txtAltura.Location = new System.Drawing.Point(117, 54);
+            this.txtAltura.MaxLength = 10;
             this.txtAltura.Name = "txtAltura";
             this.txtAltura.Size = new System.Drawing.Size(55, 20);
             this.txtAltura.TabIndex = 15;
@@ -739,6 +746,7 @@ namespace TjossSystem
             // txtCepEndereco
             // 
             this.txtCepEndereco.Location = new System.Drawing.Point(107, 145);
+            this.txtCepEndereco.MaxLength = 8;
             this.txtCepEndereco.Name = "txtCepEndereco";
             this.txtCepEndereco.Size = new System.Drawing.Size(287, 20);
             this.txtCepEndereco.TabIndex = 6;
@@ -883,6 +891,7 @@ namespace TjossSystem
             // txtComplemento
             // 
             this.txtComplemento.Location = new System.Drawing.Point(107, 119);
+            this.txtComplemento.MaxLength = 80;
             this.txtComplemento.Name = "txtComplemento";
             this.txtComplemento.Size = new System.Drawing.Size(287, 20);
             this.txtComplemento.TabIndex = 5;
@@ -899,6 +908,7 @@ namespace TjossSystem
             // txtNumero
             // 
             this.txtNumero.Location = new System.Drawing.Point(107, 93);
+            this.txtNumero.MaxLength = 10;
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(60, 20);
             this.txtNumero.TabIndex = 4;
@@ -915,6 +925,7 @@ namespace TjossSystem
             // txtBairro
             // 
             this.txtBairro.Location = new System.Drawing.Point(107, 67);
+            this.txtBairro.MaxLength = 80;
             this.txtBairro.Name = "txtBairro";
             this.txtBairro.Size = new System.Drawing.Size(146, 20);
             this.txtBairro.TabIndex = 3;
@@ -931,6 +942,7 @@ namespace TjossSystem
             // txtEndereco
             // 
             this.txtEndereco.Location = new System.Drawing.Point(107, 41);
+            this.txtEndereco.MaxLength = 80;
             this.txtEndereco.Name = "txtEndereco";
             this.txtEndereco.Size = new System.Drawing.Size(287, 20);
             this.txtEndereco.TabIndex = 2;
@@ -947,6 +959,7 @@ namespace TjossSystem
             // txtFilial
             // 
             this.txtFilial.Location = new System.Drawing.Point(107, 15);
+            this.txtFilial.MaxLength = 4;
             this.txtFilial.Name = "txtFilial";
             this.txtFilial.Size = new System.Drawing.Size(60, 20);
             this.txtFilial.TabIndex = 1;
@@ -1186,6 +1199,7 @@ namespace TjossSystem
             // 
             this.tsbGravar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tsbGravar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbGravar.Enabled = false;
             this.tsbGravar.Image = ((System.Drawing.Image)(resources.GetObject("tsbGravar.Image")));
             this.tsbGravar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbGravar.Name = "tsbGravar";
@@ -1201,10 +1215,8 @@ namespace TjossSystem
             this.Controls.Add(this.tspBotoes);
             this.Controls.Add(this.tbcDadosCadastro);
             this.Controls.Add(this.grpDadosChave);
-            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "FrmCadastro";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro";
             this.Load += new System.EventHandler(this.FrmCadastro_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmCadastro_KeyDown);

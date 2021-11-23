@@ -53,6 +53,9 @@ namespace TjossSystem
             this.clnCodigoCadastroMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnCodigoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpCamposItem = new System.Windows.Forms.GroupBox();
+            this.bntEditarItem = new System.Windows.Forms.Button();
+            this.txtValorUnitario = new System.Windows.Forms.TextBox();
+            this.lblValorUnitarioItem = new System.Windows.Forms.Label();
             this.txtCodigoMedida = new System.Windows.Forms.TextBox();
             this.lblCodigoMedida = new System.Windows.Forms.Label();
             this.txtCodigoCadastroMedida = new System.Windows.Forms.TextBox();
@@ -62,8 +65,6 @@ namespace TjossSystem
             this.txtCodigoItem = new System.Windows.Forms.TextBox();
             this.lblCodigoItem = new System.Windows.Forms.Label();
             this.blnAdicionarItem = new System.Windows.Forms.Button();
-            this.txtValorUnitario = new System.Windows.Forms.TextBox();
-            this.lblValorUnitarioItem = new System.Windows.Forms.Label();
             this.grpDadosChaveCargo.SuspendLayout();
             this.tspBotoes.SuspendLayout();
             this.grpDadosBasicos.SuspendLayout();
@@ -290,6 +291,7 @@ namespace TjossSystem
             // 
             // grpCamposItem
             // 
+            this.grpCamposItem.Controls.Add(this.bntEditarItem);
             this.grpCamposItem.Controls.Add(this.txtValorUnitario);
             this.grpCamposItem.Controls.Add(this.lblValorUnitarioItem);
             this.grpCamposItem.Controls.Add(this.txtCodigoMedida);
@@ -307,6 +309,34 @@ namespace TjossSystem
             this.grpCamposItem.Size = new System.Drawing.Size(986, 106);
             this.grpCamposItem.TabIndex = 1;
             this.grpCamposItem.TabStop = false;
+            // 
+            // bntEditarItem
+            // 
+            this.bntEditarItem.Location = new System.Drawing.Point(740, 66);
+            this.bntEditarItem.Name = "bntEditarItem";
+            this.bntEditarItem.Size = new System.Drawing.Size(112, 29);
+            this.bntEditarItem.TabIndex = 24;
+            this.bntEditarItem.Text = "Editar Item";
+            this.bntEditarItem.UseVisualStyleBackColor = true;
+            this.bntEditarItem.Click += new System.EventHandler(this.bntEditarItem_Click);
+            // 
+            // txtValorUnitario
+            // 
+            this.txtValorUnitario.Enabled = false;
+            this.txtValorUnitario.Location = new System.Drawing.Point(135, 71);
+            this.txtValorUnitario.MaxLength = 15;
+            this.txtValorUnitario.Name = "txtValorUnitario";
+            this.txtValorUnitario.Size = new System.Drawing.Size(104, 20);
+            this.txtValorUnitario.TabIndex = 2;
+            // 
+            // lblValorUnitarioItem
+            // 
+            this.lblValorUnitarioItem.AutoSize = true;
+            this.lblValorUnitarioItem.Location = new System.Drawing.Point(12, 74);
+            this.lblValorUnitarioItem.Name = "lblValorUnitarioItem";
+            this.lblValorUnitarioItem.Size = new System.Drawing.Size(73, 13);
+            this.lblValorUnitarioItem.TabIndex = 23;
+            this.lblValorUnitarioItem.Text = "Valor Unitário:";
             // 
             // txtCodigoMedida
             // 
@@ -378,31 +408,13 @@ namespace TjossSystem
             // 
             // blnAdicionarItem
             // 
-            this.blnAdicionarItem.Location = new System.Drawing.Point(862, 36);
+            this.blnAdicionarItem.Location = new System.Drawing.Point(868, 66);
             this.blnAdicionarItem.Name = "blnAdicionarItem";
             this.blnAdicionarItem.Size = new System.Drawing.Size(112, 29);
             this.blnAdicionarItem.TabIndex = 5;
             this.blnAdicionarItem.Text = "Adicionar Item";
             this.blnAdicionarItem.UseVisualStyleBackColor = true;
             this.blnAdicionarItem.Click += new System.EventHandler(this.blnAdicionarItem_Click);
-            // 
-            // txtValorUnitario
-            // 
-            this.txtValorUnitario.Enabled = false;
-            this.txtValorUnitario.Location = new System.Drawing.Point(135, 71);
-            this.txtValorUnitario.MaxLength = 15;
-            this.txtValorUnitario.Name = "txtValorUnitario";
-            this.txtValorUnitario.Size = new System.Drawing.Size(104, 20);
-            this.txtValorUnitario.TabIndex = 2;
-            // 
-            // lblValorUnitarioItem
-            // 
-            this.lblValorUnitarioItem.AutoSize = true;
-            this.lblValorUnitarioItem.Location = new System.Drawing.Point(12, 74);
-            this.lblValorUnitarioItem.Name = "lblValorUnitarioItem";
-            this.lblValorUnitarioItem.Size = new System.Drawing.Size(73, 13);
-            this.lblValorUnitarioItem.TabIndex = 23;
-            this.lblValorUnitarioItem.Text = "Valor Unitário:";
             // 
             // FrmPedidoNovo
             // 
@@ -416,6 +428,7 @@ namespace TjossSystem
             this.Name = "FrmPedidoNovo";
             this.Text = "Pedido Novo";
             this.Load += new System.EventHandler(this.FrmPedidoNovo_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmPedidoNovo_KeyDown);
             this.grpDadosChaveCargo.ResumeLayout(false);
             this.grpDadosChaveCargo.PerformLayout();
             this.tspBotoes.ResumeLayout(false);
@@ -465,5 +478,6 @@ namespace TjossSystem
         private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoMedida;
         private System.Windows.Forms.TextBox txtValorUnitario;
         private System.Windows.Forms.Label lblValorUnitarioItem;
+        private System.Windows.Forms.Button bntEditarItem;
     }
 }

@@ -209,6 +209,138 @@ namespace TjossSystem
             dgvItensPedido.DataSource = objPedidoDI.ItensPedido;
         }
 
+        private void bntEditarItem_Click(object sender, EventArgs e)
+        {
+            /*DataGridViewRow rowItemPedido = dgvItensPedido.SelectedRows.Count > 0 ? dgvItensPedido.SelectedRows[0] : null;
+            if (rowItemPedido != null)
+            {
+                Metodos.Metodos objMetodos = new Metodos.Metodos();
+                ModuloDeItens objModuloItens = new ModuloDeItens();
+                ModuloPedidos objModuloPedidos = new ModuloPedidos();
+                ModuloContratos objModuloContratos = new ModuloContratos();
+
+                decimal decPrecoItem = 0;
+                //Validação dos campos, estoque e cadastro/atividade
+                if (!string.IsNullOrEmpty(txtCodigoItem.Text))
+                {
+                    if (!int.TryParse(txtCodigoItem.Text, out _))
+                    {
+                        MessageBox.Show($"Código do item está inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    //Buscar preço do item no banco.
+                    decPrecoItem = objModuloItens.ConsultarEstoque(Convert.ToInt32(txtCodigoItem.Text), 1).ValorUnitario;
+                    if (decPrecoItem == 0)
+                    {
+                        MessageBox.Show($"Item não cadastrado no estoque!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Código do item está vazio!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!string.IsNullOrEmpty(txtQuantidadeSolicitada.Text))
+                {
+                    if (!decimal.TryParse(txtQuantidadeSolicitada.Text, out _))
+                    {
+                        MessageBox.Show($"Quantidade solicitada está inválida!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    if (Convert.ToDecimal(txtQuantidadeSolicitada.Text) <= 0)
+                    {
+                        MessageBox.Show($"Quantidade solicitada está tem que ser maior que zero!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Quantidade solicitada está inválida!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!string.IsNullOrEmpty(txtCodigoCadastroMedida.Text) && !string.IsNullOrEmpty(txtCodigoMedida.Text))
+                {
+                    if (!int.TryParse(txtCodigoCadastroMedida.Text, out _))
+                    {
+                        MessageBox.Show($"Código do cadastro de medida está inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    if (!int.TryParse(txtCodigoMedida.Text, out _))
+                    {
+                        MessageBox.Show($"Código medida está inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(txtNumeroContrato.Text))
+                {
+                    if (!int.TryParse(txtNumeroContrato.Text, out _))
+                    {
+                        MessageBox.Show($"Número do contrato está inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    ItensContratoDI objItemContrato = objModuloContratos.BuscarItemDoContrato(Convert.ToInt32(txtNumeroContrato.Text), (int)cboCodigoTipoContrato.SelectedValue, Convert.ToInt32(txtCodigoItem.Text));
+                    if (objItemContrato == null)
+                    {
+                        MessageBox.Show($"Item não encontrado no contrato informado!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                //buscar cadastro para validação de definição.
+                List<DefinicaoDI> lstDefinicaoCadastro = objMetodos.ListarDefinicoesCadastro(Convert.ToInt32(txtCodigoCadastro.Text));
+                if ((int)cboCodigoTipoPedido.SelectedValue == 1) //Se for pedido de compra, o cadastro tem que ser fornecedor.
+                {
+                    DefinicaoDI objDefinicaoDI = lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 2).FirstOrDefault();
+                    if (objDefinicaoDI == null || lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 2).FirstOrDefault().CodigoDefinicao != 2)
+                    {
+                        MessageBox.Show($"Cadastro não é um fornecedor!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (!string.IsNullOrEmpty(txtValorUnitario.Text))
+                    {
+                        if (!decimal.TryParse(txtValorUnitario.Text, out _))
+                        {
+                            MessageBox.Show($"Valor unitário inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Valor unitário está vazio!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+                else if ((int)cboCodigoTipoPedido.SelectedValue != 1) //Se for venda ou aluguel, pega atividade de cliente.
+                {
+                    DefinicaoDI objDefinicaoDI = lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 2).FirstOrDefault();
+                    if (objDefinicaoDI == null || lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 1).FirstOrDefault().CodigoDefinicao != 1)
+                    {
+                        MessageBox.Show($"Cadastro não é um cliente!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if ((int)cboCodigoTipoPedido.SelectedValue == 3)
+                    {
+                        decPrecoItem /= 2; //Aluguel é pela metade do preço do item.
+                    }
+                }
+
+                rowItemPedido.Cells[clnValorUnitario.Name].Value = !string.IsNullOrEmpty(txtAltura.Text) ? txtAltura.Text : string.Empty;
+                rowItemPedido.Cells[clnCinturaMedida.Name].Value = !string.IsNullOrEmpty(txtCintura.Text) ? txtCintura.Text : string.Empty;
+                rowItemPedido.Cells[clnOmbroAhOmbro.Name].Value = !string.IsNullOrEmpty(txtOmbroAhOmbro.Text) ? txtOmbroAhOmbro.Text : string.Empty;
+                rowItemPedido.Cells[clnBustoMedida.Name].Value = !string.IsNullOrEmpty(txtBustoMedida.Text) ? txtBustoMedida.Text : string.Empty;
+                rowItemPedido.Cells[clnObservacaoMedida.Name].Value = !string.IsNullOrEmpty(txtObservacaoMedida.Text) ? txtObservacaoMedida.Text : string.Empty;
+                rowItemPedido.Cells[clnSituacaoMedida.Name].Value = cboSituacaoMedida.SelectedIndex == 0 ? "A" : "I";
+            }*/
+        }
+
         private void tsbGravar_Click(object sender, EventArgs e)
         {
             ModuloPedidos objModuloPedidos = new ModuloPedidos();
@@ -324,20 +456,6 @@ namespace TjossSystem
                     MessageBox.Show($"Cadastro não é um fornecedor!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-
-                if (!string.IsNullOrEmpty(txtValorUnitario.Text))
-                {
-                    if (!decimal.TryParse(txtValorUnitario.Text, out _))
-                    {
-                        MessageBox.Show($"Valor unitário inválido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show($"Valor unitário está vazio!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
             }
             else if ((int)cboCodigoTipoPedido.SelectedValue != 1) //Se for venda ou aluguel, pega atividade de cliente.
             {
@@ -354,6 +472,24 @@ namespace TjossSystem
                 }
             }
             grpDadosChaveCargo.Enabled = false;
+        }
+
+        private void FrmPedidoNovo_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F9:
+                    tsbGravar.PerformClick();
+                    break;
+                case Keys.F10:
+                    tsbLimpar.PerformClick();
+                    break;
+                case Keys.F12:
+                    tsbFechar.PerformClick();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

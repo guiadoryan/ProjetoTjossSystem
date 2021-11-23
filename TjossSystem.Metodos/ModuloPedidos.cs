@@ -8,6 +8,181 @@ namespace TjossSystem.Metodos
 {
     public class ModuloPedidos
     {
+        public bool FecharPedido(PedidoDI pPedido, int pCodigoFuncionario, out string pErro)
+        {
+            tjossEntities objConexao = new tjossEntities();
+            pedidos objPedidos = new pedidos();
+            itenspedido objItensPedido = new itenspedido();
+            List<MovimentacaoEstoqueDI> lstMovimentoEstoqueDI = new List<MovimentacaoEstoqueDI>();
+
+            try
+            {
+                if (pPedido.SituacaoPedido != "F")
+                {
+                    pErro = $"Pedido tem que estar em fechamento!";
+                    return false;
+                }
+
+                objPedidos = objConexao.pedidos.Where(c => c.numeropedido == pPedido.NumeroPedido && c.codigotipopedido == pPedido.CodigoTipoPedido && c.situacaopedido == "A").FirstOrDefault();
+
+                if (objPedidos == null)
+                {
+                    objPedidos = null;
+                    pErro = $"Pedido não está valido!";
+                    return false;                    
+                }
+
+                objPedidos.situacaopedido = pPedido.SituacaoPedido;
+                objPedidos.dataconclusao = DateTime.Now.Date;
+
+                //objPedidos.valortotalpedido = pPedido.ValorTotalPedido;
+
+                //objConexao.SaveChanges();
+                //Pega o numero do pedido que foi gerado pelo auto-increment.
+                int intNumeroPedido = objPedidos.numeropedido;
+
+                if (objPedidos.itenspedido.Count <= 0)
+                {
+                    pErro = $"Pedido tem ter mais de um item!";
+                    return false;
+                }
+
+                decimal decValorTotalPedido = 0;
+                foreach (var objItemPedidoDI in objPedidos.itenspedido)
+                {
+                    objItensPedido = objConexao.itenspedido.Where(ip => ip.numeropedido == intNumeroPedido &&
+                                                                  ip.codigotipopedido == pPedido.CodigoTipoPedido &&
+                                                                  ip.codigoitem == objItemPedidoDI.codigoitem).FirstOrDefault();
+                    if (objItensPedido == null)
+                    {
+                        objItensPedido = null;
+                        pErro = $"Itens do Pedido não estão validos!";
+                        return false;
+                    }
+
+                    objItensPedido.quantidadebaixada = objItensPedido.quantidadesolicitada;
+                    objItensPedido.valortotalitem = objItemPedidoDI.valorunitario * objItemPedidoDI.quantidadebaixada;
+                    decValorTotalPedido += objItensPedido.valortotalitem;
+
+                    lstMovimentoEstoqueDI.Add(new MovimentacaoEstoqueDI
+                    {
+                        CodigoItem = objItemPedidoDI.codigoitem,
+                        CodigoTipoEstoque = 1,
+                        TipoMovimento = pPedido.CodigoTipoPedido == 1 ? "E" : "S",
+                        QuantidadeMovimentada = objItemPedidoDI.quantidadebaixada,
+                        DatahMovimento = DateTime.Now,
+                        CodigoFuncionario = pCodigoFuncionario,
+                        NumeroPedido = pPedido.NumeroPedido,
+                        CodigoTipoPedido = pPedido.CodigoTipoPedido,
+                        ObservacaoMovimento = $"{(pPedido.CodigoTipoPedido == 1 ? $"Entrada Pelo Pedido de compra {intNumeroPedido}" : $"Saida Pelo pedido de {(pPedido.CodigoTipoPedido == 3 ? "Aluguel" : "Venda")}")}."
+                    });
+                }
+
+                if (decValorTotalPedido <= 0)
+                {
+                    pErro = $"Valor total do pedido é igual a zero!";
+                    return false;
+                }
+
+                objPedidos.valortotalpedido = decValorTotalPedido;
+
+                //Faz movimentacao de estoque
+                foreach (var objMovimentoEstoque in lstMovimentoEstoqueDI)
+                {
+                    itemestoque objItemEstoque = objConexao.itemestoque.Where(i => i.codigoitem == objMovimentoEstoque.CodigoItem && i.codigotipoestoque == objMovimentoEstoque.CodigoTipoEstoque).FirstOrDefault();
+
+                    if (objItemEstoque == null)
+                    {
+                        pErro = $"Item {objMovimentoEstoque.CodigoItem} não foi cadastrado, verifique!";
+                        return false;
+                    }
+
+                    if(objMovimentoEstoque.TipoMovimento == "E")
+                    {
+                        objItemEstoque.quantidadedisponivel += objMovimentoEstoque.QuantidadeMovimentada;
+                    }
+                    else
+                    {
+                        if (objItemEstoque.quantidadedisponivel >= objMovimentoEstoque.QuantidadeMovimentada)
+                        {
+                            objItemEstoque.quantidadedisponivel -= objMovimentoEstoque.QuantidadeMovimentada;
+                        }
+                        else
+                        {
+                            pErro = $"Item {objMovimentoEstoque.CodigoItem} não possui estoque suficiente, verifique!";
+                            return false;
+                        }
+                    }
+
+                    objConexao.movimentoestoque.Add(new movimentoestoque
+                    {
+                        codigoitem = objMovimentoEstoque.CodigoItem,
+                        codigotipoestoque = objMovimentoEstoque.CodigoTipoEstoque,
+                        tipomovimento = objMovimentoEstoque.TipoMovimento,
+                        quantidademovimentada = objMovimentoEstoque.QuantidadeMovimentada,
+                        datahmovimento = objMovimentoEstoque.DatahMovimento,
+                        codigofuncionario = objMovimentoEstoque.CodigoFuncionario,
+                        numeropedido = objMovimentoEstoque.NumeroPedido,
+                        codigotipopedido = objMovimentoEstoque.CodigoTipoPedido,
+                        observacaomovimento = objMovimentoEstoque.ObservacaoMovimento
+                    });
+                }
+
+                objConexao.SaveChanges();
+                pErro = string.Empty;
+                return true;
+            }
+            catch (Exception pEx)
+            {
+                pErro = $"Exceção ao executar o metodo FecharPedido.{Environment.NewLine}{pEx.InnerException.InnerException}";
+                return false;
+            }
+        }
+
+        public bool CancelarPedido(PedidoDI pPedido, out string pErro)
+        {
+            tjossEntities objConexao = new tjossEntities();
+            pedidos objPedidos = new pedidos();
+            itenspedido objItensPedido = new itenspedido();
+            bool blnNovoPedido = false;
+
+            try
+            {
+                if (pPedido.SituacaoPedido != "C")
+                {
+                    pErro = $"Metodo só pode ser chamado quando for cancelamento";
+                    return false;
+                }
+
+                objPedidos = objConexao.pedidos.Where(c => c.numeropedido == pPedido.NumeroPedido && c.codigotipopedido == pPedido.CodigoTipoPedido && c.situacaopedido != "C").FirstOrDefault();
+
+                if (objPedidos == null)
+                {
+                    objPedidos = null;
+                    pErro = $"Pedido não foi encontrado ou já foi cancelado!";
+                    return false;
+                }
+
+                objPedidos.situacaopedido = pPedido.SituacaoPedido;
+                objPedidos.dataconclusao = DateTime.Now.Date;
+
+                if (blnNovoPedido)
+                {
+                    objConexao.pedidos.Add(objPedidos);
+                }
+
+                objConexao.SaveChanges();
+
+                pErro = string.Empty;
+                return true;
+            }
+            catch (Exception pEx)
+            {
+                pErro = $"Exceção ao executar o metodo CancelarPedido.{Environment.NewLine}{pEx.InnerException.InnerException}";
+                return false;
+            }
+        }
+
         public bool RegistrarPedido(PedidoDI pPedido, out string pErro)
         {
             tjossEntities objConexao = new tjossEntities();
@@ -58,7 +233,7 @@ namespace TjossSystem.Metodos
                         objItensPedido.codigoitem = objItemPedidoDI.CodigoItem;
                     }
 
-                    objItensPedido.quantidadesolicitada = objItemPedidoDI.QuantidadeBaixada;
+                    objItensPedido.quantidadebaixada = objItemPedidoDI.QuantidadeBaixada;
                     objItensPedido.quantidadesolicitada = objItemPedidoDI.QuantidadeSolicitada;
                     objItensPedido.valorunitario = objItemPedidoDI.ValorUnitario;
                     objItensPedido.valortotalitem = objItemPedidoDI.ValorTotalItem;
@@ -94,9 +269,10 @@ namespace TjossSystem.Metodos
 
             try
             {
-                lstPedidos = objConexao.pedidos.Where(p => pNumeroPedido > 0 ? p.numeropedido == pNumeroPedido : 1 == 1 && 
-                                                           pCodigoTipoPedido > 0 ? p.codigotipopedido == pCodigoTipoPedido : 1 == 1 &&
-                                                           pCodigoCadastro > 0 ? p.codigocadastro == pCodigoCadastro : 1 == 1 ).ToList();
+                lstPedidos = objConexao.pedidos.Where(p => (pNumeroPedido > 0 ? p.numeropedido == pNumeroPedido : 1 == 1) && 
+                                                           (pCodigoTipoPedido > 0 ? p.codigotipopedido == pCodigoTipoPedido : 1 == 1) &&
+                                                           (pCodigoCadastro > 0 ? p.codigocadastro == pCodigoCadastro : 1 == 1) &&
+                                                           p.situacaopedido == "A").ToList();
 
                 foreach (var objPedido in lstPedidos)
                 {

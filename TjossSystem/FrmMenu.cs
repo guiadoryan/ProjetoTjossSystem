@@ -96,5 +96,12 @@ namespace TjossSystem
             objPedidos.CodigoFuncionario = CodigoFuncionario;
             objPedidos.Show();
         }
+
+        private void tipContrato_Click(object sender, EventArgs e)
+        {
+            FrmContratos objContratos = new FrmContratos();
+            objContratos.CodigoFuncionario = CodigoFuncionario;
+            objContratos.Show();
+        }
     }
 }

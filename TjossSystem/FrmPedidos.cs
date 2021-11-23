@@ -180,11 +180,86 @@ namespace TjossSystem
         private void btnFecharPedido_Click(object sender, EventArgs e)
         {
             //Fecha pedido e movimenta estoque.
+            if (dgvPedidos.SelectedRows.Count == 1)
+            {
+                ModuloPedidos objMetodosPedidos = new ModuloPedidos();
+                string strErro = string.Empty;
+                DataGridViewRow rowLinha = dgvPedidos.SelectedRows[0];
+                objPedidoDI = new PedidoDI
+                {
+                    NumeroPedido = Convert.ToInt32(rowLinha.Cells[clnNumeroPedido.Name].Value),
+                    CodigoTipoPedido = Convert.ToInt32(rowLinha.Cells[clnCodigoTipoPedido.Name].Value),
+                    SituacaoPedido = "F", //Status de cancelado
+                    CodigoCadastro = Convert.ToInt32(rowLinha.Cells[clnCodigoCadastro.Name].Value),
+                    NumeroContrato = rowLinha.Cells[clnNumeroContrato.Name].Value != null ? (int?)rowLinha.Cells[clnNumeroContrato.Name].Value : null,
+                    CodigoTipoContrato = rowLinha.Cells[clnNumeroContrato.Name].Value != null ? (int?)rowLinha.Cells[clnCodigoTipoContrato.Name].Value : null
+                };
+
+                if (!objMetodosPedidos.FecharPedido(objPedidoDI, CodigoFuncionario, out strErro))
+                {
+                    MessageBox.Show($"{strErro}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                tsbLimpar.PerformClick();
+            }
         }
 
         private void btnCancelarPedido_Click(object sender, EventArgs e)
         {
             //Apenas cancela o Pedido.
+            if (dgvPedidos.SelectedRows.Count == 1)
+            {
+                ModuloPedidos objMetodosPedidos = new ModuloPedidos();
+                string strErro = string.Empty;
+                DataGridViewRow rowLinha = dgvPedidos.SelectedRows[0];
+                objPedidoDI = new PedidoDI
+                {
+                    NumeroPedido = Convert.ToInt32(rowLinha.Cells[clnNumeroPedido.Name].Value),
+                    CodigoTipoPedido = Convert.ToInt32(rowLinha.Cells[clnCodigoTipoPedido.Name].Value),
+                    SituacaoPedido = "C", //Status de cancelado
+                    CodigoCadastro = Convert.ToInt32(rowLinha.Cells[clnCodigoCadastro.Name].Value),
+                };
+
+                if (!objMetodosPedidos.CancelarPedido(objPedidoDI, out strErro))
+                {
+                    MessageBox.Show($"{strErro}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                tsbLimpar.PerformClick();
+            }
+        }
+
+        private void tsbLimpar_Click(object sender, EventArgs e)
+        {
+            FrmPedidos objNewForm = new FrmPedidos();
+            objNewForm.CodigoFuncionario = CodigoFuncionario;
+            objNewForm.Show();
+            this.Dispose(false);
+        }
+
+        private void tsbFechar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void FrmPedidos_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F9:
+                    tsbGravar.PerformClick();
+                    break;
+                case Keys.F10:
+                    tsbLimpar.PerformClick();
+                    break;
+                case Keys.F12:
+                    tsbFechar.PerformClick();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

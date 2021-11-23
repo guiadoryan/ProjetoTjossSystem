@@ -495,6 +495,40 @@ namespace TjossSystem.Metodos
     }
 
     [DataContract]
+    public class ContratoDI
+    {
+        [DataMember]
+        public int NumeroContrato { get; set; }
+
+        [DataMember]
+        public int CodigoTipoContrato { get; set; }
+
+        [DataMember]
+        public int CodigoCadastro { get; set; }
+
+        [DataMember]
+        public DateTime DataContrato { get; set; }
+
+        [DataMember]
+        public DateTime DataVencimento { get; set; }
+
+        [DataMember]
+        public string SituacaoContrato { get; set; }
+
+        [DataMember]
+        public int? CodigoVendedor { get; set; }
+
+        [DataMember]
+        public DateTime DatahAlteracao { get; set; }
+
+        [DataMember]
+        public int CodigoFuncionario { get; set; }
+
+        [DataMember]
+        public List<ItensContratoDI> ItensContrato { get; set; }
+    }
+
+    [DataContract]
     public class ItensContratoDI
     {
         [DataMember]

@@ -35,10 +35,6 @@ namespace TjossSystem
             this.txtCodigoItem = new System.Windows.Forms.TextBox();
             this.lblCodigoItem = new System.Windows.Forms.Label();
             this.grpDadosBasicos = new System.Windows.Forms.GroupBox();
-            this.tspBotoes = new System.Windows.Forms.ToolStrip();
-            this.tsbFechar = new System.Windows.Forms.ToolStripButton();
-            this.tsbLimpar = new System.Windows.Forms.ToolStripButton();
-            this.tsbGravar = new System.Windows.Forms.ToolStripButton();
             this.txtCodigoFuncionario = new System.Windows.Forms.TextBox();
             this.txtDatahAlteracao = new System.Windows.Forms.TextBox();
             this.txtDescricaoItem = new System.Windows.Forms.TextBox();
@@ -49,6 +45,10 @@ namespace TjossSystem
             this.lblSituacao = new System.Windows.Forms.Label();
             this.lblCodigoTipoItem = new System.Windows.Forms.Label();
             this.lblDescricaoItem = new System.Windows.Forms.Label();
+            this.tspBotoes = new System.Windows.Forms.ToolStrip();
+            this.tsbFechar = new System.Windows.Forms.ToolStripButton();
+            this.tsbLimpar = new System.Windows.Forms.ToolStripButton();
+            this.tsbGravar = new System.Windows.Forms.ToolStripButton();
             this.grpDadosChaveItens.SuspendLayout();
             this.grpDadosBasicos.SuspendLayout();
             this.tspBotoes.SuspendLayout();
@@ -113,57 +113,11 @@ namespace TjossSystem
             this.grpDadosBasicos.TabIndex = 1;
             this.grpDadosBasicos.TabStop = false;
             // 
-            // tspBotoes
-            // 
-            this.tspBotoes.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tspBotoes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbFechar,
-            this.tsbLimpar,
-            this.tsbGravar});
-            this.tspBotoes.Location = new System.Drawing.Point(0, 242);
-            this.tspBotoes.Name = "tspBotoes";
-            this.tspBotoes.Size = new System.Drawing.Size(484, 25);
-            this.tspBotoes.TabIndex = 10;
-            this.tspBotoes.Text = "toolStrip1";
-            // 
-            // tsbFechar
-            // 
-            this.tsbFechar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsbFechar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbFechar.Image = ((System.Drawing.Image)(resources.GetObject("tsbFechar.Image")));
-            this.tsbFechar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbFechar.Name = "tsbFechar";
-            this.tsbFechar.Size = new System.Drawing.Size(75, 22);
-            this.tsbFechar.Text = "F12 - Fechar";
-            this.tsbFechar.Click += new System.EventHandler(this.tsbFechar_Click);
-            // 
-            // tsbLimpar
-            // 
-            this.tsbLimpar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsbLimpar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbLimpar.Image = ((System.Drawing.Image)(resources.GetObject("tsbLimpar.Image")));
-            this.tsbLimpar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbLimpar.Name = "tsbLimpar";
-            this.tsbLimpar.Size = new System.Drawing.Size(77, 22);
-            this.tsbLimpar.Text = "F10 - Limpar";
-            this.tsbLimpar.Click += new System.EventHandler(this.tsbLimpar_Click);
-            // 
-            // tsbGravar
-            // 
-            this.tsbGravar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsbGravar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbGravar.Enabled = false;
-            this.tsbGravar.Image = ((System.Drawing.Image)(resources.GetObject("tsbGravar.Image")));
-            this.tsbGravar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbGravar.Name = "tsbGravar";
-            this.tsbGravar.Size = new System.Drawing.Size(68, 22);
-            this.tsbGravar.Text = "F9 - Gravar";
-            this.tsbGravar.Click += new System.EventHandler(this.tsbGravar_Click);
-            // 
             // txtCodigoFuncionario
             // 
             this.txtCodigoFuncionario.Enabled = false;
             this.txtCodigoFuncionario.Location = new System.Drawing.Point(114, 119);
+            this.txtCodigoFuncionario.MaxLength = 20;
             this.txtCodigoFuncionario.Name = "txtCodigoFuncionario";
             this.txtCodigoFuncionario.Size = new System.Drawing.Size(121, 20);
             this.txtCodigoFuncionario.TabIndex = 9;
@@ -172,6 +126,7 @@ namespace TjossSystem
             // 
             this.txtDatahAlteracao.Enabled = false;
             this.txtDatahAlteracao.Location = new System.Drawing.Point(114, 93);
+            this.txtDatahAlteracao.MaxLength = 60;
             this.txtDatahAlteracao.Name = "txtDatahAlteracao";
             this.txtDatahAlteracao.Size = new System.Drawing.Size(241, 20);
             this.txtDatahAlteracao.TabIndex = 8;
@@ -250,6 +205,53 @@ namespace TjossSystem
             this.lblDescricaoItem.TabIndex = 0;
             this.lblDescricaoItem.Text = "Descrição:";
             // 
+            // tspBotoes
+            // 
+            this.tspBotoes.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tspBotoes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbFechar,
+            this.tsbLimpar,
+            this.tsbGravar});
+            this.tspBotoes.Location = new System.Drawing.Point(0, 242);
+            this.tspBotoes.Name = "tspBotoes";
+            this.tspBotoes.Size = new System.Drawing.Size(484, 25);
+            this.tspBotoes.TabIndex = 10;
+            this.tspBotoes.Text = "toolStrip1";
+            // 
+            // tsbFechar
+            // 
+            this.tsbFechar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsbFechar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbFechar.Image = ((System.Drawing.Image)(resources.GetObject("tsbFechar.Image")));
+            this.tsbFechar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbFechar.Name = "tsbFechar";
+            this.tsbFechar.Size = new System.Drawing.Size(75, 22);
+            this.tsbFechar.Text = "F12 - Fechar";
+            this.tsbFechar.Click += new System.EventHandler(this.tsbFechar_Click);
+            // 
+            // tsbLimpar
+            // 
+            this.tsbLimpar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsbLimpar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbLimpar.Image = ((System.Drawing.Image)(resources.GetObject("tsbLimpar.Image")));
+            this.tsbLimpar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbLimpar.Name = "tsbLimpar";
+            this.tsbLimpar.Size = new System.Drawing.Size(77, 22);
+            this.tsbLimpar.Text = "F10 - Limpar";
+            this.tsbLimpar.Click += new System.EventHandler(this.tsbLimpar_Click);
+            // 
+            // tsbGravar
+            // 
+            this.tsbGravar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsbGravar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbGravar.Enabled = false;
+            this.tsbGravar.Image = ((System.Drawing.Image)(resources.GetObject("tsbGravar.Image")));
+            this.tsbGravar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbGravar.Name = "tsbGravar";
+            this.tsbGravar.Size = new System.Drawing.Size(68, 22);
+            this.tsbGravar.Text = "F9 - Gravar";
+            this.tsbGravar.Click += new System.EventHandler(this.tsbGravar_Click);
+            // 
             // FrmCadastroItens
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -258,9 +260,7 @@ namespace TjossSystem
             this.Controls.Add(this.tspBotoes);
             this.Controls.Add(this.grpDadosBasicos);
             this.Controls.Add(this.grpDadosChaveItens);
-            this.KeyPreview = true;
             this.Name = "FrmCadastroItens";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Itens";
             this.Load += new System.EventHandler(this.FrmCadastroItens_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmCadastroItens_KeyDown);

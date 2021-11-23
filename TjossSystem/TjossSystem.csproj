@@ -152,6 +152,18 @@
     <Compile Include="FrmCadastroUsuario.Designer.cs">
       <DependentUpon>FrmCadastroUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmContratoNovo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmContratoNovo.Designer.cs">
+      <DependentUpon>FrmContratoNovo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmContratos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmContratos.Designer.cs">
+      <DependentUpon>FrmContratos.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmEntradaSaidaEstoque.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,6 +231,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCadastroUsuario.resx">
       <DependentUpon>FrmCadastroUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmContratoNovo.resx">
+      <DependentUpon>FrmContratoNovo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmContratos.resx">
+      <DependentUpon>FrmContratos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmEntradaSaidaEstoque.resx">
       <DependentUpon>FrmEntradaSaidaEstoque.cs</DependentUpon>

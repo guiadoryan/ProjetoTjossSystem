@@ -111,6 +111,7 @@ namespace TjossSystem
             // txtDescricaoTipoItem
             // 
             this.txtDescricaoTipoItem.Location = new System.Drawing.Point(114, 13);
+            this.txtDescricaoTipoItem.MaxLength = 80;
             this.txtDescricaoTipoItem.Name = "txtDescricaoTipoItem";
             this.txtDescricaoTipoItem.Size = new System.Drawing.Size(241, 20);
             this.txtDescricaoTipoItem.TabIndex = 7;
@@ -170,6 +171,7 @@ namespace TjossSystem
             // txtCodigoTipoItem
             // 
             this.txtCodigoTipoItem.Location = new System.Drawing.Point(114, 27);
+            this.txtCodigoTipoItem.MaxLength = 20;
             this.txtCodigoTipoItem.Name = "txtCodigoTipoItem";
             this.txtCodigoTipoItem.Size = new System.Drawing.Size(104, 20);
             this.txtCodigoTipoItem.TabIndex = 1;

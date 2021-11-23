@@ -35,6 +35,8 @@ namespace TjossSystem
             this.tsbLimpar = new System.Windows.Forms.ToolStripButton();
             this.tsbGravar = new System.Windows.Forms.ToolStripButton();
             this.grpDadosChaveCargo = new System.Windows.Forms.GroupBox();
+            this.btnCancelarPedido = new System.Windows.Forms.Button();
+            this.btnFecharPedido = new System.Windows.Forms.Button();
             this.blnNovoPedido = new System.Windows.Forms.Button();
             this.txtNumeroPedido = new System.Windows.Forms.TextBox();
             this.lblNumeroPedido = new System.Windows.Forms.Label();
@@ -58,8 +60,6 @@ namespace TjossSystem
             this.clnNumeroContrato = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnCodigoTipoContrato = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnValorTotalPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnFecharPedido = new System.Windows.Forms.Button();
-            this.btnCancelarPedido = new System.Windows.Forms.Button();
             this.tspBotoes.SuspendLayout();
             this.grpDadosChaveCargo.SuspendLayout();
             this.grpDadosBasicos.SuspendLayout();
@@ -88,6 +88,7 @@ namespace TjossSystem
             this.tsbFechar.Name = "tsbFechar";
             this.tsbFechar.Size = new System.Drawing.Size(75, 22);
             this.tsbFechar.Text = "F12 - Fechar";
+            this.tsbFechar.Click += new System.EventHandler(this.tsbFechar_Click);
             // 
             // tsbLimpar
             // 
@@ -98,6 +99,7 @@ namespace TjossSystem
             this.tsbLimpar.Name = "tsbLimpar";
             this.tsbLimpar.Size = new System.Drawing.Size(77, 22);
             this.tsbLimpar.Text = "F10 - Limpar";
+            this.tsbLimpar.Click += new System.EventHandler(this.tsbLimpar_Click);
             // 
             // tsbGravar
             // 
@@ -134,6 +136,26 @@ namespace TjossSystem
             this.grpDadosChaveCargo.Size = new System.Drawing.Size(964, 90);
             this.grpDadosChaveCargo.TabIndex = 14;
             this.grpDadosChaveCargo.TabStop = false;
+            // 
+            // btnCancelarPedido
+            // 
+            this.btnCancelarPedido.Location = new System.Drawing.Point(728, 12);
+            this.btnCancelarPedido.Name = "btnCancelarPedido";
+            this.btnCancelarPedido.Size = new System.Drawing.Size(112, 29);
+            this.btnCancelarPedido.TabIndex = 14;
+            this.btnCancelarPedido.Text = "Cancelar Pedido";
+            this.btnCancelarPedido.UseVisualStyleBackColor = true;
+            this.btnCancelarPedido.Click += new System.EventHandler(this.btnCancelarPedido_Click);
+            // 
+            // btnFecharPedido
+            // 
+            this.btnFecharPedido.Location = new System.Drawing.Point(846, 12);
+            this.btnFecharPedido.Name = "btnFecharPedido";
+            this.btnFecharPedido.Size = new System.Drawing.Size(112, 29);
+            this.btnFecharPedido.TabIndex = 13;
+            this.btnFecharPedido.Text = "Fechar Pedido";
+            this.btnFecharPedido.UseVisualStyleBackColor = true;
+            this.btnFecharPedido.Click += new System.EventHandler(this.btnFecharPedido_Click);
             // 
             // blnNovoPedido
             // 
@@ -228,6 +250,7 @@ namespace TjossSystem
             this.btnCriarPrePedido.TabIndex = 3;
             this.btnCriarPrePedido.Text = "Criar Pré-Pedido";
             this.btnCriarPrePedido.UseVisualStyleBackColor = true;
+            this.btnCriarPrePedido.Visible = false;
             this.btnCriarPrePedido.Click += new System.EventHandler(this.btnCriarPrePedido_Click);
             // 
             // btnFiltrarPedidos
@@ -348,26 +371,6 @@ namespace TjossSystem
             this.clnValorTotalPedido.Name = "clnValorTotalPedido";
             this.clnValorTotalPedido.ReadOnly = true;
             // 
-            // btnFecharPedido
-            // 
-            this.btnFecharPedido.Location = new System.Drawing.Point(846, 12);
-            this.btnFecharPedido.Name = "btnFecharPedido";
-            this.btnFecharPedido.Size = new System.Drawing.Size(112, 29);
-            this.btnFecharPedido.TabIndex = 13;
-            this.btnFecharPedido.Text = "Fechar Pedido";
-            this.btnFecharPedido.UseVisualStyleBackColor = true;
-            this.btnFecharPedido.Click += new System.EventHandler(this.btnFecharPedido_Click);
-            // 
-            // btnCancelarPedido
-            // 
-            this.btnCancelarPedido.Location = new System.Drawing.Point(728, 12);
-            this.btnCancelarPedido.Name = "btnCancelarPedido";
-            this.btnCancelarPedido.Size = new System.Drawing.Size(112, 29);
-            this.btnCancelarPedido.TabIndex = 14;
-            this.btnCancelarPedido.Text = "Cancelar Pedido";
-            this.btnCancelarPedido.UseVisualStyleBackColor = true;
-            this.btnCancelarPedido.Click += new System.EventHandler(this.btnCancelarPedido_Click);
-            // 
             // FrmPedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -379,6 +382,7 @@ namespace TjossSystem
             this.Name = "FrmPedidos";
             this.Text = "Pedidos";
             this.Load += new System.EventHandler(this.FrmPedidos_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmPedidos_KeyDown);
             this.tspBotoes.ResumeLayout(false);
             this.tspBotoes.PerformLayout();
             this.grpDadosChaveCargo.ResumeLayout(false);

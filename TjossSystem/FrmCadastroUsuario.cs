@@ -47,6 +47,12 @@ namespace TjossSystem
                 }
             }
 
+            if (string.IsNullOrEmpty(txtSenha.Text))
+            {
+                MessageBox.Show("Digite uma senha válida!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (!DateTime.TryParse(txtDatahCadastro.Text, out _))
             {
                 MessageBox.Show("Data de Cadastro é invalido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);

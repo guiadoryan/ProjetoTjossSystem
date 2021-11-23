@@ -78,6 +78,7 @@ namespace TjossSystem
             // txtUsuario
             // 
             this.txtUsuario.Location = new System.Drawing.Point(88, 23);
+            this.txtUsuario.MaxLength = 15;
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(100, 20);
             this.txtUsuario.TabIndex = 0;
@@ -86,6 +87,7 @@ namespace TjossSystem
             // txtSenha
             // 
             this.txtSenha.Location = new System.Drawing.Point(88, 49);
+            this.txtSenha.MaxLength = 30;
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(100, 20);

@@ -34,13 +34,11 @@ namespace TjossSystem
             this.cadastroDePessoaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pedidosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tipPedido = new System.Windows.Forms.ToolStripMenuItem();
-            this.pedidoDeVendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pedidoDeAluguelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.movimentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contratosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipContrato = new System.Windows.Forms.ToolStripMenuItem();
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parematrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDePaísToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastroEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeItensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroTipoEstoqToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,7 +58,7 @@ namespace TjossSystem
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cadastrosToolStripMenuItem,
             this.pedidosToolStripMenuItem,
-            this.movimentosToolStripMenuItem,
+            this.contratosToolStripMenuItem,
             this.relatóriosToolStripMenuItem,
             this.parematrosToolStripMenuItem,
             this.itensToolStripMenuItem,
@@ -89,9 +87,7 @@ namespace TjossSystem
             // pedidosToolStripMenuItem
             // 
             this.pedidosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tipPedido,
-            this.pedidoDeVendaToolStripMenuItem,
-            this.pedidoDeAluguelToolStripMenuItem});
+            this.tipPedido});
             this.pedidosToolStripMenuItem.Name = "pedidosToolStripMenuItem";
             this.pedidosToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.pedidosToolStripMenuItem.Text = "Pedidos";
@@ -103,23 +99,20 @@ namespace TjossSystem
             this.tipPedido.Text = "Pedido";
             this.tipPedido.Click += new System.EventHandler(this.tipPedido_Click);
             // 
-            // pedidoDeVendaToolStripMenuItem
+            // contratosToolStripMenuItem
             // 
-            this.pedidoDeVendaToolStripMenuItem.Name = "pedidoDeVendaToolStripMenuItem";
-            this.pedidoDeVendaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.pedidoDeVendaToolStripMenuItem.Text = "Pedido de venda";
+            this.contratosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tipContrato});
+            this.contratosToolStripMenuItem.Name = "contratosToolStripMenuItem";
+            this.contratosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.contratosToolStripMenuItem.Text = "Contratos";
             // 
-            // pedidoDeAluguelToolStripMenuItem
+            // tipContrato
             // 
-            this.pedidoDeAluguelToolStripMenuItem.Name = "pedidoDeAluguelToolStripMenuItem";
-            this.pedidoDeAluguelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.pedidoDeAluguelToolStripMenuItem.Text = "Pedido de aluguel";
-            // 
-            // movimentosToolStripMenuItem
-            // 
-            this.movimentosToolStripMenuItem.Name = "movimentosToolStripMenuItem";
-            this.movimentosToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
-            this.movimentosToolStripMenuItem.Text = "Movimentos";
+            this.tipContrato.Name = "tipContrato";
+            this.tipContrato.Size = new System.Drawing.Size(180, 22);
+            this.tipContrato.Text = "Contratos";
+            this.tipContrato.Click += new System.EventHandler(this.tipContrato_Click);
             // 
             // relatóriosToolStripMenuItem
             // 
@@ -130,8 +123,7 @@ namespace TjossSystem
             // parematrosToolStripMenuItem
             // 
             this.parematrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cadastroDePaísToolStripMenuItem,
-            this.cadastroEmpresaToolStripMenuItem});
+            this.cadastroDePaísToolStripMenuItem});
             this.parematrosToolStripMenuItem.Name = "parematrosToolStripMenuItem";
             this.parematrosToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.parematrosToolStripMenuItem.Text = "Parematros";
@@ -142,12 +134,6 @@ namespace TjossSystem
             this.cadastroDePaísToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.cadastroDePaísToolStripMenuItem.Text = "Cadastro de Regiões";
             this.cadastroDePaísToolStripMenuItem.Click += new System.EventHandler(this.cadastroDePaísToolStripMenuItem_Click);
-            // 
-            // cadastroEmpresaToolStripMenuItem
-            // 
-            this.cadastroEmpresaToolStripMenuItem.Name = "cadastroEmpresaToolStripMenuItem";
-            this.cadastroEmpresaToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.cadastroEmpresaToolStripMenuItem.Text = "Cadastro Empresa";
             // 
             // itensToolStripMenuItem
             // 
@@ -257,13 +243,9 @@ namespace TjossSystem
         private System.Windows.Forms.ToolStripMenuItem cadastroDePessoaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pedidosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tipPedido;
-        private System.Windows.Forms.ToolStripMenuItem pedidoDeVendaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pedidoDeAluguelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem movimentosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relatóriosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem parematrosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroDePaísToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cadastroEmpresaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem itensToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeItensToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroTipoEstoqToolStripMenuItem;
@@ -275,6 +257,8 @@ namespace TjossSystem
         private System.Windows.Forms.ToolStripMenuItem cadastroDeCargosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeUsuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tipEntradaSaidaEstoque;
+        private System.Windows.Forms.ToolStripMenuItem contratosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tipContrato;
     }
 }
 

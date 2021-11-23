@@ -79,5 +79,264 @@ namespace TjossSystem.Metodos
             }
         }
 
+        public List<ItensContratoDI> BuscarItensContrato(int pNumeroContrato, int pCodigoTipoContrato)
+        {
+            tjossEntities objConexao = new tjossEntities();
+            List<itenscontrato> lstItensContrato = new List<itenscontrato>();
+
+            ItensContratoDI objItensContratoDI;
+            List<ItensContratoDI> lstItensContratoDI = new List<ItensContratoDI>();
+
+            try
+            {
+                lstItensContrato = objConexao.itenscontrato.Where(p => pNumeroContrato > 0 ? p.numerocontrato == pNumeroContrato : 1 == 1 &&
+                                                                   pCodigoTipoContrato > 0 ? p.codigotipocontrato == pCodigoTipoContrato : 1 == 1).ToList();
+
+                foreach (var objItensContrato in lstItensContrato)
+                {
+                    objItensContratoDI = new ItensContratoDI
+                    {
+                        NumeroContrato = objItensContrato.numerocontrato,
+                        CodigoTipoContrato = objItensContrato.codigotipocontrato,
+                        CodigoItem = objItensContrato.codigoitem,
+                        SaldoContratado = objItensContrato.saldocontratado,
+                        SaldoAtual = objItensContrato.saldoatual,
+                        ValorItem = objItensContrato.valoritem
+                    };
+
+                    lstItensContratoDI.Add(objItensContratoDI);
+                }
+
+                return lstItensContratoDI;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public List<ContratoDI> ListarContratos(int pNumeroContrato, int pCodigoTipoContrato, int? pCodigoCadastro)
+        {
+            tjossEntities objConexao = new tjossEntities();
+            List<contrato> lstContratos = new List<contrato>();
+
+            ContratoDI objContratoDI;
+            List<ContratoDI> lstContratoDI = new List<ContratoDI>();
+
+            try
+            {
+                DateTime dtaDataVencimento = DateTime.Now.Date;
+                lstContratos = objConexao.contrato.Where(p => (pNumeroContrato > 0 ? p.numerocontrato == pNumeroContrato : 1 == 1) &&
+                                                           (pCodigoTipoContrato > 0 ? p.codigotipocontrato == pCodigoTipoContrato : 1 == 1) &&
+                                                           (pCodigoCadastro > 0 ? p.codigocadastro == pCodigoCadastro : 1 == 1) &&
+                                                           p.situacao == "A" &&
+                                                           p.datavencimento >= dtaDataVencimento).ToList();
+
+                foreach (var objContrato in lstContratos)
+                {
+                    objContratoDI = new ContratoDI
+                    {
+                        NumeroContrato = objContrato.numerocontrato,
+                        CodigoTipoContrato = objContrato.codigotipocontrato,
+                        CodigoCadastro = objContrato.codigocadastro,
+                        DataContrato = objContrato.datacontrato,
+                        DataVencimento = objContrato.datavencimento,
+                        SituacaoContrato = objContrato.situacao,
+                        CodigoVendedor = objContrato.codigovendedor,
+                        DatahAlteracao = objContrato.datahalteracao,
+                        CodigoFuncionario = objContrato.codigofuncionario
+                    };
+
+                    lstContratoDI.Add(objContratoDI);
+                }
+
+                return lstContratoDI;
+            }
+            catch(Exception pEx)
+            {
+                return null;
+            }
+
+        }
+
+
+        public bool FecharContrato(ContratoDI pContrato, out string pErro)
+        {
+            tjossEntities objConexao = new tjossEntities();
+            contrato objContrato = new contrato();
+            itenscontrato objItensContrato = new itenscontrato();
+            //List<MovimentacaoEstoqueDI> lstMovimentoEstoqueDI = new List<MovimentacaoEstoqueDI>();
+
+            try
+            {
+                if (pContrato.SituacaoContrato != "F")
+                {
+                    pErro = $"Contrato tem que estar em fechamento!";
+                    return false;
+                }
+
+                objContrato = objConexao.contrato.Where(c => c.numerocontrato == pContrato.NumeroContrato && c.codigotipocontrato == pContrato.CodigoTipoContrato && c.situacao == "A").FirstOrDefault();
+
+                if (objContrato == null)
+                {
+                    objContrato = null;
+                    pErro = $"Contrato não está valido!";
+                    return false;
+                }
+
+                objContrato.situacao = pContrato.SituacaoContrato;
+                objContrato.datahalteracao = DateTime.Now;
+                objContrato.codigofuncionario = pContrato.CodigoFuncionario;
+
+                //objPedidos.valortotalpedido = pPedido.ValorTotalPedido;
+
+                //objConexao.SaveChanges();
+                //Pega o numero do pedido que foi gerado pelo auto-increment.
+                int intNumeroContrato = objContrato.numerocontrato;
+
+                if (objContrato.itenscontrato.Count <= 0)
+                {
+                    pErro = $"Contrato tem ter mais de um item!";
+                    return false;
+                }
+
+                foreach (var objItemContratoDI in objContrato.itenscontrato)
+                {
+                    objItensContrato = objConexao.itenscontrato.Where(ip => ip.numerocontrato == intNumeroContrato &&
+                                                                            ip.codigotipocontrato == pContrato.CodigoTipoContrato &&
+                                                                            ip.codigoitem == objItemContratoDI.codigoitem).FirstOrDefault();
+                    if (objItensContrato == null)
+                    {
+                        objItensContrato = null;
+                        pErro = $"Itens do Contrato não estão validos!";
+                        return false;
+                    }
+
+                    objItensContrato.saldoatual = objItensContrato.saldocontratado;
+                }
+
+                objConexao.SaveChanges();
+                pErro = string.Empty;
+                return true;
+            }
+            catch (Exception pEx)
+            {
+                pErro = $"Exceção ao executar o metodo FecharContrato.{Environment.NewLine}{pEx.InnerException.InnerException}";
+                return false;
+            }
+        }
+
+        public bool CancelarContrato(ContratoDI pContrato, out string pErro)
+        {
+            tjossEntities objConexao = new tjossEntities();
+            contrato objContratos = new contrato();
+            itenscontrato objItensContrato = new itenscontrato();
+
+            try
+            {
+                if (pContrato.SituacaoContrato != "C")
+                {
+                    pErro = $"Metodo só pode ser chamado quando for cancelamento";
+                    return false;
+                }
+
+                objContratos = objConexao.contrato.Where(c => c.numerocontrato == pContrato.NumeroContrato && c.codigotipocontrato == pContrato.CodigoTipoContrato && c.situacao != "C").FirstOrDefault();
+
+                if (objContratos == null)
+                {
+                    objContratos = null;
+                    pErro = $"Contrato não foi encontrado ou já foi cancelado!";
+                    return false;
+                }
+
+                objContratos.situacao = pContrato.SituacaoContrato;
+                objContratos.datahalteracao = DateTime.Now;
+                objContratos.codigofuncionario = pContrato.CodigoFuncionario;
+
+                objConexao.SaveChanges();
+
+                pErro = string.Empty;
+                return true;
+            }
+            catch (Exception pEx)
+            {
+                pErro = $"Exceção ao executar o metodo CancelarContrato.{Environment.NewLine}{pEx.InnerException.InnerException}";
+                return false;
+            }
+        }
+
+        public bool RegistrarContrato(ContratoDI pContrato, out string pErro)
+        {
+            tjossEntities objConexao = new tjossEntities();
+            contrato objContrato = new contrato();
+            itenscontrato objItensContrato = new itenscontrato();
+            bool blnNovoContrato = false;
+            int intNumeroContrato = 0;
+
+            try
+            {
+                objContrato = objConexao.contrato.Where(c => c.numerocontrato == pContrato.NumeroContrato && c.codigotipocontrato == pContrato.CodigoTipoContrato).FirstOrDefault();
+
+                if (objContrato == null)
+                {
+                    objContrato = new contrato();
+                    blnNovoContrato = true;
+                    intNumeroContrato = objConexao.contrato.Where(c => c.codigotipocontrato == pContrato.CodigoTipoContrato).OrderByDescending(il => il.numerocontrato).FirstOrDefault() != null ?
+                                        objConexao.contrato.Where(c => c.codigotipocontrato == pContrato.CodigoTipoContrato).OrderByDescending(il => il.numerocontrato).FirstOrDefault().numerocontrato + 1 : 1;
+                    objContrato.numerocontrato = intNumeroContrato;
+                    objContrato.codigotipocontrato = pContrato.CodigoTipoContrato;
+                }
+
+                objContrato.codigocadastro = pContrato.CodigoCadastro;
+                objContrato.datacontrato = pContrato.DataContrato;
+                objContrato.datavencimento = pContrato.DataVencimento;
+                objContrato.situacao = pContrato.SituacaoContrato;
+                //null se não for com contrato vinculado.
+                objContrato.codigovendedor = pContrato.CodigoVendedor <= 0 ? null : pContrato.CodigoVendedor;
+                objContrato.datahalteracao = pContrato.DatahAlteracao;
+                objContrato.codigofuncionario = pContrato.CodigoFuncionario;
+
+                if (blnNovoContrato)
+                {
+                    objConexao.contrato.Add(objContrato);
+                }
+
+                bool blnNovoItemContrato = false;
+                foreach (var objItemContratoDI in pContrato.ItensContrato)
+                {
+                    blnNovoItemContrato = false;
+                    objItensContrato = objConexao.itenscontrato.Where(ip => ip.numerocontrato == intNumeroContrato &&
+                                                                            ip.codigotipocontrato == pContrato.CodigoTipoContrato &&
+                                                                            ip.codigoitem == objItemContratoDI.CodigoItem).FirstOrDefault();
+                    if (objItensContrato == null)
+                    {
+                        objItensContrato = new itenscontrato();
+                        blnNovoItemContrato = true;
+                        objItensContrato.numerocontrato = intNumeroContrato;
+                        objItensContrato.codigotipocontrato = pContrato.CodigoTipoContrato;
+                        objItensContrato.codigoitem = objItemContratoDI.CodigoItem;
+                    }
+
+                    objItensContrato.saldocontratado = objItemContratoDI.SaldoContratado;
+                    objItensContrato.saldoatual = objItemContratoDI.SaldoAtual;
+                    objItensContrato.valoritem = objItemContratoDI.ValorItem;
+
+                    if (blnNovoItemContrato)
+                    {
+                        objConexao.itenscontrato.Add(objItensContrato);
+                    }
+
+                    objConexao.SaveChanges();
+                }
+
+                pErro = string.Empty;
+                return true;
+            }
+            catch (Exception pEx)
+            {
+                pErro = $"Exceção ao executar o metodo RegistrarContrato.{Environment.NewLine}{pEx.InnerException.InnerException}";
+                return false;
+            }
+        }
     }
 }

@@ -378,6 +378,7 @@ namespace TjossSystem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 540);
             this.Controls.Add(this.grpCadastroRegiões);
+            this.KeyPreview = true;
             this.Name = "FrmCadastroRegioes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Regiões";

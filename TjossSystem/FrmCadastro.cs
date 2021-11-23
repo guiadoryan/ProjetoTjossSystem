@@ -403,12 +403,18 @@ namespace TjossSystem
                         dgvEnderecos.DataSource = dttEnderecos;
                         dgvMedidas.DataSource = dttMedidas;
                         dgvDefinicao.DataSource = dttDefinicao;
+
+                        grpDadosChave.Enabled = false;
+                        tbcDadosCadastro.Enabled = true;
+                        tsbGravar.Enabled = true;
                     }
                 }
                 else
                 {
                     txtNomeCadastro.Focus();
                     grpDadosChave.Enabled = false;
+                    tbcDadosCadastro.Enabled = true;
+                    tsbGravar.Enabled = true;
                 }
             }
             catch(Exception pE)

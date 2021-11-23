@@ -36,11 +36,11 @@ namespace TjossSystem
             this.lblCodigoItem = new System.Windows.Forms.Label();
             this.grpDadosBasicos = new System.Windows.Forms.GroupBox();
             this.txtObservacaoFormula = new System.Windows.Forms.RichTextBox();
+            this.lblObservacaoFormula = new System.Windows.Forms.Label();
             this.tspBotoes = new System.Windows.Forms.ToolStrip();
             this.tsbFechar = new System.Windows.Forms.ToolStripButton();
             this.tsbLimpar = new System.Windows.Forms.ToolStripButton();
             this.tsbGravar = new System.Windows.Forms.ToolStripButton();
-            this.lblObservacaoFormula = new System.Windows.Forms.Label();
             this.grpDadosChaveItens.SuspendLayout();
             this.grpDadosBasicos.SuspendLayout();
             this.tspBotoes.SuspendLayout();
@@ -71,6 +71,7 @@ namespace TjossSystem
             // txtCodigoItem
             // 
             this.txtCodigoItem.Location = new System.Drawing.Point(84, 27);
+            this.txtCodigoItem.MaxLength = 15;
             this.txtCodigoItem.Name = "txtCodigoItem";
             this.txtCodigoItem.Size = new System.Drawing.Size(104, 20);
             this.txtCodigoItem.TabIndex = 1;
@@ -104,6 +105,15 @@ namespace TjossSystem
             this.txtObservacaoFormula.Size = new System.Drawing.Size(241, 42);
             this.txtObservacaoFormula.TabIndex = 9;
             this.txtObservacaoFormula.Text = "";
+            // 
+            // lblObservacaoFormula
+            // 
+            this.lblObservacaoFormula.AutoSize = true;
+            this.lblObservacaoFormula.Location = new System.Drawing.Point(12, 16);
+            this.lblObservacaoFormula.Name = "lblObservacaoFormula";
+            this.lblObservacaoFormula.Size = new System.Drawing.Size(58, 13);
+            this.lblObservacaoFormula.TabIndex = 0;
+            this.lblObservacaoFormula.Text = "Descrição:";
             // 
             // tspBotoes
             // 
@@ -150,15 +160,6 @@ namespace TjossSystem
             this.tsbGravar.Size = new System.Drawing.Size(68, 22);
             this.tsbGravar.Text = "F9 - Gravar";
             this.tsbGravar.Click += new System.EventHandler(this.tsbGravar_Click);
-            // 
-            // lblObservacaoFormula
-            // 
-            this.lblObservacaoFormula.AutoSize = true;
-            this.lblObservacaoFormula.Location = new System.Drawing.Point(12, 16);
-            this.lblObservacaoFormula.Name = "lblObservacaoFormula";
-            this.lblObservacaoFormula.Size = new System.Drawing.Size(58, 13);
-            this.lblObservacaoFormula.TabIndex = 0;
-            this.lblObservacaoFormula.Text = "Descrição:";
             // 
             // FrmCadastroFormulaItem
             // 

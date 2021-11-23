@@ -73,6 +73,7 @@ namespace TjossSystem
             // txtCodigoTipoEstoque
             // 
             this.txtCodigoTipoEstoque.Location = new System.Drawing.Point(127, 27);
+            this.txtCodigoTipoEstoque.MaxLength = 20;
             this.txtCodigoTipoEstoque.Name = "txtCodigoTipoEstoque";
             this.txtCodigoTipoEstoque.Size = new System.Drawing.Size(104, 20);
             this.txtCodigoTipoEstoque.TabIndex = 1;
@@ -150,6 +151,7 @@ namespace TjossSystem
             // txtDescricaoTipoEstoque
             // 
             this.txtDescricaoTipoEstoque.Location = new System.Drawing.Point(114, 13);
+            this.txtDescricaoTipoEstoque.MaxLength = 80;
             this.txtDescricaoTipoEstoque.Name = "txtDescricaoTipoEstoque";
             this.txtDescricaoTipoEstoque.Size = new System.Drawing.Size(241, 20);
             this.txtDescricaoTipoEstoque.TabIndex = 7;
