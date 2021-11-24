@@ -184,6 +184,7 @@ namespace TjossSystem
             this.bntEditarItem.TabIndex = 24;
             this.bntEditarItem.Text = "Editar Item";
             this.bntEditarItem.UseVisualStyleBackColor = true;
+            this.bntEditarItem.Visible = false;
             this.bntEditarItem.Click += new System.EventHandler(this.bntEditarItem_Click);
             // 
             // txtValorItem

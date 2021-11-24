@@ -13,10 +13,19 @@ namespace TjossSystem
 {
     public partial class FrmContratos : FrmPadrao
     {
+        /// <summary>
+        /// Objeto de dados do contrato
+        /// </summary>
         ContratoDI objContratoDI;
 
+        /// <summary>
+        /// Data table com dados do contrato
+        /// </summary>
         DataTable dttContratos;
 
+        /// <summary>
+        /// Lista de tipos de contratos
+        /// </summary>
         List<TipoContratoDI> lstTipoContratoDI;
 
         public FrmContratos()

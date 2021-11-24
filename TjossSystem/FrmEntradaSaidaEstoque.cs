@@ -134,7 +134,9 @@ namespace TjossSystem
             if (e.KeyChar == ',')
             {
                 if ((sender as TextBox).Text.IndexOf(e.KeyChar) != -1)
+                {
                     e.Handled = true;
+                }
             }
         }
     }

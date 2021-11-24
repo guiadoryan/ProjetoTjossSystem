@@ -37,6 +37,10 @@ namespace TjossSystem
             this.contratosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tipContrato = new System.Windows.Forms.ToolStripMenuItem();
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipRelCadastro = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipRelFuncionarios = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipRelEstoque = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipEstoqueMovimento = new System.Windows.Forms.ToolStripMenuItem();
             this.parematrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDePaísToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +54,7 @@ namespace TjossSystem
             this.cadastroDeFuncionariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeCargosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pedidosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,7 +100,7 @@ namespace TjossSystem
             // tipPedido
             // 
             this.tipPedido.Name = "tipPedido";
-            this.tipPedido.Size = new System.Drawing.Size(180, 22);
+            this.tipPedido.Size = new System.Drawing.Size(111, 22);
             this.tipPedido.Text = "Pedido";
             this.tipPedido.Click += new System.EventHandler(this.tipPedido_Click);
             // 
@@ -110,15 +115,49 @@ namespace TjossSystem
             // tipContrato
             // 
             this.tipContrato.Name = "tipContrato";
-            this.tipContrato.Size = new System.Drawing.Size(180, 22);
+            this.tipContrato.Size = new System.Drawing.Size(126, 22);
             this.tipContrato.Text = "Contratos";
             this.tipContrato.Click += new System.EventHandler(this.tipContrato_Click);
             // 
             // relatóriosToolStripMenuItem
             // 
+            this.relatóriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tipRelCadastro,
+            this.tipRelFuncionarios,
+            this.tipRelEstoque,
+            this.tipEstoqueMovimento,
+            this.pedidosToolStripMenuItem1});
             this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
             this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.relatóriosToolStripMenuItem.Text = "Relatórios";
+            // 
+            // tipRelCadastro
+            // 
+            this.tipRelCadastro.Name = "tipRelCadastro";
+            this.tipRelCadastro.Size = new System.Drawing.Size(181, 22);
+            this.tipRelCadastro.Text = "Cadastro";
+            this.tipRelCadastro.Click += new System.EventHandler(this.tipRelCadastro_Click);
+            // 
+            // tipRelFuncionarios
+            // 
+            this.tipRelFuncionarios.Name = "tipRelFuncionarios";
+            this.tipRelFuncionarios.Size = new System.Drawing.Size(181, 22);
+            this.tipRelFuncionarios.Text = "Funcionarios";
+            this.tipRelFuncionarios.Click += new System.EventHandler(this.tipRelFuncionarios_Click);
+            // 
+            // tipRelEstoque
+            // 
+            this.tipRelEstoque.Name = "tipRelEstoque";
+            this.tipRelEstoque.Size = new System.Drawing.Size(181, 22);
+            this.tipRelEstoque.Text = "Estoque";
+            this.tipRelEstoque.Click += new System.EventHandler(this.tipRelEstoque_Click);
+            // 
+            // tipEstoqueMovimento
+            // 
+            this.tipEstoqueMovimento.Name = "tipEstoqueMovimento";
+            this.tipEstoqueMovimento.Size = new System.Drawing.Size(181, 22);
+            this.tipEstoqueMovimento.Text = "Estoque Movimento";
+            this.tipEstoqueMovimento.Click += new System.EventHandler(this.tipEstoqueMovimento_Click);
             // 
             // parematrosToolStripMenuItem
             // 
@@ -221,6 +260,13 @@ namespace TjossSystem
             this.cadastroDeUsuariosToolStripMenuItem.Text = "Cadastro de Usuarios";
             this.cadastroDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.cadastroDeUsuariosToolStripMenuItem_Click);
             // 
+            // pedidosToolStripMenuItem1
+            // 
+            this.pedidosToolStripMenuItem1.Name = "pedidosToolStripMenuItem1";
+            this.pedidosToolStripMenuItem1.Size = new System.Drawing.Size(181, 22);
+            this.pedidosToolStripMenuItem1.Text = "Pedidos";
+            this.pedidosToolStripMenuItem1.Click += new System.EventHandler(this.pedidosToolStripMenuItem1_Click);
+            // 
             // FrmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -259,6 +305,11 @@ namespace TjossSystem
         private System.Windows.Forms.ToolStripMenuItem tipEntradaSaidaEstoque;
         private System.Windows.Forms.ToolStripMenuItem contratosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tipContrato;
+        private System.Windows.Forms.ToolStripMenuItem tipRelCadastro;
+        private System.Windows.Forms.ToolStripMenuItem tipRelFuncionarios;
+        private System.Windows.Forms.ToolStripMenuItem tipRelEstoque;
+        private System.Windows.Forms.ToolStripMenuItem tipEstoqueMovimento;
+        private System.Windows.Forms.ToolStripMenuItem pedidosToolStripMenuItem1;
     }
 }
 

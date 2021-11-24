@@ -43,6 +43,13 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que busca item do contrato
+        /// </summary>
+        /// <param name="pNumeroContrato">Número do contrato</param>
+        /// <param name="pCodigoTipoContrato">Código tipo do contrato</param>
+        /// <param name="pCodigoItem">Código do item</param>
+        /// <returns>Retorna um objeto com os dados registrados</returns>
         public ItensContratoDI BuscarItemDoContrato(int pNumeroContrato, int pCodigoTipoContrato, int pCodigoItem)
         {
             tjossEntities objConexao = new tjossEntities();
@@ -79,6 +86,12 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que busca itens do contrato
+        /// </summary>
+        /// <param name="pNumeroContrato">Número do contrato</param>
+        /// <param name="pCodigoTipoContrato">Código tipo do contrato</param>
+        /// <returns>Retorna uma lista com os dados registrados</returns>
         public List<ItensContratoDI> BuscarItensContrato(int pNumeroContrato, int pCodigoTipoContrato)
         {
             tjossEntities objConexao = new tjossEntities();
@@ -115,6 +128,13 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que busca os contratos não cancelados e sem vinculo com pedido
+        /// </summary>
+        /// <param name="pNumeroContrato">Número do contrato</param>
+        /// <param name="pCodigoTipoContrato">Código tipo do contrato</param>
+        /// <param name="pCodigoCadastro">Código do item</param>
+        /// <returns>Retorna uma lista com os dados registrados</returns>
         public List<ContratoDI> ListarContratos(int pNumeroContrato, int pCodigoTipoContrato, int? pCodigoCadastro)
         {
             tjossEntities objConexao = new tjossEntities();
@@ -129,43 +149,55 @@ namespace TjossSystem.Metodos
                 lstContratos = objConexao.contrato.Where(p => (pNumeroContrato > 0 ? p.numerocontrato == pNumeroContrato : 1 == 1) &&
                                                            (pCodigoTipoContrato > 0 ? p.codigotipocontrato == pCodigoTipoContrato : 1 == 1) &&
                                                            (pCodigoCadastro > 0 ? p.codigocadastro == pCodigoCadastro : 1 == 1) &&
-                                                           p.situacao == "A" &&
+                                                           p.situacao != "C" &&
                                                            p.datavencimento >= dtaDataVencimento).ToList();
 
                 foreach (var objContrato in lstContratos)
                 {
-                    objContratoDI = new ContratoDI
-                    {
-                        NumeroContrato = objContrato.numerocontrato,
-                        CodigoTipoContrato = objContrato.codigotipocontrato,
-                        CodigoCadastro = objContrato.codigocadastro,
-                        DataContrato = objContrato.datacontrato,
-                        DataVencimento = objContrato.datavencimento,
-                        SituacaoContrato = objContrato.situacao,
-                        CodigoVendedor = objContrato.codigovendedor,
-                        DatahAlteracao = objContrato.datahalteracao,
-                        CodigoFuncionario = objContrato.codigofuncionario
-                    };
+                    //Só retorna contratos sem vinculo com pedidos.
+                    pedidos objPedido = objConexao.pedidos.Where(p => p.numerocontrato == objContrato.numerocontrato && p.codigotipocontrato == objContrato.codigotipocontrato).FirstOrDefault();
 
-                    lstContratoDI.Add(objContratoDI);
+                    if(objPedido == null)
+                    {
+                        objContratoDI = new ContratoDI
+                        {
+                            NumeroContrato = objContrato.numerocontrato,
+                            CodigoTipoContrato = objContrato.codigotipocontrato,
+                            CodigoCadastro = objContrato.codigocadastro,
+                            DataContrato = objContrato.datacontrato,
+                            DataVencimento = objContrato.datavencimento,
+                            SituacaoContrato = objContrato.situacao,
+                            CodigoVendedor = objContrato.codigovendedor,
+                            DatahAlteracao = objContrato.datahalteracao,
+                            CodigoFuncionario = objContrato.codigofuncionario
+                        };
+
+                        lstContratoDI.Add(objContratoDI);
+                    }
                 }
 
                 return lstContratoDI;
             }
             catch(Exception pEx)
             {
+                string strErro = pEx.InnerException.Message;
                 return null;
             }
 
         }
 
 
+        /// <summary>
+        /// Método que faz o fechamento do contrato
+        /// </summary>
+        /// <param name="pContrato">Objeto com os dados do contrato</param>
+        /// <param name="pErro">Mensagem de erro</param>
+        /// <returns>True se fechou com sucesso, false caso o contrario</returns>
         public bool FecharContrato(ContratoDI pContrato, out string pErro)
         {
             tjossEntities objConexao = new tjossEntities();
             contrato objContrato = new contrato();
             itenscontrato objItensContrato = new itenscontrato();
-            //List<MovimentacaoEstoqueDI> lstMovimentoEstoqueDI = new List<MovimentacaoEstoqueDI>();
 
             try
             {
@@ -188,9 +220,6 @@ namespace TjossSystem.Metodos
                 objContrato.datahalteracao = DateTime.Now;
                 objContrato.codigofuncionario = pContrato.CodigoFuncionario;
 
-                //objPedidos.valortotalpedido = pPedido.ValorTotalPedido;
-
-                //objConexao.SaveChanges();
                 //Pega o numero do pedido que foi gerado pelo auto-increment.
                 int intNumeroContrato = objContrato.numerocontrato;
 
@@ -226,6 +255,12 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que faz o cancelamento do contrato
+        /// </summary>
+        /// <param name="pContrato">Objeto com os dados do contrato</param>
+        /// <param name="pErro">Mensagem de erro</param>
+        /// <returns>True se cancelou com sucesso, false caso o contrario</returns>
         public bool CancelarContrato(ContratoDI pContrato, out string pErro)
         {
             tjossEntities objConexao = new tjossEntities();
@@ -265,6 +300,12 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que faz o registro do contrato
+        /// </summary>
+        /// <param name="pContrato">Objeto com os dados do contrato</param>
+        /// <param name="pErro">Mensagem de erro</param>
+        /// <returns>True se registrou com sucesso, false caso o contrario</returns>
         public bool RegistrarContrato(ContratoDI pContrato, out string pErro)
         {
             tjossEntities objConexao = new tjossEntities();

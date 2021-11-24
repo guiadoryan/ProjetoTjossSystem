@@ -180,6 +180,40 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Metodo que lista todos os estoques registrados
+        /// </summary>
+        /// <returns>Retorna uma lista de estoques</returns>
+        public List<EstoqueItemDI> ListarEstoqueRelatorio()
+        {
+            tjossEntities objConexao = new tjossEntities();
+            List<EstoqueItemDI> lstEstoqueItemDI = new List<EstoqueItemDI>();
+
+            List<itemestoque> lstItemEstoque = objConexao.itemestoque.Where(c => c.codigoitem != 0 && c.codigotipoestoque == 1).OrderBy(o => o.codigoitem).ToList();
+
+            if (lstItemEstoque.Count > 0)
+            {
+                EstoqueItemDI objEstoqueItemDI;
+                foreach (var objItemEstoque in lstItemEstoque)
+                {
+                    objEstoqueItemDI = new EstoqueItemDI
+                    {
+                        CodigoItem = objItemEstoque.codigoitem,
+                        CodigoTipoEstoque = objItemEstoque.codigotipoestoque,
+                        Quantidade = objItemEstoque.quantidadedisponivel,
+                        ValorUnitario = objItemEstoque.valorproduto
+                    };
+                    lstEstoqueItemDI.Add(objEstoqueItemDI);
+                }
+
+                return lstEstoqueItemDI;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         #endregion
 
         #region :: Tipo Estoque ::
@@ -484,6 +518,45 @@ namespace TjossSystem.Metodos
             catch (Exception pE)
             {
                 string strErro = pE.InnerException.InnerException.Message;
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Metodo que lista todos os estoques registrados
+        /// </summary>
+        /// <returns>Retorna uma lista de estoques</returns>
+        public List<MovimentacaoEstoqueDI> ListarMovimentoEstoqueRelatorio()
+        {//TO DO: RELATORIO DE MOVIMENTACAO
+            tjossEntities objConexao = new tjossEntities();
+            List<MovimentacaoEstoqueDI> lstEstoqueItemDI = new List<MovimentacaoEstoqueDI>();
+
+            List<movimentoestoque> lstItemEstoque = objConexao.movimentoestoque.Where(c => c.codigoitem != 0 && c.codigotipoestoque == 1).OrderBy(o => o.codigoitem).ToList();
+
+            if (lstItemEstoque.Count > 0)
+            {
+                MovimentacaoEstoqueDI objEstoqueItemDI;
+                foreach (var objItemEstoque in lstItemEstoque)
+                {
+                    objEstoqueItemDI = new MovimentacaoEstoqueDI
+                    {
+                        CodigoItem = objItemEstoque.codigoitem,
+                        CodigoTipoEstoque = objItemEstoque.codigotipoestoque,
+                        TipoMovimento = objItemEstoque.tipomovimento,
+                        QuantidadeMovimentada = objItemEstoque.quantidademovimentada,
+                        DatahMovimento = objItemEstoque.datahmovimento,
+                        CodigoFuncionario = objItemEstoque.codigofuncionario,
+                        NumeroPedido = objItemEstoque.numeropedido,
+                        CodigoTipoPedido = objItemEstoque.codigotipopedido,
+                        ObservacaoMovimento = objItemEstoque.observacaomovimento
+                    };
+                    lstEstoqueItemDI.Add(objEstoqueItemDI);
+                }
+
+                return lstEstoqueItemDI;
+            }
+            else
+            {
                 return null;
             }
         }

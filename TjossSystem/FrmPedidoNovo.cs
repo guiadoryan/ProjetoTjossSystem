@@ -162,7 +162,7 @@ namespace TjossSystem
                 }
             } else if ((int)cboCodigoTipoPedido.SelectedValue != 1) //Se for venda ou aluguel, pega atividade de cliente.
             {
-                DefinicaoDI objDefinicaoDI = lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 2).FirstOrDefault();
+                DefinicaoDI objDefinicaoDI = lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 1).FirstOrDefault();
                 if (objDefinicaoDI == null || lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 1).FirstOrDefault().CodigoDefinicao != 1)
                 {
                     MessageBox.Show($"Cadastro não é um cliente!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -450,7 +450,7 @@ namespace TjossSystem
 
             if (string.IsNullOrEmpty(txtCodigoCadastro.Text))
             {
-                txtCodigoCadastro.Focus();
+                cboCodigoTipoPedido.Focus();
                 return;
             }
             else
@@ -458,26 +458,34 @@ namespace TjossSystem
                 if (!int.TryParse(txtCodigoCadastro.Text, out _))
                 {
                     MessageBox.Show($"Cadastro Invalido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtCodigoCadastro.Focus();
+                    cboCodigoTipoPedido.Focus();
                     return;
                 }
             }
             List<DefinicaoDI> lstDefinicaoCadastro = objMetodos.ListarDefinicoesCadastro(Convert.ToInt32(txtCodigoCadastro.Text));
+            if (lstDefinicaoCadastro == null || lstDefinicaoCadastro.Count <= 0)
+            {
+                MessageBox.Show($"Não foi encontrado definições para o cadastro informado!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboCodigoTipoPedido.Focus();
+                return;
+            }
             if ((int)cboCodigoTipoPedido.SelectedValue == 1) //Se for pedido de compra, o cadastro tem que ser fornecedor.
             {
                 DefinicaoDI objDefinicaoDI = lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 2).FirstOrDefault();
                 if (objDefinicaoDI == null || lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 2).FirstOrDefault().CodigoDefinicao != 2)
                 {
                     MessageBox.Show($"Cadastro não é um fornecedor!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboCodigoTipoPedido.Focus();
                     return;
                 }
             }
             else if ((int)cboCodigoTipoPedido.SelectedValue != 1) //Se for venda ou aluguel, pega atividade de cliente.
             {
-                DefinicaoDI objDefinicaoDI = lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 2).FirstOrDefault();
+                DefinicaoDI objDefinicaoDI = lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 1).FirstOrDefault();
                 if (objDefinicaoDI == null || lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 1).FirstOrDefault().CodigoDefinicao != 1)
                 {
                     MessageBox.Show($"Cadastro não é um cliente!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboCodigoTipoPedido.Focus();
                     return;
                 }
 
@@ -486,6 +494,8 @@ namespace TjossSystem
                     decPrecoItem /= 2; //Aluguel é pela metade do preço do item.
                 }
             }
+
+            txtValorUnitario.Enabled = (int)cboCodigoTipoPedido.SelectedValue == 1;
             grpDadosChaveCargo.Enabled = false;
         }
 

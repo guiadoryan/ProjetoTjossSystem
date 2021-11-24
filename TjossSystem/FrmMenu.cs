@@ -103,5 +103,35 @@ namespace TjossSystem
             objContratos.CodigoFuncionario = CodigoFuncionario;
             objContratos.Show();
         }
+
+        private void tipRelCadastro_Click(object sender, EventArgs e)
+        {
+            FrmRelatorioCadastro objRelCadastro = new FrmRelatorioCadastro();
+            objRelCadastro.ShowDialog();
+        }
+
+        private void tipRelFuncionarios_Click(object sender, EventArgs e)
+        {
+            FrmRelatorioFuncionario objRelFuncionario = new FrmRelatorioFuncionario();
+            objRelFuncionario.ShowDialog();
+        }
+
+        private void tipRelEstoque_Click(object sender, EventArgs e)
+        {
+            FrmRelatorioEstoque objRelEstoque = new FrmRelatorioEstoque();
+            objRelEstoque.ShowDialog();
+        }
+
+        private void tipEstoqueMovimento_Click(object sender, EventArgs e)
+        {
+            FrmRelatorioEstoqueMov objRelatorioEstoqueMov = new FrmRelatorioEstoqueMov();
+            objRelatorioEstoqueMov.ShowDialog();
+        }
+
+        private void pedidosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FrmRelatorioPedidos objRelatorioPedidos = new FrmRelatorioPedidos();
+            objRelatorioPedidos.ShowDialog();
+        }
     }
 }

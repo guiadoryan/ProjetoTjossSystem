@@ -288,14 +288,56 @@ namespace TjossSystem.Metodos
             tjossEntities objConexao = new tjossEntities();
             List<CadastroDI> lstCadastroDI = new List<CadastroDI>();
 
-            List<cadastro> lstCadastro = objConexao.cadastro.Where(c => c.codigocadastro != 0).ToList();
+            List<cadastro> lstCadastro = objConexao.cadastro.Where(c => c.codigocadastro != 0).OrderBy(o => o.codigocadastro).ToList();
 
             if (lstCadastro.Count > 0)
             {
                 CadastroDI objCadastroDI;
                 foreach (var objCadastro in lstCadastro)
                 {
-                    objCadastroDI = new CadastroDI { CodigoCadastro = objCadastro.codigocadastro, NomeCadastro = $"{objCadastro.codigocadastro} - {objCadastro.nomecadastro}" };
+                    objCadastroDI = new CadastroDI 
+                    { 
+                        CodigoCadastro = objCadastro.codigocadastro, 
+                        NomeCadastro = $"{objCadastro.codigocadastro} - {objCadastro.nomecadastro}" 
+                    };
+                    lstCadastroDI.Add(objCadastroDI);
+                }
+
+                return lstCadastroDI;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Metodo que lista todos os cadastros registrados
+        /// </summary>
+        /// <returns>Retorna uma lista de cadastros</returns>
+        public List<CadastroDI> ListarCadastrosRelatorio()
+        {
+            tjossEntities objConexao = new tjossEntities();
+            List<CadastroDI> lstCadastroDI = new List<CadastroDI>();
+
+            List<cadastro> lstCadastro = objConexao.cadastro.Where(c => c.codigocadastro != 0).OrderBy(o => o.codigocadastro).ToList();
+
+            if (lstCadastro.Count > 0)
+            {
+                CadastroDI objCadastroDI;
+                foreach (var objCadastro in lstCadastro)
+                {
+                    objCadastroDI = new CadastroDI
+                    {
+                        CodigoCadastro = objCadastro.codigocadastro,
+                        NomeCadastro = objCadastro.nomecadastro,
+                        NomeFantasia = objCadastro.nomefantasia,
+                        CodigoTipoCadastro = objCadastro.codigotipocadastro,
+                        CpfCnpj = objCadastro.cpfcnpj,
+                        Controle = objCadastro.controle,
+                        DatahAlteracao = objCadastro.datahalteracao,
+                        CodigoFuncionario = objCadastro.codigofuncionario
+                    };
                     lstCadastroDI.Add(objCadastroDI);
                 }
 
@@ -384,6 +426,10 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que consulta todos os estados cadastradas
+        /// </summary>
+        /// <returns>Retorna uma lista com os estados</returns>
         public List<EstadoDI> ConsultarEstados()
         {
             tjossEntities objConexao = new tjossEntities();
@@ -408,6 +454,10 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que consulta todos os paises cadastradas
+        /// </summary>
+        /// <returns>Retorna uma lista com os paises</returns>
         public List<PaisDI> ConsultarPaises()
         {
             tjossEntities objConexao = new tjossEntities();
@@ -460,12 +510,17 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que lista as definições de um cadastro
+        /// </summary>
+        /// <param name="pCodigoCadastro">Código do cadastro</param>
+        /// <returns>Retorna uma lista com os dados buscados</returns>
         public List<DefinicaoDI> ListarDefinicoesCadastro(int pCodigoCadastro)
         {
             tjossEntities objConexao = new tjossEntities();
             List<DefinicaoDI> lstDefinicaoDI = new List<DefinicaoDI>();
 
-            List<definicaocadastro> lstDefinicao = objConexao.definicaocadastro.Where(d => d.codigocadastro == pCodigoCadastro).ToList();
+            List<definicaocadastro> lstDefinicao = objConexao.definicaocadastro.Where(d => d.codigocadastro == pCodigoCadastro && d.situacao == "A").ToList();
 
             if (lstDefinicao.Count > 0)
             {

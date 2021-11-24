@@ -210,6 +210,7 @@ namespace TjossSystem
                 cboCodigoTipoContrato.SelectedValue = objContratoDI.CodigoTipoContrato;
                 txtCodigoCadastro.Text = objContratoDI.CodigoCadastro.ToString();
                 txtCodigoCadastro.Enabled = false;
+                cboCodigoTipoContrato.Enabled = false;
 
                 /*if (objPedidoDI.NumeroContrato != null && objPedidoDI.NumeroContrato != 0)
                 {
@@ -281,7 +282,7 @@ namespace TjossSystem
             }
             else if ((int)cboCodigoTipoContrato.SelectedValue != 1) //Se for venda ou aluguel, pega atividade de cliente.
             {
-                DefinicaoDI objDefinicaoDI = lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 2).FirstOrDefault();
+                DefinicaoDI objDefinicaoDI = lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 1).FirstOrDefault();
                 if (objDefinicaoDI == null || lstDefinicaoCadastro.Where(c => c.CodigoDefinicao == 1).FirstOrDefault().CodigoDefinicao != 1)
                 {
                     MessageBox.Show($"Cadastro não é um cliente!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -293,6 +294,8 @@ namespace TjossSystem
                     decPrecoItem /= 2; //Aluguel é pela metade do preço do item.
                 }
             }
+
+            txtValorItem.Enabled = (int)cboCodigoTipoContrato.SelectedValue == 1;
             grpDadosChaveCargo.Enabled = false;
         }
 

@@ -81,12 +81,6 @@ namespace TjossSystem
         /// <returns>True se validar com sucesso, false caso o contrario.</returns>
         private bool ValidarCamposDadosBasicos()
         {
-            //TO DO: VALIDAR CAMPOS DO CADASTRO
-            /*if (!string.IsNullOrEmpty(txtNumeroCadastro.Text) && !int.TryParse(txtNumeroCadastro.Text, out _))
-            {
-                MessageBox.Show("Número do cadastro invalido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }*/
             if (string.IsNullOrEmpty(txtNomeCadastro.Text))
             {
                 MessageBox.Show("Nome do cadastro está vazio!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -101,6 +95,19 @@ namespace TjossSystem
             {
                 MessageBox.Show($"Cpf/Cnpj do cadastro está vazio ou invalido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
+            }
+            else
+            {
+                if ((int)cboTipoCadastro.SelectedValue == 1 && txtCpfCnpj.Text.Length != 9)
+                {
+                    MessageBox.Show($"Informe o CPF corretamente!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+                if ((int)cboTipoCadastro.SelectedValue == 2 && txtCpfCnpj.Text.Length != 8)
+                {
+                    MessageBox.Show($"Informe o CNPJ corretamente!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
             }
             if (string.IsNullOrEmpty(txtControle.Text) || !int.TryParse(txtControle.Text, out _))
             {

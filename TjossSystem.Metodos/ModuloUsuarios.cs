@@ -328,5 +328,43 @@ namespace TjossSystem.Metodos
                 return null;
             }
         }
+
+        /// <summary>
+        /// Metodo que lista todos os funcionarios registrados
+        /// </summary>
+        /// <returns>Retorna uma lista de funcionarios</returns>
+        public List<FuncionarioDI> ListarFuncionariosRelatorio()
+        {
+            tjossEntities objConexao = new tjossEntities();
+            List<FuncionarioDI> lstFuncionariosDI = new List<FuncionarioDI>();
+
+            List<funcionarios> lstFuncionarios = objConexao.funcionarios.Where(c => c.codigofuncionario != 0).OrderBy(o => o.codigofuncionario).ToList();
+
+            if (lstFuncionarios.Count > 0)
+            {
+                FuncionarioDI objFuncionarioDI;
+                foreach (var objFuncionario in lstFuncionarios)
+                {
+                    objFuncionarioDI = new FuncionarioDI
+                    {
+                        CodigoFuncionario = objFuncionario.codigofuncionario,
+                        Nome = objFuncionario.nome,
+                        Cpf = objFuncionario.cpf,
+                        CpfControle = objFuncionario.cpfcontrole,
+                        DataNascimento = objFuncionario.datanascimento,
+                        DataAdmissao = objFuncionario.dataadmissao,
+                        DataDesligamento = objFuncionario.datadesligamento,
+                        CodigoCargo = objFuncionario.codigocargo
+                    };
+                    lstFuncionariosDI.Add(objFuncionarioDI);
+                }
+
+                return lstFuncionariosDI;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

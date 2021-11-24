@@ -13,13 +13,34 @@ namespace TjossSystem
 {
     public partial class FrmPedidos : FrmPadrao
     {
+        /// <summary>
+        /// Objeto com os dados do pedido
+        /// </summary>
         PedidoDI objPedidoDI;
+
+        /// <summary>
+        /// Objeto com os dados do item pedido
+        /// </summary>
         ItensPedidoDI objItensPedido;
 
+        /// <summary>
+        /// Data Table com os dados do pedido
+        /// </summary>
         DataTable dttPedidos;
+
+        /// <summary>
+        /// Data Table com os dados do item pedido
+        /// </summary>
         DataTable dttItensPedido;
 
+        /// <summary>
+        /// Lista com tipos de pedidos
+        /// </summary>
         List<TipoPedidoDI> lstTipoPedidoDI;
+
+        /// <summary>
+        /// Lista com tipos de contratos
+        /// </summary>
         List<TipoContratoDI> lstTipoContratoDI;
 
         public FrmPedidos()

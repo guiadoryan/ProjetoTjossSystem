@@ -45,13 +45,6 @@ namespace TjossSystem
             this.tsbGravar = new System.Windows.Forms.ToolStripButton();
             this.grpDadosBasicos = new System.Windows.Forms.GroupBox();
             this.dgvItensPedido = new System.Windows.Forms.DataGridView();
-            this.clnNumeroPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnCodigoTipoPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnCodigoItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnValorUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnValorTotalItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnCodigoCadastroMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clnCodigoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpCamposItem = new System.Windows.Forms.GroupBox();
             this.bntEditarItem = new System.Windows.Forms.Button();
             this.txtValorUnitario = new System.Windows.Forms.TextBox();
@@ -65,6 +58,14 @@ namespace TjossSystem
             this.txtCodigoItem = new System.Windows.Forms.TextBox();
             this.lblCodigoItem = new System.Windows.Forms.Label();
             this.blnAdicionarItem = new System.Windows.Forms.Button();
+            this.clnNumeroPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCodigoTipoPedido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCodigoItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnQuantidadeSolicitada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnValorUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnValorTotalItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCodigoCadastroMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clnCodigoMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpDadosChaveCargo.SuspendLayout();
             this.tspBotoes.SuspendLayout();
             this.grpDadosBasicos.SuspendLayout();
@@ -227,6 +228,7 @@ namespace TjossSystem
             this.clnNumeroPedido,
             this.clnCodigoTipoPedido,
             this.clnCodigoItem,
+            this.clnQuantidadeSolicitada,
             this.clnValorUnitario,
             this.clnValorTotalItem,
             this.clnCodigoCadastroMedida,
@@ -239,55 +241,6 @@ namespace TjossSystem
             this.dgvItensPedido.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvItensPedido.Size = new System.Drawing.Size(980, 342);
             this.dgvItensPedido.TabIndex = 0;
-            // 
-            // clnNumeroPedido
-            // 
-            this.clnNumeroPedido.DataPropertyName = "NumeroPedido";
-            this.clnNumeroPedido.HeaderText = "N° Pedido";
-            this.clnNumeroPedido.Name = "clnNumeroPedido";
-            this.clnNumeroPedido.ReadOnly = true;
-            // 
-            // clnCodigoTipoPedido
-            // 
-            this.clnCodigoTipoPedido.DataPropertyName = "CodigoTipoPedido";
-            this.clnCodigoTipoPedido.HeaderText = "Tipo Pedido";
-            this.clnCodigoTipoPedido.Name = "clnCodigoTipoPedido";
-            this.clnCodigoTipoPedido.ReadOnly = true;
-            // 
-            // clnCodigoItem
-            // 
-            this.clnCodigoItem.DataPropertyName = "CodigoItem";
-            this.clnCodigoItem.HeaderText = "Código Item";
-            this.clnCodigoItem.Name = "clnCodigoItem";
-            this.clnCodigoItem.ReadOnly = true;
-            // 
-            // clnValorUnitario
-            // 
-            this.clnValorUnitario.DataPropertyName = "ValorUnitario";
-            this.clnValorUnitario.HeaderText = "Valor Unitario";
-            this.clnValorUnitario.Name = "clnValorUnitario";
-            this.clnValorUnitario.ReadOnly = true;
-            // 
-            // clnValorTotalItem
-            // 
-            this.clnValorTotalItem.DataPropertyName = "ValorTotalItem";
-            this.clnValorTotalItem.HeaderText = "Valor Total Item";
-            this.clnValorTotalItem.Name = "clnValorTotalItem";
-            this.clnValorTotalItem.ReadOnly = true;
-            // 
-            // clnCodigoCadastroMedida
-            // 
-            this.clnCodigoCadastroMedida.DataPropertyName = "CodigoCadastro";
-            this.clnCodigoCadastroMedida.HeaderText = "Código Cadastro";
-            this.clnCodigoCadastroMedida.Name = "clnCodigoCadastroMedida";
-            this.clnCodigoCadastroMedida.ReadOnly = true;
-            // 
-            // clnCodigoMedida
-            // 
-            this.clnCodigoMedida.DataPropertyName = "CodigoMedida";
-            this.clnCodigoMedida.HeaderText = "Código Medida";
-            this.clnCodigoMedida.Name = "clnCodigoMedida";
-            this.clnCodigoMedida.ReadOnly = true;
             // 
             // grpCamposItem
             // 
@@ -318,6 +271,7 @@ namespace TjossSystem
             this.bntEditarItem.TabIndex = 24;
             this.bntEditarItem.Text = "Editar Item";
             this.bntEditarItem.UseVisualStyleBackColor = true;
+            this.bntEditarItem.Visible = false;
             this.bntEditarItem.Click += new System.EventHandler(this.bntEditarItem_Click);
             // 
             // txtValorUnitario
@@ -416,6 +370,62 @@ namespace TjossSystem
             this.blnAdicionarItem.UseVisualStyleBackColor = true;
             this.blnAdicionarItem.Click += new System.EventHandler(this.blnAdicionarItem_Click);
             // 
+            // clnNumeroPedido
+            // 
+            this.clnNumeroPedido.DataPropertyName = "NumeroPedido";
+            this.clnNumeroPedido.HeaderText = "N° Pedido";
+            this.clnNumeroPedido.Name = "clnNumeroPedido";
+            this.clnNumeroPedido.ReadOnly = true;
+            // 
+            // clnCodigoTipoPedido
+            // 
+            this.clnCodigoTipoPedido.DataPropertyName = "CodigoTipoPedido";
+            this.clnCodigoTipoPedido.HeaderText = "Tipo Pedido";
+            this.clnCodigoTipoPedido.Name = "clnCodigoTipoPedido";
+            this.clnCodigoTipoPedido.ReadOnly = true;
+            // 
+            // clnCodigoItem
+            // 
+            this.clnCodigoItem.DataPropertyName = "CodigoItem";
+            this.clnCodigoItem.HeaderText = "Código Item";
+            this.clnCodigoItem.Name = "clnCodigoItem";
+            this.clnCodigoItem.ReadOnly = true;
+            // 
+            // clnQuantidadeSolicitada
+            // 
+            this.clnQuantidadeSolicitada.DataPropertyName = "QuantidadeSolicitada";
+            this.clnQuantidadeSolicitada.HeaderText = "Qtd. Solicitada";
+            this.clnQuantidadeSolicitada.Name = "clnQuantidadeSolicitada";
+            this.clnQuantidadeSolicitada.ReadOnly = true;
+            // 
+            // clnValorUnitario
+            // 
+            this.clnValorUnitario.DataPropertyName = "ValorUnitario";
+            this.clnValorUnitario.HeaderText = "Valor Unitario";
+            this.clnValorUnitario.Name = "clnValorUnitario";
+            this.clnValorUnitario.ReadOnly = true;
+            // 
+            // clnValorTotalItem
+            // 
+            this.clnValorTotalItem.DataPropertyName = "ValorTotalItem";
+            this.clnValorTotalItem.HeaderText = "Valor Total Item";
+            this.clnValorTotalItem.Name = "clnValorTotalItem";
+            this.clnValorTotalItem.ReadOnly = true;
+            // 
+            // clnCodigoCadastroMedida
+            // 
+            this.clnCodigoCadastroMedida.DataPropertyName = "CodigoCadastro";
+            this.clnCodigoCadastroMedida.HeaderText = "Código Cadastro";
+            this.clnCodigoCadastroMedida.Name = "clnCodigoCadastroMedida";
+            this.clnCodigoCadastroMedida.ReadOnly = true;
+            // 
+            // clnCodigoMedida
+            // 
+            this.clnCodigoMedida.DataPropertyName = "CodigoMedida";
+            this.clnCodigoMedida.HeaderText = "Código Medida";
+            this.clnCodigoMedida.Name = "clnCodigoMedida";
+            this.clnCodigoMedida.ReadOnly = true;
+            // 
             // FrmPedidoNovo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -470,15 +480,16 @@ namespace TjossSystem
         private System.Windows.Forms.Label lblQuantidadeSolicitada;
         private System.Windows.Forms.TextBox txtCodigoItem;
         private System.Windows.Forms.Label lblCodigoItem;
+        private System.Windows.Forms.TextBox txtValorUnitario;
+        private System.Windows.Forms.Label lblValorUnitarioItem;
+        private System.Windows.Forms.Button bntEditarItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnNumeroPedido;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoTipoPedido;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clnQuantidadeSolicitada;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnValorUnitario;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnValorTotalItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoCadastroMedida;
         private System.Windows.Forms.DataGridViewTextBoxColumn clnCodigoMedida;
-        private System.Windows.Forms.TextBox txtValorUnitario;
-        private System.Windows.Forms.Label lblValorUnitarioItem;
-        private System.Windows.Forms.Button bntEditarItem;
     }
 }

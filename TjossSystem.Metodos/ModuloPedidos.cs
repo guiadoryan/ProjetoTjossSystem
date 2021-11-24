@@ -8,6 +8,13 @@ namespace TjossSystem.Metodos
 {
     public class ModuloPedidos
     {
+        /// <summary>
+        /// Método que faz o fechamento do pedido
+        /// </summary>
+        /// <param name="pPedido">Objeto com os dados do pedido</param>
+        /// <param name="pCodigoFuncionario">Código do funcionario</param>
+        /// <param name="pErro">Mensagem de erro</param>
+        /// <returns>True se fechou com sucesso, false caso o contrario</returns>
         public bool FecharPedido(PedidoDI pPedido, int pCodigoFuncionario, out string pErro)
         {
             tjossEntities objConexao = new tjossEntities();
@@ -35,9 +42,6 @@ namespace TjossSystem.Metodos
                 objPedidos.situacaopedido = pPedido.SituacaoPedido;
                 objPedidos.dataconclusao = DateTime.Now.Date;
 
-                //objPedidos.valortotalpedido = pPedido.ValorTotalPedido;
-
-                //objConexao.SaveChanges();
                 //Pega o numero do pedido que foi gerado pelo auto-increment.
                 int intNumeroPedido = objPedidos.numeropedido;
 
@@ -139,6 +143,12 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que faz o cancelamento do pedido
+        /// </summary>
+        /// <param name="pPedido">Objeto com os dados do pedido</param>
+        /// <param name="pErro">Mensagem de erro</param>
+        /// <returns>True se cancelou com sucesso, false caso o contrario</returns>
         public bool CancelarPedido(PedidoDI pPedido, out string pErro)
         {
             tjossEntities objConexao = new tjossEntities();
@@ -183,6 +193,12 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que faz o registro do pedido
+        /// </summary>
+        /// <param name="pPedido">Objeto com os dados do pedido</param>
+        /// <param name="pErro">Mensagem de erro</param>
+        /// <returns>True se registrou com sucesso, false caso o contrario</returns>
         public bool RegistrarPedido(PedidoDI pPedido, out string pErro)
         {
             tjossEntities objConexao = new tjossEntities();
@@ -259,6 +275,13 @@ namespace TjossSystem.Metodos
             }
         }
 
+        /// <summary>
+        /// Método que lista os pedidos
+        /// </summary>
+        /// <param name="pNumeroPedido">Número do pedido</param>
+        /// <param name="pCodigoTipoPedido">Código tipo pedido</param>
+        /// <param name="pCodigoCadastro">Código do cadastro</param>
+        /// <returns>Lista com os pedidos</returns>
         public List<PedidoDI> ListarPedidos(int pNumeroPedido, int pCodigoTipoPedido, int? pCodigoCadastro)
         {
             tjossEntities objConexao = new tjossEntities();
@@ -300,6 +323,54 @@ namespace TjossSystem.Metodos
             
         }
 
+        /// <summary>
+        /// Método que lista os pedidos
+        /// </summary>
+        /// <returns>Lista com os pedidos</returns>
+        public List<PedidoDI> ListarTodosPedidos()
+        {
+            tjossEntities objConexao = new tjossEntities();
+            List<pedidos> lstPedidos = new List<pedidos>();
+
+            PedidoDI objPedidoDI;
+            List<PedidoDI> lstPedidoDI = new List<PedidoDI>();
+
+            try
+            {
+                lstPedidos = objConexao.pedidos.OrderBy(p => p.codigocadastro).ToList();
+
+                foreach (var objPedido in lstPedidos)
+                {
+                    objPedidoDI = new PedidoDI
+                    {
+                        NumeroPedido = objPedido.numeropedido,
+                        CodigoTipoPedido = objPedido.codigotipopedido,
+                        CodigoCadastro = objPedido.codigocadastro,
+                        SituacaoPedido = objPedido.situacaopedido,
+                        DataConclusao = objPedido.dataconclusao,
+                        NumeroContrato = objPedido.numerocontrato,
+                        CodigoTipoContrato = objPedido.codigotipocontrato,
+                        ValorTotalPedido = objPedido.valortotalpedido
+                    };
+
+                    lstPedidoDI.Add(objPedidoDI);
+                }
+
+                return lstPedidoDI;
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
+
+        /// <summary>
+        /// Método que lista os itens do pedido
+        /// </summary>
+        /// <param name="pNumeroPedido">Número do pedido</param>
+        /// <param name="pCodigoTipoPedido">Código tipo pedido</param>
+        /// <returns>Lista com os itens do pedido</returns>
         public List<ItensPedidoDI> BuscarItensPedido(int pNumeroPedido, int pCodigoTipoPedido)
         {
             tjossEntities objConexao = new tjossEntities();
