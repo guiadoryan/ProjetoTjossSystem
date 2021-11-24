@@ -717,11 +717,11 @@ namespace TjossSystem
 
                 txtCodigoMedida.Text = rowMedidas.Cells[clnCodigoMedida.Name].Value.ToString() == "0" ? string.Empty : rowMedidas.Cells[clnCodigoMedida.Name].Value.ToString();
 
-                txtAltura.Text = rowMedidas.Cells[clnAlturaMedida.Name].Value.ToString();
-                txtCintura.Text = rowMedidas.Cells[clnCinturaMedida.Name].Value.ToString();
-                txtOmbroAhOmbro.Text = rowMedidas.Cells[clnOmbroAhOmbro.Name].Value.ToString();
-                txtBustoMedida.Text = rowMedidas.Cells[clnBustoMedida.Name].Value.ToString();
-                txtObservacaoMedida.Text = rowMedidas.Cells[clnObservacaoMedida.Name].Value.ToString();
+                txtAltura.Text = rowMedidas.Cells[clnAlturaMedida.Name].Value != null ? rowMedidas.Cells[clnAlturaMedida.Name].Value.ToString() : "0";
+                txtCintura.Text = rowMedidas.Cells[clnCinturaMedida.Name].Value != null ? rowMedidas.Cells[clnCinturaMedida.Name].Value.ToString() : "0";
+                txtOmbroAhOmbro.Text = rowMedidas.Cells[clnOmbroAhOmbro.Name].Value != null ? rowMedidas.Cells[clnOmbroAhOmbro.Name].Value.ToString() : "0";
+                txtBustoMedida.Text = rowMedidas.Cells[clnBustoMedida.Name].Value != null ? rowMedidas.Cells[clnBustoMedida.Name].Value.ToString() : "0";
+                txtObservacaoMedida.Text = rowMedidas.Cells[clnObservacaoMedida.Name].Value != null ? rowMedidas.Cells[clnObservacaoMedida.Name].Value.ToString() : "0";
                 cboSituacaoMedida.SelectedIndex = rowMedidas.Cells[clnSituacaoMedida.Name].Value.ToString() == "A" ? 0 : 1;
             }
         }

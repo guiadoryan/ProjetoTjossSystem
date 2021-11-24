@@ -427,6 +427,7 @@ namespace TjossSystem
             this.Controls.Add(this.grpDadosChaveCargo);
             this.Name = "FrmPedidoNovo";
             this.Text = "Pedido Novo";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPedidoNovo_FormClosing);
             this.Load += new System.EventHandler(this.FrmPedidoNovo_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmPedidoNovo_KeyDown);
             this.grpDadosChaveCargo.ResumeLayout(false);

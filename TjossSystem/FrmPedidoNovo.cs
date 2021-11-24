@@ -447,6 +447,21 @@ namespace TjossSystem
             Metodos.Metodos objMetodos = new Metodos.Metodos();
             decimal decPrecoItem = 0;
             //buscar cadastro para validação de definição.
+
+            if (string.IsNullOrEmpty(txtCodigoCadastro.Text))
+            {
+                txtCodigoCadastro.Focus();
+                return;
+            }
+            else
+            {
+                if (!int.TryParse(txtCodigoCadastro.Text, out _))
+                {
+                    MessageBox.Show($"Cadastro Invalido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCodigoCadastro.Focus();
+                    return;
+                }
+            }
             List<DefinicaoDI> lstDefinicaoCadastro = objMetodos.ListarDefinicoesCadastro(Convert.ToInt32(txtCodigoCadastro.Text));
             if ((int)cboCodigoTipoPedido.SelectedValue == 1) //Se for pedido de compra, o cadastro tem que ser fornecedor.
             {
@@ -490,6 +505,11 @@ namespace TjossSystem
                 default:
                     break;
             }
+        }
+
+        private void FrmPedidoNovo_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
     }
 }

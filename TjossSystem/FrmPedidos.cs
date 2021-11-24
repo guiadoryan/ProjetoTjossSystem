@@ -191,8 +191,8 @@ namespace TjossSystem
                     CodigoTipoPedido = Convert.ToInt32(rowLinha.Cells[clnCodigoTipoPedido.Name].Value),
                     SituacaoPedido = "F", //Status de cancelado
                     CodigoCadastro = Convert.ToInt32(rowLinha.Cells[clnCodigoCadastro.Name].Value),
-                    NumeroContrato = rowLinha.Cells[clnNumeroContrato.Name].Value != null ? (int?)rowLinha.Cells[clnNumeroContrato.Name].Value : null,
-                    CodigoTipoContrato = rowLinha.Cells[clnNumeroContrato.Name].Value != null ? (int?)rowLinha.Cells[clnCodigoTipoContrato.Name].Value : null
+                    NumeroContrato = rowLinha.Cells[clnNumeroContrato.Name].Value.ToString() != string.Empty ? (int?)rowLinha.Cells[clnNumeroContrato.Name].Value : null,
+                    CodigoTipoContrato = rowLinha.Cells[clnNumeroContrato.Name].Value.ToString() != string.Empty ? (int?)rowLinha.Cells[clnCodigoTipoContrato.Name].Value : null
                 };
 
                 if (!objMetodosPedidos.FecharPedido(objPedidoDI, CodigoFuncionario, out strErro))

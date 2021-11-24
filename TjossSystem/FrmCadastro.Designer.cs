@@ -29,9 +29,9 @@ namespace TjossSystem
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCadastro));
             this.grpDadosChave = new System.Windows.Forms.GroupBox();
             this.cboNumeroCadastro = new System.Windows.Forms.ComboBox();
@@ -175,6 +175,7 @@ namespace TjossSystem
             this.cboNumeroCadastro.Name = "cboNumeroCadastro";
             this.cboNumeroCadastro.Size = new System.Drawing.Size(224, 21);
             this.cboNumeroCadastro.TabIndex = 23;
+            this.cboNumeroCadastro.Visible = false;
             this.cboNumeroCadastro.TextChanged += new System.EventHandler(this.cboNumeroCadastro_TextChanged);
             // 
             // btnBuscar
@@ -535,9 +536,9 @@ namespace TjossSystem
             // clnAlturaMedida
             // 
             this.clnAlturaMedida.DataPropertyName = "Altura";
-            dataGridViewCellStyle13.Format = "N2";
-            dataGridViewCellStyle13.NullValue = null;
-            this.clnAlturaMedida.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.clnAlturaMedida.DefaultCellStyle = dataGridViewCellStyle1;
             this.clnAlturaMedida.HeaderText = "Altura";
             this.clnAlturaMedida.Name = "clnAlturaMedida";
             this.clnAlturaMedida.ReadOnly = true;
@@ -545,8 +546,8 @@ namespace TjossSystem
             // clnCinturaMedida
             // 
             this.clnCinturaMedida.DataPropertyName = "Cintura";
-            dataGridViewCellStyle14.Format = "N2";
-            this.clnCinturaMedida.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Format = "N2";
+            this.clnCinturaMedida.DefaultCellStyle = dataGridViewCellStyle2;
             this.clnCinturaMedida.HeaderText = "Cintura";
             this.clnCinturaMedida.Name = "clnCinturaMedida";
             this.clnCinturaMedida.ReadOnly = true;
@@ -554,8 +555,8 @@ namespace TjossSystem
             // clnOmbroAhOmbro
             // 
             this.clnOmbroAhOmbro.DataPropertyName = "OmbroAhOmbro";
-            dataGridViewCellStyle15.Format = "N2";
-            this.clnOmbroAhOmbro.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Format = "N2";
+            this.clnOmbroAhOmbro.DefaultCellStyle = dataGridViewCellStyle3;
             this.clnOmbroAhOmbro.HeaderText = "Ombro a Ombro";
             this.clnOmbroAhOmbro.Name = "clnOmbroAhOmbro";
             this.clnOmbroAhOmbro.ReadOnly = true;

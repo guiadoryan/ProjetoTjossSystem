@@ -245,6 +245,8 @@ namespace TjossSystem
             Metodos.Metodos objMetodos = new Metodos.Metodos();
             decimal decPrecoItem = 0;
             //buscar cadastro para validação de definição.
+            List<DefinicaoDI> lstDefinicaoCadastro = new List<DefinicaoDI>();
+
             if (string.IsNullOrEmpty(txtCodigoCadastro.Text))
             {
                 txtCodigoCadastro.Focus();
@@ -252,14 +254,16 @@ namespace TjossSystem
             }
             else
             {
-                if (int.TryParse(txtCodigoCadastro.Text, out _))
+                if (!int.TryParse(txtCodigoCadastro.Text, out _))
                 {
                     MessageBox.Show($"Cadastro Invalido!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtCodigoCadastro.Focus();
                     return;
                 }
             }
-            List<DefinicaoDI> lstDefinicaoCadastro = objMetodos.ListarDefinicoesCadastro(Convert.ToInt32(txtCodigoCadastro.Text));
+
+            lstDefinicaoCadastro = objMetodos.ListarDefinicoesCadastro(Convert.ToInt32(txtCodigoCadastro.Text));
+
             if (lstDefinicaoCadastro == null || lstDefinicaoCadastro.Count <= 0)
             {
                 MessageBox.Show($"Cadastro não tem nenhuma definição cadastrada!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
